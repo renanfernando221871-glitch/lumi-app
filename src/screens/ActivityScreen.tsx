@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { AudioButton } from "../components/AudioButton";
 import { BackButton } from "../components/BackButton";
 import { LumiSpeechBubble } from "../components/LumiSpeechBubble";
@@ -82,7 +88,10 @@ export function ActivityScreen({
         <ProgressIndicator current={activityNumber - 1} total={total} />
         <View style={[styles.topSpacer, compactHeader && styles.compactTopSpacer]} />
       </View>
-      <View style={styles.content}>
+      <ScrollView
+        style={styles.contentScroll}
+        contentContainerStyle={styles.content}
+      >
         <Text style={styles.kicker}>ATIVIDADE {activityNumber}</Text>
         <Text style={styles.title}>{activity.title}</Text>
         <LumiSpeechBubble compact>{activity.instructionText}</LumiSpeechBubble>
@@ -115,7 +124,7 @@ export function ActivityScreen({
             style={styles.nextButton}
           />
         ) : null}
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -134,7 +143,9 @@ const styles = StyleSheet.create({
   },
   topSpacer: { width: 76 },
   compactTopSpacer: { width: 0 },
+  contentScroll: { width: "100%", flex: 1 },
   content: {
+    flexGrow: 1,
     width: "100%",
     maxWidth: 620,
     alignSelf: "center",

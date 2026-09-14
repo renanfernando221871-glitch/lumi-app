@@ -30,16 +30,16 @@ const emptyProgress: ProgressState = {
   earnedRewardIds: [],
 };
 
-test("the catalog contains exactly two valid worlds and sixteen activities", () => {
-  assert.equal(worldCatalog.length, 2);
-  assert.equal(activities.length, 16);
+test("the catalog contains exactly three valid worlds and twenty-four activities", () => {
+  assert.equal(worldCatalog.length, 3);
+  assert.equal(activities.length, 24);
   assert.deepEqual(
     worldCatalog.map((world) => world.activityIds.length),
-    [8, 8],
+    [8, 8, 8],
   );
   assert.equal(
     new Set(worldCatalog.flatMap((world) => world.activityIds)).size,
-    16,
+    24,
   );
   assert.equal(
     validateActivityCatalog(activities),
@@ -51,6 +51,23 @@ test("the catalog contains exactly two valid worlds and sixteen activities", () 
       activities,
       rewards.map((reward) => reward.id),
     ),
+    true,
+  );
+});
+
+test("Parque stays softly locked until Fazenda is complete", () => {
+  const parque = worldCatalog.find((world) => world.id === "parque-das-cores");
+  assert.ok(parque);
+  assert.equal(isWorldUnlocked(parque, emptyProgress, worldCatalog), false);
+  const casaAndFarmProgress = {
+    ...emptyProgress,
+    completedActivityIds: [
+      ...casaDoLumi.activityIds,
+      ...fazendaDasDescobertas.activityIds,
+    ],
+  };
+  assert.equal(
+    isWorldUnlocked(parque, casaAndFarmProgress, worldCatalog),
     true,
   );
 });
@@ -180,6 +197,32 @@ test("farm activities use the requested data-driven engine sequence and valid co
       { draggableItemId: "sheep-source", targetId: "wool" },
     ],
   );
+});
+
+test("Parque activities use the requested data-driven engines and configs", () => {
+  const parqueActivities = activities.filter(
+    (activity) => activity.worldId === "parque-das-cores",
+  );
+  assert.deepEqual(
+    parqueActivities.map((activity) => activity.engineType),
+    [
+      "tap-and-find",
+      "tap-and-find",
+      "tap-and-find",
+      "count-and-select",
+      "pattern-completion",
+      "tap-and-find",
+      "tap-and-find",
+      "real-world-challenge",
+    ],
+  );
+  assert.equal(parqueActivities.length, 8);
+  assert.equal(validateActivityCatalog(parqueActivities), true);
+  const count = parqueActivities[3];
+  assert.equal(count.engineType, "count-and-select");
+  if (count.engineType === "count-and-select") {
+    assert.deepEqual(count.config.options, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  }
 });
 
 test("old Casa-only schema-v2 progress remains valid after the farm is added", () => {

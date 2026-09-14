@@ -3,6 +3,8 @@ import {
   CountAndSelectEngine,
   DragToTargetEngine,
   OrderingEngine,
+  PatternCompletionEngine,
+  RealWorldChallengeEngine,
   TapAndFindEngine,
 } from "../components/engines";
 import {
@@ -81,6 +83,16 @@ export const activityEngineRegistry = {
     "ordering",
     OrderingEngine,
     activityEngineValidators.ordering,
+  ),
+  "pattern-completion": defineActivityEngine(
+    "pattern-completion",
+    PatternCompletionEngine,
+    activityEngineValidators["pattern-completion"],
+  ),
+  "real-world-challenge": defineActivityEngine(
+    "real-world-challenge",
+    RealWorldChallengeEngine,
+    activityEngineValidators["real-world-challenge"],
   ),
 } satisfies {
   [K in ActivityEngineType]: ActivityEngineRegistration<K>;

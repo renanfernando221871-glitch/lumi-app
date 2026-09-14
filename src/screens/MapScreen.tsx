@@ -25,6 +25,18 @@ export function MapScreen({
   onOpenWorld,
   onEditProfile,
 }: Props) {
+  const currentWorld =
+    worlds.find((world) => {
+      const unlocked = unlockedWorldIds.includes(world.id);
+      const complete = world.activityIds.every((id) =>
+        completedActivityIds.includes(id),
+      );
+      return unlocked && !complete;
+    }) ??
+    [...worlds]
+      .reverse()
+      .find((world) => unlockedWorldIds.includes(world.id));
+
   return (
     <Shell>
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -46,7 +58,7 @@ export function MapScreen({
             <Text style={styles.mapPath}>⌁  ·  ⌁  ·  ⌁</Text>
           </View>
           <LumiSpeechBubble>
-             {worlds[0]?.assets.mapPrompt}
+             {currentWorld?.assets.mapPrompt}
           </LumiSpeechBubble>
            {worlds.map((world, index) => {
              const unlocked = unlockedWorldIds.includes(world.id);

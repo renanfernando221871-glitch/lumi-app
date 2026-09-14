@@ -3,9 +3,13 @@ import {
   CountAndSelectActivity,
   DragToTargetActivity,
   OrderingActivity,
+  PatternCompletionActivity,
+  RealWorldChallengeActivity,
   TapAndFindActivity,
 } from "../types";
 import { evaluateOrdering as evaluateOrderingState } from "./ordering";
+import { evaluatePatternCompletion as evaluatePatternCompletionState } from "./patternCompletion";
+import { evaluateRealWorldChallenge as evaluateRealWorldChallengeState } from "./realWorldChallenge";
 
 export function evaluateTapAndFind(
   activity: TapAndFindActivity,
@@ -39,6 +43,20 @@ export function evaluateOrdering(
   selectedItemIds: readonly string[],
 ) {
   return evaluateOrderingState(activity, selectedItemIds);
+}
+
+export function evaluatePatternCompletion(
+  activity: PatternCompletionActivity,
+  optionId: string,
+) {
+  return evaluatePatternCompletionState(activity, optionId);
+}
+
+export function evaluateRealWorldChallenge(
+  activity: RealWorldChallengeActivity,
+  confirmed = true,
+) {
+  return evaluateRealWorldChallengeState(activity, confirmed);
 }
 
 export type DragFrame = {

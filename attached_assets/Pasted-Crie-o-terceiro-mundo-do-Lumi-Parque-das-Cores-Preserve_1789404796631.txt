@@ -1,0 +1,121 @@
+Crie o terceiro mundo do Lumi: Parque das Cores.
+Preserve integralmente:
+- arquitetura atual;
+- Casa do Lumi;
+- Fazenda das Descobertas;
+- VoiceService;
+- sistema de progresso;
+- rewards;
+- navigation;
+- identidade visual.
+Não altere os mundos anteriores.
+Objetivo pedagógico do Parque das Cores:
+cores, formas geométricas, movimento, relações espaciais, padrões, quantidades simples, sequência lógica e exploração do mundo real.
+Crie o novo world em data/worlds.ts com:
+- id;
+- title;
+- description;
+- activityIds;
+- rewardId;
+- estado de desbloqueio;
+- assets/configurações visuais.
+Nome:
+Parque das Cores
+Desbloqueio:
+- deve ficar disponível após conclusão da Fazenda das Descobertas;
+- manter a lógica visual de caminho/descoberta, sem cadeado agressivo.
+Crie estas 8 atividades:
+1. Pipas coloridas
+   - objetivo: reconhecer cores;
+   - mostrar pipas de cores diferentes;
+   - instruções como “Qual pipa é azul?” ou “Onde está a pipa amarela?”;
+   - reutilizar tap-and-find.
+2. Formas no parque
+   - objetivo: reconhecer círculo, quadrado e triângulo;
+   - mostrar formas integradas ao cenário do parque;
+   - usar seleção visual orientada por dados;
+   - reutilizar engine existente sempre que possível.
+3. Em cima e embaixo
+   - objetivo: relações espaciais;
+   - mostrar dois elementos em posições claras;
+   - perguntar “Qual está em cima?” ou “Qual está embaixo?”;
+   - reutilizar engine de seleção.
+4. Conte os patinhos
+   - objetivo: contar de 1 a 10;
+   - mostrar quantidade variável de patinhos;
+   - usar count-and-select;
+   - manter configuração genérica para qualquer objeto e quantidade.
+5. Complete a sequência
+   - objetivo: reconhecer padrões simples;
+   - exemplos:
+     - vermelho, azul, vermelho, azul, ?
+     - círculo, quadrado, círculo, quadrado, ?
+   - se ainda não existir engine adequado, criar um engine genérico pattern-completion;
+   - deve funcionar apenas por configuração.
+6. O caminho certo
+   - objetivo: lógica e orientação espacial;
+   - mostrar caminhos simples e pedir qual leva ao destino;
+   - pode usar seleção visual;
+   - evitar labirinto complexo;
+   - foco em decisão simples e percepção visual.
+7. Rápido e devagar
+   - objetivo: reconhecer velocidade/movimento;
+   - comparar dois elementos, por exemplo bicicleta e tartaruga;
+   - perguntar “Quem vai mais rápido?” ou “Quem vai devagar?”;
+   - usar engine de seleção configurado por dados.
+8. Descubra fora da tela
+   - objetivo: conectar aprendizado digital ao mundo real;
+   - criar um engine genérico real-world-challenge se ainda não existir;
+   - instruções como:
+     - “Encontre alguma coisa azul perto de você.”
+     - “Mostre três dedos.”
+     - “Procure alguma coisa redonda.”
+   - a criança conclui tocando em um botão como “Consegui!”;
+   - não exigir câmera, microfone, localização ou upload;
+   - manter funcionamento offline.
+Regras pedagógicas:
+- sem punição;
+- sem X vermelho;
+- feedback acolhedor;
+- instruções curtas;
+- pouco texto;
+- prioridade para imagem e áudio;
+- dificuldade progressiva;
+- respeitar a lógica:
+  descobrir → reconhecer → relacionar → expressar → criar.
+Regras técnicas:
+- todas as atividades devem ser cadastradas por dados;
+- não usar posição global do array como regra;
+- progresso por IDs;
+- conclusão do mundo após as 8 atividades;
+- reward uma única vez;
+- revisitar o mundo não repete reward;
+- manter compatibilidade com progresso salvo dos mundos anteriores;
+- não criar backend;
+- não alterar engines existentes de forma específica para uma atividade.
+Se criar novos engines:
+- devem ser genéricos;
+- registrados em activityEngineRegistry;
+- possuir contrato TypeScript próprio;
+- funcionar com configuração validada;
+- ter testes.
+Validação obrigatória:
+1. TypeScript sem erros;
+2. testes passando;
+3. Preview funcionando;
+4. Casa e Fazenda continuam intactas;
+5. Parque desbloqueia após Fazenda;
+6. 8 atividades funcionam em sequência;
+7. não é possível pular atividades;
+8. progresso persiste após recarregar;
+9. reward aparece apenas após a 8ª atividade;
+10. pattern-completion, se criado, funciona por configuração;
+11. real-world-challenge, se criado, funciona sem permissões especiais.
+Ao final, informe:
+1. engines reutilizados;
+2. engines novos;
+3. arquivos alterados;
+4. estrutura das 8 atividades;
+5. testes executados;
+6. limitações restantes.
+Não avance para Mercado ou Cidade nesta tarefa.

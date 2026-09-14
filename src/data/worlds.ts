@@ -42,10 +42,32 @@ export const fazendaDasDescobertas: WorldDefinition = {
   },
 };
 
+export const parqueDasCores: WorldDefinition = {
+  id: "parque-das-cores",
+  title: "Parque das Cores",
+  description: "Um parque alegre para descobrir cores, formas e caminhos.",
+  activityIds: activities
+    .filter((activity) => activity.worldId === "parque-das-cores")
+    .map((activity) => activity.id),
+  rewardId: "parque-rainbow",
+  unlock: {
+    unlockedByDefault: false,
+    prerequisiteWorldId: "fazenda-das-descobertas",
+  },
+  assets: {
+    mapIcon: "🎨",
+    mapPrompt: "O Parque das Cores está logo ali. Vamos descobrir juntos?",
+    entryLabel: "Entrar no parque",
+    introPrompt:
+      "Vamos passear pelo parque? Cada cor esconde uma descoberta.",
+  },
+};
+
 /** Worlds are data, so adding a world does not require changing navigation. */
 export const worldCatalog: readonly WorldDefinition[] = [
   casaDoLumi,
   fazendaDasDescobertas,
+  parqueDasCores,
 ];
 export const worlds = worldCatalog;
 

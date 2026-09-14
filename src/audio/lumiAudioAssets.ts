@@ -17,6 +17,14 @@ export const LUMI_AUDIO_FILES = [
   "activity-14-farm-where-from.mp3",
   "activity-15-farm-front-or-back.mp3",
   "activity-16-farm-help-harvest.mp3",
+  "activity-17-parque-kites.mp3",
+  "activity-18-parque-shapes.mp3",
+  "activity-19-parque-above-below.mp3",
+  "activity-20-parque-count-ducks.mp3",
+  "activity-21-parque-sequence.mp3",
+  "activity-22-parque-right-path.mp3",
+  "activity-23-parque-speed.mp3",
+  "activity-24-parque-real-world.mp3",
   "reward-you-did-it.mp3",
 ] as const;
 
@@ -43,6 +51,14 @@ const lumiAudioAssets: Partial<Record<LumiAudioFile, AudioSource>> = {
   // "activity-14-farm-where-from.mp3": require("../../assets/audio/lumi/activity-14-farm-where-from.mp3"),
   // "activity-15-farm-front-or-back.mp3": require("../../assets/audio/lumi/activity-15-farm-front-or-back.mp3"),
   // "activity-16-farm-help-harvest.mp3": require("../../assets/audio/lumi/activity-16-farm-help-harvest.mp3"),
+  // "activity-17-parque-kites.mp3": require("../../assets/audio/lumi/activity-17-parque-kites.mp3"),
+  // "activity-18-parque-shapes.mp3": require("../../assets/audio/lumi/activity-18-parque-shapes.mp3"),
+  // "activity-19-parque-above-below.mp3": require("../../assets/audio/lumi/activity-19-parque-above-below.mp3"),
+  // "activity-20-parque-count-ducks.mp3": require("../../assets/audio/lumi/activity-20-parque-count-ducks.mp3"),
+  // "activity-21-parque-sequence.mp3": require("../../assets/audio/lumi/activity-21-parque-sequence.mp3"),
+  // "activity-22-parque-right-path.mp3": require("../../assets/audio/lumi/activity-22-parque-right-path.mp3"),
+  // "activity-23-parque-speed.mp3": require("../../assets/audio/lumi/activity-23-parque-speed.mp3"),
+  // "activity-24-parque-real-world.mp3": require("../../assets/audio/lumi/activity-24-parque-real-world.mp3"),
   // "reward-you-did-it.mp3": require("../../assets/audio/lumi/reward-you-did-it.mp3"),
 };
 

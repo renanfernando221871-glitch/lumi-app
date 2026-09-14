@@ -19,6 +19,15 @@ export const rewards: readonly RewardDefinition[] = [
     message: "Você descobriu os segredos da fazenda e ajudou a cuidar dela.",
     completionLabel: "Ver minha colheita",
   },
+  {
+    id: "parque-rainbow",
+    icon: "🌈",
+    progressLockedIcon: "🌱",
+    eyebrow: "CONQUISTA NOVA",
+    title: "O parque\nficou colorido!",
+    message: "Você descobriu cores, formas e ideias por todo o parque.",
+    completionLabel: "Ver meu arco-íris",
+  },
 ];
 
 export function getRewardById(rewardId: string): RewardDefinition {

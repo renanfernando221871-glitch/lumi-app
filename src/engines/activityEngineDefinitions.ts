@@ -5,6 +5,8 @@ import {
   CountAndSelectActivity,
   DragToTargetActivity,
   OrderingActivity,
+  PatternCompletionActivity,
+  RealWorldChallengeActivity,
   TapAndFindActivity,
 } from "../types";
 
@@ -13,6 +15,8 @@ export type ActivityByEngine = {
   "drag-to-target": DragToTargetActivity;
   "count-and-select": CountAndSelectActivity;
   ordering: OrderingActivity;
+  "pattern-completion": PatternCompletionActivity;
+  "real-world-challenge": RealWorldChallengeActivity;
 };
 
 export type ActivityEngineValidator<K extends ActivityEngineType> = (
@@ -118,6 +122,58 @@ export const activityEngineValidators = {
       throw new Error(
         `Activity "${activity.id}" ordering configuration must include every item exactly once.`,
       );
+    }
+  },
+  "pattern-completion": (activity) => {
+    const { sequence, options, targetOptionId } = activity.config;
+    const optionIds = new Set<string>();
+    if (
+      sequence.length < 2 ||
+      options.length < 2 ||
+      !targetOptionId.trim() ||
+      !options.some((option) => option.id === targetOptionId)
+    ) {
+      throw new Error(
+        `Activity "${activity.id}" has invalid pattern-completion configuration.`,
+      );
+    }
+    for (const token of sequence) {
+      if (!token.id.trim() || !token.label.trim()) {
+        throw new Error(
+          `Activity "${activity.id}" pattern sequence contains an incomplete token.`,
+        );
+      }
+    }
+    for (const option of options) {
+      if (!option.id.trim() || !option.label.trim() || optionIds.has(option.id)) {
+        throw new Error(
+          `Activity "${activity.id}" pattern options must have unique IDs and labels.`,
+        );
+      }
+      optionIds.add(option.id);
+    }
+    if (activity.config.placeholder !== undefined && !activity.config.placeholder.trim()) {
+      throw new Error(`Activity "${activity.id}" pattern placeholder cannot be empty.`);
+    }
+    if (activity.config.prompt !== undefined && !activity.config.prompt.trim()) {
+      throw new Error(`Activity "${activity.id}" pattern prompt cannot be empty.`);
+    }
+  },
+  "real-world-challenge": (activity) => {
+    const { prompt, confirmationLabel, visual } = activity.config;
+    if (
+      !prompt.trim() ||
+      !confirmationLabel.trim() ||
+      !visual ||
+      !visual.emoji.trim() ||
+      !visual.label.trim()
+    ) {
+      throw new Error(
+        `Activity "${activity.id}" has invalid real-world-challenge configuration.`,
+      );
+    }
+    if (visual.color !== undefined && !visual.color.trim()) {
+      throw new Error(`Activity "${activity.id}" visual color cannot be empty.`);
     }
   },
 } satisfies {

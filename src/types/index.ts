@@ -2,7 +2,9 @@ export type ActivityEngineType =
   | "tap-and-find"
   | "drag-to-target"
   | "count-and-select"
-  | "ordering";
+  | "ordering"
+  | "pattern-completion"
+  | "real-world-challenge";
 
 export type ActivityItem = {
   id: string;
@@ -79,11 +81,44 @@ export type OrderingActivity = ActivityContent & {
 };
 export type OrderingActivityDefinition = OrderingActivity;
 
+export type PatternToken = {
+  id: string;
+  label: string;
+  emoji?: string;
+  color?: string;
+};
+
+export type PatternCompletionActivity = ActivityContent & {
+  engineType: "pattern-completion";
+  config: {
+    sequence: PatternToken[];
+    options: PatternToken[];
+    targetOptionId: string;
+    placeholder?: string;
+    prompt?: string;
+  };
+};
+
+export type RealWorldChallengeActivity = ActivityContent & {
+  engineType: "real-world-challenge";
+  config: {
+    prompt: string;
+    confirmationLabel: string;
+    visual: {
+      emoji: string;
+      label: string;
+      color?: string;
+    };
+  };
+};
+
 export type ActivityDefinition =
   | TapAndFindActivity
   | DragToTargetActivity
   | CountAndSelectActivity
-  | OrderingActivity;
+  | OrderingActivity
+  | PatternCompletionActivity
+  | RealWorldChallengeActivity;
 
 export type ActivityInteraction = {
   completed: boolean;
