@@ -76,6 +76,17 @@ export function validateWorldCatalog(
         `World "${world.id}" references unknown reward "${world.rewardId}".`,
       );
     }
+    if (
+      world.unlock.prerequisiteWorldId &&
+      (world.unlock.prerequisiteWorldId === world.id ||
+        !catalog.some(
+          (candidate) => candidate.id === world.unlock.prerequisiteWorldId,
+        ))
+    ) {
+      throw new Error(
+        `World "${world.id}" references an unknown prerequisite world.`,
+      );
+    }
     for (const activityId of world.activityIds) {
       if (activityIds.has(activityId)) {
         throw new Error(`Activity catalog contains duplicate activity ID "${activityId}".`);

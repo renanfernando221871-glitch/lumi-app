@@ -4,6 +4,7 @@ import {
   ActivityItem,
   CountAndSelectActivity,
   DragToTargetActivity,
+  OrderingActivity,
   TapAndFindActivity,
 } from "../types";
 
@@ -11,6 +12,7 @@ export type ActivityByEngine = {
   "tap-and-find": TapAndFindActivity;
   "drag-to-target": DragToTargetActivity;
   "count-and-select": CountAndSelectActivity;
+  ordering: OrderingActivity;
 };
 
 export type ActivityEngineValidator<K extends ActivityEngineType> = (
@@ -98,6 +100,23 @@ export const activityEngineValidators = {
     ) {
       throw new Error(
         `Activity "${activity.id}" has invalid count-and-select configuration.`,
+      );
+    }
+  },
+  ordering: (activity) => {
+    const itemIds = getItemIds(activity.id, activity.config.items);
+    const { correctOrder, orderingInstruction } = activity.config;
+    if (
+      !orderingInstruction.trim() ||
+      correctOrder.length < 2 ||
+      new Set(correctOrder).size !== correctOrder.length ||
+      correctOrder.some((id) => !itemIds.has(id))
+    ) {
+      throw new Error(`Activity "${activity.id}" has invalid ordering configuration.`);
+    }
+    if (correctOrder.length !== activity.config.items.length) {
+      throw new Error(
+        `Activity "${activity.id}" ordering configuration must include every item exactly once.`,
       );
     }
   },

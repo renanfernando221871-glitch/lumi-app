@@ -2,8 +2,10 @@ import {
   ActivityInteraction,
   CountAndSelectActivity,
   DragToTargetActivity,
+  OrderingActivity,
   TapAndFindActivity,
 } from "../types";
+import { evaluateOrdering as evaluateOrderingState } from "./ordering";
 
 export function evaluateTapAndFind(
   activity: TapAndFindActivity,
@@ -30,6 +32,13 @@ export function evaluateDragToTarget(
   return droppedInsideTarget
     ? { completed: true }
     : { completed: false, feedback: activity.retryFeedback };
+}
+
+export function evaluateOrdering(
+  activity: OrderingActivity,
+  selectedItemIds: readonly string[],
+) {
+  return evaluateOrderingState(activity, selectedItemIds);
 }
 
 export type DragFrame = {

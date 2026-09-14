@@ -8,23 +8,21 @@ import { Shell } from "./components/Shell";
 
 type Props = {
   profile: ChildProfile;
-  world: WorldDefinition;
-  reward: RewardDefinition;
-  worldNumber: number;
-  completedCount: number;
-  hasFlower: boolean;
-  onOpenHouse: () => void;
+  worlds: readonly WorldDefinition[];
+  unlockedWorldIds: readonly string[];
+  completedActivityIds: readonly string[];
+  rewards: Readonly<Record<string, RewardDefinition>>;
+  onOpenWorld: (worldId: string) => void;
   onEditProfile: () => void;
 };
 
 export function MapScreen({
   profile,
-  world,
-  reward,
-  worldNumber,
-  completedCount,
-  hasFlower,
-  onOpenHouse,
+  worlds,
+  unlockedWorldIds,
+  completedActivityIds,
+  rewards,
+  onOpenWorld,
   onEditProfile,
 }: Props) {
   return (
@@ -48,40 +46,58 @@ export function MapScreen({
             <Text style={styles.mapPath}>⌁  ·  ⌁  ·  ⌁</Text>
           </View>
           <LumiSpeechBubble>
-            {world.assets.mapPrompt}
+             {worlds[0]?.assets.mapPrompt}
           </LumiSpeechBubble>
-          <View style={styles.mapCard}>
-            <View style={styles.homeIcon}>
-              <Text style={styles.homeEmoji}>{world.assets.mapIcon}</Text>
-            </View>
-            <View style={styles.homeCopy}>
-              <Text style={styles.homeEyebrow}>MUNDO {worldNumber}</Text>
-              <Text style={styles.homeTitle}>{world.title}</Text>
-              <Text style={styles.homeSub}>
-                {world.activityIds.length} descobertas para fazer
-              </Text>
-            </View>
-            <Text style={styles.homeArrow}>›</Text>
-          </View>
-          <PrimaryButton
-            label={world.assets.entryLabel}
-            onPress={onOpenHouse}
-            variant="blue"
-            style={styles.fullButton}
-          />
-          <View style={styles.progressCard}>
-            <View style={styles.progressCopy}>
-              <Text style={styles.progressTitle}>Seu jardim</Text>
-              <Text style={styles.progressSub}>
-                {hasFlower
-                  ? "Uma flor nasceu!"
-                  : "Cada descoberta faz uma flor crescer."}
-              </Text>
-            </View>
-            <Text style={styles.progressFlower}>
-              {hasFlower ? reward.icon : reward.progressLockedIcon}
-            </Text>
-          </View>
+           {worlds.map((world, index) => {
+             const unlocked = unlockedWorldIds.includes(world.id);
+             const reward = rewards[world.rewardId];
+             const completedCount = world.activityIds.filter((id) =>
+               completedActivityIds.includes(id),
+             ).length;
+             const complete = completedCount === world.activityIds.length;
+             return (
+               <View key={world.id}>
+                 <View style={[styles.mapCard, !unlocked && styles.lockedCard]}>
+                   <View style={styles.homeIcon}>
+                     <Text style={styles.homeEmoji}>{world.assets.mapIcon}</Text>
+                   </View>
+                   <View style={styles.homeCopy}>
+                     <Text style={styles.homeEyebrow}>MUNDO {index + 1}</Text>
+                     <Text style={styles.homeTitle}>{world.title}</Text>
+                     <Text style={styles.homeSub}>
+                       {unlocked
+                         ? `${completedCount}/${world.activityIds.length} descobertas`
+                         : "Uma nova descoberta está a caminho"}
+                     </Text>
+                   </View>
+                   <Text style={styles.homeArrow}>{unlocked ? "›" : "☁️"}</Text>
+                 </View>
+                 {unlocked ? (
+                   <PrimaryButton
+                     label={world.assets.entryLabel}
+                     onPress={() => onOpenWorld(world.id)}
+                     variant="blue"
+                     style={styles.fullButton}
+                   />
+                 ) : null}
+                 <View style={styles.progressCard}>
+                   <View style={styles.progressCopy}>
+                     <Text style={styles.progressTitle}>{world.title}</Text>
+                     <Text style={styles.progressSub}>
+                       {complete
+                         ? "Descoberta completa!"
+                         : unlocked
+                           ? "Cada descoberta faz uma conquista crescer."
+                           : "Complete o mundo anterior para explorar."}
+                     </Text>
+                   </View>
+                   <Text style={styles.progressFlower}>
+                     {complete && reward ? reward.icon : reward?.progressLockedIcon ?? "🌱"}
+                   </Text>
+                 </View>
+               </View>
+             );
+           })}
         </View>
       </ScrollView>
     </Shell>
@@ -175,6 +191,10 @@ const styles = StyleSheet.create({
     borderRadius: 23,
     backgroundColor: colors.white,
     ...shadow,
+  },
+  lockedCard: {
+    opacity: 0.82,
+    backgroundColor: "#F7F5EC",
   },
   homeIcon: {
     width: 68,

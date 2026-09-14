@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { activities } from "./src/data/activities";
-import { getRewardById } from "./src/data/rewards";
-import { casaDoLumi, worldCatalog } from "./src/data/worlds";
+import { getRewardById, rewards } from "./src/data/rewards";
+import { worldCatalog } from "./src/data/worlds";
 import {
+  canOpenWorld,
+  canStartWorldActivity,
+  getNextIncompleteActivityId,
+  getUnlockedWorldIds,
   completeWorldProgress,
-  getWorldCompletionDestination,
 } from "./src/domain/progress";
 import { useAppNavigation } from "./src/navigation/useAppNavigation";
 import { ActivityScreen } from "./src/screens/ActivityScreen";
@@ -112,35 +115,49 @@ function LumiApp() {
   }
 
   if (navigation.route === "map") {
-    const reward = getRewardById(casaDoLumi.rewardId);
-    const completedCount = casaDoLumi.activityIds.filter((id) =>
-      progress.completedActivityIds.includes(id),
-    ).length;
+    const unlockedWorldIds = getUnlockedWorldIds(
+      worldCatalog,
+      progress.completedActivityIds,
+    );
+    const rewardCatalog = rewards.reduce<Record<string, (typeof rewards)[number]>>(
+      (result, reward) => {
+        result[reward.id] = reward;
+        return result;
+      },
+      {},
+    );
     return (
       <MapScreen
         profile={profile}
-        world={casaDoLumi}
-        reward={reward}
-        worldNumber={worldCatalog.indexOf(casaDoLumi) + 1}
-        completedCount={completedCount}
-        hasFlower={progress.earnedRewardIds.includes(casaDoLumi.rewardId)}
-        onOpenHouse={() => navigation.openWorld(casaDoLumi.id)}
+        worlds={worldCatalog}
+        unlockedWorldIds={unlockedWorldIds}
+        completedActivityIds={progress.completedActivityIds}
+        rewards={rewardCatalog}
+        onOpenWorld={(worldId) => {
+          if (unlockedWorldIds.includes(worldId)) navigation.openWorld(worldId);
+        }}
         onEditProfile={() => navigation.replace("personalize")}
       />
     );
   }
 
   const world = getWorld(navigation.worldId);
+  if (!canOpenWorld(world, progress, worldCatalog)) {
+    return (
+      <NavigationRedirect
+        onRedirect={() => navigation.replace("map")}
+      />
+    );
+  }
   const worldActivities = getWorldActivities(world);
   const worldNumber = worldCatalog.indexOf(world) + 1;
 
   if (navigation.route === "house") {
     const startActivities = () => {
       const next =
-        worldActivities.find(
-          (activity) => !progress.completedActivityIds.includes(activity.id),
-        ) ?? worldActivities[0];
-      navigation.startActivity(world.id, next.id);
+        getNextIncompleteActivityId(world, progress.completedActivityIds) ??
+        worldActivities[0].id;
+      navigation.startActivity(world.id, next);
     };
     return (
       <HouseScreen
@@ -155,9 +172,39 @@ function LumiApp() {
   }
 
   const activity = getActivity(worldActivities, navigation.activityId);
+  if (
+    !canStartWorldActivity(
+      world,
+      activity.id,
+      progress,
+      worldCatalog,
+    )
+  ) {
+    const expectedActivityId = getNextIncompleteActivityId(
+      world,
+      progress.completedActivityIds,
+    );
+    return (
+      <NavigationRedirect
+        onRedirect={() =>
+          expectedActivityId
+            ? navigation.startActivity(world.id, expectedActivityId)
+            : navigation.replace("map")
+        }
+      />
+    );
+  }
   const activityIndex = worldActivities.indexOf(activity);
 
   const completeActivity = () => {
+    const expectedActivityId = getNextIncompleteActivityId(
+      world,
+      progress.completedActivityIds,
+    );
+    if (expectedActivityId && expectedActivityId !== activity.id) {
+      navigation.startActivity(world.id, expectedActivityId);
+      return;
+    }
     const { progress: nextProgress, rewardGranted } = completeWorldProgress(
       progress,
       activity.id,
@@ -166,15 +213,14 @@ function LumiApp() {
     setProgress(nextProgress);
     saveProgress(nextProgress).catch(console.error);
 
-    const destination = getWorldCompletionDestination(
-      rewardGranted,
-      activity.id,
+    const nextActivityId = getNextIncompleteActivityId(
       world,
+      nextProgress.completedActivityIds,
     );
-    if (destination === "reward") {
+    if (rewardGranted) {
       navigation.showReward(world.rewardId);
-    } else if (destination === "next") {
-      navigation.startActivity(world.id, worldActivities[activityIndex + 1].id);
+    } else if (nextActivityId) {
+      navigation.startActivity(world.id, nextActivityId);
     } else {
       navigation.replace("map");
     }
@@ -187,6 +233,7 @@ function LumiApp() {
         activity={activity}
         activityNumber={activityIndex + 1}
         total={worldActivities.length}
+        finalCompletionLabel={getRewardById(world.rewardId).completionLabel}
         onBack={navigation.goBack}
         onComplete={completeActivity}
       />
@@ -198,4 +245,11 @@ function LumiApp() {
       ) : null}
     </>
   );
+}
+
+function NavigationRedirect({ onRedirect }: { onRedirect: () => void }) {
+  useEffect(() => {
+    onRedirect();
+  }, [onRedirect]);
+  return <SplashScreen />;
 }

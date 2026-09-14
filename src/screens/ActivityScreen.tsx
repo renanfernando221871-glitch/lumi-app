@@ -14,6 +14,7 @@ type Props = {
   activity: ActivityDefinition;
   activityNumber: number;
   total: number;
+  finalCompletionLabel: string;
   onBack: () => void;
   /** The optional argument preserves compatibility with the original App. */
   onComplete: (result?: ActivityResult) => void;
@@ -23,6 +24,7 @@ export function ActivityScreen({
   activity,
   activityNumber,
   total,
+  finalCompletionLabel,
   onBack,
   onComplete,
 }: Props) {
@@ -102,7 +104,11 @@ export function ActivityScreen({
         </Text>
         {session.complete ? (
           <PrimaryButton
-            label={activityNumber === total ? "Ver minha flor" : "Próxima atividade"}
+            label={
+              activityNumber === total
+                ? finalCompletionLabel
+                : "Próxima atividade"
+            }
             onPress={advance}
             variant="green"
             disabled={session.advancing}

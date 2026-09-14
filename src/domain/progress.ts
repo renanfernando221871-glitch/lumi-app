@@ -4,6 +4,71 @@ export type WorldLike =
   | Pick<WorldDefinition, "activityIds" | "rewardId">
   | readonly ActivityDefinition[];
 
+export function isWorldUnlocked(
+  world: Pick<WorldDefinition, "unlock">,
+  completedActivityIds: readonly string[] | ProgressState,
+  catalog: readonly WorldDefinition[],
+): boolean {
+  if (world.unlock.unlockedByDefault) return true;
+  const prerequisiteId = world.unlock.prerequisiteWorldId;
+  if (!prerequisiteId) return false;
+  const prerequisite = catalog.find((candidate) => candidate.id === prerequisiteId);
+  const completedIds = Array.isArray(completedActivityIds)
+    ? completedActivityIds
+    : (completedActivityIds as ProgressState).completedActivityIds;
+  return prerequisite
+    ? hasCompletedWorld([...completedIds], prerequisite)
+    : false;
+}
+
+export function getUnlockedWorldIds(
+  catalog: readonly WorldDefinition[],
+  completedActivityIds: readonly string[],
+): string[] {
+  return catalog
+    .filter((world) => isWorldUnlocked(world, completedActivityIds, catalog))
+    .map((world) => world.id);
+}
+
+export const isWorldAvailable = isWorldUnlocked;
+
+export function getNextIncompleteActivityId(
+  world: Pick<WorldDefinition, "activityIds">,
+  completedActivityIds: readonly string[],
+): string | undefined {
+  return world.activityIds.find((id) => !completedActivityIds.includes(id));
+}
+
+export function canStartActivity(
+  world: Pick<WorldDefinition, "activityIds">,
+  activityId: string,
+  completedActivityIds: readonly string[],
+): boolean {
+  const next = getNextIncompleteActivityId(world, completedActivityIds);
+  return next === activityId || (!next && world.activityIds.includes(activityId));
+}
+
+export function canOpenWorld(
+  world: WorldDefinition,
+  completedActivityIds: readonly string[] | ProgressState,
+  catalog: readonly WorldDefinition[],
+): boolean {
+  return isWorldUnlocked(world, completedActivityIds, catalog);
+}
+
+export function canStartWorldActivity(
+  world: WorldDefinition,
+  activityId: string,
+  completedActivityIds: readonly string[] | ProgressState,
+  catalog: readonly WorldDefinition[],
+): boolean {
+  if (!canOpenWorld(world, completedActivityIds, catalog)) return false;
+  const completedIds = Array.isArray(completedActivityIds)
+    ? completedActivityIds
+    : (completedActivityIds as ProgressState).completedActivityIds;
+  return canStartActivity(world, activityId, completedIds);
+}
+
 function isActivityList(
   value: WorldLike,
 ): value is readonly ActivityDefinition[] {

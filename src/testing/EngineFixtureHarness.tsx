@@ -26,6 +26,7 @@ export function EngineFixtureHarness({
         activity={activity}
         activityNumber={1}
         total={1}
+        finalCompletionLabel="Concluir atividade"
         onBack={() => undefined}
         onComplete={(next) => setResult(next ?? null)}
       />

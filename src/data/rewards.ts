@@ -8,6 +8,16 @@ export const rewards: readonly RewardDefinition[] = [
     eyebrow: "CONQUISTA NOVA",
     title: "Nossa primeira\nflor nasceu!",
     message: "Você cuidou de cada atividade. Que bonito crescer junto!",
+    completionLabel: "Ver minha flor",
+  },
+  {
+    id: "farm-basket",
+    icon: "🧺",
+    progressLockedIcon: "🌱",
+    eyebrow: "CONQUISTA NOVA",
+    title: "A colheita\nfoi completa!",
+    message: "Você descobriu os segredos da fazenda e ajudou a cuidar dela.",
+    completionLabel: "Ver minha colheita",
   },
 ];
 

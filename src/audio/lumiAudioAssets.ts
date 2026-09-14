@@ -9,6 +9,14 @@ export const LUMI_AUDIO_FILES = [
   "activity-06-identify-shape.mp3",
   "activity-07-lumi-emotion.mp3",
   "activity-08-tidy-house.mp3",
+  "activity-09-farm-who-moo.mp3",
+  "activity-10-farm-find-horse.mp3",
+  "activity-11-farm-brown-animal.mp3",
+  "activity-12-farm-count-chicks.mp3",
+  "activity-13-farm-order-size.mp3",
+  "activity-14-farm-who-gives-what.mp3",
+  "activity-15-farm-front-or-back.mp3",
+  "activity-16-farm-help-harvest.mp3",
   "reward-you-did-it.mp3",
 ] as const;
 
@@ -27,6 +35,14 @@ const lumiAudioAssets: Partial<Record<LumiAudioFile, AudioSource>> = {
   // "activity-06-identify-shape.mp3": require("../../assets/audio/lumi/activity-06-identify-shape.mp3"),
   // "activity-07-lumi-emotion.mp3": require("../../assets/audio/lumi/activity-07-lumi-emotion.mp3"),
   // "activity-08-tidy-house.mp3": require("../../assets/audio/lumi/activity-08-tidy-house.mp3"),
+  // "activity-09-farm-who-moo.mp3": require("../../assets/audio/lumi/activity-09-farm-who-moo.mp3"),
+  // "activity-10-farm-find-horse.mp3": require("../../assets/audio/lumi/activity-10-farm-find-horse.mp3"),
+  // "activity-11-farm-brown-animal.mp3": require("../../assets/audio/lumi/activity-11-farm-brown-animal.mp3"),
+  // "activity-12-farm-count-chicks.mp3": require("../../assets/audio/lumi/activity-12-farm-count-chicks.mp3"),
+  // "activity-13-farm-order-size.mp3": require("../../assets/audio/lumi/activity-13-farm-order-size.mp3"),
+  // "activity-14-farm-who-gives-what.mp3": require("../../assets/audio/lumi/activity-14-farm-who-gives-what.mp3"),
+  // "activity-15-farm-front-or-back.mp3": require("../../assets/audio/lumi/activity-15-farm-front-or-back.mp3"),
+  // "activity-16-farm-help-harvest.mp3": require("../../assets/audio/lumi/activity-16-farm-help-harvest.mp3"),
   // "reward-you-did-it.mp3": require("../../assets/audio/lumi/reward-you-did-it.mp3"),
 };
 

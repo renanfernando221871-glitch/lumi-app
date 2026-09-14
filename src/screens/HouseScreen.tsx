@@ -39,14 +39,15 @@ export function HouseScreen({
         <View style={styles.inner}>
           <BackButton onPress={onBack} />
           <View style={styles.houseHeader}>
-            <Text style={styles.houseEmoji}>🏡</Text>
+            <Text style={styles.houseEmoji}>{world.assets.mapIcon}</Text>
             <View>
               <Text style={styles.pageKicker}>MUNDO {worldNumber}</Text>
               <Text style={styles.pageTitle}>{world.title}</Text>
             </View>
           </View>
           <LumiSpeechBubble>
-            Vamos cuidar da casa juntos? Cada brincadeira esconde uma descoberta.
+            {world.assets.introPrompt ??
+              `${world.description} Vamos descobrir juntos.`}
           </LumiSpeechBubble>
           <View style={styles.activityList}>
             {activities.map((activity, index) => {

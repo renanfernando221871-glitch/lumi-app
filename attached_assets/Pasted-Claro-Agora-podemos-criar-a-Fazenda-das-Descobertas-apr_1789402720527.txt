@@ -1,0 +1,113 @@
+Claro. Agora podemos criar a Fazenda das Descobertas aproveitando a arquitetura que já está mais robusta.
+Cole este prompt no Replit Agent:
+Crie o segundo mundo do Lumi: Fazenda das Descobertas.
+Preserve integralmente a arquitetura atual, a identidade visual, o VoiceService, o sistema de progresso, rewards e navigation.
+Não altere as 8 atividades da Casa do Lumi.
+Objetivo desta tarefa:
+adicionar o mundo Fazenda das Descobertas com 8 atividades orientadas por dados, reutilizando os engines existentes sempre que possível e criando novos engines somente quando forem realmente necessários e de forma genérica.
+Crie o novo world em data/worlds.ts com:
+- id
+- title
+- description
+- activityIds
+- rewardId
+- estado de desbloqueio
+- assets/configurações visuais necessárias
+O mundo deve se chamar:
+Fazenda das Descobertas
+Tema pedagógico:
+animais, sons, natureza, quantidades de 1 a 5, tamanho, associação e relações espaciais.
+Crie estas 8 atividades:
+1. Quem faz muu?
+   - objetivo: associar animal e som;
+   - mostrar animais como vaca, cavalo e galinha;
+   - pergunta: “Quem faz muu?”
+   - usar seleção visual por dados;
+   - engine reutilizável.
+2. Encontre o cavalo
+   - objetivo: reconhecer animais;
+   - instrução: “Onde está o cavalo?”
+   - usar tap-and-find.
+3. O animal marrom
+   - objetivo: reconhecer cor e animal;
+   - instrução: “Qual animal é marrom?”
+   - usar tap-and-find ou engine equivalente configurado por dados.
+4. Conte os pintinhos
+   - objetivo: contar de 1 a 5;
+   - mostrar uma quantidade variável de pintinhos;
+   - criança escolhe a quantidade correta;
+   - usar count-and-select;
+   - configuração preparada para outros objetos e quantidades.
+5. Do maior para o menor
+   - objetivo: ordenar por tamanho;
+   - mostrar 3 animais ou objetos em tamanhos diferentes;
+   - instrução: “Vamos colocar do maior para o menor?”
+   - se ainda não existir engine adequado, criar um engine genérico ordering;
+   - deve funcionar por configuração, sem IDs fixos.
+6. Quem dá o quê?
+   - objetivo: associação;
+   - exemplos:
+     - vaca → leite
+     - galinha → ovo
+     - ovelha → lã
+   - se necessário, criar um engine genérico matching ou association;
+   - deve aceitar pares configurados por dados.
+7. Na frente ou atrás?
+   - objetivo: relação espacial;
+   - mostrar um cenário simples com dois elementos;
+   - perguntar algo como:
+     “Quem está na frente?”
+     ou
+     “Quem está atrás?”
+   - usar engine de seleção configurado por dados sempre que possível.
+8. Ajude na colheita
+   - objetivo: síntese do mundo;
+   - atividade final com classificação ou arraste;
+   - exemplo:
+     arrastar frutas ou legumes para cestos corretos;
+   - reutilizar drag-to-target ou classification, se já existir;
+   - se criar algo novo, deve ser genérico e reutilizável em outros mundos.
+Regras pedagógicas:
+- sem punição;
+- sem X vermelho;
+- erro deve virar nova oportunidade de aprendizagem;
+- feedback curto e acolhedor;
+- instruções simples em português do Brasil;
+- evitar excesso de texto;
+- prioridade para áudio e imagem;
+- respeitar a lógica:
+  descobrir → reconhecer → relacionar → expressar → criar.
+Regras técnicas:
+- todas as atividades devem ser adicionadas ao catálogo por dados;
+- nenhuma atividade deve depender da posição no array;
+- progresso deve ser baseado em IDs;
+- conclusão do mundo apenas após as 8 atividades;
+- reward concedida uma única vez;
+- revisitar o mundo não deve repetir reward única;
+- manter compatibilidade com progresso salvo da Casa do Lumi;
+- manter fallback TTS enquanto não houver arquivos gravados;
+- não criar backend.
+Desbloqueio:
+- Fazenda das Descobertas deve ficar disponível após a conclusão da Casa do Lumi;
+- não usar cadeado agressivo;
+- visualmente pode aparecer como caminho, ponte, nuvem ou área ainda não descoberta;
+- preserve a ideia de “mundo de descobertas”.
+Validação obrigatória:
+1. TypeScript sem erros;
+2. testes passando;
+3. Preview funcionando;
+4. Casa do Lumi continua intacta;
+5. Fazenda aparece após conclusão da Casa;
+6. as 8 atividades funcionam em sequência;
+7. não é possível pular atividades;
+8. progresso persiste após recarregar;
+9. recompensa aparece apenas uma vez;
+10. novos engines, se criados, devem ser usados por configuração.
+Ao final, entregue:
+1. lista de engines reutilizados;
+2. lista de engines novos;
+3. arquivos alterados;
+4. estrutura das 8 atividades;
+5. testes executados;
+6. limitações restantes.
+Não avance para Parque, Mercado ou Cidade nesta tarefa.

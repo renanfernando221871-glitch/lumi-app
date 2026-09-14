@@ -18,6 +18,20 @@ import {
 } from "../src/navigation/navigationState";
 
 test("production activities use the exhaustive interaction engine contracts", () => {
+  const casaActivityIds = casaDoLumi.activityIds;
+  assert.deepEqual(
+    casaActivityIds.map((id) => activities.find((activity) => activity.id === id)!.engineType),
+    [
+      "tap-and-find",
+      "tap-and-find",
+      "drag-to-target",
+      "tap-and-find",
+      "count-and-select",
+      "tap-and-find",
+      "tap-and-find",
+      "drag-to-target",
+    ],
+  );
   assert.deepEqual(
     activities.map((activity) => activity.engineType),
     [
@@ -27,6 +41,14 @@ test("production activities use the exhaustive interaction engine contracts", ()
       "tap-and-find",
       "count-and-select",
       "tap-and-find",
+      "tap-and-find",
+      "drag-to-target",
+      "tap-and-find",
+      "tap-and-find",
+      "tap-and-find",
+      "count-and-select",
+      "ordering",
+      "drag-to-target",
       "tap-and-find",
       "drag-to-target",
     ],
@@ -110,7 +132,12 @@ test("world catalog validation rejects duplicate IDs and invalid references", ()
     ),
     true,
   );
-  assert.deepEqual(casaDoLumi.activityIds, activities.map((activity) => activity.id));
+  assert.deepEqual(
+    casaDoLumi.activityIds,
+    activities
+      .filter((activity) => activity.worldId === "casa-do-lumi")
+      .map((activity) => activity.id),
+  );
 
   assert.throws(
     () => validateActivityCatalog([tapFixture, { ...tapFixture }]),

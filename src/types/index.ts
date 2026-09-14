@@ -1,7 +1,8 @@
 export type ActivityEngineType =
   | "tap-and-find"
   | "drag-to-target"
-  | "count-and-select";
+  | "count-and-select"
+  | "ordering";
 
 export type ActivityItem = {
   id: string;
@@ -64,10 +65,25 @@ export type CountAndSelectActivity = ActivityContent & {
   };
 };
 
+export type OrderingItem = ActivityItem & {
+  size?: number;
+};
+
+export type OrderingActivity = ActivityContent & {
+  engineType: "ordering";
+  config: {
+    items: OrderingItem[];
+    correctOrder: string[];
+    orderingInstruction: string;
+  };
+};
+export type OrderingActivityDefinition = OrderingActivity;
+
 export type ActivityDefinition =
   | TapAndFindActivity
   | DragToTargetActivity
-  | CountAndSelectActivity;
+  | CountAndSelectActivity
+  | OrderingActivity;
 
 export type ActivityInteraction = {
   completed: boolean;
@@ -90,11 +106,14 @@ export type WorldDefinition = {
   rewardId: string;
   unlock: {
     unlockedByDefault: boolean;
+    /** The world that must be completed before this world is available. */
+    prerequisiteWorldId?: string;
   };
   assets: {
     mapIcon: string;
     mapPrompt: string;
     entryLabel: string;
+    introPrompt?: string;
   };
 };
 
@@ -105,6 +124,7 @@ export type RewardDefinition = {
   title: string;
   message: string;
   progressLockedIcon: string;
+  completionLabel: string;
 };
 export type WorldCatalog = readonly WorldDefinition[];
 

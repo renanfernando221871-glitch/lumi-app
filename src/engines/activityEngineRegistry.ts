@@ -2,6 +2,7 @@ import React from "react";
 import {
   CountAndSelectEngine,
   DragToTargetEngine,
+  OrderingEngine,
   TapAndFindEngine,
 } from "../components/engines";
 import {
@@ -75,6 +76,11 @@ export const activityEngineRegistry = {
     "count-and-select",
     CountAndSelectEngine,
     activityEngineValidators["count-and-select"],
+  ),
+  ordering: defineActivityEngine(
+    "ordering",
+    OrderingEngine,
+    activityEngineValidators.ordering,
   ),
 } satisfies {
   [K in ActivityEngineType]: ActivityEngineRegistration<K>;

@@ -14,16 +14,23 @@ const activityAudioFiles = [
   "activity-08-tidy-house.mp3",
 ];
 
-test("all eight activities declare their reserved local instruction audio", () => {
+test("Casa keeps all eight original instruction audio reservations", () => {
   assert.deepEqual(
-    activities.map((activity) => activity.instructionAudio),
+    activities
+      .filter((activity) => activity.worldId === "casa-do-lumi")
+      .map((activity) => activity.instructionAudio),
     activityAudioFiles,
   );
 });
 
-test("the local manifest reserves all activity and reward recordings", () => {
-  assert.deepEqual(LUMI_AUDIO_FILES, [
-    ...activityAudioFiles,
-    "reward-you-did-it.mp3",
-  ]);
+test("the local manifest reserves every production activity and reward recording", () => {
+  const productionAudioFiles = activities.map(
+    (activity) => activity.instructionAudio,
+  );
+  assert.equal(productionAudioFiles.length, 16);
+  assert.equal(new Set(productionAudioFiles).size, 16);
+  for (const file of productionAudioFiles) {
+    assert.ok(LUMI_AUDIO_FILES.includes(file as (typeof LUMI_AUDIO_FILES)[number]));
+  }
+  assert.ok(LUMI_AUDIO_FILES.includes("reward-you-did-it.mp3"));
 });
