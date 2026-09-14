@@ -83,7 +83,11 @@ export function ActivityScreen({
         <Text style={styles.kicker}>ATIVIDADE {activityNumber}</Text>
         <Text style={styles.title}>{activity.title}</Text>
         <LumiSpeechBubble compact>{activity.instruction}</LumiSpeechBubble>
-        <AudioButton label={activity.audioLabel} text={activity.instruction} />
+        <AudioButton
+          label={activity.audioLabel}
+          text={activity.instruction}
+          audioFile={activity.instructionAudio}
+        />
         <View style={styles.stage}>
           {activity.kind === "find" ? (
             <FindActivity activity={activity} onChoose={choose} />

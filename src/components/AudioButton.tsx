@@ -6,18 +6,28 @@ import {
 } from "../audio/lumiVoiceService";
 import { colors } from "../theme/colors";
 
-export function AudioButton({ label, text }: { label: string; text: string }) {
+export function AudioButton({
+  label,
+  text,
+  audioFile,
+}: {
+  label: string;
+  text: string;
+  audioFile?: string;
+}) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [voiceService] = useState<LumiVoiceService>(() =>
     createSystemLumiVoiceService(setIsPlaying),
   );
 
   useEffect(() => {
-    return () => voiceService.dispose();
+    return () => {
+      void voiceService.dispose();
+    };
   }, [voiceService]);
 
   const handlePress = () => {
-    void voiceService.play(text);
+    void voiceService.play({ text, audioFile });
   };
 
   return (

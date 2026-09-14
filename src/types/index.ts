@@ -13,6 +13,7 @@ export type ActivityDefinition = {
   kind: ActivityKind;
   title: string;
   instruction: string;
+  instructionAudio?: string;
   audioLabel: string;
   helper: string;
   items: ActivityItem[];

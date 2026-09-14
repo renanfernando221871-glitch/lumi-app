@@ -25,6 +25,7 @@ export type SpeechDriver = {
 
 export type LumiVoiceService = {
   play: (text: string) => Promise<void>;
+  stop: () => Promise<void>;
   dispose: () => void;
 };
 
@@ -201,6 +202,11 @@ export function createLumiVoiceService(
       } catch {
         finishIfCurrent(id);
       }
+    },
+    async stop() {
+      requestId += 1;
+      await driver.stop();
+      if (mounted) onPlayingChange(false);
     },
     dispose() {
       mounted = false;
