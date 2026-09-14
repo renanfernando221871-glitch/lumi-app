@@ -91,6 +91,7 @@ export function ActivityScreen({
         />
         <View style={styles.stage}>
           <Engine
+            key={activity.id}
             activity={activity}
             onInteraction={handleInteraction}
             disabled={session.complete}

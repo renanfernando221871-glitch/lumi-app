@@ -13,6 +13,7 @@ export const tapFixture: ActivityDefinition = {
   successFeedback: "Muito bem!",
   retryFeedback: "Tente outra vez.",
   hint: "Procure a estrela brilhante.",
+  previewEmoji: "⭐",
   config: {
     targetId: "star",
     items: [
@@ -35,7 +36,10 @@ export const dragFixture: ActivityDefinition = {
   successFeedback: "Muito bem!",
   retryFeedback: "Tente outra vez.",
   hint: "Arraste a concha.",
+  previewEmoji: "🧰",
   config: {
+    dragInstruction: "Arraste até aqui",
+    placedLabel: "Guardado!",
     pairs: [{ draggableItemId: "shell", targetId: "chest" }],
     items: [
       { id: "shell", label: "concha", emoji: "🐚", color: "#F7A49B" },

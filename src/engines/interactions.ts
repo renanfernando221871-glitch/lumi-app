@@ -24,12 +24,12 @@ export function evaluateCountAndSelect(
 }
 
 export function evaluateDragToTarget(
-  _activity: DragToTargetActivity,
+  activity: DragToTargetActivity,
   droppedInsideTarget: boolean,
 ): ActivityInteraction {
   return droppedInsideTarget
     ? { completed: true }
-    : { completed: false };
+    : { completed: false, feedback: activity.retryFeedback };
 }
 
 export type DragFrame = {
@@ -63,11 +63,20 @@ export function getResponsiveDragFrames(
       },
     };
   }
-  const slotWidth = width / total;
+  const columns = Math.min(3, total);
+  const row = Math.floor(index / columns);
+  const column = index % columns;
+  const slotWidth = width / columns;
   const cardWidth = Math.max(72, Math.min(100, slotWidth - 12));
-  const x = index * slotWidth + (slotWidth - cardWidth) / 2;
+  const x = column * slotWidth + (slotWidth - cardWidth) / 2;
+  const rowOffset = row * 250;
   return {
-    draggable: { x, y: 190, width: cardWidth, height: 88 },
-    target: { x, y: 45, width: cardWidth, height: 98 },
+    draggable: { x, y: 190 + rowOffset, width: cardWidth, height: 88 },
+    target: { x, y: 45 + rowOffset, width: cardWidth, height: 98 },
   };
+}
+
+export function getResponsiveDragStageHeight(total: number): number {
+  if (total <= 1) return 300;
+  return 45 + Math.ceil(total / 3) * 250;
 }

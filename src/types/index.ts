@@ -24,6 +24,7 @@ type ActivityContent = {
   successFeedback: string;
   retryFeedback: string;
   hint: string;
+  previewEmoji: string;
 };
 
 export type TapAndFindActivity = ActivityContent & {
@@ -42,6 +43,8 @@ export type DragToTargetActivity = ActivityContent & {
   engineType: "drag-to-target";
   config: {
     items: ActivityItem[];
+    dragInstruction: string;
+    placedLabel: string;
     pairs: {
       draggableItemId: string;
       targetId: string;

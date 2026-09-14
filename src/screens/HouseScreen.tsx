@@ -51,10 +51,6 @@ export function HouseScreen({
           <View style={styles.activityList}>
             {activities.map((activity, index) => {
               const done = completedActivityIds.includes(activity.id);
-              const previewEmoji =
-                activity.engineType === "count-and-select"
-                  ? activity.config.itemEmoji
-                  : activity.config.items.find((item) => item.isTarget)?.emoji;
               return (
                 <View key={activity.id} style={styles.activityRow}>
                   <View style={[styles.activityNumber, done && styles.activityDone]}>
@@ -67,7 +63,7 @@ export function HouseScreen({
                     <Text style={styles.activitySubtitle}>{activity.hint}</Text>
                   </View>
                   <Text style={styles.activityEmoji}>
-                    {previewEmoji}
+                    {activity.previewEmoji}
                   </Text>
                 </View>
               );

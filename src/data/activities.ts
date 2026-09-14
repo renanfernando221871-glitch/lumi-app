@@ -15,6 +15,7 @@ export const activities: ActivityDefinition[] = [
     successFeedback: "Você encontrou a cama!",
     retryFeedback: "Quase! Vamos olhar mais uma vez juntos.",
     hint: "Toque na cama bem macia.",
+    previewEmoji: "🛏️",
     config: {
       targetId: "bed",
       items: [
@@ -38,6 +39,7 @@ export const activities: ActivityDefinition[] = [
     successFeedback: "Isso! Vermelho como uma maçã!",
     retryFeedback: "Quase! Vamos olhar mais uma vez juntos.",
     hint: "Escolha uma cor bem vermelhinha.",
+    previewEmoji: "🍎",
     config: {
       presentation: "color-options",
       targetId: "apple",
@@ -62,7 +64,10 @@ export const activities: ActivityDefinition[] = [
     successFeedback: "Muito bem! O ursinho está guardado!",
     retryFeedback: "Tente levar o ursinho até a cesta.",
     hint: "Segure o ursinho e arraste até a cesta.",
+    previewEmoji: "🧺",
     config: {
+      dragInstruction: "Arraste até aqui",
+      placedLabel: "Guardado!",
       pairs: [{ draggableItemId: "teddy", targetId: "basket" }],
       items: [
         { id: "teddy", label: "ursinho", emoji: "🧸", color: "#C98759" },
@@ -83,6 +88,7 @@ export const activities: ActivityDefinition[] = [
     successFeedback: "Isso! Você encontrou a bola maior!",
     retryFeedback: "Olhe o tamanho das duas bolas.",
     hint: "Toque na bola que ocupa mais espaço.",
+    previewEmoji: "🔵",
     config: {
       targetId: "large-ball",
       items: [
@@ -104,6 +110,7 @@ export const activities: ActivityDefinition[] = [
     successFeedback: "Muito bem! São três maçãs!",
     retryFeedback: "Conte devagar: uma, duas, três.",
     hint: "Conte cada maçã e escolha o número.",
+    previewEmoji: "🍎",
     config: {
       itemEmoji: "🍎",
       itemLabel: "maçã",
@@ -125,6 +132,7 @@ export const activities: ActivityDefinition[] = [
     successFeedback: "Você encontrou o triângulo!",
     retryFeedback: "Procure a forma com três pontas.",
     hint: "O triângulo tem três lados.",
+    previewEmoji: "▲",
     config: {
       targetId: "triangle",
       items: [
@@ -147,6 +155,7 @@ export const activities: ActivityDefinition[] = [
     successFeedback: "Isso! A Lumi está alegre!",
     retryFeedback: "Olhe o sorriso da Lumi.",
     hint: "Escolha a carinha com um sorriso.",
+    previewEmoji: "😊",
     config: {
       targetId: "happy",
       featuredEmoji: "🌻 😊",
@@ -171,7 +180,10 @@ export const activities: ActivityDefinition[] = [
     successFeedback: "Que capricho! A casa está arrumada!",
     retryFeedback: "Tente levar cada objeto ao lugar com o mesmo símbolo.",
     hint: "Arraste o livro, a roupa e o brinquedo.",
+    previewEmoji: "📕",
     config: {
+      dragInstruction: "Cada objeto no seu lugar",
+      placedLabel: "Guardado!",
       pairs: [
         { draggableItemId: "book-item", targetId: "book-shelf" },
         { draggableItemId: "shirt-item", targetId: "shirt-drawer" },
