@@ -881,7 +881,7 @@ export const activities: ActivityDefinition[] = [
       items: [
         { id: "city-buy-bread", label: "comprar pão", emoji: "🍞", color: "#F8E0AC" },
         { id: "city-care-sick", label: "cuidar de alguém doente", emoji: "🩹", color: "#D8ECFC" },
-        { id: "city-play", label: "brincar", emoji: "🛝", color: "#DDF1D5" },
+        { id: "city-play", label: "brincar", emoji: "⚽", color: "#DDF1D5" },
         { id: "city-bakery", label: "padaria", emoji: "🥖", color: "#FFF0C7" },
         { id: "city-hospital", label: "hospital", emoji: "🏥", color: "#E6F3FD" },
         { id: "city-park", label: "parque", emoji: "🌳", color: "#E4F3DB" },
