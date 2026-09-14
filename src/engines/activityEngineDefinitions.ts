@@ -2,12 +2,14 @@ import {
   ActivityDefinition,
   ActivityEngineType,
   ActivityItem,
+  ClassificationActivity,
   CountAndSelectActivity,
   DragToTargetActivity,
   OrderingActivity,
   PatternCompletionActivity,
   RealWorldChallengeActivity,
   TapAndFindActivity,
+  VisualMemoryActivity,
 } from "../types";
 
 export type ActivityByEngine = {
@@ -17,6 +19,8 @@ export type ActivityByEngine = {
   ordering: OrderingActivity;
   "pattern-completion": PatternCompletionActivity;
   "real-world-challenge": RealWorldChallengeActivity;
+  classification: ClassificationActivity;
+  "visual-memory": VisualMemoryActivity;
 };
 
 export type ActivityEngineValidator<K extends ActivityEngineType> = (
@@ -174,6 +178,47 @@ export const activityEngineValidators = {
     }
     if (visual.color !== undefined && !visual.color.trim()) {
       throw new Error(`Activity "${activity.id}" visual color cannot be empty.`);
+    }
+  },
+  classification: (activity) => {
+    const itemIds = getItemIds(activity.id, activity.config.items);
+    const categoryIds = new Set(activity.config.categories.map(({ id }) => id));
+    const assignedItems = new Set<string>();
+    if (
+      activity.config.categories.length < 2 ||
+      categoryIds.size !== activity.config.categories.length ||
+      activity.config.categories.some(
+        ({ id, label, emoji, color }) =>
+          !id.trim() || !label.trim() || !emoji.trim() || !color.trim(),
+      ) ||
+      activity.config.assignments.length !== activity.config.items.length
+    ) {
+      throw new Error(`Activity "${activity.id}" has invalid classification configuration.`);
+    }
+    for (const assignment of activity.config.assignments) {
+      if (
+        !itemIds.has(assignment.itemId) ||
+        !categoryIds.has(assignment.categoryId) ||
+        assignedItems.has(assignment.itemId)
+      ) {
+        throw new Error(`Activity "${activity.id}" has invalid classification assignments.`);
+      }
+      assignedItems.add(assignment.itemId);
+    }
+  },
+  "visual-memory": (activity) => {
+    const itemIds = getItemIds(activity.id, activity.config.items);
+    const { missingItemId, revealDurationMs, studyPrompt, questionPrompt } =
+      activity.config;
+    if (
+      activity.config.items.length < 3 ||
+      !itemIds.has(missingItemId) ||
+      (revealDurationMs !== undefined &&
+        (!Number.isInteger(revealDurationMs) || revealDurationMs < 500)) ||
+      (studyPrompt !== undefined && !studyPrompt.trim()) ||
+      (questionPrompt !== undefined && !questionPrompt.trim())
+    ) {
+      throw new Error(`Activity "${activity.id}" has invalid visual-memory configuration.`);
     }
   },
 } satisfies {

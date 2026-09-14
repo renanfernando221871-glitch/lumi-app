@@ -63,11 +63,33 @@ export const parqueDasCores: WorldDefinition = {
   },
 };
 
+export const mercadoDoLumi: WorldDefinition = {
+  id: "mercado-do-lumi",
+  title: "Mercado do Lumi",
+  description: "Um mercado alegre para escolher, contar e organizar alimentos.",
+  activityIds: activities
+    .filter((activity) => activity.worldId === "mercado-do-lumi")
+    .map((activity) => activity.id),
+  rewardId: "mercado-bag",
+  unlock: {
+    unlockedByDefault: false,
+    prerequisiteWorldId: "parque-das-cores",
+  },
+  assets: {
+    mapIcon: "🏪",
+    mapPrompt: "O Mercado do Lumi apareceu no caminho. Vamos fazer descobertas?",
+    entryLabel: "Entrar no mercado",
+    introPrompt:
+      "Vamos passear pelo mercado? Há alimentos, sons e escolhas para descobrir.",
+  },
+};
+
 /** Worlds are data, so adding a world does not require changing navigation. */
 export const worldCatalog: readonly WorldDefinition[] = [
   casaDoLumi,
   fazendaDasDescobertas,
   parqueDasCores,
+  mercadoDoLumi,
 ];
 export const worlds = worldCatalog;
 

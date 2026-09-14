@@ -1,11 +1,13 @@
 import React from "react";
 import {
   CountAndSelectEngine,
+  ClassificationEngine,
   DragToTargetEngine,
   OrderingEngine,
   PatternCompletionEngine,
   RealWorldChallengeEngine,
   TapAndFindEngine,
+  VisualMemoryEngine,
 } from "../components/engines";
 import {
   ActivityDefinition,
@@ -93,6 +95,16 @@ export const activityEngineRegistry = {
     "real-world-challenge",
     RealWorldChallengeEngine,
     activityEngineValidators["real-world-challenge"],
+  ),
+  classification: defineActivityEngine(
+    "classification",
+    ClassificationEngine,
+    activityEngineValidators.classification,
+  ),
+  "visual-memory": defineActivityEngine(
+    "visual-memory",
+    VisualMemoryEngine,
+    activityEngineValidators["visual-memory"],
   ),
 } satisfies {
   [K in ActivityEngineType]: ActivityEngineRegistration<K>;

@@ -25,6 +25,14 @@ export const LUMI_AUDIO_FILES = [
   "activity-22-parque-right-path.mp3",
   "activity-23-parque-speed.mp3",
   "activity-24-parque-real-world.mp3",
+  "activity-25-mercado-find-apple.mp3",
+  "activity-26-mercado-two-bananas.mp3",
+  "activity-27-mercado-fruit-or-vegetable.mp3",
+  "activity-28-mercado-which-has-more.mp3",
+  "activity-29-mercado-what-disappeared.mp3",
+  "activity-30-mercado-what-color.mp3",
+  "activity-31-mercado-first-sound.mp3",
+  "activity-32-mercado-prepare-snack.mp3",
   "reward-you-did-it.mp3",
 ] as const;
 
@@ -59,6 +67,14 @@ const lumiAudioAssets: Partial<Record<LumiAudioFile, AudioSource>> = {
   // "activity-22-parque-right-path.mp3": require("../../assets/audio/lumi/activity-22-parque-right-path.mp3"),
   // "activity-23-parque-speed.mp3": require("../../assets/audio/lumi/activity-23-parque-speed.mp3"),
   // "activity-24-parque-real-world.mp3": require("../../assets/audio/lumi/activity-24-parque-real-world.mp3"),
+  // "activity-25-mercado-find-apple.mp3": require("../../assets/audio/lumi/activity-25-mercado-find-apple.mp3"),
+  // "activity-26-mercado-two-bananas.mp3": require("../../assets/audio/lumi/activity-26-mercado-two-bananas.mp3"),
+  // "activity-27-mercado-fruit-or-vegetable.mp3": require("../../assets/audio/lumi/activity-27-mercado-fruit-or-vegetable.mp3"),
+  // "activity-28-mercado-which-has-more.mp3": require("../../assets/audio/lumi/activity-28-mercado-which-has-more.mp3"),
+  // "activity-29-mercado-what-disappeared.mp3": require("../../assets/audio/lumi/activity-29-mercado-what-disappeared.mp3"),
+  // "activity-30-mercado-what-color.mp3": require("../../assets/audio/lumi/activity-30-mercado-what-color.mp3"),
+  // "activity-31-mercado-first-sound.mp3": require("../../assets/audio/lumi/activity-31-mercado-first-sound.mp3"),
+  // "activity-32-mercado-prepare-snack.mp3": require("../../assets/audio/lumi/activity-32-mercado-prepare-snack.mp3"),
   // "reward-you-did-it.mp3": require("../../assets/audio/lumi/reward-you-did-it.mp3"),
 };
 

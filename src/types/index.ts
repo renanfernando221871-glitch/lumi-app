@@ -4,7 +4,9 @@ export type ActivityEngineType =
   | "count-and-select"
   | "ordering"
   | "pattern-completion"
-  | "real-world-challenge";
+  | "real-world-challenge"
+  | "classification"
+  | "visual-memory";
 
 export type ActivityItem = {
   id: string;
@@ -114,13 +116,35 @@ export type RealWorldChallengeActivity = ActivityContent & {
   };
 };
 
+export type ClassificationActivity = ActivityContent & {
+  engineType: "classification";
+  config: {
+    categories: { id: string; label: string; emoji: string; color: string }[];
+    items: ActivityItem[];
+    assignments: { itemId: string; categoryId: string }[];
+  };
+};
+
+export type VisualMemoryActivity = ActivityContent & {
+  engineType: "visual-memory";
+  config: {
+    items: ActivityItem[];
+    missingItemId: string;
+    revealDurationMs?: number;
+    studyPrompt?: string;
+    questionPrompt?: string;
+  };
+};
+
 export type ActivityDefinition =
   | TapAndFindActivity
   | DragToTargetActivity
   | CountAndSelectActivity
   | OrderingActivity
   | PatternCompletionActivity
-  | RealWorldChallengeActivity;
+  | RealWorldChallengeActivity
+  | ClassificationActivity
+  | VisualMemoryActivity;
 
 export type ActivityInteraction = {
   completed: boolean;

@@ -28,6 +28,15 @@ export const rewards: readonly RewardDefinition[] = [
     message: "Você descobriu cores, formas e ideias por todo o parque.",
     completionLabel: "Ver meu arco-íris",
   },
+  {
+    id: "mercado-bag",
+    icon: "🛍️",
+    progressLockedIcon: "🌱",
+    eyebrow: "CONQUISTA NOVA",
+    title: "As compras\nestão prontas!",
+    message: "Você escolheu, contou e organizou tudo no Mercado do Lumi.",
+    completionLabel: "Ver minhas compras",
+  },
 ];
 
 export function getRewardById(rewardId: string): RewardDefinition {

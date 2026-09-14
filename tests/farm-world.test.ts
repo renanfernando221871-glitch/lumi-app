@@ -30,16 +30,16 @@ const emptyProgress: ProgressState = {
   earnedRewardIds: [],
 };
 
-test("the catalog contains exactly three valid worlds and twenty-four activities", () => {
-  assert.equal(worldCatalog.length, 3);
-  assert.equal(activities.length, 24);
+test("the catalog contains exactly four valid worlds and thirty-two activities", () => {
+  assert.equal(worldCatalog.length, 4);
+  assert.equal(activities.length, 32);
   assert.deepEqual(
     worldCatalog.map((world) => world.activityIds.length),
-    [8, 8, 8],
+    [8, 8, 8, 8],
   );
   assert.equal(
     new Set(worldCatalog.flatMap((world) => world.activityIds)).size,
-    24,
+    32,
   );
   assert.equal(
     validateActivityCatalog(activities),

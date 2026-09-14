@@ -1,0 +1,123 @@
+Crie o quarto mundo do Lumi: Mercado do Lumi.
+Preserve integralmente:
+- Casa do Lumi;
+- Fazenda das Descobertas;
+- Parque das Cores;
+- arquitetura atual;
+- VoiceService;
+- progresso e rewards;
+- navegação;
+- identidade visual;
+- compatibilidade com progresso salvo.
+Não altere os mundos anteriores.
+Objetivo pedagógico do Mercado:
+alimentos, classificação, quantidade, comparação, memória, cores e início de associação entre sons, objetos e palavras.
+Crie o novo world em data/worlds.ts com:
+- id;
+- title;
+- description;
+- activityIds;
+- rewardId;
+- estado de desbloqueio;
+- assets/configuração visual.
+Nome do mundo:
+Mercado do Lumi
+Desbloqueio:
+- deve ficar disponível após conclusão do Parque das Cores;
+- manter a lógica de descoberta/caminho, sem cadeado agressivo.
+Crie estas 8 atividades:
+1. Encontre a maçã
+   - objetivo: reconhecer alimentos e vocabulário;
+   - mostrar diferentes itens;
+   - instrução: “Onde está a maçã?”
+   - reutilizar tap-and-find.
+2. Compras do Lumi
+   - objetivo: seguir instruções simples e relacionar quantidade + objeto;
+   - exemplo: “Coloque duas bananas na cesta.”
+   - reutilizar drag-to-target ou count-and-select combinado com seleção, se a arquitetura permitir;
+   - evitar lógica específica da atividade.
+3. Frutas e legumes
+   - objetivo: classificação;
+   - separar itens em dois grupos;
+   - exemplos:
+     - fruta
+     - legume
+   - se necessário, criar engine genérico classification;
+   - deve aceitar categorias e itens apenas por configuração.
+4. Qual cesta tem mais?
+   - objetivo: comparação de quantidade;
+   - mostrar duas cestas com diferentes quantidades;
+   - perguntar “Qual cesta tem mais?”;
+   - se possível, reutilizar seleção visual;
+   - a configuração deve permitir também “menos” futuramente.
+5. O que sumiu?
+   - objetivo: memória visual;
+   - mostrar inicialmente 3 ou 4 itens;
+   - depois esconder um;
+   - perguntar qual item sumiu;
+   - se ainda não existir engine adequado, criar engine genérico memory;
+   - deve funcionar por dados e não por objetos hardcoded.
+6. Que cor tem?
+   - objetivo: reforçar associação objeto-cor;
+   - exemplo:
+     - banana → amarela
+     - maçã → vermelha
+     - brócolis → verde
+   - usar seleção visual por dados.
+7. Primeiro som
+   - objetivo: consciência fonológica inicial;
+   - trabalhar o som inicial de palavras familiares;
+   - exemplos:
+     - maçã → /m/
+     - banana → /b/
+     - pera → /p/
+   - não transformar em alfabetização formal;
+   - priorizar som antes da letra escrita;
+   - instruções simples como:
+     “Maçã começa com qual som?”
+   - se necessário, criar engine genérico sound-match ou equivalente.
+8. Prepare o lanche
+   - objetivo: síntese do mundo;
+   - combinar classificação, escolha e quantidade simples;
+   - exemplo:
+     “Vamos preparar um lanche com uma fruta e uma bebida.”
+   - usar engines existentes sempre que possível;
+   - se precisar compor mais de uma interação, faça de forma genérica e sem criar um minigame específico.
+Regras pedagógicas:
+- sem punição;
+- sem X vermelho;
+- feedback curto e acolhedor;
+- erro vira nova oportunidade de aprendizagem;
+- instruções em português do Brasil;
+- pouco texto;
+- imagem e áudio prioritários;
+- progressão simples e adequada a crianças de 3–5 anos.
+Regras técnicas:
+- todas as atividades orientadas por dados;
+- nada dependente de posição global no array;
+- progresso por IDs;
+- conclusão do mundo após as 8 atividades;
+- reward uma única vez;
+- revisita não repete reward;
+- novos engines devem ser genéricos, registrados no activityEngineRegistry, tipados e testados;
+- não criar backend;
+- não alterar engines existentes de forma específica para uma única atividade.
+Validação obrigatória:
+1. TypeScript sem erros;
+2. testes passando;
+3. Preview funcionando;
+4. Casa, Fazenda e Parque continuam intactos;
+5. Mercado desbloqueia após Parque;
+6. 8 atividades funcionam em sequência;
+7. não é possível pular atividades;
+8. progresso persiste após recarregar;
+9. reward aparece apenas após a 8ª atividade;
+10. novos engines funcionam apenas por configuração.
+Ao final, informe:
+1. engines reutilizados;
+2. engines novos;
+3. arquivos alterados;
+4. estrutura das 8 atividades;
+5. testes executados;
+6. limitações restantes.
+Não avance para Cidade das Aventuras nesta tarefa.
