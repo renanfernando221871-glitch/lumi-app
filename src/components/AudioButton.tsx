@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import * as Speech from "expo-speech";
 import { Pressable, StyleSheet, Text } from "react-native";
+import {
+  createSpeechController,
+  SpeechController,
+} from "../audio/speechController";
 import { colors } from "../theme/colors";
 
-export function AudioButton({ label }: { label: string }) {
+export function AudioButton({ label, text }: { label: string; text: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [controller] = useState<SpeechController>(() =>
+    createSpeechController(
+      {
+        stop: Speech.stop,
+        speak: Speech.speak,
+      },
+      setIsPlaying,
+    ),
+  );
+
+  useEffect(() => {
+    return () => controller.dispose();
+  }, [controller]);
 
   const handlePress = () => {
-    setIsPlaying(true);
-    setTimeout(() => setIsPlaying(false), 900);
+    void controller.play(text);
   };
 
   return (

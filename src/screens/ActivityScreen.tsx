@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Animated,
   LayoutRectangle,
@@ -15,6 +15,10 @@ import { ProgressIndicator } from "../components/ProgressIndicator";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { colors, shadow } from "../theme/colors";
 import { ActivityDefinition } from "../types";
+import {
+  createActivitySession,
+  resetActivitySession,
+} from "../domain/activitySession";
 
 type Props = {
   activity: ActivityDefinition;
@@ -31,20 +35,41 @@ export function ActivityScreen({
   onBack,
   onComplete,
 }: Props) {
-  const [feedback, setFeedback] = useState("");
-  const [complete, setComplete] = useState(false);
+  const [session, setSession] = useState(() =>
+    createActivitySession(activity.id),
+  );
+  const advancingRef = useRef(false);
+
+  useEffect(() => {
+    advancingRef.current = false;
+    setSession((current) => resetActivitySession(current, activity.id));
+  }, [activity.id]);
 
   const finish = () => {
-    setComplete(true);
-    setFeedback(activity.reward);
+    setSession((current) =>
+      current.complete
+        ? current
+        : { ...current, complete: true, feedback: activity.reward },
+    );
   };
 
   const choose = (id: string) => {
+    if (session.complete) return;
     if (id === activity.targetId) {
       finish();
     } else {
-      setFeedback("Quase! Vamos olhar mais uma vez juntos.");
+      setSession((current) => ({
+        ...current,
+        feedback: "Quase! Vamos olhar mais uma vez juntos.",
+      }));
     }
+  };
+
+  const advance = () => {
+    if (!session.complete || advancingRef.current) return;
+    advancingRef.current = true;
+    setSession((current) => ({ ...current, advancing: true }));
+    onComplete();
   };
 
   return (
@@ -58,7 +83,7 @@ export function ActivityScreen({
         <Text style={styles.kicker}>ATIVIDADE {activityNumber}</Text>
         <Text style={styles.title}>{activity.title}</Text>
         <LumiSpeechBubble compact>{activity.instruction}</LumiSpeechBubble>
-        <AudioButton label={activity.audioLabel} />
+        <AudioButton label={activity.audioLabel} text={activity.instruction} />
         <View style={styles.stage}>
           {activity.kind === "find" ? (
             <FindActivity activity={activity} onChoose={choose} />
@@ -68,14 +93,15 @@ export function ActivityScreen({
             <DragActivity activity={activity} onComplete={finish} />
           )}
         </View>
-        <Text style={[styles.helper, feedback && styles.feedback]}>
-          {feedback || activity.helper}
+        <Text style={[styles.helper, session.feedback && styles.feedback]}>
+          {session.feedback || activity.helper}
         </Text>
-        {complete ? (
+        {session.complete ? (
           <PrimaryButton
             label={activityNumber === total ? "Ver minha flor" : "Próxima atividade"}
-            onPress={onComplete}
+            onPress={advance}
             variant="green"
+            disabled={session.advancing}
             style={styles.nextButton}
           />
         ) : null}

@@ -15,6 +15,10 @@ import { PrimaryButton } from "./src/components/PrimaryButton";
 import { RewardModal } from "./src/components/RewardModal";
 import { ProgressIndicator } from "./src/components/ProgressIndicator";
 import { activities } from "./src/data/activities";
+import {
+  completeActivityProgress,
+  getCompletionDestination,
+} from "./src/domain/progress";
 import { ActivityScreen } from "./src/screens/ActivityScreen";
 import { colors, shadow } from "./src/theme/colors";
 import { ChildProfile, ProgressState, ScreenName } from "./src/types";
@@ -56,25 +60,35 @@ export default function App() {
   const updateProfile = (name: string, avatar: string) => {
     const next = { name, avatar, hasOnboarded: true };
     setProfile(next);
-    saveProfile(next).catch(() => undefined);
+    saveProfile(next).catch((error) => {
+      console.error(error);
+    });
     setScreen("map");
   };
 
   const completeActivity = () => {
-    const completed = progress.completedActivityIds.includes(currentActivity.id)
-      ? progress.completedActivityIds
-      : [...progress.completedActivityIds, currentActivity.id];
-    const nextProgress = {
-      completedActivityIds: completed,
-      earnedReward: completed.length === activities.length || progress.earnedReward,
-    };
+    const catalogIds = activities.map((activity) => activity.id);
+    const { progress: nextProgress, rewardGranted } = completeActivityProgress(
+      progress,
+      currentActivity.id,
+      catalogIds,
+    );
     setProgress(nextProgress);
-    saveProgress(nextProgress).catch(() => undefined);
+    saveProgress(nextProgress).catch((error) => {
+      console.error(error);
+    });
 
-    if (activityIndex === activities.length - 1) {
+    const destination = getCompletionDestination(
+      rewardGranted,
+      activityIndex,
+      activities.length,
+    );
+    if (destination === "reward") {
       setShowReward(true);
-    } else {
+    } else if (destination === "next") {
       setActivityIndex((value) => value + 1);
+    } else {
+      setScreen("map");
     }
   };
 
@@ -150,6 +164,7 @@ export default function App() {
       <MapScreen
         profile={profile}
         completedCount={completedCount}
+        hasFlower={progress.earnedReward}
         onOpenHouse={() => setScreen("house")}
         onEditProfile={() => setScreen("personalize")}
       />
@@ -159,7 +174,7 @@ export default function App() {
   if (screen === "house") {
     return (
       <HouseScreen
-        completedCount={completedCount}
+        completedActivityIds={progress.completedActivityIds}
         onBack={() => setScreen("map")}
         onStart={startActivities}
       />
@@ -169,6 +184,7 @@ export default function App() {
   return (
     <>
       <ActivityScreen
+        key={currentActivity.id}
         activity={currentActivity}
         activityNumber={activityIndex + 1}
         total={activities.length}
@@ -257,11 +273,13 @@ function PersonalizeScreen({
 function MapScreen({
   profile,
   completedCount,
+  hasFlower,
   onOpenHouse,
   onEditProfile,
 }: {
   profile: ChildProfile;
   completedCount: number;
+  hasFlower: boolean;
   onOpenHouse: () => void;
   onEditProfile: () => void;
 }) {
@@ -304,10 +322,10 @@ function MapScreen({
             <View style={styles.progressCopy}>
               <Text style={styles.progressTitle}>Seu jardim</Text>
               <Text style={styles.progressSub}>
-                {completedCount === 3 ? "Uma flor nasceu!" : "Cada descoberta faz uma flor crescer."}
+                {hasFlower ? "Uma flor nasceu!" : "Cada descoberta faz uma flor crescer."}
               </Text>
             </View>
-            <Text style={styles.progressFlower}>{completedCount === 3 ? "🌼" : "🌱"}</Text>
+            <Text style={styles.progressFlower}>{hasFlower ? "🌼" : "🌱"}</Text>
           </View>
         </View>
       </ScrollView>
@@ -316,15 +334,19 @@ function MapScreen({
 }
 
 function HouseScreen({
-  completedCount,
+  completedActivityIds,
   onBack,
   onStart,
 }: {
-  completedCount: number;
+  completedActivityIds: string[];
   onBack: () => void;
   onStart: () => void;
 }) {
-  const nextLabel = completedCount === 3 ? "Revisitar atividades" : "Começar a brincar";
+  const completedCount = completedActivityIds.length;
+  const nextLabel =
+    completedCount === activities.length
+      ? "Revisitar atividades"
+      : "Começar a brincar";
   return (
     <Shell>
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -342,7 +364,7 @@ function HouseScreen({
           </LumiSpeechBubble>
           <View style={styles.activityList}>
             {activities.map((activity, index) => {
-              const done = index < completedCount;
+              const done = completedActivityIds.includes(activity.id);
               return (
                 <View key={activity.id} style={styles.activityRow}>
                   <View style={[styles.activityNumber, done && styles.activityDone]}>

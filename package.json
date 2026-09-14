@@ -6,16 +6,19 @@
   "scripts": {
     "start": "expo start",
     "web": "expo start --web --port 5000",
+    "test": "tsx --test tests/**/*.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.2",
     "expo": "~57.0.0",
+    "expo-speech": "~57.0.3",
     "expo-status-bar": "~3.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-native": "^0.81.5",
-    "react-native-web": "^0.21.2"
+    "react-native-web": "^0.21.2",
+    "tsx": "^4.23.13"
   },
   "devDependencies": {
     "@types/react": "~19.1.0",

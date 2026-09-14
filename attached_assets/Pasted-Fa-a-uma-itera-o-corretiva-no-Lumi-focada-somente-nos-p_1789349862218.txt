@@ -1,0 +1,47 @@
+Faça uma iteração corretiva no Lumi focada somente nos problemas P1 identificados na revisão técnica. Não implemente novos mundos, engines ou atividades.
+1. Corrigir isolamento de estado entre atividades
+Atualmente complete e feedback permanecem ativos ao trocar de atividade.
+Corrija para que:
+- cada nova atividade comece obrigatoriamente incompleta;
+- feedback da atividade anterior não permaneça;
+- o botão de avanço só apareça após conclusão real da atividade atual;
+- não seja possível pular atividades clicando repetidamente;
+- a mudança de atividade reinicialize corretamente todo estado específico do engine;
+- adicione pelo menos um teste de regressão para esse fluxo.
+2. Tornar a persistência local confiável
+Continue usando AsyncStorage, mas:
+- valide os dados lidos antes de usá-los;
+- crie uma versão de schema;
+- normalize arrays e IDs;
+- trate null, tipos inválidos e JSON corrompido;
+- não silencie falhas de gravação;
+- preserve valores padrão válidos quando necessário;
+- conclusão deve ser calculada por IDs das atividades, não apenas por contagem ou posição;
+- a primeira flor deve ser concedida uma única vez.
+Teste:
+- recarregar o app;
+- dados inválidos;
+- atividade já concluída;
+- reordenação do catálogo.
+3. Implementar áudio real no botão “Ouvir”
+O botão atualmente só simula reprodução.
+Para esta iteração:
+- use uma solução compatível com Expo;
+- reproduza ou sintetize a instrução da atividade em português do Brasil;
+- impeça sobreposição de várias reproduções;
+- permita repetir a instrução;
+- reduza/pare o áudio ao sair da tela;
+- mantenha uma interface simples e infantil.
+Restrições
+- não alterar a identidade visual;
+- não ampliar o catálogo;
+- não criar backend;
+- não refatorar ainda toda a arquitetura dos engines;
+- preserve o fluxo visual já aprovado;
+- execute TypeScript, Preview web e os testes antes de concluir.
+Ao terminar, liste objetivamente:
+1. arquivos alterados;
+2. bugs corrigidos;
+3. testes executados;
+4. qualquer limitação restante.
+Não avance para os problemas P2 nesta tarefa.
