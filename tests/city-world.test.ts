@@ -167,3 +167,31 @@ test("sentence and story ordering are fully configured by data", () => {
     "story-home",
   ]);
 });
+
+test("Quem dirige keeps vehicles in targets and professionals in draggable cards", () => {
+  const activity = cidadeActivities.find(
+    ({ id }) => id === "cidade-who-drives",
+  );
+  assert.ok(activity && activity.engineType === "drag-to-target");
+  if (!activity || activity.engineType !== "drag-to-target") return;
+
+  const item = (id: string) =>
+    activity.config.items.find((candidate) => candidate.id === id)!;
+  const driver = item("city-driver");
+  const pilot = item("city-pilot");
+  const trainDriver = item("city-train-driver");
+
+  assert.equal(driver.emoji, "🧑‍🦱");
+  assert.equal(driver.headwearEmoji, "🧢");
+  assert.equal(pilot.emoji, "👩‍✈️");
+  assert.equal(trainDriver.emoji, "🧑");
+  assert.equal(trainDriver.headwearEmoji, "🧢");
+
+  for (const professional of [driver, trainDriver]) {
+    assert.doesNotMatch(professional.emoji, /🚌|✈️|🚆|🔧/u);
+  }
+  assert.deepEqual(
+    activity.config.pairs.map(({ targetId }) => item(targetId).emoji),
+    ["🚌", "✈️", "🚆"],
+  );
+});

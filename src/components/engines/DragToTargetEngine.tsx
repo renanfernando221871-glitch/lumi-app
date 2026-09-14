@@ -189,7 +189,14 @@ function DraggablePair({
           onPress={onSelect}
           style={styles.draggablePressable}
         >
-          <Text style={styles.dragEmoji}>{draggable.emoji}</Text>
+          {draggable.headwearEmoji ? (
+            <View style={styles.characterVisual}>
+              <Text style={styles.headwearEmoji}>{draggable.headwearEmoji}</Text>
+              <Text style={styles.characterEmoji}>{draggable.emoji}</Text>
+            </View>
+          ) : (
+            <Text style={styles.dragEmoji}>{draggable.emoji}</Text>
+          )}
           <Text style={styles.dragLabel}>{draggable.label}</Text>
         </Pressable>
       </Animated.View>
@@ -354,5 +361,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   dragEmoji: { fontSize: 42 },
+  characterVisual: {
+    width: 54,
+    height: 49,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  headwearEmoji: {
+    position: "absolute",
+    top: -5,
+    zIndex: 1,
+    fontSize: 25,
+  },
+  characterEmoji: { fontSize: 39 },
   dragLabel: { color: colors.deepGreen, fontSize: 13, fontWeight: "800" },
 });

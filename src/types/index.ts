@@ -15,6 +15,8 @@ export type ActivityItem = {
   color: string;
   /** Optional text glyph whose fill color comes from `color`. */
   colorGlyph?: string;
+  /** Optional headwear rendered above a character without changing its identity. */
+  headwearEmoji?: string;
   isTarget?: boolean;
   emojiScale?: number;
 };
