@@ -11,8 +11,10 @@ import {
 import {
   canStartWorldActivity,
   completeWorldProgress,
+  getNextIncompleteActivityId,
   getWorldProgressionDestination,
   isWorldUnlocked,
+  normalizeWorldCompletedActivityIds,
 } from "../src/domain/progress";
 import { validateActivityCatalog } from "../src/domain/catalog";
 import {
@@ -55,6 +57,40 @@ test("Parque keeps the exact requested activity ID order", () => {
   ]);
 });
 
+test("Parque entry starts at its first incomplete activity only", () => {
+  const [kites, shapes, aboveBelow, ducks] = parqueDasCores.activityIds;
+  assert.equal(getNextIncompleteActivityId(parqueDasCores, []), kites);
+  assert.equal(
+    getNextIncompleteActivityId(parqueDasCores, [kites]),
+    shapes,
+  );
+  assert.equal(
+    getNextIncompleteActivityId(parqueDasCores, [
+      kites,
+      shapes,
+      aboveBelow,
+    ]),
+    ducks,
+  );
+});
+
+test("Parque entry ignores progress from other worlds and removed IDs", () => {
+  const mixedProgress = [
+    ...casaDoLumi.activityIds,
+    ...fazendaDasDescobertas.activityIds,
+    "legacy-removed-activity",
+    parqueDasCores.activityIds[0],
+  ];
+  assert.deepEqual(
+    normalizeWorldCompletedActivityIds(parqueDasCores, mixedProgress),
+    [parqueDasCores.activityIds[0]],
+  );
+  assert.equal(
+    getNextIncompleteActivityId(parqueDasCores, mixedProgress),
+    parqueDasCores.activityIds[1],
+  );
+});
+
 test("Parque unlocks only after Fazenda and cannot skip activities", () => {
   assert.equal(
     isWorldUnlocked(
@@ -93,6 +129,14 @@ test("Parque unlocks only after Fazenda and cannot skip activities", () => {
 });
 
 test("Parque advances 1→2, 7→8, and 8→reward→map", () => {
+  assert.deepEqual(
+    getWorldProgressionDestination(
+      parqueDasCores,
+      parqueDasCores.activityIds[3],
+      false,
+    ),
+    { type: "activity", activityId: parqueDasCores.activityIds[4] },
+  );
   assert.deepEqual(
     getWorldProgressionDestination(
       parqueDasCores,

@@ -32,11 +32,22 @@ export function getUnlockedWorldIds(
 
 export const isWorldAvailable = isWorldUnlocked;
 
+export function normalizeWorldCompletedActivityIds(
+  world: Pick<WorldDefinition, "activityIds">,
+  completedActivityIds: readonly string[],
+): string[] {
+  const completed = new Set(completedActivityIds);
+  return world.activityIds.filter((activityId) => completed.has(activityId));
+}
+
 export function getNextIncompleteActivityId(
   world: Pick<WorldDefinition, "activityIds">,
   completedActivityIds: readonly string[],
 ): string | undefined {
-  return world.activityIds.find((id) => !completedActivityIds.includes(id));
+  const completedWorldIds = new Set(
+    normalizeWorldCompletedActivityIds(world, completedActivityIds),
+  );
+  return world.activityIds.find((id) => !completedWorldIds.has(id));
 }
 
 export function getNextWorldActivityId(

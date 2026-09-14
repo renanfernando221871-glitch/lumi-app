@@ -1,0 +1,44 @@
+Corrija a entrada e a progressão do mundo Parque das Cores.
+Existem dois bugs:
+Bug A — Entrada no mundo pula atividades
+Ao entrar no Parque das Cores, o app vai direto para “Conte os patinhos”, sem passar por:
+1. Pipas coloridas
+2. Formas no parque
+3. Em cima e embaixo
+Corrija para que:
+- ao entrar em um mundo, o app abra a primeira atividade ainda não concluída daquele mundo, seguindo exatamente a ordem de world.activityIds;
+- se nenhuma atividade do mundo foi concluída, começar sempre pela primeira;
+- progresso de outros mundos não pode interferir;
+- IDs de atividades antigas/removidas não podem deslocar a sequência;
+- progresso salvo deve ser normalizado e filtrado contra os activityIds atuais do mundo;
+- se houver dados antigos inconsistentes, o app deve se recuperar com segurança sem pular atividades válidas.
+Bug B — Conte os patinhos não conclui
+Ao selecionar a quantidade correta, a atividade não avança.
+Corrija para que:
+- a quantidade renderizada corresponda ao valor correto configurado;
+- a opção correta seja comparada pelo valor sem incompatibilidade string/number;
+- resposta correta dispare conclusão;
+- feedback apareça;
+- próxima atividade seja liberada;
+- resposta errada seguida de correta funcione;
+- o estado seja reinicializado ao trocar de atividade.
+Investigue especificamente
+- cálculo de primeira atividade pendente;
+- uso de completedActivityIds;
+- filtragem por world.activityIds;
+- progresso legado;
+- option.id vs option.value;
+- string vs number;
+- callback onComplete;
+- state reset por activityId.
+Adicione testes
+1. Parque sem progresso → abre Pipas coloridas;
+2. só Pipas concluída → abre Formas no parque;
+3. três primeiras concluídas → abre Conte os patinhos;
+4. progresso com ID inválido → ignora ID inválido;
+5. 3 patinhos → selecionar 3 conclui;
+6. 7 patinhos → selecionar 7 conclui;
+7. resposta errada seguida da correta;
+8. conclusão da atividade 4 avança para a 5.
+Não altere Casa do Lumi, Fazenda ou identidade visual.
+Execute TypeScript, testes e Preview antes de concluir.
