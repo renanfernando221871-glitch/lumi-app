@@ -1,0 +1,50 @@
+Na atividade “Quem dirige?” da Cidade das Aventuras, faça um ajuste somente visual, mantendo toda a lógica atual da atividade.
+Objetivo
+Deixar a associação entre profissão e veículo mais clara para a criança, evitando confusão visual.
+Ajustes solicitados
+1) Motorista
+Hoje o motorista aparece com um avião ao lado, o que confunde com a profissão de piloto.
+Corrigir para:
+- substituir esse ícone/figura por uma representação de chofer / motorista;
+- usar um visual infantil e amigável, coerente com o estilo do Lumi;
+- sugestões visuais:
+  - boné ou uniforme simples de motorista;
+  - volante;
+  - aparência clara de alguém que dirige ônibus.
+Resultado esperado:
+A criança deve perceber imediatamente que aquele personagem corresponde ao ônibus.
+2) Maquinista
+Hoje o maquinista aparece com uma ferramenta, o que não representa bem a função.
+Corrigir para:
+- substituir por uma representação de maquinista;
+- usar um visual infantil e amigável, coerente com o estilo do Lumi;
+- sugestões visuais:
+  - boné, capacete ou chapéu característico de maquinista/condutor ferroviário;
+  - aparência ligada ao universo do trem;
+  - sem ferramenta como símbolo principal.
+Resultado esperado:
+A criança deve perceber imediatamente que aquele personagem corresponde ao trem.
+Regras importantes
+- não alterar a lógica da atividade;
+- não alterar drag-and-drop;
+- não alterar validação;
+- não alterar progresso;
+- não alterar textos principais, a não ser pequenos ajustes visuais de legenda se forem estritamente necessários;
+- não alterar a ordem das atividades;
+- não alterar outros mundos;
+- manter:
+  - motorista → ônibus
+  - piloto → avião
+  - maquinista → trem
+Direção de arte
+- manter o estilo já existente do Lumi;
+- usar visual infantil, simpático, simples e didático;
+- evitar ícones ambíguos;
+- priorizar leitura visual rápida para crianças pequenas;
+- manter coerência com os demais elementos da tela.
+Validação
+Ao final:
+- garantir que o preview continue funcionando;
+- garantir que TypeScript continue sem erros;
+- garantir que não haja regressão nos testes;
+- verificar visualmente que a tela “Quem dirige?” ficou inequívoca e pedagogicamente mais clara.
