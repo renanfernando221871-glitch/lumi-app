@@ -744,9 +744,9 @@ export const activities: ActivityDefinition[] = [
       featuredLabel: "banana",
       targetId: "color-yellow",
       items: [
-        { id: "color-red", label: "vermelha", emoji: "●", color: "#F28A7D" },
-        { id: "color-yellow", label: "amarela", emoji: "●", color: "#FFD15C", isTarget: true },
-        { id: "color-green", label: "verde", emoji: "●", color: "#82C879" },
+        { id: "color-red", label: "vermelha", emoji: "●", colorGlyph: "●", color: "#F28A7D" },
+        { id: "color-yellow", label: "amarela", emoji: "●", colorGlyph: "●", color: "#FFD15C", isTarget: true },
+        { id: "color-green", label: "verde", emoji: "●", colorGlyph: "●", color: "#82C879" },
       ],
     },
   },
