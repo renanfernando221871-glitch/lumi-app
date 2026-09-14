@@ -11,6 +11,8 @@ export type ActivityItem = {
   label: string;
   emoji: string;
   color: string;
+  /** Optional text glyph whose fill color comes from `color`. */
+  colorGlyph?: string;
   isTarget?: boolean;
   emojiScale?: number;
 };

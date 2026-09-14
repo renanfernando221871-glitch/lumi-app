@@ -1,3 +1,5 @@
+import { ActivityInteraction } from "../types";
+
 export type ActivitySessionState = {
   activityId: string;
   complete: boolean;
@@ -21,4 +23,19 @@ export function resetActivitySession(
   return current.activityId === activityId
     ? current
     : createActivitySession(activityId);
+}
+
+export function applyActivityInteraction(
+  current: ActivitySessionState,
+  interaction: ActivityInteraction,
+  successFeedback: string,
+): ActivitySessionState {
+  if (current.complete) return current;
+  return interaction.completed
+    ? { ...current, complete: true, feedback: successFeedback }
+    : { ...current, feedback: interaction.feedback || "" };
+}
+
+export function canAdvanceActivity(session: ActivitySessionState): boolean {
+  return session.complete && !session.advancing;
 }

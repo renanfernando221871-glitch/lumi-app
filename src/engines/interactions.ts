@@ -22,9 +22,18 @@ export function evaluateTapAndFind(
 
 export function evaluateCountAndSelect(
   activity: CountAndSelectActivity,
-  selectedCount: number,
+  selectedCount: number | string,
 ): ActivityInteraction {
-  return selectedCount === activity.config.targetCount
+  const numericSelection =
+    typeof selectedCount === "number"
+      ? selectedCount
+      : selectedCount.trim()
+        ? Number(selectedCount)
+        : Number.NaN;
+  return (
+    Number.isInteger(numericSelection) &&
+    numericSelection === activity.config.targetCount
+  )
     ? { completed: true }
     : { completed: false, feedback: activity.retryFeedback };
 }

@@ -11,7 +11,12 @@ import { BackButton } from "../components/BackButton";
 import { LumiSpeechBubble } from "../components/LumiSpeechBubble";
 import { ProgressIndicator } from "../components/ProgressIndicator";
 import { PrimaryButton } from "../components/PrimaryButton";
-import { createActivitySession, resetActivitySession } from "../domain/activitySession";
+import {
+  applyActivityInteraction,
+  canAdvanceActivity,
+  createActivitySession,
+  resetActivitySession,
+} from "../domain/activitySession";
 import { getActivityEngine } from "../engines/activityEngineRegistry";
 import { ActivityDefinition, ActivityInteraction, ActivityResult } from "../types";
 import { colors } from "../theme/colors";
@@ -58,18 +63,19 @@ export function ActivityScreen({
       if (completed) {
         completedAtRef.current = Date.now();
       }
-      setSession((current) => {
-        if (current.complete) return current;
-        return completed
-          ? { ...current, complete: true, feedback: activity.successFeedback }
-          : { ...current, feedback: feedback || "" };
-      });
+      setSession((current) =>
+        applyActivityInteraction(
+          current,
+          { completed, feedback },
+          activity.successFeedback,
+        ),
+      );
     },
     [activity.successFeedback],
   );
 
   const advance = () => {
-    if (!session.complete || advancingRef.current) return;
+    if (!canAdvanceActivity(session) || advancingRef.current) return;
     advancingRef.current = true;
     setSession((current) => ({ ...current, advancing: true }));
     onComplete({
