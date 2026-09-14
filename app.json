@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Lumi",
+    "slug": "lumi",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#FFF8E9"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lumi.aprender"
+    },
+    "android": {
+      "package": "com.lumi.aprender",
+      "adaptiveIcon": {
+        "backgroundColor": "#FFF8E9"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    }
+  }
+}
