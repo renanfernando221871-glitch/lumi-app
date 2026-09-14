@@ -1,30 +1,23 @@
 import React, { useEffect, useState } from "react";
-import * as Speech from "expo-speech";
 import { Pressable, StyleSheet, Text } from "react-native";
 import {
-  createSpeechController,
-  SpeechController,
-} from "../audio/speechController";
+  createSystemLumiVoiceService,
+  LumiVoiceService,
+} from "../audio/lumiVoiceService";
 import { colors } from "../theme/colors";
 
 export function AudioButton({ label, text }: { label: string; text: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [controller] = useState<SpeechController>(() =>
-    createSpeechController(
-      {
-        stop: Speech.stop,
-        speak: Speech.speak,
-      },
-      setIsPlaying,
-    ),
+  const [voiceService] = useState<LumiVoiceService>(() =>
+    createSystemLumiVoiceService(setIsPlaying),
   );
 
   useEffect(() => {
-    return () => controller.dispose();
-  }, [controller]);
+    return () => voiceService.dispose();
+  }, [voiceService]);
 
   const handlePress = () => {
-    void controller.play(text);
+    void voiceService.play(text);
   };
 
   return (
