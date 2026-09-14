@@ -8,6 +8,8 @@ import { ActivityResult } from "../src/types";
 import { dragFixture, tapFixture } from "./fixtures/activityFixtures";
 import {
   evaluateDragToTarget,
+  evaluateCountAndSelect,
+  getResponsiveDragFrames,
   evaluateTapAndFind,
 } from "../src/engines/interactions";
 import {
@@ -18,9 +20,46 @@ import {
 test("production activities use the exhaustive interaction engine contracts", () => {
   assert.deepEqual(
     activities.map((activity) => activity.engineType),
-    ["tap-and-find", "tap-and-find", "drag-to-target"],
+    [
+      "tap-and-find",
+      "tap-and-find",
+      "drag-to-target",
+      "tap-and-find",
+      "count-and-select",
+      "tap-and-find",
+      "tap-and-find",
+      "drag-to-target",
+    ],
   );
   assert.equal(validateActivityCatalog(activities), true);
+});
+
+test("the new count engine works from production configuration alone", () => {
+  const countActivity = activities.find(
+    (activity) => activity.id === "count-apples",
+  );
+  assert.ok(countActivity);
+  assert.equal(countActivity.engineType, "count-and-select");
+  if (countActivity.engineType !== "count-and-select") return;
+  assert.deepEqual(evaluateCountAndSelect(countActivity, 3), {
+    completed: true,
+  });
+  assert.deepEqual(evaluateCountAndSelect(countActivity, 2), {
+    completed: false,
+    feedback: "Conte devagar: uma, duas, três.",
+  });
+});
+
+test("drag pairs stay inside narrow mobile stages", () => {
+  for (const width of [320, 360, 430]) {
+    for (let index = 0; index < 3; index += 1) {
+      const frames = getResponsiveDragFrames(index, 3, width);
+      assert.ok(frames.draggable.x >= 0);
+      assert.ok(frames.target.x >= 0);
+      assert.ok(frames.draggable.x + frames.draggable.width <= width);
+      assert.ok(frames.target.x + frames.target.width <= width);
+    }
+  }
 });
 
 test("activity contracts standardize completion results", () => {
@@ -82,10 +121,13 @@ test("world catalog validation rejects duplicate IDs and invalid references", ()
       validateActivityCatalog([
         ({
           ...dragFixture,
-          config: { ...dragFixture.config, draggableItemId: "missing" },
+          config: {
+            ...dragFixture.config,
+            pairs: [{ draggableItemId: "missing", targetId: "chest" }],
+          },
         } as typeof dragFixture),
       ]),
-    /draggableItemId/,
+    /drag pair/,
   );
 });
 

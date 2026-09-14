@@ -1,1 +1,2 @@
 - [Expo Audio web completion](expo-audio-web-completion.md) — Expo Audio v57 web may not emit a completion event; read currentStatus.didJustFinish instead.
+- [PanResponder headless testing](panresponder-headless-testing.md) — CDP may move RN Web drags without ending them; verify geometry and keep an accessible tap path.

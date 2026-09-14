@@ -1,0 +1,80 @@
+Complete o mundo Casa do Lumi com 8 atividades totais, preservando a arquitetura refatorada atual.
+Já existem 3 atividades funcionais. Adicione as 5 restantes preferencialmente por configuração em data/activities.ts e usando os engines existentes sempre que possível.
+As 8 atividades da Casa do Lumi devem ser:
+1. Conheça o quarto
+   - objetivo: reconhecer objetos familiares;
+   - interação: tocar em objetos indicados;
+   - exemplo de fala: “Onde está a cama?”
+2. Cadê o vermelho?
+   - objetivo: reconhecer a cor vermelha;
+   - interação: selecionar o objeto vermelho;
+3. Guarde o ursinho
+   - objetivo: relação espacial e organização;
+   - interação: arrastar o ursinho para a cesta;
+4. Grande ou pequeno?
+   - objetivo: comparar tamanho;
+   - mostrar dois objetos semelhantes em tamanhos diferentes;
+   - pedir algo como “Qual é o maior?” ou “Qual é o pequeno?”;
+   - usar engine existente se possível; se precisar criar um engine novo, faça isso de forma genérica e reutilizável.
+5. Quantas maçãs?
+   - objetivo: quantidade inicial;
+   - mostrar de 1 a 3 maçãs;
+   - criança deve escolher a quantidade correta;
+   - se ainda não existir um engine adequado, crie um engine genérico count-and-select, preparado para quantidades futuras.
+6. Que forma é essa?
+   - objetivo: reconhecer formas geométricas simples;
+   - trabalhar círculo, quadrado e triângulo;
+   - usar seleção visual por dados.
+7. Como o Lumi está?
+   - objetivo: reconhecer emoções;
+   - trabalhar inicialmente alegria, tristeza e surpresa;
+   - mostrar o Lumi com uma expressão e pedir para identificar como ele está se sentindo;
+   - não usar texto longo; priorizar imagem e áudio.
+8. Arrumando a Casa
+   - objetivo: síntese do mundo;
+   - pequena atividade final combinando objetos e lugares;
+   - exemplo: colocar 2 ou 3 objetos em seus lugares corretos;
+   - pode usar drag-to-target, mas deve aceitar múltiplos pares configuráveis, sem IDs fixos.
+Regras importantes:
+- não criar um minigame específico para cada atividade;
+- reutilizar os engines atuais;
+- criar novo engine somente quando realmente necessário;
+- qualquer engine novo deve ser genérico e reutilizável por outros mundos;
+- todas as atividades devem estar ligadas ao worldId da Casa do Lumi;
+- progresso deve continuar baseado em IDs;
+- conclusão do mundo deve depender das 8 atividades completas;
+- a recompensa do mundo deve ser concedida uma única vez;
+- manter o VoiceService com áudio local + TTS fallback;
+- manter português do Brasil;
+- não alterar a identidade visual aprovada;
+- não criar ainda Fazenda, Parque, Mercado ou Cidade.
+Para cada atividade, configure:
+- id
+- worldId
+- engineType
+- title
+- instructionText
+- instructionAudio
+- learningGoal
+- difficulty
+- configuração específica do engine
+- successFeedback
+- retryFeedback
+- hint
+Também atualize worlds.ts para que a Casa do Lumi tenha as 8 activityIds.
+Validação obrigatória:
+1. TypeScript sem erros.
+2. Preview funcionando.
+3. Todas as 8 atividades acessíveis em sequência.
+4. Não é possível pular atividades.
+5. Progresso persiste após recarregar.
+6. A recompensa aparece somente após concluir as 8.
+7. Revisitar atividades não concede recompensa novamente.
+8. Pelo menos uma atividade nova de cada engine criado deve funcionar apenas por configuração.
+Ao final, entregue:
+1. lista dos engines usados/criados;
+2. arquivos alterados;
+3. estrutura das 8 atividades;
+4. testes executados;
+5. limitações restantes.
+Não avance para outros mundos nesta tarefa.

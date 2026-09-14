@@ -12,6 +12,7 @@ import {
   STORAGE_SCHEMA_VERSION,
 } from "../src/storage/schema";
 import { ChildProfile, ProgressState } from "../src/types";
+import { activities } from "../src/data/activities";
 
 const profileDefaults: ChildProfile = {
   name: "",
@@ -22,7 +23,7 @@ const progressDefaults: ProgressState = {
   completedActivityIds: [],
   earnedRewardIds: [],
 };
-const catalog = ["find-bed", "red-object", "store-teddy"];
+const catalog = activities.map((activity) => activity.id);
 
 test("versioned state survives a save and reload cycle", () => {
   const saved = createEnvelope({
@@ -84,13 +85,14 @@ test("an already completed activity is not duplicated", () => {
 });
 
 test("catalog reordering does not affect completion or reward", () => {
-  const reordered = ["store-teddy", "find-bed", "red-object"];
+  const reordered = [...catalog].reverse();
+  const finalId = reordered[reordered.length - 1];
   const result = completeActivityProgress(
     {
-      completedActivityIds: ["find-bed", "red-object"],
+      completedActivityIds: reordered.slice(0, -1),
       earnedRewardIds: [],
     },
-    "store-teddy",
+    finalId,
     reordered,
   );
   assert.deepEqual(result.progress.earnedRewardIds, ["lumi-flower"]);
@@ -103,7 +105,7 @@ test("the first flower is granted only once", () => {
       completedActivityIds: [...catalog],
       earnedRewardIds: ["lumi-flower"],
     },
-    "store-teddy",
+    catalog[catalog.length - 1],
     catalog,
   );
   assert.deepEqual(alreadyEarned.progress.earnedRewardIds, ["lumi-flower"]);
@@ -111,17 +113,21 @@ test("the first flower is granted only once", () => {
 });
 
 test("a reward granted at a non-final catalog position still opens the flower", () => {
+  const missingId = "red-object";
   const result = completeActivityProgress(
     {
-      completedActivityIds: ["find-bed", "store-teddy"],
+      completedActivityIds: catalog.filter((id) => id !== missingId),
       earnedRewardIds: [],
     },
-    "red-object",
+    missingId,
     catalog,
   );
 
   assert.equal(result.rewardGranted, true);
-  assert.equal(getCompletionDestination(result.rewardGranted, 1, 3), "reward");
+  assert.equal(
+    getCompletionDestination(result.rewardGranted, 1, catalog.length),
+    "reward",
+  );
 });
 
 test("schema v1 flower boolean migrates to the reward ID", () => {
@@ -142,19 +148,18 @@ test("schema v1 flower boolean migrates to the reward ID", () => {
 });
 
 test("completing one world preserves activity and reward IDs from other worlds", () => {
+  const finalActivityId = catalog[catalog.length - 1];
   const result = completeActivityProgress(
     {
-      completedActivityIds: ["other-world-activity", "find-bed", "red-object"],
+      completedActivityIds: ["other-world-activity", ...catalog.slice(0, -1)],
       earnedRewardIds: ["other-world-reward"],
     },
-    "store-teddy",
+    finalActivityId,
     catalog,
   );
   assert.deepEqual(result.progress.completedActivityIds, [
     "other-world-activity",
-    "find-bed",
-    "red-object",
-    "store-teddy",
+    ...catalog,
   ]);
   assert.deepEqual(result.progress.earnedRewardIds, [
     "other-world-reward",

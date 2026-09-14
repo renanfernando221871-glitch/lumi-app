@@ -8,37 +8,92 @@ import {
 const engineTypes: readonly ActivityEngineType[] = [
   "tap-and-find",
   "drag-to-target",
+  "count-and-select",
 ];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-function assertItems(activity: ActivityDefinition) {
-  if (activity.config.items.length === 0) {
-    throw new Error(`Activity "${activity.id}" must define at least one item.`);
+function getItemIds(activityId: string, items: ActivityItem[]) {
+  if (items.length === 0) {
+    throw new Error(`Activity "${activityId}" must define at least one item.`);
   }
-
   const itemIds = new Set<string>();
-  for (const item of activity.config.items) {
+  for (const item of items) {
     if (!item.id || itemIds.has(item.id)) {
-      throw new Error(`Activity "${activity.id}" contains duplicate item IDs.`);
+      throw new Error(`Activity "${activityId}" contains duplicate item IDs.`);
     }
     itemIds.add(item.id);
   }
+  return itemIds;
+}
 
-  if (!itemIds.has(activity.config.targetId)) {
+function validateEngineConfig(activity: ActivityDefinition) {
+  if (activity.engineType === "tap-and-find") {
+    const itemIds = getItemIds(activity.id, activity.config.items);
+    if (!itemIds.has(activity.config.targetId)) {
+      throw new Error(
+        `Activity "${activity.id}" targetId "${activity.config.targetId}" does not reference an item.`,
+      );
+    }
+    return;
+  }
+
+  if (activity.engineType === "drag-to-target") {
+    const itemIds = getItemIds(activity.id, activity.config.items);
+    if (activity.config.pairs.length === 0) {
+      throw new Error(`Activity "${activity.id}" must define at least one drag pair.`);
+    }
+    if (activity.config.pairs.length > 3) {
+      throw new Error(
+        `Activity "${activity.id}" supports at most three visible drag pairs.`,
+      );
+    }
+    const draggableIds = new Set<string>();
+    const targetIds = new Set<string>();
+    for (const pair of activity.config.pairs) {
+      if (
+        !itemIds.has(pair.draggableItemId) ||
+        !itemIds.has(pair.targetId) ||
+        pair.draggableItemId === pair.targetId
+      ) {
+        throw new Error(
+          `Activity "${activity.id}" drag pair must reference different existing items.`,
+        );
+      }
+      if (
+        draggableIds.has(pair.draggableItemId) ||
+        targetIds.has(pair.targetId)
+      ) {
+        throw new Error(`Activity "${activity.id}" contains duplicate drag pairs.`);
+      }
+      draggableIds.add(pair.draggableItemId);
+      targetIds.add(pair.targetId);
+    }
+    return;
+  }
+
+  const { displayCount, options, targetCount, itemEmoji, itemLabel } =
+    activity.config;
+  if (
+    !Number.isInteger(displayCount) ||
+    displayCount < 1 ||
+    !Number.isInteger(targetCount) ||
+    !itemEmoji.trim() ||
+    !itemLabel.trim() ||
+    options.length < 2 ||
+    new Set(options).size !== options.length ||
+    options.some((option) => !Number.isInteger(option) || option < 0) ||
+    !options.includes(targetCount) ||
+    targetCount !== displayCount
+  ) {
     throw new Error(
-      `Activity "${activity.id}" targetId "${activity.config.targetId}" does not reference an item.`,
+      `Activity "${activity.id}" has invalid count-and-select configuration.`,
     );
   }
 }
 
-/**
- * Validates the data boundary in development and in catalog-focused tests.
- * Throwing here makes a malformed activity fail close to its source instead
- * of silently selecting a different interaction.
- */
 export function validateActivityCatalog(
   catalog: readonly ActivityDefinition[],
 ): true {
@@ -57,36 +112,21 @@ export function validateActivityCatalog(
         )}".`,
       );
     }
-
     if (
       !activity.worldId.trim() ||
       !activity.title.trim() ||
       !activity.instructionText.trim() ||
+      !activity.instructionAudio?.trim() ||
       !activity.audioLabel.trim() ||
-      !activity.objective.trim() ||
-      !activity.feedbackSuccess.trim() ||
-      !activity.feedbackAttempt.trim() ||
+      !activity.learningGoal.trim() ||
+      !activity.successFeedback.trim() ||
+      !activity.retryFeedback.trim() ||
       !activity.hint.trim()
     ) {
-      throw new Error(`Activity "${activity.id}" is missing presentation copy.`);
+      throw new Error(`Activity "${activity.id}" is missing required content.`);
     }
-
-    assertItems(activity);
-
-    if (
-      activity.engineType === "drag-to-target" &&
-      (!activity.config.draggableItemId ||
-        activity.config.draggableItemId === activity.config.targetId ||
-        !activity.config.items.some(
-          (item) => item.id === activity.config.draggableItemId,
-        ))
-    ) {
-      throw new Error(
-        `Activity "${activity.id}" draggableItemId must reference a non-target item.`,
-      );
-    }
+    validateEngineConfig(activity);
   }
-
   return true;
 }
 

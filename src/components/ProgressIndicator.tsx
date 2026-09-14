@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { colors } from "../theme/colors";
 
 export function ProgressIndicator({
@@ -9,19 +9,23 @@ export function ProgressIndicator({
   current: number;
   total: number;
 }) {
+  const compact = useWindowDimensions().width < 480;
   return (
-    <View style={styles.wrap}>
-      <View style={styles.dots}>
+    <View style={[styles.wrap, compact && styles.compactWrap]}>
+      <View style={[styles.dots, compact && styles.compactDots]}>
         {Array.from({ length: total }).map((_, index) => (
           <View
             key={index}
             style={[
               styles.dot,
+              compact && styles.compactDot,
               index < current && styles.done,
               index === current && styles.current,
             ]}
           >
-            {index < current ? <Text style={styles.check}>✓</Text> : null}
+            {index < current ? (
+              <Text style={[styles.check, compact && styles.compactCheck]}>✓</Text>
+            ) : null}
           </View>
         ))}
       </View>
@@ -42,6 +46,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 7,
   },
+  compactWrap: { gap: 6 },
+  compactDots: { gap: 3 },
+  compactDot: { width: 16, height: 16, borderRadius: 8 },
+  compactCheck: { fontSize: 10 },
   dot: {
     width: 22,
     height: 22,

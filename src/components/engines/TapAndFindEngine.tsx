@@ -21,7 +21,7 @@ export function TapAndFindEngine({
     onInteraction(evaluateTapAndFind(activity, id));
   };
 
-  return colorOptions ? (
+  const choices = colorOptions ? (
     <View style={styles.colorOptions}>
       {activity.config.items.map((item) => (
         <Pressable
@@ -36,7 +36,16 @@ export function TapAndFindEngine({
           ]}
         >
           <View style={[styles.colorDot, { backgroundColor: item.color }]} />
-          <Text style={styles.colorEmoji}>{item.emoji}</Text>
+          <Text
+            style={[
+              styles.colorEmoji,
+              item.emojiScale
+                ? { fontSize: 41 * item.emojiScale }
+                : undefined,
+            ]}
+          >
+            {item.emoji}
+          </Text>
           <Text style={styles.colorLabel}>{item.label}</Text>
         </Pressable>
       ))}
@@ -58,15 +67,51 @@ export function TapAndFindEngine({
             },
           ]}
         >
-          <Text style={styles.itemEmoji}>{item.emoji}</Text>
+          <Text
+            style={[
+              styles.itemEmoji,
+              item.emojiScale
+                ? { fontSize: 47 * item.emojiScale }
+                : undefined,
+            ]}
+          >
+            {item.emoji}
+          </Text>
           <Text style={styles.itemLabel}>{item.label}</Text>
         </Pressable>
       ))}
     </View>
   );
+
+  return (
+    <View style={styles.container}>
+      {activity.config.featuredEmoji ? (
+        <View
+          accessibilityLabel={activity.config.featuredLabel}
+          style={styles.featured}
+        >
+          <Text style={styles.featuredEmoji}>
+            {activity.config.featuredEmoji}
+          </Text>
+        </View>
+      ) : null}
+      {choices}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
+  container: { width: "100%", alignItems: "center", gap: 18 },
+  featured: {
+    minWidth: 150,
+    minHeight: 92,
+    borderRadius: 28,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.softYellow,
+    ...shadow,
+  },
+  featuredEmoji: { fontSize: 48 },
   grid: {
     width: "100%",
     maxWidth: 430,

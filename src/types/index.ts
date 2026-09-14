@@ -1,4 +1,7 @@
-export type ActivityEngineType = "tap-and-find" | "drag-to-target";
+export type ActivityEngineType =
+  | "tap-and-find"
+  | "drag-to-target"
+  | "count-and-select";
 
 export type ActivityItem = {
   id: string;
@@ -6,6 +9,7 @@ export type ActivityItem = {
   emoji: string;
   color: string;
   isTarget?: boolean;
+  emojiScale?: number;
 };
 
 type ActivityContent = {
@@ -13,12 +17,12 @@ type ActivityContent = {
   worldId: string;
   title: string;
   instructionText: string;
-  instructionAudio?: string;
+  instructionAudio: string;
   audioLabel: string;
-  objective: string;
+  learningGoal: string;
   difficulty: "easy" | "medium" | "hard";
-  feedbackSuccess: string;
-  feedbackAttempt: string;
+  successFeedback: string;
+  retryFeedback: string;
   hint: string;
 };
 
@@ -28,6 +32,8 @@ export type TapAndFindActivity = ActivityContent & {
     items: ActivityItem[];
     targetId: string;
     presentation?: "grid" | "color-options";
+    featuredEmoji?: string;
+    featuredLabel?: string;
   };
 };
 export type TapAndFindActivityDefinition = TapAndFindActivity;
@@ -36,13 +42,29 @@ export type DragToTargetActivity = ActivityContent & {
   engineType: "drag-to-target";
   config: {
     items: ActivityItem[];
-    targetId: string;
-    draggableItemId: string;
+    pairs: {
+      draggableItemId: string;
+      targetId: string;
+    }[];
   };
 };
 export type DragToTargetActivityDefinition = DragToTargetActivity;
 
-export type ActivityDefinition = TapAndFindActivity | DragToTargetActivity;
+export type CountAndSelectActivity = ActivityContent & {
+  engineType: "count-and-select";
+  config: {
+    itemEmoji: string;
+    itemLabel: string;
+    displayCount: number;
+    options: number[];
+    targetCount: number;
+  };
+};
+
+export type ActivityDefinition =
+  | TapAndFindActivity
+  | DragToTargetActivity
+  | CountAndSelectActivity;
 
 export type ActivityInteraction = {
   completed: boolean;

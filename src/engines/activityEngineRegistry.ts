@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  CountAndSelectEngine,
   DragToTargetEngine,
   TapAndFindEngine,
 } from "../components/engines";
@@ -28,6 +29,7 @@ export const activityEngineRegistry: Record<
 > = {
   "tap-and-find": TapAndFindEngine as unknown as ActivityEngineComponent,
   "drag-to-target": DragToTargetEngine as unknown as ActivityEngineComponent,
+  "count-and-select": CountAndSelectEngine as unknown as ActivityEngineComponent,
 };
 
 export function getActivityEngine(

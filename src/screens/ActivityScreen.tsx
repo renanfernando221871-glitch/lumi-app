@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { AudioButton } from "../components/AudioButton";
 import { BackButton } from "../components/BackButton";
 import { LumiSpeechBubble } from "../components/LumiSpeechBubble";
@@ -26,6 +26,7 @@ export function ActivityScreen({
   onBack,
   onComplete,
 }: Props) {
+  const compactHeader = useWindowDimensions().width < 480;
   const [session, setSession] = useState(() =>
     createActivitySession(activity.id),
   );
@@ -52,11 +53,11 @@ export function ActivityScreen({
       setSession((current) => {
         if (current.complete) return current;
         return completed
-          ? { ...current, complete: true, feedback: activity.feedbackSuccess }
+          ? { ...current, complete: true, feedback: activity.successFeedback }
           : { ...current, feedback: feedback || "" };
       });
     },
-    [activity.feedbackSuccess],
+    [activity.successFeedback],
   );
 
   const advance = () => {
@@ -77,7 +78,7 @@ export function ActivityScreen({
       <View style={styles.topBar}>
         <BackButton onPress={onBack} />
         <ProgressIndicator current={activityNumber - 1} total={total} />
-        <View style={styles.topSpacer} />
+        <View style={[styles.topSpacer, compactHeader && styles.compactTopSpacer]} />
       </View>
       <View style={styles.content}>
         <Text style={styles.kicker}>ATIVIDADE {activityNumber}</Text>
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   topSpacer: { width: 76 },
+  compactTopSpacer: { width: 0 },
   content: {
     width: "100%",
     maxWidth: 620,
