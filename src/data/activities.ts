@@ -822,7 +822,7 @@ export const activities: ActivityDefinition[] = [
       dragInstruction: "Arraste cada pessoa até seu veículo.",
       placedLabel: "Pessoa e veículo combinados",
       items: [
-        { id: "city-driver", label: "motorista", emoji: "🧑‍🦱🛞", color: "#F8E0AC" },
+        { id: "city-driver", label: "motorista", emoji: "🧢🧑‍🦱", color: "#F8E0AC" },
         { id: "city-pilot", label: "piloto", emoji: "👩‍✈️", color: "#D8ECFC" },
         { id: "city-train-driver", label: "maquinista", emoji: "🧑🚆", color: "#DDF1D5" },
         { id: "city-bus", label: "ônibus", emoji: "🚌", color: "#FFD88A" },
