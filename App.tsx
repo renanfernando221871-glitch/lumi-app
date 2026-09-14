@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { activities } from "./src/data/activities";
 import { getRewardById, rewards } from "./src/data/rewards";
 import { worldCatalog } from "./src/data/worlds";
 import {
   canOpenWorld,
   canStartWorldActivity,
+  completeWorldActivityTransition,
   getNextIncompleteActivityId,
-  getWorldProgressionDestination,
   getUnlockedWorldIds,
-  completeWorldProgress,
 } from "./src/domain/progress";
+import { persistProgressBeforeCommit } from "./src/domain/progressPersistence";
 import { useAppNavigation } from "./src/navigation/useAppNavigation";
 import { ActivityScreen } from "./src/screens/ActivityScreen";
 import { HouseScreen } from "./src/screens/HouseScreen";
@@ -74,6 +74,7 @@ function LumiApp() {
   const { replace } = navigation;
   const [profile, setProfile] = useState<ChildProfile>(defaultProfile);
   const [progress, setProgress] = useState<ProgressState>(defaultProgress);
+  const progressRef = useRef<ProgressState>(defaultProgress);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
@@ -81,6 +82,7 @@ function LumiApp() {
     loadSavedState().then(({ profile: savedProfile, progress: savedProgress }) => {
       if (!mounted) return;
       setProfile(savedProfile);
+      progressRef.current = savedProgress;
       setProgress(savedProgress);
       setHydrated(true);
       setTimeout(() => {
@@ -197,28 +199,28 @@ function LumiApp() {
   }
   const activityIndex = worldActivities.indexOf(activity);
 
-  const completeActivity = () => {
-    const expectedActivityId = getNextIncompleteActivityId(
+  const completeActivity = async () => {
+    const transition = completeWorldActivityTransition(
+      progressRef.current,
       world,
-      progress.completedActivityIds,
+      activity.id,
     );
-    if (expectedActivityId && expectedActivityId !== activity.id) {
-      navigation.startActivity(world.id, expectedActivityId);
-      return;
+    const { destination } = transition;
+    if (transition.progressChanged) {
+      try {
+        await persistProgressBeforeCommit(
+          transition.progress,
+          saveProgress,
+          (persistedProgress) => {
+            progressRef.current = persistedProgress;
+            setProgress(persistedProgress);
+          },
+        );
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
     }
-    const { progress: nextProgress, rewardGranted } = completeWorldProgress(
-      progress,
-      activity.id,
-      world,
-    );
-    setProgress(nextProgress);
-    saveProgress(nextProgress).catch(console.error);
-
-    const destination = getWorldProgressionDestination(
-      world,
-      activity.id,
-      rewardGranted,
-    );
     if (destination.type === "activity") {
       navigation.startActivity(world.id, destination.activityId);
     } else if (destination.type === "reward") {

@@ -28,7 +28,7 @@ type Props = {
   finalCompletionLabel: string;
   onBack: () => void;
   /** The optional argument preserves compatibility with the original App. */
-  onComplete: (result?: ActivityResult) => void;
+  onComplete: (result?: ActivityResult) => void | Promise<void>;
 };
 
 export function ActivityScreen({
@@ -74,17 +74,26 @@ export function ActivityScreen({
     [activity.successFeedback],
   );
 
-  const advance = () => {
+  const advance = async () => {
     if (!canAdvanceActivity(session) || advancingRef.current) return;
     advancingRef.current = true;
     setSession((current) => ({ ...current, advancing: true }));
-    onComplete({
-      activityId: activity.id,
-      completed: true,
-      attempts,
-      startedAt: startedAtRef.current,
-      completedAt: completedAtRef.current ?? Date.now(),
-    });
+    try {
+      await onComplete({
+        activityId: activity.id,
+        completed: true,
+        attempts,
+        startedAt: startedAtRef.current,
+        completedAt: completedAtRef.current ?? Date.now(),
+      });
+    } catch {
+      advancingRef.current = false;
+      setSession((current) => ({
+        ...current,
+        advancing: false,
+        feedback: "Não consegui salvar agora. Toque novamente.",
+      }));
+    }
   };
 
   return (

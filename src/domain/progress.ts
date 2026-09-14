@@ -65,6 +65,13 @@ export type WorldProgressionDestination =
   | { type: "reward"; rewardId: string }
   | { type: "map" };
 
+export type WorldActivityCompletionTransition = {
+  progress: ProgressState;
+  destination: WorldProgressionDestination;
+  rewardGranted: boolean;
+  progressChanged: boolean;
+};
+
 export function getWorldProgressionDestination(
   world: Pick<WorldDefinition, "activityIds" | "rewardId">,
   currentActivityId: string,
@@ -77,6 +84,40 @@ export function getWorldProgressionDestination(
   return rewardGranted
     ? { type: "reward", rewardId: world.rewardId }
     : { type: "map" };
+}
+
+export function completeWorldActivityTransition(
+  progress: ProgressState,
+  world: Pick<WorldDefinition, "activityIds" | "rewardId">,
+  currentActivityId: string,
+): WorldActivityCompletionTransition {
+  const expectedActivityId = getNextIncompleteActivityId(
+    world,
+    progress.completedActivityIds,
+  );
+  if (expectedActivityId && expectedActivityId !== currentActivityId) {
+    return {
+      progress,
+      destination: { type: "activity", activityId: expectedActivityId },
+      rewardGranted: false,
+      progressChanged: false,
+    };
+  }
+
+  const completion = completeWorldProgress(
+    progress,
+    currentActivityId,
+    world,
+  );
+  return {
+    ...completion,
+    destination: getWorldProgressionDestination(
+      world,
+      currentActivityId,
+      completion.rewardGranted,
+    ),
+    progressChanged: completion.progress !== progress,
+  };
 }
 
 export function canStartActivity(

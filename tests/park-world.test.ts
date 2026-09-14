@@ -10,12 +10,14 @@ import {
 } from "../src/data/worlds";
 import {
   canStartWorldActivity,
+  completeWorldActivityTransition,
   completeWorldProgress,
   getNextIncompleteActivityId,
   getWorldProgressionDestination,
   isWorldUnlocked,
   normalizeWorldCompletedActivityIds,
 } from "../src/domain/progress";
+import { persistProgressBeforeCommit } from "../src/domain/progressPersistence";
 import { validateActivityCatalog } from "../src/domain/catalog";
 import {
   createPatternCompletionState,
@@ -169,6 +171,146 @@ test("Parque advances 1→2, 7→8, and 8→reward→map", () => {
     ),
     { type: "map" },
   );
+});
+
+test("Parque completion transaction never reopens the same activity", () => {
+  const firstActivityId = parqueDasCores.activityIds[0];
+  const transition = completeWorldActivityTransition(
+    {
+      completedActivityIds: completedPreviousWorlds,
+      earnedRewardIds: ["lumi-flower", "farm-basket"],
+    },
+    parqueDasCores,
+    firstActivityId,
+  );
+  assert.equal(
+    transition.progress.completedActivityIds.includes(firstActivityId),
+    true,
+  );
+  assert.deepEqual(transition.destination, {
+    type: "activity",
+    activityId: parqueDasCores.activityIds[1],
+  });
+  assert.notEqual(
+    transition.destination.type === "activity"
+      ? transition.destination.activityId
+      : undefined,
+    firstActivityId,
+  );
+});
+
+test("Parque completion transaction advances activity 4 to activity 5", () => {
+  const completedThroughThird = {
+    completedActivityIds: [
+      ...completedPreviousWorlds,
+      ...parqueDasCores.activityIds.slice(0, 3),
+    ],
+    earnedRewardIds: ["lumi-flower", "farm-basket"],
+  };
+  const transition = completeWorldActivityTransition(
+    completedThroughThird,
+    parqueDasCores,
+    parqueDasCores.activityIds[3],
+  );
+  assert.deepEqual(transition.destination, {
+    type: "activity",
+    activityId: parqueDasCores.activityIds[4],
+  });
+});
+
+test("saved Parque progress reenters at the first incomplete activity", () => {
+  const savedProgress = {
+    completedActivityIds: [
+      ...completedPreviousWorlds,
+      ...parqueDasCores.activityIds.slice(0, 4),
+    ],
+    earnedRewardIds: ["lumi-flower", "farm-basket"],
+  };
+  const reloaded = normalizeProgress(
+    parseStoredJson(JSON.stringify(createEnvelope(savedProgress))),
+    { completedActivityIds: [], earnedRewardIds: [] },
+    worldCatalog.flatMap((world) => world.activityIds),
+    rewards.map((reward) => reward.id),
+  );
+  assert.equal(
+    getNextIncompleteActivityId(parqueDasCores, reloaded.completedActivityIds),
+    parqueDasCores.activityIds[4],
+  );
+});
+
+test("Parque final completion transaction shows reward and revisit goes to map", () => {
+  const beforeLast = {
+    completedActivityIds: [
+      ...completedPreviousWorlds,
+      ...parqueDasCores.activityIds.slice(0, -1),
+    ],
+    earnedRewardIds: ["lumi-flower", "farm-basket"],
+  };
+  const completed = completeWorldActivityTransition(
+    beforeLast,
+    parqueDasCores,
+    parqueDasCores.activityIds.at(-1)!,
+  );
+  assert.deepEqual(completed.destination, {
+    type: "reward",
+    rewardId: parqueDasCores.rewardId,
+  });
+  const revisit = completeWorldActivityTransition(
+    completed.progress,
+    parqueDasCores,
+    parqueDasCores.activityIds.at(-1)!,
+  );
+  assert.deepEqual(revisit.destination, { type: "map" });
+});
+
+test("Parque progress is persisted before it is committed for navigation", async () => {
+  const events: string[] = [];
+  let finishPersistence: (() => void) | undefined;
+  const persistence = new Promise<void>((resolve) => {
+    finishPersistence = resolve;
+  });
+  const nextProgress = {
+    completedActivityIds: [
+      ...completedPreviousWorlds,
+      parqueDasCores.activityIds[0],
+    ],
+    earnedRewardIds: ["lumi-flower", "farm-basket"],
+  };
+  const operation = persistProgressBeforeCommit(
+    nextProgress,
+    async () => {
+      await persistence;
+      events.push("persisted");
+    },
+    () => events.push("committed"),
+  );
+  assert.deepEqual(events, []);
+  finishPersistence?.();
+  await operation;
+  assert.deepEqual(events, ["persisted", "committed"]);
+});
+
+test("failed Parque persistence does not commit stale navigation state", async () => {
+  let committed = false;
+  await assert.rejects(
+    persistProgressBeforeCommit(
+      {
+        completedActivityIds: [
+          ...completedPreviousWorlds,
+          parqueDasCores.activityIds[0],
+        ],
+        earnedRewardIds: ["lumi-flower", "farm-basket"],
+      },
+      async () => {
+        throw new Error("storage unavailable");
+      },
+      () => {
+        committed = true;
+      },
+    ),
+    /storage unavailable/,
+  );
+  assert.equal(committed, false);
 });
 
 test("Parque progress persists and its terminal reward is granted once", () => {
