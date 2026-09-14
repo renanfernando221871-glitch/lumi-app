@@ -41,7 +41,7 @@ export const activities: ActivityDefinition[] = [
     audioLabel: "Ouvir: Leve o ursinho para a caixa.",
     helper: "Segure o ursinho e arraste até a caixa.",
     targetId: "toy-box",
-    reward: "O ursinho ficou bem guardado!",
+    reward: "Muito bem! O ursinho está guardado!",
     items: [
       { id: "teddy", label: "ursinho", emoji: "🧸", color: "#C98759" },
       { id: "toy-box", label: "caixa", emoji: "🧺", color: "#FFC442", isTarget: true },

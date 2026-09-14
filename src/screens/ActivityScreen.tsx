@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 import {
   Animated,
+  LayoutRectangle,
   PanResponder,
   Pressable,
   StyleSheet,
@@ -151,25 +152,52 @@ function DragActivity({
   const target = activity.items.find((item) => item.id === activity.targetId)!;
   const position = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
   const [dropped, setDropped] = useState(false);
+  const [targetLayout, setTargetLayout] = useState<LayoutRectangle | null>(null);
+  const teddyFrame = { x: 42, y: 105, width: 128, height: 112 };
   const responder = useMemo(
     () =>
       PanResponder.create({
         onStartShouldSetPanResponder: () => !dropped,
-        onPanResponderGrant: () => {
-          position.setOffset({ x: (position.x as any).__getValue(), y: (position.y as any).__getValue() });
-          position.setValue({ x: 0, y: 0 });
-        },
+        onMoveShouldSetPanResponder: (_, gesture) =>
+          !dropped && (Math.abs(gesture.dx) > 3 || Math.abs(gesture.dy) > 3),
         onPanResponderMove: Animated.event(
           [null, { dx: position.x, dy: position.y }],
           { useNativeDriver: false },
         ),
         onPanResponderRelease: (_, gesture) => {
-          position.flattenOffset();
-          const nearBox = gesture.dx > 65 && Math.abs(gesture.dy) < 150;
-          if (nearBox) {
-            setDropped(true);
-            position.setValue({ x: 103, y: 100 });
-            setTimeout(onComplete, 420);
+          const teddyCenter = {
+            x: teddyFrame.x + teddyFrame.width / 2 + gesture.dx,
+            y: teddyFrame.y + teddyFrame.height / 2 + gesture.dy,
+          };
+          const isInsideTarget =
+            targetLayout !== null &&
+            teddyCenter.x >= targetLayout.x &&
+            teddyCenter.x <= targetLayout.x + targetLayout.width &&
+            teddyCenter.y >= targetLayout.y &&
+            teddyCenter.y <= targetLayout.y + targetLayout.height;
+
+          if (isInsideTarget && targetLayout) {
+            const snapPosition = {
+              x:
+                targetLayout.x +
+                targetLayout.width / 2 -
+                (teddyFrame.x + teddyFrame.width / 2),
+              y:
+                targetLayout.y +
+                targetLayout.height / 2 -
+                (teddyFrame.y + teddyFrame.height / 2),
+            };
+
+            Animated.spring(position, {
+              toValue: snapPosition,
+              useNativeDriver: false,
+              speed: 16,
+              bounciness: 5,
+            }).start(({ finished }) => {
+              if (!finished) return;
+              setDropped(true);
+              onComplete();
+            });
           } else {
             Animated.spring(position, {
               toValue: { x: 0, y: 0 },
@@ -179,7 +207,7 @@ function DragActivity({
           }
         },
       }),
-    [dropped, onComplete, position],
+    [dropped, onComplete, position, targetLayout],
   );
 
   return (
@@ -188,15 +216,28 @@ function DragActivity({
         <Text style={styles.dragHintText}>Arraste até aqui</Text>
         <Text style={styles.dragArrow}>↓</Text>
       </View>
-      <View style={[styles.dropZone, dropped && styles.dropZoneDone]}>
-        <Text style={styles.dropEmoji}>{dropped ? "🧸" : target.emoji}</Text>
-        <Text style={styles.dropLabel}>{dropped ? "Muito bem!" : target.label}</Text>
+      <View
+        onLayout={(event) => setTargetLayout(event.nativeEvent.layout)}
+        style={[styles.dropZone, dropped && styles.dropZoneDone]}
+      >
+        <Text style={styles.dropEmoji}>{target.emoji}</Text>
+        <Text style={styles.dropLabel}>{dropped ? "Guardado!" : target.label}</Text>
       </View>
       <Animated.View
         {...responder.panHandlers}
+        accessibilityLabel="ursinho para guardar"
+        accessibilityRole="button"
+        accessibilityState={{ disabled: dropped }}
+        pointerEvents={dropped ? "none" : "auto"}
         style={[
           styles.draggable,
-          { backgroundColor: teddy.color, transform: position.getTranslateTransform() },
+          {
+            backgroundColor: teddy.color,
+            transform: [
+              ...position.getTranslateTransform(),
+              { scale: dropped ? 0.62 : 1 },
+            ],
+          },
         ]}
       >
         <Text style={styles.dragEmoji}>{teddy.emoji}</Text>
