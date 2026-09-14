@@ -84,12 +84,34 @@ export const mercadoDoLumi: WorldDefinition = {
   },
 };
 
+export const cidadeDasAventuras: WorldDefinition = {
+  id: "cidade-das-aventuras",
+  title: "Cidade das Aventuras",
+  description: "Uma cidade para descobrir pessoas, lugares, escolhas e histórias.",
+  activityIds: activities
+    .filter((activity) => activity.worldId === "cidade-das-aventuras")
+    .map((activity) => activity.id),
+  rewardId: "cidade-star",
+  unlock: {
+    unlockedByDefault: false,
+    prerequisiteWorldId: "mercado-do-lumi",
+  },
+  assets: {
+    mapIcon: "🏙️",
+    mapPrompt: "Uma cidade apareceu no caminho. Vamos descobrir suas aventuras?",
+    entryLabel: "Entrar na cidade",
+    introPrompt:
+      "Vamos passear pela cidade? Há pessoas, lugares e histórias para descobrir.",
+  },
+};
+
 /** Worlds are data, so adding a world does not require changing navigation. */
 export const worldCatalog: readonly WorldDefinition[] = [
   casaDoLumi,
   fazendaDasDescobertas,
   parqueDasCores,
   mercadoDoLumi,
+  cidadeDasAventuras,
 ];
 export const worlds = worldCatalog;
 

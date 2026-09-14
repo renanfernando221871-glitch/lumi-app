@@ -27,8 +27,8 @@ test("the local manifest reserves every production activity and reward recording
   const productionAudioFiles = activities.map(
     (activity) => activity.instructionAudio,
   );
-  assert.equal(productionAudioFiles.length, 32);
-  assert.equal(new Set(productionAudioFiles).size, 32);
+  assert.equal(productionAudioFiles.length, 40);
+  assert.equal(new Set(productionAudioFiles).size, 40);
   for (const file of productionAudioFiles) {
     assert.ok(LUMI_AUDIO_FILES.includes(file as (typeof LUMI_AUDIO_FILES)[number]));
   }

@@ -37,6 +37,15 @@ export const rewards: readonly RewardDefinition[] = [
     message: "Você escolheu, contou e organizou tudo no Mercado do Lumi.",
     completionLabel: "Ver minhas compras",
   },
+  {
+    id: "cidade-star",
+    icon: "⭐",
+    progressLockedIcon: "🌱",
+    eyebrow: "CONQUISTA NOVA",
+    title: "A cidade ganhou\numa nova estrela!",
+    message: "Você ajudou, escolheu com cuidado e criou uma história pela cidade.",
+    completionLabel: "Ver minha estrela",
+  },
 ];
 
 export function getRewardById(rewardId: string): RewardDefinition {

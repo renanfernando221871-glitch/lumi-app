@@ -67,6 +67,14 @@ test("production activities use the exhaustive interaction engine contracts", ()
       "tap-and-find",
       "tap-and-find",
       "drag-to-target",
+      "drag-to-target",
+      "tap-and-find",
+      "drag-to-target",
+      "tap-and-find",
+      "tap-and-find",
+      "tap-and-find",
+      "ordering",
+      "ordering",
     ],
   );
   assert.equal(validateActivityCatalog(activities), true);

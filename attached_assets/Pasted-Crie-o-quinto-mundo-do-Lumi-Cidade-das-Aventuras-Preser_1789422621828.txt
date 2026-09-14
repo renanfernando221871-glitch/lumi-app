@@ -1,0 +1,126 @@
+Crie o quinto mundo do Lumi: Cidade das Aventuras.
+Preserve integralmente:
+- Casa do Lumi;
+- Fazenda das Descobertas;
+- Parque das Cores;
+- Mercado do Lumi;
+- arquitetura atual;
+- VoiceService;
+- progresso e rewards;
+- navegação;
+- identidade visual;
+- compatibilidade com progresso já salvo.
+Não altere os mundos anteriores.
+Objetivo pedagógico da Cidade das Aventuras:
+profissões, veículos, lugares, sons iniciais, relações sociais, segurança, emoções, frases simples e pequenas narrativas.
+Crie o novo world em data/worlds.ts com:
+- id;
+- title;
+- description;
+- activityIds;
+- rewardId;
+- estado de desbloqueio;
+- assets/configuração visual.
+Nome:
+Cidade das Aventuras
+Desbloqueio:
+- disponível após conclusão do Mercado do Lumi;
+- manter a lógica de descoberta/caminho;
+- evitar cadeados agressivos.
+Crie estas 8 atividades:
+1. Quem dirige?
+   - objetivo: relacionar profissão e veículo;
+   - exemplos:
+     - motorista → ônibus
+     - piloto → avião
+     - maquinista → trem
+   - usar associação/seleção por dados.
+2. C de carro
+   - objetivo: consciência fonológica inicial;
+   - trabalhar som inicial, não memorização mecânica do alfabeto;
+   - exemplo:
+     “Carro começa com qual som?”
+   - usar engine de som já existente, se disponível;
+   - associar som e letra de forma simples.
+3. Onde devemos ir?
+   - objetivo: relacionar necessidade e lugar;
+   - exemplos:
+     - comprar pão → padaria
+     - cuidar de alguém doente → hospital
+     - brincar → parque
+   - usar associação ou seleção configurável.
+4. Atravesse com segurança
+   - objetivo: noções básicas de segurança no trânsito;
+   - cenário simples de faixa de pedestres e semáforo;
+   - pedir decisão segura, por exemplo:
+     “Quando podemos atravessar?”
+   - não usar medo, acidente ou punição;
+   - feedback educativo e acolhedor.
+5. Quem está triste?
+   - objetivo: reconhecer emoções em contexto;
+   - mostrar pessoas/personagens com expressões diferentes;
+   - trabalhar tristeza, alegria, surpresa e calma;
+   - usar seleção visual.
+6. Ajude o amigo
+   - objetivo: relações sociais, empatia e escolha de comportamento;
+   - apresentar uma situação simples, por exemplo:
+     “O amigo deixou cair os brinquedos. O que podemos fazer?”
+   - opções visuais simples;
+   - resposta correta deve valorizar ajuda, cuidado e cooperação;
+   - evitar tom moralista ou punitivo.
+7. Monte a frase
+   - objetivo: construir frases simples;
+   - exemplo:
+     “O menino + anda + de bicicleta.”
+   - se ainda não existir engine, criar um engine genérico sentence-builder;
+   - usar blocos grandes e visuais;
+   - permitir ordenar ou escolher partes da frase;
+   - preparado para futuras frases configuráveis.
+8. A história do Lumi
+   - objetivo: síntese narrativa;
+   - pequena sequência de 3 ou 4 cenas;
+   - criança organiza ou escolhe a ordem correta da história;
+   - reutilizar ordering se possível;
+   - exemplo:
+     Lumi sai de casa → encontra um amigo → ajuda o amigo → volta feliz;
+   - linguagem simples, visual e curta.
+Regras pedagógicas:
+- sem punição;
+- sem X vermelho;
+- erro vira oportunidade de aprendizagem;
+- feedback curto e acolhedor;
+- português do Brasil;
+- pouco texto;
+- imagem e áudio prioritários;
+- dificuldade adequada a crianças de 3–5 anos;
+- manter a lógica:
+  descobrir → reconhecer → relacionar → expressar → criar.
+Regras técnicas:
+- atividades orientadas por dados;
+- nenhuma lógica dependente de posição global no catálogo;
+- progresso por IDs;
+- conclusão após 8 atividades;
+- reward uma única vez;
+- revisita não repete reward;
+- novos engines devem ser genéricos, tipados, registrados e testados;
+- não criar backend;
+- não alterar engines anteriores para atender uma atividade específica.
+Validação obrigatória:
+1. TypeScript sem erros;
+2. testes passando;
+3. Preview funcionando;
+4. quatro mundos anteriores intactos;
+5. Cidade desbloqueia após Mercado;
+6. 8 atividades em sequência;
+7. não é possível pular atividades;
+8. progresso persiste após recarregar;
+9. reward aparece apenas após a 8ª;
+10. sentence-builder, se criado, deve funcionar só por configuração.
+Ao final, informe:
+1. engines reutilizados;
+2. engines novos;
+3. arquivos alterados;
+4. estrutura das 8 atividades;
+5. testes executados;
+6. limitações restantes.
+Não crie novos mundos além da Cidade nesta tarefa.

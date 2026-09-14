@@ -33,6 +33,14 @@ export const LUMI_AUDIO_FILES = [
   "activity-30-mercado-what-color.mp3",
   "activity-31-mercado-first-sound.mp3",
   "activity-32-mercado-prepare-snack.mp3",
+  "activity-33-cidade-who-drives.mp3",
+  "activity-34-cidade-car-sound.mp3",
+  "activity-35-cidade-where-to-go.mp3",
+  "activity-36-cidade-cross-safely.mp3",
+  "activity-37-cidade-who-is-sad.mp3",
+  "activity-38-cidade-help-friend.mp3",
+  "activity-39-cidade-build-sentence.mp3",
+  "activity-40-cidade-lumi-story.mp3",
   "reward-you-did-it.mp3",
 ] as const;
 
@@ -75,6 +83,14 @@ const lumiAudioAssets: Partial<Record<LumiAudioFile, AudioSource>> = {
   // "activity-30-mercado-what-color.mp3": require("../../assets/audio/lumi/activity-30-mercado-what-color.mp3"),
   // "activity-31-mercado-first-sound.mp3": require("../../assets/audio/lumi/activity-31-mercado-first-sound.mp3"),
   // "activity-32-mercado-prepare-snack.mp3": require("../../assets/audio/lumi/activity-32-mercado-prepare-snack.mp3"),
+  // "activity-33-cidade-who-drives.mp3": require("../../assets/audio/lumi/activity-33-cidade-who-drives.mp3"),
+  // "activity-34-cidade-car-sound.mp3": require("../../assets/audio/lumi/activity-34-cidade-car-sound.mp3"),
+  // "activity-35-cidade-where-to-go.mp3": require("../../assets/audio/lumi/activity-35-cidade-where-to-go.mp3"),
+  // "activity-36-cidade-cross-safely.mp3": require("../../assets/audio/lumi/activity-36-cidade-cross-safely.mp3"),
+  // "activity-37-cidade-who-is-sad.mp3": require("../../assets/audio/lumi/activity-37-cidade-who-is-sad.mp3"),
+  // "activity-38-cidade-help-friend.mp3": require("../../assets/audio/lumi/activity-38-cidade-help-friend.mp3"),
+  // "activity-39-cidade-build-sentence.mp3": require("../../assets/audio/lumi/activity-39-cidade-build-sentence.mp3"),
+  // "activity-40-cidade-lumi-story.mp3": require("../../assets/audio/lumi/activity-40-cidade-lumi-story.mp3"),
   // "reward-you-did-it.mp3": require("../../assets/audio/lumi/reward-you-did-it.mp3"),
 };
 
