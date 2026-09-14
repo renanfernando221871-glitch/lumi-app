@@ -17,6 +17,8 @@ export type ActivityItem = {
   colorGlyph?: string;
   /** Optional headwear rendered above a character without changing its identity. */
   headwearEmoji?: string;
+  /** Optional single-component character visual for roles without a clear emoji. */
+  characterVisual?: "driver";
   isTarget?: boolean;
   emojiScale?: number;
 };

@@ -181,8 +181,9 @@ test("Quem dirige keeps vehicles in targets and professionals in draggable cards
   const pilot = item("city-pilot");
   const trainDriver = item("city-train-driver");
 
-  assert.equal(driver.emoji, "🧑‍🦱");
-  assert.equal(driver.headwearEmoji, "🧢");
+  assert.equal(driver.emoji, "motorista");
+  assert.equal(driver.characterVisual, "driver");
+  assert.equal(driver.headwearEmoji, undefined);
   assert.equal(pilot.emoji, "👩‍✈️");
   assert.equal(trainDriver.emoji, "🧑");
   assert.equal(trainDriver.headwearEmoji, "🧢");

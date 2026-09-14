@@ -35,6 +35,28 @@ function center(frame: { x: number; y: number; width: number; height: number }) 
   };
 }
 
+function DriverCharacterIcon() {
+  return (
+    <View style={styles.driverIcon}>
+      <View style={styles.driverCap}>
+        <View style={styles.driverCapBadge} />
+      </View>
+      <View style={styles.driverCapBrim} />
+      <View style={styles.driverHead}>
+        <View style={styles.driverHair} />
+        <View style={styles.driverEyes}>
+          <View style={styles.driverEye} />
+          <View style={styles.driverEye} />
+        </View>
+        <View style={styles.driverSmile} />
+      </View>
+      <View style={styles.driverUniform}>
+        <View style={styles.driverCollar} />
+      </View>
+    </View>
+  );
+}
+
 function DraggablePair({
   draggable,
   target,
@@ -189,7 +211,9 @@ function DraggablePair({
           onPress={onSelect}
           style={styles.draggablePressable}
         >
-          {draggable.headwearEmoji ? (
+          {draggable.characterVisual === "driver" ? (
+            <DriverCharacterIcon />
+          ) : draggable.headwearEmoji ? (
             <View style={styles.characterVisual}>
               <Text style={styles.headwearEmoji}>{draggable.headwearEmoji}</Text>
               <Text style={styles.characterEmoji}>{draggable.emoji}</Text>
@@ -361,6 +385,91 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   dragEmoji: { fontSize: 42 },
+  driverIcon: {
+    width: 48,
+    height: 52,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  driverCap: {
+    position: "absolute",
+    top: 0,
+    width: 34,
+    height: 13,
+    borderTopLeftRadius: 9,
+    borderTopRightRadius: 9,
+    backgroundColor: "#47738F",
+    alignItems: "center",
+  },
+  driverCapBadge: {
+    width: 6,
+    height: 6,
+    marginTop: 3,
+    borderRadius: 3,
+    backgroundColor: "#FFD15C",
+  },
+  driverCapBrim: {
+    position: "absolute",
+    top: 10,
+    left: 20,
+    width: 23,
+    height: 5,
+    borderRadius: 4,
+    backgroundColor: "#355B73",
+  },
+  driverHead: {
+    position: "absolute",
+    top: 12,
+    width: 29,
+    height: 27,
+    borderRadius: 14,
+    backgroundColor: "#D99A72",
+    alignItems: "center",
+  },
+  driverHair: {
+    width: 27,
+    height: 7,
+    borderTopLeftRadius: 13,
+    borderTopRightRadius: 13,
+    backgroundColor: "#5E4034",
+  },
+  driverEyes: {
+    marginTop: 4,
+    flexDirection: "row",
+    gap: 8,
+  },
+  driverEye: {
+    width: 3,
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: "#2F4C46",
+  },
+  driverSmile: {
+    width: 9,
+    height: 5,
+    marginTop: 4,
+    borderBottomWidth: 2,
+    borderBottomColor: "#8C4E42",
+    borderRadius: 5,
+  },
+  driverUniform: {
+    width: 39,
+    height: 19,
+    borderTopLeftRadius: 13,
+    borderTopRightRadius: 13,
+    backgroundColor: "#5F91AE",
+    alignItems: "center",
+  },
+  driverCollar: {
+    width: 10,
+    height: 8,
+    borderLeftWidth: 5,
+    borderRightWidth: 5,
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+    borderTopWidth: 7,
+    borderTopColor: colors.white,
+  },
   characterVisual: {
     width: 54,
     height: 49,
