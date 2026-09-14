@@ -6,6 +6,7 @@ import {
   canOpenWorld,
   canStartWorldActivity,
   getNextIncompleteActivityId,
+  getWorldProgressionDestination,
   getUnlockedWorldIds,
   completeWorldProgress,
 } from "./src/domain/progress";
@@ -213,14 +214,15 @@ function LumiApp() {
     setProgress(nextProgress);
     saveProgress(nextProgress).catch(console.error);
 
-    const nextActivityId = getNextIncompleteActivityId(
+    const destination = getWorldProgressionDestination(
       world,
-      nextProgress.completedActivityIds,
+      activity.id,
+      rewardGranted,
     );
-    if (rewardGranted) {
-      navigation.showReward(world.rewardId);
-    } else if (nextActivityId) {
-      navigation.startActivity(world.id, nextActivityId);
+    if (destination.type === "activity") {
+      navigation.startActivity(world.id, destination.activityId);
+    } else if (destination.type === "reward") {
+      navigation.showReward(destination.rewardId);
     } else {
       navigation.replace("map");
     }

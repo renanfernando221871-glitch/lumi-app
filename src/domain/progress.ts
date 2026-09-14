@@ -39,6 +39,35 @@ export function getNextIncompleteActivityId(
   return world.activityIds.find((id) => !completedActivityIds.includes(id));
 }
 
+export function getNextWorldActivityId(
+  world: Pick<WorldDefinition, "activityIds">,
+  currentActivityId: string,
+): string | undefined {
+  const currentIndex = world.activityIds.indexOf(currentActivityId);
+  return currentIndex >= 0
+    ? world.activityIds[currentIndex + 1]
+    : undefined;
+}
+
+export type WorldProgressionDestination =
+  | { type: "activity"; activityId: string }
+  | { type: "reward"; rewardId: string }
+  | { type: "map" };
+
+export function getWorldProgressionDestination(
+  world: Pick<WorldDefinition, "activityIds" | "rewardId">,
+  currentActivityId: string,
+  rewardGranted: boolean,
+): WorldProgressionDestination {
+  const nextActivityId = getNextWorldActivityId(world, currentActivityId);
+  if (nextActivityId) {
+    return { type: "activity", activityId: nextActivityId };
+  }
+  return rewardGranted
+    ? { type: "reward", rewardId: world.rewardId }
+    : { type: "map" };
+}
+
 export function canStartActivity(
   world: Pick<WorldDefinition, "activityIds">,
   activityId: string,
@@ -131,12 +160,26 @@ export function completeWorldProgress(
   activityId: string,
   world: Pick<WorldDefinition, "activityIds" | "rewardId">,
 ): { progress: ProgressState; rewardGranted: boolean } {
-  return completeActivityProgress(
+  const result = completeActivityProgress(
     current,
     activityId,
     getWorldActivityIds(world),
     world.rewardId,
   );
+  const isLastActivity =
+    world.activityIds[world.activityIds.length - 1] === activityId;
+  if (result.rewardGranted && !isLastActivity) {
+    return {
+      progress: {
+        ...result.progress,
+        earnedRewardIds: result.progress.earnedRewardIds.filter(
+          (rewardId) => rewardId !== world.rewardId,
+        ),
+      },
+      rewardGranted: false,
+    };
+  }
+  return result;
 }
 
 export const completeWorldActivityProgress = completeWorldProgress;
