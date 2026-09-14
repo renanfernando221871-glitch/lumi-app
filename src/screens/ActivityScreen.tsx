@@ -151,7 +151,6 @@ function DragActivity({
   const target = activity.items.find((item) => item.id === activity.targetId)!;
   const position = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
   const [dropped, setDropped] = useState(false);
-  const start = useRef({ x: 0, y: 0 });
   const responder = useMemo(
     () =>
       PanResponder.create({
@@ -159,7 +158,6 @@ function DragActivity({
         onPanResponderGrant: () => {
           position.setOffset({ x: (position.x as any).__getValue(), y: (position.y as any).__getValue() });
           position.setValue({ x: 0, y: 0 });
-          start.current = { x: (position.x as any).__getValue(), y: (position.y as any).__getValue() };
         },
         onPanResponderMove: Animated.event(
           [null, { dx: position.x, dy: position.y }],
@@ -167,7 +165,7 @@ function DragActivity({
         ),
         onPanResponderRelease: (_, gesture) => {
           position.flattenOffset();
-          const nearBox = gesture.moveX > 160 && gesture.moveX < 380 && gesture.moveY > 260;
+          const nearBox = gesture.dx > 65 && Math.abs(gesture.dy) < 150;
           if (nearBox) {
             setDropped(true);
             position.setValue({ x: 103, y: 100 });

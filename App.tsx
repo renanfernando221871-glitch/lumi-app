@@ -1,5 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { BackButton } from "./src/components/BackButton";
 import { LumiSpeechBubble } from "./src/components/LumiSpeechBubble";
@@ -142,7 +150,7 @@ export default function App() {
       <MapScreen
         profile={profile}
         completedCount={completedCount}
-        onOpenHouse={startActivities}
+        onOpenHouse={() => setScreen("house")}
         onEditProfile={() => setScreen("personalize")}
       />
     );
@@ -209,24 +217,29 @@ function PersonalizeScreen({
           <Text style={styles.pageTitle}>Como posso te chamar?</Text>
           <LumiSpeechBubble compact>Escolha um nome e uma carinha!</LumiSpeechBubble>
           <Text style={styles.inputLabel}>SEU NOME</Text>
-          <Text
-            accessibilityRole="text"
+          <TextInput
+            accessibilityLabel="Seu nome"
+            autoCapitalize="words"
+            maxLength={18}
+            placeholder="Seu nome"
+            placeholderTextColor={colors.muted}
+            value={name}
+            onChangeText={setName}
             style={styles.fakeInput}
-            onPress={() => setName(name ? "" : "Amigo")}
-          >
-            {name || "Toque para escrever seu nome"}
-          </Text>
-          <Text style={styles.inputHint}>No preview, toque no nome para usar “Amigo”.</Text>
+          />
+          <Text style={styles.inputHint}>Pode ser seu nome ou um apelido.</Text>
           <Text style={styles.inputLabel}>SUA COMPANHEIRA</Text>
           <View style={styles.avatarRow}>
             {avatars.map((item) => (
-              <Text
+              <Pressable
                 key={item}
                 onPress={() => setAvatar(item)}
+                accessibilityRole="button"
+                accessibilityLabel={`Escolher companheira ${item}`}
                 style={[styles.avatar, avatar === item && styles.selectedAvatar]}
               >
-                {item}
-              </Text>
+                <Text style={styles.avatarEmoji}>{item}</Text>
+              </Pressable>
             ))}
           </View>
           <PrimaryButton
@@ -524,13 +537,15 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 22,
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 34,
+    alignItems: "center",
+    justifyContent: "center",
     overflow: "hidden",
     backgroundColor: colors.white,
     borderWidth: 2,
     borderColor: colors.line,
+  },
+  avatarEmoji: {
+    fontSize: 34,
   },
   selectedAvatar: {
     borderColor: colors.green,
