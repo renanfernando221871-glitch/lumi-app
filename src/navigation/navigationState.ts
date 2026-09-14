@@ -1,0 +1,69 @@
+export type StaticRoute = "splash" | "welcome" | "personalize" | "map";
+
+export type NavigationState =
+  | { route: "splash" }
+  | { route: "welcome" }
+  | { route: "personalize" }
+  | { route: "map" }
+  | { route: "house"; worldId: string }
+  | {
+      route: "activity";
+      worldId: string;
+      activityId: string;
+      rewardId?: string;
+    };
+
+export type NavigationAction =
+  | { type: "replace"; route: StaticRoute }
+  | { type: "openWorld"; worldId: string }
+  | { type: "startActivity"; worldId: string; activityId: string }
+  | { type: "showReward"; rewardId: string }
+  | { type: "back" };
+
+export const initialNavigationState: NavigationState = {
+  route: "splash",
+};
+
+export function navigationReducer(
+  state: NavigationState,
+  action: NavigationAction,
+): NavigationState {
+  switch (action.type) {
+    case "replace":
+      return { route: action.route };
+    case "openWorld":
+      return { route: "house", worldId: action.worldId };
+    case "startActivity":
+      return {
+        route: "activity",
+        worldId: action.worldId,
+        activityId: action.activityId,
+      };
+    case "showReward":
+      if (state.route !== "activity") {
+        throw new Error("A reward can only be shown over an activity.");
+      }
+      return { ...state, rewardId: action.rewardId };
+    case "back":
+      if (state.route === "personalize") {
+        return { route: "welcome" };
+      }
+      if (state.route === "house") {
+        return { route: "map" };
+      }
+      if (state.route === "activity") {
+        return state.rewardId
+          ? { route: "map" }
+          : { route: "house", worldId: state.worldId };
+      }
+      return state;
+  }
+}
+
+export function canGoBack(state: NavigationState) {
+  return (
+    state.route === "personalize" ||
+    state.route === "house" ||
+    state.route === "activity"
+  );
+}

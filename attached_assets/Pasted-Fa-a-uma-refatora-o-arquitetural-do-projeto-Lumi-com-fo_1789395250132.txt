@@ -1,0 +1,118 @@
+Faça uma refatoração arquitetural do projeto Lumi com foco em escalabilidade, preservando integralmente o comportamento atual do vertical slice.
+Objetivo principal:
+permitir que o Lumi cresça para múltiplos mundos, 9 engines e 40 atividades sem concentrar regras em App.tsx ou ActivityScreen.tsx, e sem exigir código específico para cada nova atividade.
+Regras desta iteração:
+- não criar novos mundos definitivos;
+- não criar as 40 atividades;
+- não alterar a identidade visual;
+- não alterar o VoiceService;
+- não criar backend;
+- não mudar o fluxo atual aprovado;
+- manter as 3 atividades atuais funcionando exatamente como estão.
+Refatore a arquitetura com estas metas:
+1. Navegação
+   - retirar a navegação manual baseada apenas em useState<ScreenName>;
+   - criar uma camada de navegação clara e extensível;
+   - separar onboarding, mapa, mundo, atividade e conquista;
+   - preservar comportamento de voltar;
+   - preparar a arquitetura para Android/iOS e botão físico de voltar.
+2. Estrutura de telas
+   Extrair do App.tsx as responsabilidades de:
+   - Splash;
+   - apresentação do Lumi;
+   - personalização;
+   - mapa;
+   - Casa do Lumi;
+   - conquista.
+O App.tsx deve ficar pequeno e responsável principalmente por providers, navegação e inicialização.
+3. Catálogo de mundos
+   Criar um modelo de World orientado por dados, contendo no mínimo:
+   - id;
+   - title;
+   - description;
+   - activityIds;
+   - rewardId;
+   - estado de desbloqueio;
+   - assets visuais configuráveis.
+A Casa do Lumi deve passar a ser definida por esse catálogo, sem regras fixas espalhadas nas telas.
+4. Contratos dos engines
+   Criar tipos TypeScript discriminados por engineType.
+Exemplo conceitual:
+- tap-and-find
+- drag-to-target
+- futuramente outros engines.
+Cada engine deve ter:
+- configuração própria;
+- tipo específico;
+- resultado padronizado;
+- interface comum com a tela de atividade.
+Exemplo de resultado padronizado:
+activityId, completed, attempts, startedAt, completedAt.
+5. Separação dos engines
+   Criar componentes/arquivos próprios para os engines atuais.
+Não deixar lógica específica de engine acumulada em ActivityScreen.tsx.
+O ActivityScreen deve funcionar como um container compartilhado para:
+- título;
+- instrução;
+- botão Ouvir;
+- progresso;
+- feedback;
+- continuidade.
+A interação pedagógica deve ser delegada ao engine correspondente.
+6. Remover dependências específicas
+   - remover IDs fixos como "teddy";
+   - não assumir nomes específicos de objetos;
+   - não usar posição da atividade no array como regra pedagógica;
+   - não usar if/else genérico que envia engines desconhecidos para um renderizador incorreto.
+7. Catálogo de atividades
+   As atividades devem ser configuradas por dados.
+Cada atividade deve conter pelo menos:
+- id;
+- worldId;
+- engineType;
+- title;
+- instructionText;
+- instructionAudio;
+- objetivo pedagógico;
+- dificuldade;
+- configuração específica do engine;
+- feedback de sucesso;
+- feedback de tentativa;
+- dica.
+8. Progresso
+   - progresso baseado em IDs;
+   - conclusão de mundo baseada nos IDs exigidos pelo mundo;
+   - recompensa separada da ordem das atividades;
+   - revisitar uma atividade não deve conceder novamente uma recompensa única;
+   - manter compatibilidade com os dados locais existentes.
+9. Validação
+   Criar validação do catálogo em desenvolvimento para detectar:
+   - activityId duplicado;
+   - worldId inexistente;
+   - engineType incompatível;
+   - target inexistente;
+   - configuração incompleta.
+10. Teste real da arquitetura
+    Depois da refatoração, crie duas atividades temporárias apenas para validar a extensibilidade:
+    - uma segunda atividade tap-and-find;
+    - uma segunda atividade drag-to-target.
+Elas devem funcionar apenas adicionando dados/configuração.
+Não modifique o código dos engines para suportar essas duas atividades.
+Se for necessário modificar um engine para isso, considere a arquitetura ainda insuficiente e ajuste antes de concluir.
+11. Qualidade
+    Ao final:
+    - execute TypeScript;
+    - execute testes;
+    - execute o Preview;
+    - confirme que as 3 atividades originais continuam funcionando;
+    - confirme que as 2 atividades temporárias funcionam por configuração;
+    - confirme que progresso e recompensa continuam funcionando.
+Entregue no final:
+1. nova estrutura de pastas;
+2. resumo das responsabilidades de cada camada;
+3. contratos TypeScript dos engines;
+4. exemplo de configuração de atividade;
+5. arquivos alterados;
+6. testes executados;
+7. limitações restantes.
+Não avance para novos engines nem para a Casa do Lumi completa nesta tarefa.

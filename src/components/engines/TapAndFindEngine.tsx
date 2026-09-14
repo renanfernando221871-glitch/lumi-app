@@ -1,0 +1,127 @@
+import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { ActivityInteraction, TapAndFindActivity } from "../../types";
+import { evaluateTapAndFind } from "../../engines/interactions";
+import { colors, shadow } from "../../theme/colors";
+
+export type TapAndFindEngineProps = {
+  activity: TapAndFindActivity;
+  onInteraction: (interaction: ActivityInteraction) => void;
+  disabled?: boolean;
+};
+
+export function TapAndFindEngine({
+  activity,
+  onInteraction,
+  disabled = false,
+}: TapAndFindEngineProps) {
+  const colorOptions = activity.config.presentation === "color-options";
+  const choose = (id: string) => {
+    if (disabled) return;
+    onInteraction(evaluateTapAndFind(activity, id));
+  };
+
+  return colorOptions ? (
+    <View style={styles.colorOptions}>
+      {activity.config.items.map((item) => (
+        <Pressable
+          key={item.id}
+          accessibilityRole="button"
+          accessibilityLabel={item.label}
+          disabled={disabled}
+          onPress={() => choose(item.id)}
+          style={({ pressed }) => [
+            styles.colorCard,
+            { borderColor: item.color, opacity: pressed ? 0.72 : 1 },
+          ]}
+        >
+          <View style={[styles.colorDot, { backgroundColor: item.color }]} />
+          <Text style={styles.colorEmoji}>{item.emoji}</Text>
+          <Text style={styles.colorLabel}>{item.label}</Text>
+        </Pressable>
+      ))}
+    </View>
+  ) : (
+    <View style={styles.grid}>
+      {activity.config.items.map((item) => (
+        <Pressable
+          key={item.id}
+          accessibilityRole="button"
+          accessibilityLabel={item.label}
+          disabled={disabled}
+          onPress={() => choose(item.id)}
+          style={({ pressed }) => [
+            styles.itemCard,
+            {
+              backgroundColor: item.color,
+              transform: [{ scale: pressed ? 0.96 : 1 }],
+            },
+          ]}
+        >
+          <Text style={styles.itemEmoji}>{item.emoji}</Text>
+          <Text style={styles.itemLabel}>{item.label}</Text>
+        </Pressable>
+      ))}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  grid: {
+    width: "100%",
+    maxWidth: 430,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 14,
+  },
+  itemCard: {
+    width: 145,
+    height: 116,
+    borderRadius: 24,
+    alignItems: "center",
+    justifyContent: "center",
+    ...shadow,
+  },
+  itemEmoji: { fontSize: 47 },
+  itemLabel: {
+    color: colors.deepGreen,
+    fontSize: 14,
+    fontWeight: "800",
+    marginTop: 3,
+  },
+  colorOptions: {
+    width: "100%",
+    maxWidth: 430,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 12,
+  },
+  colorCard: {
+    width: 150,
+    minHeight: 110,
+    borderWidth: 4,
+    borderRadius: 22,
+    padding: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.white,
+    ...shadow,
+  },
+  colorDot: {
+    position: "absolute",
+    top: 9,
+    right: 11,
+    width: 15,
+    height: 15,
+    borderRadius: 8,
+  },
+  colorEmoji: { fontSize: 41 },
+  colorLabel: {
+    color: colors.deepGreen,
+    fontSize: 14,
+    fontWeight: "800",
+    marginTop: 1,
+  },
+});

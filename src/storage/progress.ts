@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { activities } from "../data/activities";
+import { worldCatalog } from "../data/worlds";
+import { rewards } from "../data/rewards";
 import { ChildProfile, ProgressState } from "../types";
 import {
   createEnvelope,
@@ -19,11 +20,11 @@ export const defaultProfile: ChildProfile = {
 
 export const defaultProgress: ProgressState = {
   completedActivityIds: [],
-  earnedReward: false,
+  earnedRewardIds: [],
 };
 
 export async function loadSavedState() {
-  const catalogIds = activities.map((activity) => activity.id);
+  const catalogIds = worldCatalog.flatMap((world) => world.activityIds);
   try {
     const [profileValue, progressValue] = await Promise.all([
       AsyncStorage.getItem(PROFILE_KEY),
@@ -36,6 +37,7 @@ export async function loadSavedState() {
         parseStoredJson(progressValue),
         defaultProgress,
         catalogIds,
+        rewards.map((reward) => reward.id),
       ),
     };
   } catch (error) {

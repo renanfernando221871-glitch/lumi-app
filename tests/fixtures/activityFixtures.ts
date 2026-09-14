@@ -1,0 +1,1 @@
+export { dragFixture, tapFixture } from "../../src/testing/activityFixtures";

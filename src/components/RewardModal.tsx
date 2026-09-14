@@ -2,12 +2,15 @@ import React from "react";
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { colors, shadow } from "../theme/colors";
 import { PrimaryButton } from "./PrimaryButton";
+import { RewardDefinition } from "../types";
 
 export function RewardModal({
   visible,
+  reward,
   onClose,
 }: {
   visible: boolean;
+  reward: RewardDefinition;
   onClose: () => void;
 }) {
   return (
@@ -22,11 +25,11 @@ export function RewardModal({
           >
             <Text style={styles.closeText}>×</Text>
           </Pressable>
-          <Text style={styles.burst}>🌼</Text>
-          <Text style={styles.eyebrow}>CONQUISTA NOVA</Text>
-          <Text style={styles.title}>Nossa primeira{`\n`}flor nasceu!</Text>
+          <Text style={styles.burst}>{reward.icon}</Text>
+          <Text style={styles.eyebrow}>{reward.eyebrow}</Text>
+          <Text style={styles.title}>{reward.title}</Text>
           <Text style={styles.message}>
-            Você cuidou de cada atividade. Que bonito crescer junto!
+            {reward.message}
           </Text>
           <View style={styles.flowerRow}>
             <Text>🌱</Text>

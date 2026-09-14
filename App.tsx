@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from "react";
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { BackButton } from "./src/components/BackButton";
-import { LumiSpeechBubble } from "./src/components/LumiSpeechBubble";
-import { PrimaryButton } from "./src/components/PrimaryButton";
-import { RewardModal } from "./src/components/RewardModal";
-import { ProgressIndicator } from "./src/components/ProgressIndicator";
 import { activities } from "./src/data/activities";
+import { getRewardById } from "./src/data/rewards";
+import { casaDoLumi, worldCatalog } from "./src/data/worlds";
 import {
-  completeActivityProgress,
-  getCompletionDestination,
+  completeWorldProgress,
+  getWorldCompletionDestination,
 } from "./src/domain/progress";
+import { useAppNavigation } from "./src/navigation/useAppNavigation";
 import { ActivityScreen } from "./src/screens/ActivityScreen";
-import { colors, shadow } from "./src/theme/colors";
-import { ChildProfile, ProgressState, ScreenName } from "./src/types";
+import { HouseScreen } from "./src/screens/HouseScreen";
+import { MapScreen } from "./src/screens/MapScreen";
+import { PersonalizeScreen } from "./src/screens/PersonalizeScreen";
+import { RewardScreen } from "./src/screens/RewardScreen";
+import { SplashScreen } from "./src/screens/SplashScreen";
+import { WelcomeScreen } from "./src/screens/WelcomeScreen";
 import {
   defaultProfile,
   defaultProgress,
@@ -29,13 +21,55 @@ import {
   saveProfile,
   saveProgress,
 } from "./src/storage/progress";
+import {
+  ActivityDefinition,
+  ChildProfile,
+  ProgressState,
+  WorldDefinition,
+} from "./src/types";
+import {
+  EngineFixtureHarness,
+  getRequestedEngineFixture,
+} from "./src/testing/EngineFixtureHarness";
+
+function getWorld(worldId: string): WorldDefinition {
+  const world = worldCatalog.find((candidate) => candidate.id === worldId);
+  if (!world) throw new Error(`[Lumi navigation] Unknown world "${worldId}".`);
+  return world;
+}
+
+function getWorldActivities(world: WorldDefinition): ActivityDefinition[] {
+  return world.activityIds.map((activityId) => {
+    const activity = activities.find((candidate) => candidate.id === activityId);
+    if (!activity) {
+      throw new Error(`[Lumi navigation] Unknown activity "${activityId}".`);
+    }
+    return activity;
+  });
+}
+
+function getActivity(
+  worldActivities: ActivityDefinition[],
+  activityId: string,
+): ActivityDefinition {
+  const activity = worldActivities.find((candidate) => candidate.id === activityId);
+  if (!activity) {
+    throw new Error(`[Lumi navigation] Activity "${activityId}" is not in this world.`);
+  }
+  return activity;
+}
 
 export default function App() {
-  const [screen, setScreen] = useState<ScreenName>("splash");
+  const engineFixture = getRequestedEngineFixture();
+  if (engineFixture) return <EngineFixtureHarness activity={engineFixture} />;
+  return <LumiApp />;
+}
+
+function LumiApp() {
+  const navigation = useAppNavigation();
+  const { replace } = navigation;
   const [profile, setProfile] = useState<ChildProfile>(defaultProfile);
   const [progress, setProgress] = useState<ProgressState>(defaultProgress);
-  const [activityIndex, setActivityIndex] = useState(0);
-  const [showReward, setShowReward] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
@@ -46,740 +80,122 @@ export default function App() {
       setProgress(savedProgress);
       setHydrated(true);
       setTimeout(() => {
-        if (mounted) setScreen(savedProfile.hasOnboarded ? "map" : "welcome");
+        if (mounted) replace(savedProfile.hasOnboarded ? "map" : "welcome");
       }, 850);
     });
     return () => {
       mounted = false;
     };
-  }, []);
-
-  const currentActivity = activities[activityIndex];
-  const completedCount = progress.completedActivityIds.length;
+  }, [replace]);
 
   const updateProfile = (name: string, avatar: string) => {
     const next = { name, avatar, hasOnboarded: true };
     setProfile(next);
-    saveProfile(next).catch((error) => {
-      console.error(error);
-    });
-    setScreen("map");
+    saveProfile(next).catch(console.error);
+    navigation.replace("map");
   };
 
-  const completeActivity = () => {
-    const catalogIds = activities.map((activity) => activity.id);
-    const { progress: nextProgress, rewardGranted } = completeActivityProgress(
-      progress,
-      currentActivity.id,
-      catalogIds,
-    );
-    setProgress(nextProgress);
-    saveProgress(nextProgress).catch((error) => {
-      console.error(error);
-    });
+  if (!hydrated || navigation.route === "splash") return <SplashScreen />;
 
-    const destination = getCompletionDestination(
-      rewardGranted,
-      activityIndex,
-      activities.length,
-    );
-    if (destination === "reward") {
-      setShowReward(true);
-    } else if (destination === "next") {
-      setActivityIndex((value) => value + 1);
-    } else {
-      setScreen("map");
-    }
-  };
-
-  const startActivities = () => {
-    const firstIncomplete = activities.findIndex(
-      (activity) => !progress.completedActivityIds.includes(activity.id),
-    );
-    setActivityIndex(firstIncomplete === -1 ? 0 : firstIncomplete);
-    setScreen("activity");
-  };
-
-  if (!hydrated || screen === "splash") {
-    return (
-      <Shell>
-        <View style={styles.splash}>
-          <View style={styles.sunBadge}>
-            <Text style={styles.sun}>🌻</Text>
-          </View>
-          <Text style={styles.brand}>lumi</Text>
-          <Text style={styles.splashTagline}>crescer é descobrir</Text>
-          <View style={styles.loadingDots}>
-            <View style={styles.loadingDot} />
-            <View style={[styles.loadingDot, styles.loadingDotActive]} />
-            <View style={styles.loadingDot} />
-          </View>
-        </View>
-      </Shell>
-    );
+  if (navigation.route === "welcome") {
+    return <WelcomeScreen onContinue={() => navigation.replace("personalize")} />;
   }
 
-  if (screen === "welcome") {
-    return (
-      <Shell>
-        <ScrollView contentContainerStyle={styles.scroll}>
-          <View style={styles.hero}>
-            <Text style={styles.heroKicker}>UM OLÁ BEM BONITO</Text>
-            <View style={styles.lumiHero}>
-              <Text style={styles.lumiHeroFace}>🌻</Text>
-              <Text style={styles.sparkle}>✦</Text>
-              <Text style={styles.sparkleTwo}>✦</Text>
-            </View>
-            <Text style={styles.heroTitle}>Oi! Eu sou a Lumi.</Text>
-            <Text style={styles.heroSubtitle}>
-              Vou descobrir o mundo com você.
-            </Text>
-            <LumiSpeechBubble>
-              Aqui, cada descoberta vira uma sementinha de coragem!
-            </LumiSpeechBubble>
-            <PrimaryButton
-              label="Vamos descobrir"
-              onPress={() => setScreen("personalize")}
-              variant="green"
-              style={styles.fullButton}
-            />
-          </View>
-        </ScrollView>
-      </Shell>
-    );
-  }
-
-  if (screen === "personalize") {
+  if (navigation.route === "personalize") {
     return (
       <PersonalizeScreen
         initialName={profile.name}
-        onBack={() => setScreen("welcome")}
+        onBack={navigation.goBack}
         onContinue={updateProfile}
       />
     );
   }
 
-  if (screen === "map") {
+  if (navigation.route === "map") {
+    const reward = getRewardById(casaDoLumi.rewardId);
+    const completedCount = casaDoLumi.activityIds.filter((id) =>
+      progress.completedActivityIds.includes(id),
+    ).length;
     return (
       <MapScreen
         profile={profile}
+        world={casaDoLumi}
+        reward={reward}
+        worldNumber={worldCatalog.indexOf(casaDoLumi) + 1}
         completedCount={completedCount}
-        hasFlower={progress.earnedReward}
-        onOpenHouse={() => setScreen("house")}
-        onEditProfile={() => setScreen("personalize")}
+        hasFlower={progress.earnedRewardIds.includes(casaDoLumi.rewardId)}
+        onOpenHouse={() => navigation.openWorld(casaDoLumi.id)}
+        onEditProfile={() => navigation.replace("personalize")}
       />
     );
   }
 
-  if (screen === "house") {
+  const world = getWorld(navigation.worldId);
+  const worldActivities = getWorldActivities(world);
+  const worldNumber = worldCatalog.indexOf(world) + 1;
+
+  if (navigation.route === "house") {
+    const startActivities = () => {
+      const next =
+        worldActivities.find(
+          (activity) => !progress.completedActivityIds.includes(activity.id),
+        ) ?? worldActivities[0];
+      navigation.startActivity(world.id, next.id);
+    };
     return (
       <HouseScreen
         completedActivityIds={progress.completedActivityIds}
-        onBack={() => setScreen("map")}
+        world={world}
+        worldNumber={worldNumber}
+        activities={worldActivities}
+        onBack={navigation.goBack}
         onStart={startActivities}
       />
     );
   }
 
+  const activity = getActivity(worldActivities, navigation.activityId);
+  const activityIndex = worldActivities.indexOf(activity);
+
+  const completeActivity = () => {
+    const { progress: nextProgress, rewardGranted } = completeWorldProgress(
+      progress,
+      activity.id,
+      world,
+    );
+    setProgress(nextProgress);
+    saveProgress(nextProgress).catch(console.error);
+
+    const destination = getWorldCompletionDestination(
+      rewardGranted,
+      activity.id,
+      world,
+    );
+    if (destination === "reward") {
+      navigation.showReward(world.rewardId);
+    } else if (destination === "next") {
+      navigation.startActivity(world.id, worldActivities[activityIndex + 1].id);
+    } else {
+      navigation.replace("map");
+    }
+  };
+
   return (
     <>
       <ActivityScreen
-        key={currentActivity.id}
-        activity={currentActivity}
+        key={activity.id}
+        activity={activity}
         activityNumber={activityIndex + 1}
-        total={activities.length}
-        onBack={() => setScreen("house")}
+        total={worldActivities.length}
+        onBack={navigation.goBack}
         onComplete={completeActivity}
       />
-      <RewardModal
-        visible={showReward}
-        onClose={() => {
-          setShowReward(false);
-          setScreen("map");
-        }}
-      />
+      {navigation.rewardId ? (
+        <RewardScreen
+          reward={getRewardById(navigation.rewardId)}
+          onClose={() => navigation.replace("map")}
+        />
+      ) : null}
     </>
   );
 }
-
-function Shell({ children }: { children: React.ReactNode }) {
-  return (
-    <SafeAreaView style={styles.safe}>
-      <StatusBar style="dark" />
-      {children}
-    </SafeAreaView>
-  );
-}
-
-function PersonalizeScreen({
-  initialName,
-  onBack,
-  onContinue,
-}: {
-  initialName: string;
-  onBack: () => void;
-  onContinue: (name: string, avatar: string) => void;
-}) {
-  const [name, setName] = useState(initialName);
-  const [avatar, setAvatar] = useState("🌻");
-  const avatars = ["🌻", "🦋", "🐰", "🦊"];
-
-  return (
-    <Shell>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.inner}>
-          <BackButton onPress={onBack} />
-          <Text style={styles.pageKicker}>UM POUQUINHO SOBRE VOCÊ</Text>
-          <Text style={styles.pageTitle}>Como posso te chamar?</Text>
-          <LumiSpeechBubble compact>Escolha um nome e uma carinha!</LumiSpeechBubble>
-          <Text style={styles.inputLabel}>SEU NOME</Text>
-          <TextInput
-            accessibilityLabel="Seu nome"
-            autoCapitalize="words"
-            maxLength={18}
-            placeholder="Seu nome"
-            placeholderTextColor={colors.muted}
-            value={name}
-            onChangeText={setName}
-            style={styles.fakeInput}
-          />
-          <Text style={styles.inputHint}>Pode ser seu nome ou um apelido.</Text>
-          <Text style={styles.inputLabel}>SUA COMPANHEIRA</Text>
-          <View style={styles.avatarRow}>
-            {avatars.map((item) => (
-              <Pressable
-                key={item}
-                onPress={() => setAvatar(item)}
-                accessibilityRole="button"
-                accessibilityLabel={`Escolher companheira ${item}`}
-                style={[styles.avatar, avatar === item && styles.selectedAvatar]}
-              >
-                <Text style={styles.avatarEmoji}>{item}</Text>
-              </Pressable>
-            ))}
-          </View>
-          <PrimaryButton
-            label="Entrar no meu jardim"
-            onPress={() => onContinue(name.trim() || "Amigo", avatar)}
-            variant="green"
-            style={styles.fullButton}
-          />
-        </View>
-      </ScrollView>
-    </Shell>
-  );
-}
-
-function MapScreen({
-  profile,
-  completedCount,
-  hasFlower,
-  onOpenHouse,
-  onEditProfile,
-}: {
-  profile: ChildProfile;
-  completedCount: number;
-  hasFlower: boolean;
-  onOpenHouse: () => void;
-  onEditProfile: () => void;
-}) {
-  return (
-    <Shell>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.mapInner}>
-          <View style={styles.mapHeader}>
-            <View>
-              <Text style={styles.greeting}>Oi, {profile.name}!</Text>
-              <Text style={styles.mapTitle}>Seu jardim de descobertas</Text>
-            </View>
-            <Text onPress={onEditProfile} style={styles.profileAvatar}>
-              {profile.avatar}
-            </Text>
-          </View>
-          <View style={styles.mapIllustration}>
-            <Text style={styles.mapSun}>☀️</Text>
-            <Text style={styles.mapCloud}>☁️</Text>
-            <Text style={styles.mapTree}>🌳</Text>
-            <Text style={styles.mapFlower}>🌷 🌼 🌷</Text>
-            <Text style={styles.mapPath}>⌁  ·  ⌁  ·  ⌁</Text>
-          </View>
-          <LumiSpeechBubble>
-            A Casa do Lumi está pertinho. Vamos olhar lá dentro?
-          </LumiSpeechBubble>
-          <View style={styles.mapCard}>
-            <View style={styles.homeIcon}>
-              <Text style={styles.homeEmoji}>🏡</Text>
-            </View>
-            <View style={styles.homeCopy}>
-              <Text style={styles.homeEyebrow}>MUNDO 1</Text>
-              <Text style={styles.homeTitle}>Casa do Lumi</Text>
-              <Text style={styles.homeSub}>3 descobertas para fazer</Text>
-            </View>
-            <Text style={styles.homeArrow}>›</Text>
-          </View>
-          <PrimaryButton label="Entrar na casa" onPress={onOpenHouse} variant="blue" style={styles.fullButton} />
-          <View style={styles.progressCard}>
-            <View style={styles.progressCopy}>
-              <Text style={styles.progressTitle}>Seu jardim</Text>
-              <Text style={styles.progressSub}>
-                {hasFlower ? "Uma flor nasceu!" : "Cada descoberta faz uma flor crescer."}
-              </Text>
-            </View>
-            <Text style={styles.progressFlower}>{hasFlower ? "🌼" : "🌱"}</Text>
-          </View>
-        </View>
-      </ScrollView>
-    </Shell>
-  );
-}
-
-function HouseScreen({
-  completedActivityIds,
-  onBack,
-  onStart,
-}: {
-  completedActivityIds: string[];
-  onBack: () => void;
-  onStart: () => void;
-}) {
-  const completedCount = completedActivityIds.length;
-  const nextLabel =
-    completedCount === activities.length
-      ? "Revisitar atividades"
-      : "Começar a brincar";
-  return (
-    <Shell>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.inner}>
-          <BackButton onPress={onBack} />
-          <View style={styles.houseHeader}>
-            <Text style={styles.houseEmoji}>🏡</Text>
-            <View>
-              <Text style={styles.pageKicker}>MUNDO 1</Text>
-              <Text style={styles.pageTitle}>Casa do Lumi</Text>
-            </View>
-          </View>
-          <LumiSpeechBubble>
-            Vamos cuidar da casa juntos? Cada brincadeira esconde uma descoberta.
-          </LumiSpeechBubble>
-          <View style={styles.activityList}>
-            {activities.map((activity, index) => {
-              const done = completedActivityIds.includes(activity.id);
-              return (
-                <View key={activity.id} style={styles.activityRow}>
-                  <View style={[styles.activityNumber, done && styles.activityDone]}>
-                    <Text style={styles.activityNumberText}>{done ? "✓" : index + 1}</Text>
-                  </View>
-                  <View style={styles.activityCopy}>
-                    <Text style={styles.activityTitle}>{activity.title}</Text>
-                    <Text style={styles.activitySubtitle}>{activity.helper}</Text>
-                  </View>
-                  <Text style={styles.activityEmoji}>
-                    {activity.items.find((item) => item.isTarget)?.emoji}
-                  </Text>
-                </View>
-              );
-            })}
-          </View>
-          <ProgressIndicator current={completedCount} total={activities.length} />
-          <PrimaryButton label={nextLabel} onPress={onStart} variant="green" style={styles.fullButton} />
-        </View>
-      </ScrollView>
-    </Shell>
-  );
-}
-
-const styles = StyleSheet.create({
-  safe: {
-    flex: 1,
-    backgroundColor: colors.cream,
-  },
-  scroll: {
-    flexGrow: 1,
-    paddingVertical: 22,
-  },
-  splash: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.cream,
-  },
-  sunBadge: {
-    width: 112,
-    height: 112,
-    borderRadius: 56,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.yellow,
-    ...shadow,
-  },
-  sun: {
-    fontSize: 62,
-  },
-  brand: {
-    color: colors.deepGreen,
-    fontSize: 48,
-    fontWeight: "900",
-    letterSpacing: -2,
-    marginTop: 18,
-  },
-  splashTagline: {
-    color: colors.green,
-    fontSize: 16,
-    fontWeight: "800",
-    marginTop: 2,
-  },
-  loadingDots: {
-    flexDirection: "row",
-    gap: 7,
-    marginTop: 36,
-  },
-  loadingDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: colors.line,
-  },
-  loadingDotActive: {
-    backgroundColor: colors.green,
-  },
-  hero: {
-    width: "100%",
-    maxWidth: 530,
-    alignSelf: "center",
-    alignItems: "center",
-    paddingHorizontal: 24,
-    paddingTop: 22,
-    paddingBottom: 24,
-  },
-  heroKicker: {
-    color: colors.coral,
-    fontSize: 12,
-    fontWeight: "900",
-    letterSpacing: 1.4,
-  },
-  lumiHero: {
-    width: 176,
-    height: 176,
-    borderRadius: 88,
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 16,
-    backgroundColor: colors.yellow,
-    borderWidth: 8,
-    borderColor: colors.white,
-    ...shadow,
-  },
-  lumiHeroFace: {
-    fontSize: 101,
-  },
-  sparkle: {
-    position: "absolute",
-    top: 13,
-    right: 5,
-    color: colors.coral,
-    fontSize: 34,
-  },
-  sparkleTwo: {
-    position: "absolute",
-    bottom: 23,
-    left: 8,
-    color: colors.blue,
-    fontSize: 23,
-  },
-  heroTitle: {
-    color: colors.deepGreen,
-    fontSize: 34,
-    lineHeight: 40,
-    textAlign: "center",
-    fontWeight: "900",
-  },
-  heroSubtitle: {
-    color: colors.muted,
-    fontSize: 17,
-    fontWeight: "600",
-    marginTop: 5,
-    marginBottom: 22,
-  },
-  fullButton: {
-    width: "100%",
-    marginTop: 20,
-  },
-  inner: {
-    width: "100%",
-    maxWidth: 560,
-    alignSelf: "center",
-    paddingHorizontal: 22,
-    paddingBottom: 25,
-  },
-  pageKicker: {
-    color: colors.green,
-    fontSize: 12,
-    fontWeight: "900",
-    letterSpacing: 1.3,
-    marginTop: 11,
-  },
-  pageTitle: {
-    color: colors.deepGreen,
-    fontSize: 32,
-    lineHeight: 38,
-    fontWeight: "900",
-    marginTop: 4,
-    marginBottom: 18,
-  },
-  inputLabel: {
-    color: colors.muted,
-    fontSize: 12,
-    letterSpacing: 1.2,
-    fontWeight: "900",
-    marginTop: 27,
-    marginBottom: 8,
-  },
-  fakeInput: {
-    borderWidth: 2,
-    borderColor: colors.line,
-    borderRadius: 18,
-    paddingHorizontal: 17,
-    paddingVertical: 17,
-    color: colors.deepGreen,
-    fontSize: 16,
-    fontWeight: "700",
-    backgroundColor: colors.white,
-  },
-  inputHint: {
-    color: colors.muted,
-    fontSize: 11,
-    marginTop: 7,
-  },
-  avatarRow: {
-    flexDirection: "row",
-    gap: 12,
-  },
-  avatar: {
-    width: 64,
-    height: 64,
-    borderRadius: 22,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    backgroundColor: colors.white,
-    borderWidth: 2,
-    borderColor: colors.line,
-  },
-  avatarEmoji: {
-    fontSize: 34,
-  },
-  selectedAvatar: {
-    borderColor: colors.green,
-    backgroundColor: colors.softGreen,
-    borderWidth: 4,
-  },
-  mapInner: {
-    width: "100%",
-    maxWidth: 740,
-    alignSelf: "center",
-    paddingHorizontal: 22,
-    paddingBottom: 30,
-  },
-  mapHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 13,
-  },
-  greeting: {
-    color: colors.green,
-    fontSize: 15,
-    fontWeight: "800",
-  },
-  mapTitle: {
-    color: colors.deepGreen,
-    fontSize: 27,
-    fontWeight: "900",
-    marginTop: 2,
-  },
-  profileAvatar: {
-    width: 52,
-    height: 52,
-    borderRadius: 18,
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 28,
-    backgroundColor: colors.softYellow,
-  },
-  mapIllustration: {
-    height: 230,
-    borderRadius: 28,
-    position: "relative",
-    overflow: "hidden",
-    marginBottom: 17,
-    backgroundColor: "#BFE6FA",
-    ...shadow,
-  },
-  mapSun: {
-    position: "absolute",
-    top: 19,
-    right: 30,
-    fontSize: 43,
-  },
-  mapCloud: {
-    position: "absolute",
-    top: 32,
-    left: 35,
-    fontSize: 33,
-  },
-  mapTree: {
-    position: "absolute",
-    bottom: 38,
-    left: 30,
-    fontSize: 72,
-  },
-  mapFlower: {
-    position: "absolute",
-    bottom: 30,
-    right: 20,
-    fontSize: 29,
-  },
-  mapPath: {
-    position: "absolute",
-    bottom: 62,
-    left: "37%",
-    color: colors.yellow,
-    fontSize: 29,
-    fontWeight: "900",
-  },
-  mapCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 15,
-    marginTop: 19,
-    borderRadius: 23,
-    backgroundColor: colors.white,
-    ...shadow,
-  },
-  homeIcon: {
-    width: 68,
-    height: 68,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.softYellow,
-  },
-  homeEmoji: {
-    fontSize: 39,
-  },
-  homeCopy: {
-    flex: 1,
-    marginLeft: 14,
-  },
-  homeEyebrow: {
-    color: colors.coral,
-    fontSize: 11,
-    fontWeight: "900",
-    letterSpacing: 1.1,
-  },
-  homeTitle: {
-    color: colors.deepGreen,
-    fontSize: 21,
-    fontWeight: "900",
-    marginTop: 2,
-  },
-  homeSub: {
-    color: colors.muted,
-    fontSize: 13,
-    marginTop: 2,
-  },
-  homeArrow: {
-    color: colors.green,
-    fontSize: 35,
-    paddingHorizontal: 6,
-  },
-  progressCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 16,
-    marginTop: 14,
-    borderRadius: 23,
-    backgroundColor: colors.softGreen,
-  },
-  progressCopy: {
-    flex: 1,
-  },
-  progressTitle: {
-    color: colors.deepGreen,
-    fontSize: 16,
-    fontWeight: "900",
-  },
-  progressSub: {
-    color: colors.muted,
-    fontSize: 13,
-    marginTop: 3,
-  },
-  progressFlower: {
-    fontSize: 39,
-    marginLeft: 10,
-  },
-  houseHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 13,
-    marginBottom: 18,
-  },
-  houseEmoji: {
-    width: 66,
-    height: 66,
-    borderRadius: 20,
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 39,
-    backgroundColor: colors.softYellow,
-  },
-  activityList: {
-    marginTop: 24,
-    gap: 10,
-  },
-  activityRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    minHeight: 77,
-    padding: 11,
-    borderRadius: 20,
-    backgroundColor: colors.white,
-    ...shadow,
-  },
-  activityNumber: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.softBlue,
-  },
-  activityDone: {
-    backgroundColor: colors.green,
-  },
-  activityNumberText: {
-    color: colors.deepGreen,
-    fontSize: 16,
-    fontWeight: "900",
-  },
-  activityCopy: {
-    flex: 1,
-    marginLeft: 12,
-  },
-  activityTitle: {
-    color: colors.deepGreen,
-    fontSize: 15,
-    fontWeight: "900",
-  },
-  activitySubtitle: {
-    color: colors.muted,
-    fontSize: 12,
-    marginTop: 2,
-  },
-  activityEmoji: {
-    fontSize: 31,
-    marginHorizontal: 8,
-  },
-});

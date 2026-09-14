@@ -1,6 +1,6 @@
 import { ChildProfile, ProgressState } from "../types";
 
-export const STORAGE_SCHEMA_VERSION = 1;
+export const STORAGE_SCHEMA_VERSION = 2;
 
 type PersistedEnvelope = {
   schemaVersion: number;
@@ -24,7 +24,8 @@ function unwrapPersistedData(value: unknown): unknown {
   if (!isRecord(value)) return value;
   if (!("schemaVersion" in value)) return value;
   if (
-    value.schemaVersion !== STORAGE_SCHEMA_VERSION ||
+    (value.schemaVersion !== 1 &&
+      value.schemaVersion !== STORAGE_SCHEMA_VERSION) ||
     !("data" in value)
   ) {
     return null;
@@ -67,6 +68,7 @@ export function normalizeProgress(
   value: unknown,
   defaults: ProgressState,
   catalogIds: string[],
+  rewardIds: string[] = ["lumi-flower"],
 ): ProgressState {
   const data = unwrapPersistedData(value);
   if (!isRecord(data)) return { ...defaults, completedActivityIds: [] };
@@ -83,11 +85,22 @@ export function normalizeProgress(
     ),
   );
 
+  const knownRewardIds = new Set(rewardIds);
+  const candidateRewardIds = Array.isArray(data.earnedRewardIds)
+    ? data.earnedRewardIds
+    : data.earnedReward === true
+      ? rewardIds.slice(0, 1)
+      : [];
+
   return {
     completedActivityIds,
-    earnedReward:
-      typeof data.earnedReward === "boolean"
-        ? data.earnedReward
-        : defaults.earnedReward,
+    earnedRewardIds: Array.from(
+      new Set(
+        candidateRewardIds.filter(
+          (id): id is string =>
+            typeof id === "string" && knownRewardIds.has(id),
+        ),
+      ),
+    ),
   };
 }
