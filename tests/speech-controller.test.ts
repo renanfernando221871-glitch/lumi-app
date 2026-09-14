@@ -55,6 +55,41 @@ test("selects the most natural female Brazilian voice when available", () => {
   assert.equal(selectLumiVoice(voices.slice(0, 1)), undefined);
 });
 
+test("recognizes Google's Android female pt-BR voice code", () => {
+  const androidVoices: SpeechVoice[] = [
+    {
+      identifier: "pt-br-x-ptd-network",
+      name: "Português do Brasil",
+      quality: "Enhanced",
+      language: "pt-BR",
+    },
+    {
+      identifier: "pt-br-x-afs-local",
+      name: "Português do Brasil",
+      quality: "Default",
+      language: "pt-BR",
+    },
+  ];
+
+  assert.equal(
+    selectLumiVoice(androidVoices)?.identifier,
+    "pt-br-x-afs-local",
+  );
+});
+
+test("never explicitly selects a known male voice", () => {
+  const maleVoices: SpeechVoice[] = [
+    {
+      identifier: "pt-BR-felipe",
+      name: "Felipe",
+      quality: "Enhanced",
+      language: "pt-BR",
+    },
+  ];
+
+  assert.equal(selectLumiVoice(maleVoices), undefined);
+});
+
 test("prepares the requested Lumi voice examples with meaningful punctuation", () => {
   const examples = [
     "Onde está a cama?",

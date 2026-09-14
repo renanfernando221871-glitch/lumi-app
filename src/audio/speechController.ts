@@ -31,6 +31,7 @@ export type LumiVoiceService = {
 const FEMALE_VOICE_HINTS = [
   "female",
   "feminina",
+  "pt-br-x-afs",
   "luciana",
   "thalita",
   "leticia",
@@ -38,16 +39,50 @@ const FEMALE_VOICE_HINTS = [
   "fernanda",
   "camila",
   "francisca",
+  "vitoria",
+  "vitória",
+  "maria",
+  "ines",
+  "inês",
+  "isabela",
+  "heloisa",
+  "heloísa",
+  "carolina",
+  "bruna",
+  "marcela",
   "sandy",
   "shelley",
   "flo",
 ];
 
-const MALE_VOICE_HINTS = ["male", "masculina", "felipe", "ricardo"];
+const MALE_VOICE_HINTS = [
+  "masculina",
+  "pt-br-x-ptd",
+  "felipe",
+  "ricardo",
+  "antonio",
+  "antônio",
+  "daniel",
+  "thiago",
+];
 const NATURAL_VOICE_HINTS = ["natural", "neural", "premium", "enhanced"];
 
 function normalizedLocale(locale: string) {
   return locale.toLowerCase().replace("_", "-");
+}
+
+function getVoiceGender(voice: SpeechVoice): "female" | "male" | "unknown" {
+  const searchableName = `${voice.name} ${voice.identifier}`.toLowerCase();
+  if (FEMALE_VOICE_HINTS.some((hint) => searchableName.includes(hint))) {
+    return "female";
+  }
+  if (
+    /(^|[\s_-])male($|[\s_-])/.test(searchableName) ||
+    MALE_VOICE_HINTS.some((hint) => searchableName.includes(hint))
+  ) {
+    return "male";
+  }
+  return "unknown";
 }
 
 function scoreVoice(voice: SpeechVoice) {
@@ -59,8 +94,6 @@ function scoreVoice(voice: SpeechVoice) {
   else if (language.startsWith("pt-")) score += 25;
   if (voice.quality === "Enhanced") score += 20;
   if (NATURAL_VOICE_HINTS.some((hint) => searchableName.includes(hint))) score += 15;
-  if (FEMALE_VOICE_HINTS.some((hint) => searchableName.includes(hint))) score += 30;
-  if (MALE_VOICE_HINTS.some((hint) => searchableName.includes(hint))) score -= 25;
 
   return score;
 }
@@ -69,8 +102,15 @@ export function selectLumiVoice(voices: SpeechVoice[]): SpeechVoice | undefined 
   const brazilianVoices = voices.filter(
     (voice) => normalizedLocale(voice.language) === "pt-br",
   );
+  const femaleVoices = brazilianVoices.filter(
+    (voice) => getVoiceGender(voice) === "female",
+  );
+  const candidates =
+    femaleVoices.length > 0
+      ? femaleVoices
+      : brazilianVoices.filter((voice) => getVoiceGender(voice) === "unknown");
 
-  return brazilianVoices
+  return candidates
     .map((voice, index) => ({ voice, index, score: scoreVoice(voice) }))
     .sort((a, b) => b.score - a.score || a.index - b.index)[0]?.voice;
 }
