@@ -13,6 +13,7 @@ import { persistProgressBeforeCommit } from "./src/domain/progressPersistence";
 import { useAppNavigation } from "./src/navigation/useAppNavigation";
 import { ActivityScreen } from "./src/screens/ActivityScreen";
 import { HouseScreen } from "./src/screens/HouseScreen";
+import { GuardianSignupScreen } from "./src/screens/GuardianSignupScreen";
 import { MapScreen } from "./src/screens/MapScreen";
 import { PersonalizeScreen } from "./src/screens/PersonalizeScreen";
 import { RewardScreen } from "./src/screens/RewardScreen";
@@ -102,13 +103,22 @@ function LumiApp() {
     return (
       <WelcomeScreen
         disabled={!hydrated}
-        onContinue={() => navigation.replace("personalize")}
+        onContinue={() => navigation.replace("guardian")}
       />
     );
   }
 
   if (navigation.route === "welcome") {
-    return <WelcomeScreen onContinue={() => navigation.replace("personalize")} />;
+    return <WelcomeScreen onContinue={() => navigation.replace("guardian")} />;
+  }
+
+  if (navigation.route === "guardian") {
+    return (
+      <GuardianSignupScreen
+        onBack={navigation.goBack}
+        onContinue={() => navigation.replace("personalize")}
+      />
+    );
   }
 
   if (navigation.route === "personalize") {

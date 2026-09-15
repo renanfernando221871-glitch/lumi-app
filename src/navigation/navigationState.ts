@@ -1,8 +1,14 @@
-export type StaticRoute = "splash" | "welcome" | "personalize" | "map";
+export type StaticRoute =
+  | "splash"
+  | "welcome"
+  | "guardian"
+  | "personalize"
+  | "map";
 
 export type NavigationState =
   | { route: "splash" }
   | { route: "welcome" }
+  | { route: "guardian" }
   | { route: "personalize" }
   | { route: "map" }
   | { route: "house"; worldId: string }
@@ -45,6 +51,9 @@ export function navigationReducer(
       }
       return { ...state, rewardId: action.rewardId };
     case "back":
+      if (state.route === "guardian") {
+        return { route: "welcome" };
+      }
       if (state.route === "personalize") {
         return { route: "welcome" };
       }
@@ -63,6 +72,7 @@ export function navigationReducer(
 export function canGoBack(state: NavigationState) {
   return (
     state.route === "personalize" ||
+    state.route === "guardian" ||
     state.route === "house" ||
     state.route === "activity"
   );
