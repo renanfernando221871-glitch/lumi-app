@@ -84,7 +84,7 @@ function LumiApp() {
       progressRef.current = savedProgress;
       setProgress(savedProgress);
       setHydrated(true);
-      replace(savedProfile.hasOnboarded ? "map" : "welcome");
+      replace("welcome");
     });
     return () => {
       mounted = false;
