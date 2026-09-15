@@ -4,6 +4,7 @@ export type StaticRoute =
   | "guardian"
   | "personalize"
   | "safety"
+  | "guardianHome"
   | "map";
 
 export type NavigationState =
@@ -12,6 +13,7 @@ export type NavigationState =
   | { route: "guardian" }
   | { route: "personalize" }
   | { route: "safety" }
+  | { route: "guardianHome" }
   | { route: "map" }
   | { route: "house"; worldId: string }
   | {
