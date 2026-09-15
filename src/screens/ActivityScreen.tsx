@@ -258,7 +258,7 @@ function FarmCountChicksActivity({
         accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
         imageStyle={styles.farmActivityBackgroundImage}
         resizeMode="cover"
-        source={require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_19_17_20_1789510710527.png")}
+        source={require("../../attached_assets/farm-activity-4-no-mock-status.png")}
         style={[styles.farmActivityBackground, { height }]}
       >
         <Pressable
@@ -359,13 +359,13 @@ function FarmOfficialTapActivity({
         source={
           isBrownAnimal
             ? complete
-              ? require("../../attached_assets/cavalo_Marrom_1789510083190.png")
-              : require("../../attached_assets/lumi-farm-activity-3-initial.png")
+              ? require("../../attached_assets/farm-activity-3-no-mock-status.png")
+              : require("../../attached_assets/lumi-farm-activity-3-initial-no-mock-status.png")
             : isFindHorse
             ? complete
-              ? require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_18_55_13_1789509359047.png")
-              : require("../../attached_assets/lumi-farm-activity-2-initial.png")
-            : require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_18_40_32_1789508524054.png")
+              ? require("../../attached_assets/farm-activity-2-no-mock-status.png")
+              : require("../../attached_assets/lumi-farm-activity-2-initial-no-mock-status.png")
+            : require("../../attached_assets/farm-activity-1-no-mock-status.png")
         }
         style={[styles.farmActivityBackground, { height }]}
       >
@@ -443,6 +443,7 @@ const styles = StyleSheet.create({
     width: "17%",
     height: "9%",
     borderRadius: 40,
+    zIndex: 2,
   },
   farmAnimalHotspot: {
     position: "absolute",

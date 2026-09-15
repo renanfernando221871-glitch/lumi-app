@@ -52,7 +52,7 @@ export function MapScreen({
         <ImageBackground
           accessibilityLabel="Mapa mágico de aventuras da Lumi"
           resizeMode="stretch"
-          source={require("../../assets/images/world-map-official.png")}
+          source={require("../../assets/images/world-map-no-mock-status.png")}
           style={[styles.map, { height }]}
         >
           <Pressable

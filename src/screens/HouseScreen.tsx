@@ -131,7 +131,7 @@ function FarmWorldEntrance({
           accessibilityLabel="Mundo da Fazenda"
           imageStyle={styles.farmBackgroundImage}
           resizeMode="cover"
-          source={require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_18_33_10_1789508034603.png")}
+          source={require("../../attached_assets/farm-discoveries-no-mock-status.png")}
           style={[styles.farmBackground, { height }]}
         >
           <Pressable
