@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
@@ -9,12 +9,6 @@ type Props = {
   onContinue: () => void;
   disabled?: boolean;
 };
-
-const roundedFont = Platform.select({
-  ios: "Arial Rounded MT Bold",
-  android: "sans-serif-rounded",
-  web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
-});
 
 export function WelcomeScreen({ onContinue, disabled = false }: Props) {
   return (
@@ -47,16 +41,12 @@ export function WelcomeScreen({ onContinue, disabled = false }: Props) {
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.hero}>
           <View accessibilityLabel="Logomarca Lumi" style={styles.brand}>
-            <View style={styles.brandLetters}>
-              <Text style={[styles.brandLetter, styles.brandBlue]}>L</Text>
-              <Text style={[styles.brandLetter, styles.brandYellow]}>u</Text>
-              <Text style={[styles.brandLetter, styles.brandCoral]}>m</Text>
-              <View style={styles.brandI}>
-                <Text style={styles.brandStar}>★</Text>
-                <Text style={[styles.brandLetter, styles.brandGreen]}>ı</Text>
-              </View>
-            </View>
-            <Text style={styles.brandTagline}>crescer é descobrir</Text>
+            <Image
+              accessibilityLabel="Lumi — crescer é descobrir"
+              resizeMode="contain"
+              source={require("../../assets/images/lumi/lumi-logo-official.png")}
+              style={styles.brandImage}
+            />
           </View>
           <View style={styles.lumiHero}>
             <View style={styles.softCircle} />
@@ -218,50 +208,11 @@ const styles = StyleSheet.create({
   },
   brand: {
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 4,
   },
-  brandLetters: {
-    minHeight: 76,
-    flexDirection: "row",
-    alignItems: "flex-end",
-  },
-  brandLetter: {
-    fontFamily: roundedFont,
-    fontSize: 68,
-    fontWeight: "900",
-    letterSpacing: -4,
-    lineHeight: 72,
-  },
-  brandBlue: {
-    color: colors.blue,
-  },
-  brandYellow: {
-    color: "#F3B82C",
-  },
-  brandCoral: {
-    color: colors.coral,
-  },
-  brandGreen: {
-    color: colors.green,
-  },
-  brandI: {
-    position: "relative",
-    justifyContent: "flex-end",
-  },
-  brandStar: {
-    position: "absolute",
-    zIndex: 1,
-    top: -8,
-    left: 12,
-    color: colors.yellow,
-    fontSize: 27,
-    lineHeight: 29,
-  },
-  brandTagline: {
-    color: colors.green,
-    fontSize: 13,
-    fontWeight: "800",
-    marginTop: -4,
+  brandImage: {
+    width: 320,
+    height: 132,
   },
   lumiHero: {
     width: 230,
@@ -291,12 +242,10 @@ const styles = StyleSheet.create({
   },
   heroTitle: {
     color: colors.deepGreen,
-    fontFamily: roundedFont,
     fontSize: 38,
     lineHeight: 44,
     textAlign: "center",
     fontWeight: "900",
-    letterSpacing: -0.8,
   },
   heroSubtitle: {
     maxWidth: 360,
