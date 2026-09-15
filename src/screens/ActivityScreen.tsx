@@ -125,7 +125,8 @@ export function ActivityScreen({
 
   if (
     (activity.id === "farm-who-moo" ||
-      activity.id === "farm-find-horse") &&
+      activity.id === "farm-find-horse" ||
+      activity.id === "farm-brown-animal") &&
     activity.engineType === "tap-and-find"
   ) {
     return (
@@ -224,6 +225,16 @@ function FarmOfficialTapActivity({
 }) {
   const { height } = useWindowDimensions();
   const isFindHorse = activity.id === "farm-find-horse";
+  const isBrownAnimal = activity.id === "farm-brown-animal";
+  const displayedItems = isBrownAnimal
+    ? [
+        activity.config.items.find((item) => item.id === "white-sheep"),
+        activity.config.items.find((item) => item.id === "brown-horse"),
+        activity.config.items.find((item) => item.id === "yellow-chick"),
+      ].filter((item): item is TapAndFindActivity["config"]["items"][number] =>
+        Boolean(item),
+      )
+    : activity.config.items;
   const choose = (itemId: string) => {
     if (complete) return;
     onInteraction(evaluateTapAndFind(activity, itemId));
@@ -236,7 +247,11 @@ function FarmOfficialTapActivity({
         imageStyle={styles.farmActivityBackgroundImage}
         resizeMode="cover"
         source={
-          isFindHorse
+          isBrownAnimal
+            ? complete
+              ? require("../../attached_assets/cavalo_Marrom_1789510083190.png")
+              : require("../../attached_assets/lumi-farm-activity-3-initial.png")
+            : isFindHorse
             ? complete
               ? require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_18_55_13_1789509359047.png")
               : require("../../attached_assets/lumi-farm-activity-2-initial.png")
@@ -250,7 +265,7 @@ function FarmOfficialTapActivity({
           onPress={onBack}
           style={styles.farmActivityBackHotspot}
         />
-        {activity.config.items.map((item, index) => (
+        {displayedItems.map((item, index) => (
           <Pressable
             accessibilityLabel={item.label}
             accessibilityRole="button"
@@ -271,7 +286,7 @@ function FarmOfficialTapActivity({
         {complete ? (
           <>
             <CompletionNarration text={activity.successFeedback} />
-            {!isFindHorse ? (
+            {!isFindHorse && !isBrownAnimal ? (
               <View
                 accessibilityLiveRegion="polite"
                 style={styles.farmSuccessBadge}
