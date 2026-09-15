@@ -41,7 +41,15 @@ export function WelcomeScreen({ onContinue, disabled = false }: Props) {
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.hero}>
           <View accessibilityLabel="Logomarca Lumi" style={styles.brand}>
-            <Text style={styles.brandName}>lumi</Text>
+            <View style={styles.brandLetters}>
+              <Text style={[styles.brandLetter, styles.brandBlue]}>L</Text>
+              <Text style={[styles.brandLetter, styles.brandYellow]}>u</Text>
+              <Text style={[styles.brandLetter, styles.brandCoral]}>m</Text>
+              <View style={styles.brandI}>
+                <Text style={styles.brandStar}>★</Text>
+                <Text style={[styles.brandLetter, styles.brandGreen]}>ı</Text>
+              </View>
+            </View>
             <Text style={styles.brandTagline}>crescer é descobrir</Text>
           </View>
           <View style={styles.lumiHero}>
@@ -206,18 +214,47 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 14,
   },
-  brandName: {
-    color: colors.deepGreen,
-    fontSize: 44,
+  brandLetters: {
+    minHeight: 62,
+    flexDirection: "row",
+    alignItems: "flex-end",
+  },
+  brandLetter: {
+    fontSize: 56,
     fontWeight: "900",
-    letterSpacing: -1.8,
-    lineHeight: 48,
+    letterSpacing: -3,
+    lineHeight: 60,
+  },
+  brandBlue: {
+    color: colors.blue,
+  },
+  brandYellow: {
+    color: "#F3B82C",
+  },
+  brandCoral: {
+    color: colors.coral,
+  },
+  brandGreen: {
+    color: colors.green,
+  },
+  brandI: {
+    position: "relative",
+    justifyContent: "flex-end",
+  },
+  brandStar: {
+    position: "absolute",
+    zIndex: 1,
+    top: -5,
+    left: 10,
+    color: colors.yellow,
+    fontSize: 18,
+    lineHeight: 20,
   },
   brandTagline: {
     color: colors.green,
     fontSize: 13,
     fontWeight: "800",
-    marginTop: -2,
+    marginTop: -4,
   },
   lumiHero: {
     width: 230,
