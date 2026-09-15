@@ -16,6 +16,7 @@ export function TapAndFindEngine({
   disabled = false,
 }: TapAndFindEngineProps) {
   const colorOptions = activity.config.presentation === "color-options";
+  const soundOptions = activity.config.presentation === "sound-options";
   const choose = (id: string) => {
     if (disabled) return;
     onInteraction(evaluateTapAndFind(activity, id));
@@ -65,7 +66,7 @@ export function TapAndFindEngine({
       ))}
     </View>
   ) : (
-    <View style={styles.grid}>
+    <View style={[styles.grid, soundOptions && styles.soundGrid]}>
       {activity.config.items.map((item) => (
         <Pressable
           key={item.id}
@@ -75,6 +76,7 @@ export function TapAndFindEngine({
           onPress={() => choose(item.id)}
           style={({ pressed }) => [
             styles.itemCard,
+            soundOptions && styles.soundCard,
             {
               backgroundColor: item.color,
               transform: [{ scale: pressed ? 0.96 : 1 }],
@@ -84,6 +86,7 @@ export function TapAndFindEngine({
           <Text
             style={[
               styles.itemEmoji,
+              soundOptions && styles.soundText,
               item.emojiScale
                 ? { fontSize: 47 * item.emojiScale }
                 : undefined,
@@ -91,7 +94,9 @@ export function TapAndFindEngine({
           >
             {item.emoji}
           </Text>
-          <Text style={styles.itemLabel}>{item.label}</Text>
+          {!soundOptions ? (
+            <Text style={styles.itemLabel}>{item.label}</Text>
+          ) : null}
         </Pressable>
       ))}
     </View>
@@ -143,6 +148,22 @@ const styles = StyleSheet.create({
     ...shadow,
   },
   itemEmoji: { fontSize: 47 },
+  soundGrid: {
+    maxWidth: 390,
+    flexWrap: "nowrap",
+    gap: 22,
+  },
+  soundCard: {
+    width: 96,
+    height: 76,
+    borderRadius: 20,
+  },
+  soundText: {
+    fontSize: 25,
+    lineHeight: 30,
+    color: colors.deepGreen,
+    fontWeight: "900",
+  },
   itemLabel: {
     color: colors.deepGreen,
     fontSize: 14,

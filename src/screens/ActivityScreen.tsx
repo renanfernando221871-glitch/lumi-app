@@ -112,7 +112,7 @@ export function ActivityScreen({
         <LumiSpeechBubble compact>{activity.instructionText}</LumiSpeechBubble>
         <AudioButton
           label={activity.audioLabel}
-          text={activity.instructionText}
+          text={activity.audioText ?? activity.instructionText}
           audioFile={activity.instructionAudio}
         />
         <View style={styles.stage}>

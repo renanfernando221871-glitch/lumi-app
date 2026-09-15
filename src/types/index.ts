@@ -30,6 +30,8 @@ type ActivityContent = {
   instructionText: string;
   instructionAudio: string;
   audioLabel: string;
+  /** Optional shorter phrase spoken by the instruction audio button. */
+  audioText?: string;
   learningGoal: string;
   difficulty: "easy" | "medium" | "hard";
   successFeedback: string;
@@ -43,7 +45,7 @@ export type TapAndFindActivity = ActivityContent & {
   config: {
     items: ActivityItem[];
     targetId: string;
-    presentation?: "grid" | "color-options";
+    presentation?: "grid" | "color-options" | "sound-options";
     featuredEmoji?: string;
     featuredLabel?: string;
   };

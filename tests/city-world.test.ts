@@ -168,6 +168,29 @@ test("sentence and story ordering are fully configured by data", () => {
   ]);
 });
 
+test("C de carro keeps its short prompt, compact sounds and correct answer", () => {
+  const activity = cidadeActivities.find(
+    ({ id }) => id === "cidade-car-sound",
+  );
+  assert.ok(activity && activity.engineType === "tap-and-find");
+  if (!activity || activity.engineType !== "tap-and-find") return;
+
+  assert.equal(activity.instructionText, "Escute: carro. Qual é o primeiro som?");
+  assert.equal(activity.audioText, "carro");
+  assert.equal(activity.successFeedback, "Isso! Carro começa com o som C!");
+  assert.equal(activity.retryFeedback, "Vamos ouvir de novo: carro…");
+  assert.equal(
+    activity.hint,
+    "Escute o começo da palavra antes de escolher.",
+  );
+  assert.equal(activity.config.presentation, "sound-options");
+  assert.equal(activity.config.targetId, "city-sound-c");
+  assert.deepEqual(
+    activity.config.items.map(({ emoji }) => emoji),
+    ["ccc", "mmm", "ppp"],
+  );
+});
+
 test("Quem dirige keeps vehicles in targets and professionals in draggable cards", () => {
   const activity = cidadeActivities.find(
     ({ id }) => id === "cidade-who-drives",
