@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Platform, ScrollView, StyleSheet, Text, View } from "react-native";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
@@ -9,6 +9,12 @@ type Props = {
   onContinue: () => void;
   disabled?: boolean;
 };
+
+const roundedFont = Platform.select({
+  ios: "Arial Rounded MT Bold",
+  android: "sans-serif-rounded",
+  web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
+});
 
 export function WelcomeScreen({ onContinue, disabled = false }: Props) {
   return (
@@ -212,18 +218,19 @@ const styles = StyleSheet.create({
   },
   brand: {
     alignItems: "center",
-    marginBottom: 14,
+    marginBottom: 10,
   },
   brandLetters: {
-    minHeight: 62,
+    minHeight: 76,
     flexDirection: "row",
     alignItems: "flex-end",
   },
   brandLetter: {
-    fontSize: 56,
+    fontFamily: roundedFont,
+    fontSize: 68,
     fontWeight: "900",
-    letterSpacing: -3,
-    lineHeight: 60,
+    letterSpacing: -4,
+    lineHeight: 72,
   },
   brandBlue: {
     color: colors.blue,
@@ -244,11 +251,11 @@ const styles = StyleSheet.create({
   brandStar: {
     position: "absolute",
     zIndex: 1,
-    top: -5,
-    left: 10,
+    top: -8,
+    left: 12,
     color: colors.yellow,
-    fontSize: 18,
-    lineHeight: 20,
+    fontSize: 27,
+    lineHeight: 29,
   },
   brandTagline: {
     color: colors.green,
@@ -284,10 +291,12 @@ const styles = StyleSheet.create({
   },
   heroTitle: {
     color: colors.deepGreen,
+    fontFamily: roundedFont,
     fontSize: 38,
     lineHeight: 44,
     textAlign: "center",
     fontWeight: "900",
+    letterSpacing: -0.8,
   },
   heroSubtitle: {
     maxWidth: 360,
