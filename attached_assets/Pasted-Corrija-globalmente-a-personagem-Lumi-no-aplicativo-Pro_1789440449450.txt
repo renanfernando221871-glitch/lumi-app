@@ -1,0 +1,107 @@
+Corrija globalmente a personagem Lumi no aplicativo.
+Problema:
+o app está usando um personagem/ícone genérico que não corresponde à identidade visual oficial da Lumi.
+A personagem oficial deve seguir exatamente esta referência visual:
+- corpo verde;
+- rosto e barriga em tom creme;
+- olhos grandes castanhos escuros;
+- bochechas rosadas;
+- duas folhas verdes no topo da cabeça;
+- bolsa transversal marrom;
+- estrela amarela na bolsa;
+- estilo infantil 3D, arredondado, acolhedor e expressivo.
+REGRA PERMANENTE DE IDENTIDADE
+A partir de agora, qualquer elemento, componente, variável, asset ou referência no projeto identificado como:
+- Lumi
+- lumi
+- LumiCharacter
+- lumiAvatar
+- lumiIcon
+- ou qualquer nome equivalente usado para representar a personagem
+deve apontar exclusivamente para o asset oficial da Lumi.
+É proibido usar:
+- emoji;
+- avatar genérico;
+- personagem simplificado;
+- ícone substituto;
+- ilustração diferente;
+- placeholder;
+- outro personagem como fallback visual da Lumi.
+Se o asset oficial não estiver disponível em algum ponto da interface, prefira não exibir personagem nenhum a mostrar uma personagem incorreta.
+Importante: essa regra deve ser aplicada como padrão permanente na arquitetura do projeto, para evitar que futuras telas usem outra personagem no lugar da Lumi.
+Se possível, centralize a referência da personagem em um único arquivo/componente, por exemplo:
+- LumiCharacter
+- LumiAvatar
+- ou equivalente.
+Todas as telas devem reutilizar essa fonte única de identidade visual em vez de carregar imagens independentes da Lumi.
+Substituição global
+Localize no projeto:
+- qual asset está sendo usado atualmente como personagem genérica;
+- todos os componentes que o utilizam;
+- todas as referências visuais que pretendem representar a Lumi.
+Remova essas referências incorretas e substitua pelo asset oficial.
+Não altere outras ilustrações que representem personagens diferentes.
+Onde a Lumi deve aparecer
+Use a Lumi oficial de forma consistente em:
+- tela inicial;
+- mapa dos mundos;
+- entrada dos mundos;
+- balões de fala;
+- início das atividades;
+- feedback positivo;
+- feedback de nova tentativa;
+- conquistas;
+- conclusão dos mundos.
+Ela deve atuar como companheira da criança, sem poluir a interface.
+Em telas de atividade:
+- usar preferencialmente uma versão pequena próxima ao balão de fala;
+- não cobrir perguntas, opções ou imagens;
+- manter tamanho e posição consistentes.
+Variações da personagem
+Se forem necessárias expressões diferentes como:
+- curiosa;
+- feliz;
+- gentil;
+- comemorando;
+- encorajando;
+todas devem continuar sendo claramente a mesma Lumi oficial.
+Não redesenhar a personagem com outro estilo.
+Se não houver assets oficiais dessas variações, reutilize o asset oficial existente em vez de inventar uma nova versão.
+Padronização de gênero
+Lumi é oficialmente uma personagem feminina.
+Toda referência textual à personagem deve usar:
+- a Lumi
+- ela
+- formas femininas de adjetivos quando aplicável.
+Exemplos:
+- “O Lumi quer duas bananas” → “A Lumi quer duas bananas”
+- “Ajude o Lumi” → “Ajude a Lumi”
+- “O Lumi está feliz” → “A Lumi está feliz”
+Não modificar termos masculinos que se refiram a outros personagens.
+Preserve sem alteração
+- todos os 5 mundos;
+- as 40 atividades;
+- engines;
+- respostas corretas;
+- navegação;
+- progresso;
+- recompensas;
+- persistência;
+- desbloqueios;
+- áudio;
+- lógica pedagógica.
+Esta tarefa é exclusivamente de:
+identidade visual da Lumi + padronização de gênero + prevenção de uso futuro de personagens incorretos.
+Validação obrigatória
+Ao concluir:
+- rodar TypeScript;
+- rodar testes;
+- abrir o Preview;
+- verificar a tela inicial;
+- verificar o mapa dos mundos;
+- verificar pelo menos uma atividade;
+- verificar uma tela de feedback;
+- confirmar que nenhum personagem genérico continua sendo apresentado como Lumi;
+- confirmar que todas as referências textuais à Lumi estão no feminino;
+- confirmar que a navegação e o progresso continuam funcionando.
+Não faça outras alterações fora desse escopo.

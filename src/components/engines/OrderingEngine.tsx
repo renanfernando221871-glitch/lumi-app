@@ -17,21 +17,9 @@ export type OrderingEngineProps = {
 function LumiSeesCarScene() {
   return (
     <View
-      accessibilityLabel="Lumi olhando para um carro"
+      accessibilityLabel="Um carro"
       style={styles.sentenceScene}
     >
-      <View style={styles.sceneLumi}>
-        <View style={styles.sceneLumiHead}>
-          <View style={styles.sceneLumiEye} />
-          <View style={styles.sceneLumiSmile} />
-        </View>
-        <View style={styles.sceneLumiBody} />
-      </View>
-      <View style={styles.lookLine}>
-        <View style={styles.lookDot} />
-        <View style={styles.lookDot} />
-        <View style={styles.lookDot} />
-      </View>
       <View style={styles.sceneCar}>
         <View style={styles.carWindow} />
         <View style={[styles.carWheel, styles.carWheelLeft]} />
@@ -92,7 +80,6 @@ function StoryScene({
           <View style={styles.storyMotionLine} />
           <View style={[styles.storyMotionLine, styles.storyMotionLineShort]} />
         </View>
-        <StoryPerson compact={compact} />
       </View>
     );
   }
@@ -106,7 +93,6 @@ function StoryScene({
           <View style={styles.treeTop} />
           <View style={styles.treeTrunk} />
         </View>
-        <StoryPerson compact={compact} />
         <View style={styles.helloMark}>
           <View style={styles.helloLine} />
           <View style={[styles.helloLine, styles.helloLineTilt]} />
@@ -120,7 +106,6 @@ function StoryScene({
       accessibilityLabel="Lumi brincando com um amigo"
       style={[styles.storyScene, compact && styles.storySceneCompact]}
     >
-      <StoryPerson compact={compact} />
       <View style={[styles.storyBall, compact && styles.storyBallCompact]} />
       <StoryPerson friend compact={compact} />
     </View>

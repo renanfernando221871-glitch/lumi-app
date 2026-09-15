@@ -170,21 +170,14 @@ function SeedSequenceVisual({
   const flower = variant === "flower-after";
   return (
     <View style={[styles.seedScene, compact && styles.seedSceneCompact]}>
-      <View style={styles.seedLumi}>
-        <View style={styles.seedLumiHead}>
-          <View style={styles.seedLumiEye} />
-          {flower ? <View style={styles.seedLumiSmile} /> : null}
+      {!flower ? (
+        <View style={[styles.wateringCan, styles.wateringCanStandalone]}>
+          <View style={styles.wateringCanHandle} />
+          <View style={styles.wateringCanSpout} />
+          <View style={styles.waterDropOne} />
+          <View style={styles.waterDropTwo} />
         </View>
-        <View style={styles.seedLumiBody} />
-        {!flower ? (
-          <View style={styles.wateringCan}>
-            <View style={styles.wateringCanHandle} />
-            <View style={styles.wateringCanSpout} />
-            <View style={styles.waterDropOne} />
-            <View style={styles.waterDropTwo} />
-          </View>
-        ) : null}
-      </View>
+      ) : null}
       <View style={styles.groundLine} />
       <View style={styles.seedPotGroup}>
         {flower ? (
@@ -892,6 +885,11 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     backgroundColor: "#5BA7D1",
     zIndex: 4,
+  },
+  wateringCanStandalone: {
+    left: 15,
+    right: "auto",
+    top: 45,
   },
   wateringCanHandle: {
     position: "absolute",
