@@ -24,10 +24,14 @@ import {
   ActivityDefinition,
   ActivityInteraction,
   ActivityResult,
+  CountAndSelectActivity,
   TapAndFindActivity,
 } from "../types";
 import { colors } from "../theme/colors";
-import { evaluateTapAndFind } from "../engines/interactions";
+import {
+  evaluateCountAndSelect,
+  evaluateTapAndFind,
+} from "../engines/interactions";
 import {
   createSystemLumiVoiceService,
   LumiVoiceService,
@@ -144,6 +148,25 @@ export function ActivityScreen({
     );
   }
 
+  if (
+    activity.id === "farm-count-chicks" &&
+    activity.engineType === "count-and-select"
+  ) {
+    return (
+      <FarmCountChicksActivity
+        activity={activity}
+        activityNumber={activityNumber}
+        total={total}
+        feedback={session.feedback}
+        complete={session.complete}
+        advancing={session.advancing}
+        onBack={onBack}
+        onInteraction={handleInteraction}
+        onAdvance={advance}
+      />
+    );
+  }
+
   return (
     <View style={styles.screen}>
       <View style={styles.topBar}>
@@ -198,6 +221,93 @@ export function ActivityScreen({
           </>
         ) : null}
       </ScrollView>
+    </View>
+  );
+}
+
+function FarmCountChicksActivity({
+  activity,
+  activityNumber,
+  total,
+  feedback,
+  complete,
+  advancing,
+  onBack,
+  onInteraction,
+  onAdvance,
+}: {
+  activity: CountAndSelectActivity;
+  activityNumber: number;
+  total: number;
+  feedback?: string;
+  complete: boolean;
+  advancing: boolean;
+  onBack: () => void;
+  onInteraction: (interaction: ActivityInteraction) => void;
+  onAdvance: () => void;
+}) {
+  const { height } = useWindowDimensions();
+  const choose = (count: number) => {
+    if (complete) return;
+    onInteraction(evaluateCountAndSelect(activity, count));
+  };
+
+  return (
+    <View style={[styles.farmActivityScreen, { minHeight: height }]}>
+      <ImageBackground
+        accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
+        imageStyle={styles.farmActivityBackgroundImage}
+        resizeMode="cover"
+        source={require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_19_17_20_1789510710527.png")}
+        style={[styles.farmActivityBackground, { height }]}
+      >
+        <Pressable
+          accessibilityLabel="Voltar"
+          accessibilityRole="button"
+          onPress={onBack}
+          style={styles.farmActivityBackHotspot}
+        />
+        {activity.config.options.map((option, index) => (
+          <Pressable
+            accessibilityLabel={`quantidade ${option}`}
+            accessibilityRole="button"
+            disabled={complete}
+            key={option}
+            onPress={() => choose(option)}
+            style={[
+              styles.farmCountOptionHotspot,
+              { left: `${13 + index * 27}%` },
+            ]}
+          />
+        ))}
+        {feedback && !complete ? (
+          <View accessibilityLiveRegion="polite" style={styles.farmRetryBubble}>
+            <Text style={styles.farmRetryText}>{feedback}</Text>
+          </View>
+        ) : null}
+        {complete ? (
+          <>
+            <CompletionNarration text={activity.successFeedback} />
+            <View
+              accessibilityLiveRegion="polite"
+              style={styles.farmCountSuccessBadge}
+            >
+              <Text style={styles.farmSuccessText}>Muito bem! ✓</Text>
+            </View>
+            <Pressable
+              accessibilityLabel={
+                activityNumber === total
+                  ? "Concluir mundo"
+                  : "Próxima atividade"
+              }
+              accessibilityRole="button"
+              disabled={advancing}
+              onPress={onAdvance}
+              style={styles.farmAnswerHotspot}
+            />
+          </>
+        ) : null}
+      </ImageBackground>
     </View>
   );
 }
@@ -341,6 +451,13 @@ const styles = StyleSheet.create({
     height: "11.5%",
     borderRadius: 28,
   },
+  farmCountOptionHotspot: {
+    position: "absolute",
+    top: "66.2%",
+    width: "22%",
+    height: "12%",
+    borderRadius: 24,
+  },
   farmAnswerHotspot: {
     position: "absolute",
     left: "12%",
@@ -370,6 +487,15 @@ const styles = StyleSheet.create({
     left: "31%",
     right: "31%",
     bottom: "18%",
+    paddingVertical: 7,
+    borderRadius: 18,
+    backgroundColor: "rgba(83, 185, 74, 0.96)",
+  },
+  farmCountSuccessBadge: {
+    position: "absolute",
+    left: "33%",
+    right: "33%",
+    bottom: "18.5%",
     paddingVertical: 7,
     borderRadius: 18,
     backgroundColor: "rgba(83, 185, 74, 0.96)",
