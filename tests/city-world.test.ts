@@ -194,25 +194,29 @@ test("sentence ordering and Lumi's first-then sequence are configured by data", 
   assert.equal(complete.incorrect, false);
   assert.equal(story.instructionText, "O que aconteceu primeiro?");
   assert.equal(story.config.presentation, "sequence-options");
-  assert.equal(story.config.targetId, "story-seed");
-  assert.equal(story.config.completionVisual, "seed-to-flower");
+  assert.equal(story.config.targetId, "story-watering");
+  assert.equal(story.config.completionVisual, "watering-to-flower");
   assert.deepEqual(
     story.config.items.map(({ itemVisual }) => itemVisual),
-    ["flower-after", "seed-before"],
+    ["flower-after", "watering-before"],
   );
   assert.equal(
     story.successFeedback,
-    "Isso! Primeiro Lumi plantou a semente.",
+    "Isso! Primeiro Lumi regou a plantinha.",
   );
   assert.equal(
     story.retryFeedback,
-    "Olhe de novo. O que aconteceu antes da flor nascer?",
+    "Vamos tentar de novo. Qual cena acontece antes da flor crescer?",
+  );
+  assert.equal(
+    story.completionAudioText,
+    "Primeiro Lumi regou a plantinha. Depois a flor cresceu.",
   );
   assert.equal(
     evaluateTapAndFind(story, "story-flower").completed,
     false,
   );
-  assert.deepEqual(evaluateTapAndFind(story, "story-seed"), {
+  assert.deepEqual(evaluateTapAndFind(story, "story-watering"), {
     completed: true,
   });
 });

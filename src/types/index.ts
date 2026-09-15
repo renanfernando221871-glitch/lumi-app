@@ -28,7 +28,7 @@ export type ActivityItem = {
     | "help-store"
     | "walk-away"
     | "take-toy"
-    | "seed-before"
+    | "watering-before"
     | "flower-after";
   isTarget?: boolean;
   emojiScale?: number;
@@ -43,6 +43,8 @@ type ActivityContent = {
   audioLabel: string;
   /** Optional shorter phrase spoken by the instruction audio button. */
   audioText?: string;
+  /** Optional TTS narration played once after a correct completion. */
+  completionAudioText?: string;
   learningGoal: string;
   difficulty: "easy" | "medium" | "hard";
   successFeedback: string;
@@ -66,7 +68,7 @@ export type TapAndFindActivity = ActivityContent & {
     featuredEmoji?: string;
     featuredLabel?: string;
     featuredVisual?: "traffic-crossing" | "help-friend-scene";
-    completionVisual?: "seed-to-flower";
+    completionVisual?: "watering-to-flower";
   };
 };
 export type TapAndFindActivityDefinition = TapAndFindActivity;

@@ -164,7 +164,7 @@ function SeedSequenceVisual({
   variant,
   compact = false,
 }: {
-  variant: "seed-before" | "flower-after";
+  variant: "watering-before" | "flower-after";
   compact?: boolean;
 }) {
   const flower = variant === "flower-after";
@@ -176,7 +176,14 @@ function SeedSequenceVisual({
           {flower ? <View style={styles.seedLumiSmile} /> : null}
         </View>
         <View style={styles.seedLumiBody} />
-        {!flower ? <View style={styles.seedInHand} /> : null}
+        {!flower ? (
+          <View style={styles.wateringCan}>
+            <View style={styles.wateringCanHandle} />
+            <View style={styles.wateringCanSpout} />
+            <View style={styles.waterDropOne} />
+            <View style={styles.waterDropTwo} />
+          </View>
+        ) : null}
       </View>
       <View style={styles.groundLine} />
       <View style={styles.seedPotGroup}>
@@ -197,7 +204,12 @@ function SeedSequenceVisual({
             ))}
           </>
         ) : (
-          <View style={styles.potSoil} />
+          <>
+            <View style={styles.potSoil} />
+            <View style={styles.smallPlantStem} />
+            <View style={[styles.smallPlantLeaf, styles.smallPlantLeafLeft]} />
+            <View style={[styles.smallPlantLeaf, styles.smallPlantLeafRight]} />
+          </>
         )}
         <View style={styles.sequencePotRim} />
         <View style={styles.sequencePot} />
@@ -311,7 +323,7 @@ export function TapAndFindEngine({
             item.itemVisual === "walk-away" ||
             item.itemVisual === "take-toy" ? (
             <HelpFriendVisual variant={item.itemVisual} />
-          ) : item.itemVisual === "seed-before" ||
+          ) : item.itemVisual === "watering-before" ||
             item.itemVisual === "flower-after" ? (
             <SeedSequenceVisual variant={item.itemVisual} />
           ) : (
@@ -367,12 +379,12 @@ export function TapAndFindEngine({
       ) : null}
       {choices}
       {showSequence &&
-      activity.config.completionVisual === "seed-to-flower" ? (
+      activity.config.completionVisual === "watering-to-flower" ? (
         <View
-          accessibilityLabel="Primeiro a semente, depois a flor"
+          accessibilityLabel="Primeiro Lumi rega a plantinha, depois a flor cresce"
           style={styles.completionSequence}
         >
-          <SeedSequenceVisual variant="seed-before" compact />
+          <SeedSequenceVisual variant="watering-before" compact />
           <Text style={styles.sequenceArrow}>→</Text>
           <SeedSequenceVisual variant="flower-after" compact />
         </View>
@@ -871,15 +883,53 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 11,
     backgroundColor: "#5F91AE",
   },
-  seedInHand: {
+  wateringCan: {
     position: "absolute",
-    right: -2,
+    right: -23,
     top: 45,
-    width: 15,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: "#A86D3D",
+    width: 31,
+    height: 25,
+    borderRadius: 7,
+    backgroundColor: "#5BA7D1",
+    zIndex: 4,
+  },
+  wateringCanHandle: {
+    position: "absolute",
+    left: -10,
+    top: 3,
+    width: 16,
+    height: 17,
+    borderWidth: 4,
+    borderColor: "#377EA8",
+    borderRadius: 9,
+  },
+  wateringCanSpout: {
+    position: "absolute",
+    right: -22,
+    top: 5,
+    width: 26,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#5BA7D1",
     transform: [{ rotate: "18deg" }],
+  },
+  waterDropOne: {
+    position: "absolute",
+    right: -26,
+    top: 19,
+    width: 6,
+    height: 9,
+    borderRadius: 4,
+    backgroundColor: "#65BFE8",
+  },
+  waterDropTwo: {
+    position: "absolute",
+    right: -18,
+    top: 24,
+    width: 5,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#65BFE8",
   },
   groundLine: {
     position: "absolute",
@@ -904,6 +954,30 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 5,
     backgroundColor: "#704934",
+  },
+  smallPlantStem: {
+    position: "absolute",
+    bottom: 43,
+    width: 5,
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: "#58A75D",
+  },
+  smallPlantLeaf: {
+    position: "absolute",
+    bottom: 53,
+    width: 16,
+    height: 9,
+    borderRadius: 8,
+    backgroundColor: "#75B968",
+  },
+  smallPlantLeafLeft: {
+    left: 20,
+    transform: [{ rotate: "25deg" }],
+  },
+  smallPlantLeafRight: {
+    right: 20,
+    transform: [{ rotate: "-25deg" }],
   },
   sequencePotRim: {
     width: 59,

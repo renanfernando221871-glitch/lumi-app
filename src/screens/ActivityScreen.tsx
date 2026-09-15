@@ -20,6 +20,25 @@ import {
 import { getActivityEngine } from "../engines/activityEngineRegistry";
 import { ActivityDefinition, ActivityInteraction, ActivityResult } from "../types";
 import { colors } from "../theme/colors";
+import {
+  createSystemLumiVoiceService,
+  LumiVoiceService,
+} from "../audio/lumiVoiceService";
+
+function CompletionNarration({ text }: { text: string }) {
+  const [voiceService] = useState<LumiVoiceService>(() =>
+    createSystemLumiVoiceService(() => undefined),
+  );
+
+  useEffect(() => {
+    void voiceService.play({ text });
+    return () => {
+      void voiceService.dispose();
+    };
+  }, [text, voiceService]);
+
+  return null;
+}
 
 type Props = {
   activity: ActivityDefinition;
@@ -127,17 +146,22 @@ export function ActivityScreen({
           {session.feedback || activity.hint}
         </Text>
         {session.complete ? (
-          <PrimaryButton
-            label={
-              activityNumber === total
-                ? finalCompletionLabel
-                : "Próxima atividade"
-            }
-            onPress={advance}
-            variant="green"
-            disabled={session.advancing}
-            style={styles.nextButton}
-          />
+          <>
+            {activity.completionAudioText ? (
+              <CompletionNarration text={activity.completionAudioText} />
+            ) : null}
+            <PrimaryButton
+              label={
+                activityNumber === total
+                  ? finalCompletionLabel
+                  : "Próxima atividade"
+              }
+              onPress={advance}
+              variant="green"
+              disabled={session.advancing}
+              style={styles.nextButton}
+            />
+          </>
         ) : null}
       </ScrollView>
     </View>
