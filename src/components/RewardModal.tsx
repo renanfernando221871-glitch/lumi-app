@@ -8,10 +8,12 @@ import { LumiCharacter } from "./LumiCharacter";
 export function RewardModal({
   visible,
   reward,
+  unlockMessage,
   onClose,
 }: {
   visible: boolean;
   reward: RewardDefinition;
+  unlockMessage?: string;
   onClose: () => void;
 }) {
   return (
@@ -33,6 +35,11 @@ export function RewardModal({
           <Text style={styles.message}>
             {reward.message}
           </Text>
+          {unlockMessage ? (
+            <Text accessibilityLiveRegion="polite" style={styles.unlockMessage}>
+              {unlockMessage}
+            </Text>
+          ) : null}
           <View style={styles.flowerRow}>
             <Text>🌱</Text>
             <Text>🌼</Text>
@@ -100,6 +107,13 @@ const styles = StyleSheet.create({
     color: colors.muted,
     fontSize: 15,
     lineHeight: 21,
+    textAlign: "center",
+  },
+  unlockMessage: {
+    marginTop: 14,
+    color: colors.green,
+    fontSize: 18,
+    fontWeight: "900",
     textAlign: "center",
   },
   flowerRow: {

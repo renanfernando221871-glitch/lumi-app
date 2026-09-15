@@ -11,7 +11,10 @@ export const casaDoLumi: WorldDefinition = {
     .filter((activity) => activity.worldId === "casa-do-lumi")
     .map((activity) => activity.id),
   rewardId: "lumi-flower",
-  unlock: { unlockedByDefault: true },
+  unlock: {
+    unlockedByDefault: false,
+    prerequisiteWorldId: "fazenda-das-descobertas",
+  },
   assets: {
     mapIcon: "🏡",
     mapPrompt: "A Casa da Lumi está pertinho. Vamos olhar lá dentro?",
@@ -30,8 +33,7 @@ export const fazendaDasDescobertas: WorldDefinition = {
     .map((activity) => activity.id),
   rewardId: "farm-basket",
   unlock: {
-    unlockedByDefault: false,
-    prerequisiteWorldId: "casa-do-lumi",
+    unlockedByDefault: true,
   },
   assets: {
     mapIcon: "🚜",
@@ -52,7 +54,7 @@ export const parqueDasCores: WorldDefinition = {
   rewardId: "parque-rainbow",
   unlock: {
     unlockedByDefault: false,
-    prerequisiteWorldId: "fazenda-das-descobertas",
+    prerequisiteWorldId: "casa-do-lumi",
   },
   assets: {
     mapIcon: "🎨",
@@ -107,8 +109,8 @@ export const cidadeDasAventuras: WorldDefinition = {
 
 /** Worlds are data, so adding a world does not require changing navigation. */
 export const worldCatalog: readonly WorldDefinition[] = [
-  casaDoLumi,
   fazendaDasDescobertas,
+  casaDoLumi,
   parqueDasCores,
   mercadoDoLumi,
   cidadeDasAventuras,

@@ -205,6 +205,9 @@ function LumiApp() {
   }
   const worldActivities = getWorldActivities(world);
   const worldNumber = worldCatalog.indexOf(world) + 1;
+  const nextWorld = worldCatalog.find(
+    (candidate) => candidate.unlock.prerequisiteWorldId === world.id,
+  );
 
   if (navigation.route === "house") {
     const startActivities = () => {
@@ -295,6 +298,11 @@ function LumiApp() {
       {navigation.rewardId ? (
         <RewardScreen
           reward={getRewardById(navigation.rewardId)}
+          unlockMessage={
+            nextWorld
+              ? `Parabéns! Você desbloqueou ${nextWorld.title}!`
+              : undefined
+          }
           onClose={() => navigation.replace("map")}
         />
       ) : null}

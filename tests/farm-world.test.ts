@@ -55,7 +55,7 @@ test("the catalog contains exactly five valid worlds and forty activities", () =
   );
 });
 
-test("Parque stays softly locked until Fazenda is complete", () => {
+test("Parque stays locked until Casa is complete", () => {
   const parque = worldCatalog.find((world) => world.id === "parque-das-cores");
   assert.ok(parque);
   assert.equal(isWorldUnlocked(parque, emptyProgress, worldCatalog), false);
@@ -72,21 +72,22 @@ test("Parque stays softly locked until Fazenda is complete", () => {
   );
 });
 
-test("the farm stays softly locked until Casa is complete", () => {
-  assert.equal(isWorldUnlocked(fazendaDasDescobertas, emptyProgress, worldCatalog), false);
-  assert.equal(canOpenWorld(fazendaDasDescobertas, emptyProgress, worldCatalog), false);
-  const casaProgress = {
+test("Fazenda starts unlocked and Casa unlocks only after Fazenda", () => {
+  assert.equal(isWorldUnlocked(fazendaDasDescobertas, emptyProgress, worldCatalog), true);
+  assert.equal(canOpenWorld(fazendaDasDescobertas, emptyProgress, worldCatalog), true);
+  assert.equal(isWorldUnlocked(casaDoLumi, emptyProgress, worldCatalog), false);
+  const farmProgress = {
     ...emptyProgress,
-    completedActivityIds: [...casaDoLumi.activityIds],
+    completedActivityIds: [...fazendaDasDescobertas.activityIds],
   };
   assert.equal(
-    isWorldUnlocked(fazendaDasDescobertas, casaProgress, worldCatalog),
+    isWorldUnlocked(casaDoLumi, farmProgress, worldCatalog),
     true,
   );
-  assert.equal(canOpenWorld(fazendaDasDescobertas, casaProgress, worldCatalog), true);
+  assert.equal(canOpenWorld(casaDoLumi, farmProgress, worldCatalog), true);
 });
 
-test("the world helper rejects opening or skipping farm activities", () => {
+test("the world helper opens Fazenda but rejects skipping its activities", () => {
   const firstFarmId = fazendaDasDescobertas.activityIds[0];
   const secondFarmId = fazendaDasDescobertas.activityIds[1];
   assert.equal(
@@ -96,7 +97,7 @@ test("the world helper rejects opening or skipping farm activities", () => {
       emptyProgress,
       worldCatalog,
     ),
-    false,
+    true,
   );
   const casaProgress = {
     ...emptyProgress,

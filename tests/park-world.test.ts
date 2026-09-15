@@ -93,11 +93,11 @@ test("Parque entry ignores progress from other worlds and removed IDs", () => {
   );
 });
 
-test("Parque unlocks only after Fazenda and cannot skip activities", () => {
+test("Parque unlocks only after Casa and cannot skip activities", () => {
   assert.equal(
     isWorldUnlocked(
       parqueDasCores,
-      { completedActivityIds: casaDoLumi.activityIds, earnedRewardIds: [] },
+      { completedActivityIds: fazendaDasDescobertas.activityIds, earnedRewardIds: [] },
       worldCatalog,
     ),
     false,
