@@ -66,15 +66,11 @@ export function WelcomeScreen({ onContinue, disabled = false }: Props) {
             />
           </View>
           <View style={styles.lumiHero}>
-            <View style={styles.softCircle} />
-            <View style={styles.smallCircle} />
-            <View style={styles.characterScale}>
-              <LumiCharacter
-                accessibilityLabel="Lumi, personagem oficial"
-                expression="main"
-                size="large"
-              />
-            </View>
+            <LumiCharacter
+              accessibilityLabel="Lumi, personagem oficial"
+              expression="welcome"
+              size="medallion"
+            />
           </View>
           <Text style={styles.heroTitle}>Que bom ter você aqui!</Text>
           <Text style={styles.heroSubtitle}>
@@ -222,74 +218,52 @@ const styles = StyleSheet.create({
     minHeight: "100%",
     alignSelf: "center",
     alignItems: "center",
-    paddingHorizontal: 30,
-    paddingTop: 54,
-    paddingBottom: 145,
+    paddingHorizontal: 28,
+    paddingTop: 44,
+    paddingBottom: 120,
   },
   heroTall: {
-    paddingTop: 128,
+    paddingTop: 112,
   },
   brand: {
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 12,
   },
   brandImage: {
-    width: 340,
+    width: 270,
     maxWidth: "92%",
-    height: 142,
+    height: 122,
   },
   lumiHero: {
     width: 260,
-    height: 252,
+    height: 260,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 16,
-  },
-  softCircle: {
-    position: "absolute",
-    width: 235,
-    height: 235,
-    borderRadius: 118,
-    backgroundColor: colors.softYellow,
-    borderWidth: 7,
-    borderColor: colors.white,
-    ...shadow,
-  },
-  smallCircle: {
-    position: "absolute",
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    right: 2,
-    top: 24,
-    backgroundColor: colors.softCoral,
-  },
-  characterScale: {
-    transform: [{ scale: 1.16 }],
+    marginBottom: 18,
   },
   heroTitle: {
     maxWidth: 330,
     color: colors.deepGreen,
     fontFamily: roundedTitleFont,
     fontSize: 34,
-    lineHeight: 40,
+    lineHeight: 39,
     textAlign: "center",
     fontWeight: "900",
   },
   heroSubtitle: {
-    maxWidth: 330,
+    maxWidth: 310,
     color: colors.ink,
     fontSize: 18,
     lineHeight: 26,
     fontWeight: "600",
     textAlign: "center",
-    marginTop: 12,
+    marginTop: 10,
   },
   fullButton: {
     width: "100%",
-    maxWidth: 360,
-    minHeight: 64,
-    borderRadius: 24,
-    marginTop: 24,
+    maxWidth: 350,
+    minHeight: 68,
+    borderRadius: 28,
+    marginTop: 26,
   },
 });
