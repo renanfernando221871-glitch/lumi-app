@@ -150,8 +150,16 @@ export function GuardianSignupScreen({ onBack, onContinue }: Props) {
             <View style={styles.divider} />
           </View>
 
-          <SocialButton brand="G" label="Continuar com Google" onPress={onContinue} />
-          <SocialButton brand="●" label="Continuar com Apple" onPress={onContinue} />
+          <SocialButton
+            brand="google"
+            label="Continuar com Google"
+            onPress={onContinue}
+          />
+          <SocialButton
+            brand="apple"
+            label="Continuar com Apple"
+            onPress={onContinue}
+          />
 
           <View style={styles.securityRow}>
             <Text style={styles.securityIcon}>▢</Text>
@@ -190,10 +198,15 @@ function SocialButton({
   label,
   onPress,
 }: {
-  brand: string;
+  brand: "google" | "apple";
   label: string;
   onPress: () => void;
 }) {
+  const iconSource =
+    brand === "google"
+      ? require("../../assets/icons/google.png")
+      : require("../../assets/icons/apple.png");
+
   return (
     <Pressable
       accessibilityRole="button"
@@ -203,9 +216,17 @@ function SocialButton({
         pressed && styles.socialPressed,
       ]}
     >
-      <Text style={[styles.socialBrand, brand === "G" && styles.googleBrand]}>
-        {brand}
-      </Text>
+      <View style={styles.socialIconSlot}>
+        <Image
+          accessibilityIgnoresInvertColors
+          resizeMode="contain"
+          source={iconSource}
+          style={[
+            styles.socialIcon,
+            brand === "apple" && styles.appleIcon,
+          ]}
+        />
+      </View>
       <Text style={styles.socialLabel}>{label}</Text>
     </Pressable>
   );
@@ -442,15 +463,19 @@ const styles = StyleSheet.create({
   socialPressed: {
     backgroundColor: "#F4F8FA",
   },
-  socialBrand: {
+  socialIconSlot: {
     width: 42,
-    color: "#101010",
-    fontSize: 24,
-    fontWeight: "900",
-    textAlign: "center",
+    height: 28,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  googleBrand: {
-    color: "#4285F4",
+  socialIcon: {
+    width: 22,
+    height: 22,
+  },
+  appleIcon: {
+    width: 23,
+    height: 23,
   },
   socialLabel: {
     minWidth: 200,
