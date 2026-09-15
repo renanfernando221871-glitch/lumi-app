@@ -1,5 +1,12 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
@@ -9,6 +16,12 @@ type Props = {
   onContinue: () => void;
   disabled?: boolean;
 };
+
+const roundedTitleFont = Platform.select({
+  ios: "Arial Rounded MT Bold",
+  android: "sans-serif-rounded",
+  web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
+});
 
 export function WelcomeScreen({ onContinue, disabled = false }: Props) {
   return (
@@ -57,7 +70,7 @@ export function WelcomeScreen({ onContinue, disabled = false }: Props) {
               size="large"
             />
           </View>
-          <Text style={styles.heroTitle}>Bem-vindo!</Text>
+          <Text style={styles.heroTitle}>Que bom ter você aqui!</Text>
           <Text style={styles.heroSubtitle}>
             Aprender também pode ser uma grande aventura!
           </Text>
@@ -241,9 +254,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.softCoral,
   },
   heroTitle: {
+    maxWidth: 430,
     color: colors.deepGreen,
-    fontSize: 38,
-    lineHeight: 44,
+    fontFamily: roundedTitleFont,
+    fontSize: 34,
+    lineHeight: 40,
     textAlign: "center",
     fontWeight: "900",
   },
