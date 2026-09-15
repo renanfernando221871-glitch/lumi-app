@@ -20,7 +20,11 @@ export type ActivityItem = {
   /** Optional single-component character visual for roles without a clear emoji. */
   characterVisual?: "driver";
   /** Optional drawn visual for items whose emoji is not reliably supported. */
-  itemVisual?: "potted-plant";
+  itemVisual?:
+    | "potted-plant"
+    | "safe-crossing"
+    | "red-signal"
+    | "outside-crossing";
   isTarget?: boolean;
   emojiScale?: number;
 };
@@ -50,6 +54,7 @@ export type TapAndFindActivity = ActivityContent & {
     presentation?: "grid" | "color-options" | "sound-options";
     featuredEmoji?: string;
     featuredLabel?: string;
+    featuredVisual?: "traffic-crossing";
   };
 };
 export type TapAndFindActivityDefinition = TapAndFindActivity;

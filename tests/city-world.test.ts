@@ -220,6 +220,33 @@ test("Onde devemos ir keeps its three requested city associations", () => {
   );
 });
 
+test("Atravesse com segurança keeps the positive safe crossing answer", () => {
+  const activity = cidadeActivities.find(
+    ({ id }) => id === "cidade-cross-safely",
+  );
+  assert.ok(activity && activity.engineType === "tap-and-find");
+  if (!activity || activity.engineType !== "tap-and-find") return;
+
+  assert.equal(activity.instructionText, "Quando podemos atravessar?");
+  assert.equal(activity.config.targetId, "city-safe-crossing");
+  assert.deepEqual(
+    activity.config.items.map(({ id, label }) => ({ id, label })),
+    [
+      { id: "city-safe-crossing", label: "sinal verde e faixa" },
+      { id: "city-wait-crossing", label: "sinal vermelho" },
+      { id: "city-outside-crossing", label: "fora da faixa" },
+    ],
+  );
+  assert.equal(
+    activity.successFeedback,
+    "Isso! Podemos atravessar com segurança.",
+  );
+  assert.equal(
+    activity.retryFeedback,
+    "Vamos olhar o sinal mais uma vez.",
+  );
+});
+
 test("Quem dirige keeps vehicles in targets and professionals in draggable cards", () => {
   const activity = cidadeActivities.find(
     ({ id }) => id === "cidade-who-drives",

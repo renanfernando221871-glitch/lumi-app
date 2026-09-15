@@ -23,6 +23,45 @@ function PottedPlantIcon() {
   );
 }
 
+function CrossingIcon({
+  variant,
+  featured = false,
+}: {
+  variant: "safe-crossing" | "red-signal" | "outside-crossing";
+  featured?: boolean;
+}) {
+  const safe = variant === "safe-crossing";
+  const outside = variant === "outside-crossing";
+  return (
+    <View style={[styles.crossingIcon, featured && styles.crossingIconFeatured]}>
+      {!outside ? (
+        <View style={styles.miniSignal}>
+          <View
+            style={[
+              styles.signalLight,
+              { backgroundColor: safe ? "#48A85A" : "#E75D55" },
+            ]}
+          />
+        </View>
+      ) : (
+        <View style={styles.walker}>
+          <View style={styles.walkerHead} />
+          <View style={styles.walkerBody} />
+          <View style={[styles.walkerLimb, styles.walkerArm]} />
+          <View style={[styles.walkerLimb, styles.walkerLeg]} />
+        </View>
+      )}
+      <View style={[styles.road, outside && styles.roadOutside]}>
+        {!outside
+          ? [0, 1, 2, 3].map((stripe) => (
+              <View key={stripe} style={styles.crosswalkStripe} />
+            ))
+          : null}
+      </View>
+    </View>
+  );
+}
+
 export function TapAndFindEngine({
   activity,
   onInteraction,
@@ -98,6 +137,10 @@ export function TapAndFindEngine({
         >
           {item.itemVisual === "potted-plant" ? (
             <PottedPlantIcon />
+          ) : item.itemVisual === "safe-crossing" ||
+            item.itemVisual === "red-signal" ||
+            item.itemVisual === "outside-crossing" ? (
+            <CrossingIcon variant={item.itemVisual} />
           ) : (
             <Text
               style={[
@@ -121,7 +164,14 @@ export function TapAndFindEngine({
 
   return (
     <View style={styles.container}>
-      {activity.config.featuredEmoji ? (
+      {activity.config.featuredVisual === "traffic-crossing" ? (
+        <View
+          accessibilityLabel={activity.config.featuredLabel}
+          style={styles.featured}
+        >
+          <CrossingIcon variant="safe-crossing" featured />
+        </View>
+      ) : activity.config.featuredEmoji ? (
         <View
           accessibilityLabel={activity.config.featuredLabel}
           style={styles.featured}
@@ -217,6 +267,89 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     backgroundColor: "#C65D3B",
+  },
+  crossingIcon: {
+    width: 78,
+    height: 48,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "center",
+    gap: 7,
+  },
+  crossingIconFeatured: {
+    width: 112,
+    height: 62,
+    transform: [{ scale: 1.15 }],
+  },
+  miniSignal: {
+    width: 22,
+    height: 40,
+    borderRadius: 7,
+    backgroundColor: "#40545B",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  signalLight: {
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    borderWidth: 2,
+    borderColor: "#F4F0D8",
+  },
+  road: {
+    width: 48,
+    height: 31,
+    borderRadius: 5,
+    paddingHorizontal: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#72858C",
+  },
+  roadOutside: {
+    width: 54,
+    backgroundColor: "#819399",
+  },
+  crosswalkStripe: {
+    width: 6,
+    height: 24,
+    borderRadius: 2,
+    backgroundColor: "#FFFFFF",
+  },
+  walker: {
+    width: 20,
+    height: 39,
+    alignItems: "center",
+  },
+  walkerHead: {
+    width: 11,
+    height: 11,
+    borderRadius: 6,
+    backgroundColor: "#D99A72",
+  },
+  walkerBody: {
+    width: 8,
+    height: 18,
+    marginTop: 1,
+    borderRadius: 4,
+    backgroundColor: "#4E8DB7",
+  },
+  walkerLimb: {
+    position: "absolute",
+    width: 4,
+    height: 15,
+    borderRadius: 2,
+    backgroundColor: "#355B73",
+  },
+  walkerArm: {
+    top: 14,
+    left: 3,
+    transform: [{ rotate: "35deg" }],
+  },
+  walkerLeg: {
+    bottom: 0,
+    right: 3,
+    transform: [{ rotate: "-25deg" }],
   },
   soundGrid: {
     maxWidth: 390,
