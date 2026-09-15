@@ -1,15 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { colors, shadow } from "../theme/colors";
+import { colors } from "../theme/colors";
 import { Shell } from "./components/Shell";
+import { LumiCharacter } from "../components/LumiCharacter";
 
 export function SplashScreen() {
   return (
     <Shell>
       <View style={styles.splash}>
-        <View style={styles.sunBadge}>
-          <Text style={styles.sun}>🌻</Text>
-        </View>
+        <LumiCharacter expression="happy" size="large" />
         <Text style={styles.brand}>lumi</Text>
         <Text style={styles.splashTagline}>crescer é descobrir</Text>
         <View style={styles.loadingDots}>
@@ -28,18 +27,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: colors.cream,
-  },
-  sunBadge: {
-    width: 112,
-    height: 112,
-    borderRadius: 56,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.yellow,
-    ...shadow,
-  },
-  sun: {
-    fontSize: 62,
   },
   brand: {
     color: colors.deepGreen,

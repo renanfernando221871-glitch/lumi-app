@@ -128,7 +128,12 @@ export function ActivityScreen({
       >
         <Text style={styles.kicker}>ATIVIDADE {activityNumber}</Text>
         <Text style={styles.title}>{activity.title}</Text>
-        <LumiSpeechBubble compact>{activity.instructionText}</LumiSpeechBubble>
+        <LumiSpeechBubble
+          compact
+          expression={session.complete ? "happy" : session.feedback ? "encouraging" : "curious"}
+        >
+          {activity.instructionText}
+        </LumiSpeechBubble>
         <AudioButton
           label={activity.audioLabel}
           text={activity.audioText ?? activity.instructionText}

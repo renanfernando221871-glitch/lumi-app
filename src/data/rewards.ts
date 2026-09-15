@@ -34,7 +34,7 @@ export const rewards: readonly RewardDefinition[] = [
     progressLockedIcon: "🌱",
     eyebrow: "CONQUISTA NOVA",
     title: "As compras\nestão prontas!",
-    message: "Você escolheu, contou e organizou tudo no Mercado do Lumi.",
+    message: "Você escolheu, contou e organizou tudo no Mercado da Lumi.",
     completionLabel: "Ver minhas compras",
   },
   {

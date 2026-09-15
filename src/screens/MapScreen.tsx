@@ -57,8 +57,8 @@ export function MapScreen({
             <Text style={styles.mapFlower}>🌷 🌼 🌷</Text>
             <Text style={styles.mapPath}>⌁  ·  ⌁  ·  ⌁</Text>
           </View>
-          <LumiSpeechBubble>
-             {currentWorld?.assets.mapPrompt}
+          <LumiSpeechBubble expression="encouraging">
+            {currentWorld?.assets.mapPrompt}
           </LumiSpeechBubble>
            {worlds.map((world, index) => {
              const unlocked = unlockedWorldIds.includes(world.id);

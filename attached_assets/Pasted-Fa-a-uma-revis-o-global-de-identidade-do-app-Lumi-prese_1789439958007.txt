@@ -1,0 +1,89 @@
+Faça uma revisão global de identidade do app Lumi, preservando a lógica funcional já existente.
+Temos dois objetivos principais:
+1. Tornar a personagem Lumi realmente presente no aplicativo
+A Lumi deve aparecer como uma companheira da criança ao longo da experiência, sem poluir as telas.
+Use a personagem Lumi de forma consistente nestes momentos:
+- tela de abertura / apresentação;
+- mapa dos mundos;
+- entrada de cada mundo;
+- início das atividades;
+- feedback positivo;
+- feedback de nova tentativa;
+- conquistas;
+- conclusão de um mundo.
+Não é necessário colocar a Lumi ocupando muito espaço em todas as telas.
+Ela deve funcionar como presença afetiva e visual do aplicativo.
+Quando aparecer nas atividades:
+- preferir uma versão pequena da personagem próxima ao balão de fala;
+- usar expressões coerentes com o momento: curiosa, feliz, encorajadora, comemorando;
+- não cobrir conteúdo importante;
+- manter consistência de tamanho e posicionamento.
+IMPORTANTE: reutilize o asset oficial da Lumi já existente no projeto, se houver.
+Não crie uma nova personagem diferente.
+Se existirem variações visuais, use a versão que melhor corresponde à identidade principal já definida.
+2. Padronizar a Lumi como personagem feminina
+A partir de agora, Lumi é oficialmente uma personagem feminina.
+Revise todos os textos do projeto e substitua referências masculinas à personagem.
+Padronização:
+- o Lumi → a Lumi
+- ele → ela, quando a referência for Lumi
+- adjetivos relacionados à Lumi devem ficar no feminino quando necessário
+- tratar Lumi como companheira, não como personagem masculino
+Exemplos:
+- “O Lumi quer duas bananas” → “A Lumi quer duas bananas”
+- “Ajude o Lumi” → “Ajude a Lumi”
+- “O Lumi está feliz” → “A Lumi está feliz”
+- “Lumi encontrou um amigo” pode permanecer assim quando “amigo” for outra personagem, e não referência à Lumi.
+Não alterar palavras masculinas que se refiram a outros personagens.
+Voz e personalidade
+Manter a Lumi com:
+- voz feminina;
+- tom acolhedor;
+- curiosa;
+- alegre;
+- gentil;
+- encorajadora;
+- nunca julgadora.
+Não alterar a arquitetura atual de áudio.
+Manter VoiceService, áudios locais e fallback existentes.
+Regras técnicas
+Preserve:
+- todos os 5 mundos;
+- as 40 atividades;
+- engines;
+- respostas corretas;
+- progresso;
+- recompensas;
+- navegação;
+- persistência;
+- lógica de desbloqueio;
+- testes existentes.
+Não reescreva atividades que já estão funcionando.
+Esta tarefa é de identidade visual e padronização de linguagem.
+Faça uma busca global no código
+Procure especialmente por ocorrências de:
+- o Lumi
+- O Lumi
+- do Lumi
+- Do Lumi
+- ele
+- referências masculinas à personagem
+Corrija somente quando a referência for realmente à Lumi.
+Atenção especial aos arquivos de conteúdo, como:
+- src/data/activities.ts
+- src/data/worlds.ts
+- componentes de feedback;
+- telas;
+- textos de conquistas;
+- instruções e mensagens de áudio.
+Validação obrigatória
+Ao terminar:
+- rodar TypeScript;
+- rodar testes;
+- abrir o Preview;
+- verificar pelo menos uma atividade de cada mundo;
+- confirmar que a Lumi aparece visualmente;
+- confirmar que nenhuma imagem fica sobreposta;
+- confirmar que os textos tratam Lumi no feminino;
+- confirmar que navegação e progresso continuam funcionando.
+Não faça alterações adicionais fora deste escopo.

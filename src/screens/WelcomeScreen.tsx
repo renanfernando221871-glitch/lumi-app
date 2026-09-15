@@ -4,6 +4,7 @@ import { LumiSpeechBubble } from "../components/LumiSpeechBubble";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
+import { LumiCharacter } from "../components/LumiCharacter";
 
 export function WelcomeScreen({ onContinue }: { onContinue: () => void }) {
   return (
@@ -12,7 +13,7 @@ export function WelcomeScreen({ onContinue }: { onContinue: () => void }) {
         <View style={styles.hero}>
           <Text style={styles.heroKicker}>UM OLÁ BEM BONITO</Text>
           <View style={styles.lumiHero}>
-            <Text style={styles.lumiHeroFace}>🌻</Text>
+            <LumiCharacter expression="curious" size="large" />
             <Text style={styles.sparkle}>✦</Text>
             <Text style={styles.sparkleTwo}>✦</Text>
           </View>
@@ -66,9 +67,6 @@ const styles = StyleSheet.create({
     borderWidth: 8,
     borderColor: colors.white,
     ...shadow,
-  },
-  lumiHeroFace: {
-    fontSize: 101,
   },
   sparkle: {
     position: "absolute",

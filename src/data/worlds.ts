@@ -5,7 +5,7 @@ import { rewards } from "./rewards";
 
 export const casaDoLumi: WorldDefinition = {
   id: "casa-do-lumi",
-  title: "Casa do Lumi",
+  title: "Casa da Lumi",
   description: "Um cantinho acolhedor para descobrir e aprender.",
   activityIds: activities
     .filter((activity) => activity.worldId === "casa-do-lumi")
@@ -14,7 +14,7 @@ export const casaDoLumi: WorldDefinition = {
   unlock: { unlockedByDefault: true },
   assets: {
     mapIcon: "🏡",
-    mapPrompt: "A Casa do Lumi está pertinho. Vamos olhar lá dentro?",
+    mapPrompt: "A Casa da Lumi está pertinho. Vamos olhar lá dentro?",
     entryLabel: "Entrar na casa",
     introPrompt:
       "Vamos cuidar da casa juntos? Cada brincadeira esconde uma descoberta.",
@@ -65,7 +65,7 @@ export const parqueDasCores: WorldDefinition = {
 
 export const mercadoDoLumi: WorldDefinition = {
   id: "mercado-do-lumi",
-  title: "Mercado do Lumi",
+  title: "Mercado da Lumi",
   description: "Um mercado alegre para escolher, contar e organizar alimentos.",
   activityIds: activities
     .filter((activity) => activity.worldId === "mercado-do-lumi")
@@ -77,7 +77,7 @@ export const mercadoDoLumi: WorldDefinition = {
   },
   assets: {
     mapIcon: "🏪",
-    mapPrompt: "O Mercado do Lumi apareceu no caminho. Vamos fazer descobertas?",
+    mapPrompt: "O Mercado da Lumi apareceu no caminho. Vamos fazer descobertas?",
     entryLabel: "Entrar no mercado",
     introPrompt:
       "Vamos passear pelo mercado? Há alimentos, sons e escolhas para descobrir.",

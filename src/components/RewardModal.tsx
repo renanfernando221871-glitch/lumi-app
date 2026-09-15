@@ -3,6 +3,7 @@ import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { colors, shadow } from "../theme/colors";
 import { PrimaryButton } from "./PrimaryButton";
 import { RewardDefinition } from "../types";
+import { LumiCharacter } from "./LumiCharacter";
 
 export function RewardModal({
   visible,
@@ -25,6 +26,7 @@ export function RewardModal({
           >
             <Text style={styles.closeText}>×</Text>
           </Pressable>
+          <LumiCharacter expression="celebrating" size="large" />
           <Text style={styles.burst}>{reward.icon}</Text>
           <Text style={styles.eyebrow}>{reward.eyebrow}</Text>
           <Text style={styles.title}>{reward.title}</Text>

@@ -45,7 +45,7 @@ export function HouseScreen({
               <Text style={styles.pageTitle}>{world.title}</Text>
             </View>
           </View>
-          <LumiSpeechBubble>
+          <LumiSpeechBubble expression="curious">
             {world.assets.introPrompt ??
               `${world.description} Vamos descobrir juntos.`}
           </LumiSpeechBubble>
