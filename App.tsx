@@ -14,6 +14,7 @@ import { useAppNavigation } from "./src/navigation/useAppNavigation";
 import { ActivityScreen } from "./src/screens/ActivityScreen";
 import { HouseScreen } from "./src/screens/HouseScreen";
 import { GuardianSignupScreen } from "./src/screens/GuardianSignupScreen";
+import { SafetyScreen } from "./src/screens/SafetyScreen";
 import { MapScreen } from "./src/screens/MapScreen";
 import { PersonalizeScreen } from "./src/screens/PersonalizeScreen";
 import { RewardScreen } from "./src/screens/RewardScreen";
@@ -96,7 +97,7 @@ function LumiApp() {
     const next = { name, avatar, hasOnboarded: true };
     setProfile(next);
     saveProfile(next).catch(console.error);
-    navigation.replace("map");
+    navigation.replace("safety");
   };
 
   if (!hydrated || navigation.route === "splash") {
@@ -127,6 +128,15 @@ function LumiApp() {
         initialName={profile.name}
         onBack={navigation.goBack}
         onContinue={updateProfile}
+      />
+    );
+  }
+
+  if (navigation.route === "safety") {
+    return (
+      <SafetyScreen
+        onBack={navigation.goBack}
+        onContinue={() => navigation.replace("map")}
       />
     );
   }

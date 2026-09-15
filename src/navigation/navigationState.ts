@@ -3,6 +3,7 @@ export type StaticRoute =
   | "welcome"
   | "guardian"
   | "personalize"
+  | "safety"
   | "map";
 
 export type NavigationState =
@@ -10,6 +11,7 @@ export type NavigationState =
   | { route: "welcome" }
   | { route: "guardian" }
   | { route: "personalize" }
+  | { route: "safety" }
   | { route: "map" }
   | { route: "house"; worldId: string }
   | {
@@ -57,6 +59,9 @@ export function navigationReducer(
       if (state.route === "personalize") {
         return { route: "guardian" };
       }
+      if (state.route === "safety") {
+        return { route: "personalize" };
+      }
       if (state.route === "house") {
         return { route: "map" };
       }
@@ -72,6 +77,7 @@ export function navigationReducer(
 export function canGoBack(state: NavigationState) {
   return (
     state.route === "personalize" ||
+    state.route === "safety" ||
     state.route === "guardian" ||
     state.route === "house" ||
     state.route === "activity"
