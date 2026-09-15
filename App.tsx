@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Platform } from "react-native";
 import { activities } from "./src/data/activities";
 import { getRewardById, rewards } from "./src/data/rewards";
 import { worldCatalog } from "./src/data/worlds";
@@ -25,6 +26,7 @@ import {
   defaultProfile,
   defaultProgress,
   loadSavedState,
+  preparePreviewProgress,
   saveProfile,
   saveProgress,
 } from "./src/storage/progress";
@@ -82,14 +84,30 @@ function LumiApp() {
 
   useEffect(() => {
     let mounted = true;
-    loadSavedState().then(({ profile: savedProfile, progress: savedProgress }) => {
-      if (!mounted) return;
-      setProfile(savedProfile);
-      progressRef.current = savedProgress;
-      setProgress(savedProgress);
-      setHydrated(true);
-      replace("welcome");
-    });
+    const forcePreviewReset =
+      __DEV__ &&
+      Platform.OS === "web" &&
+      typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).get("resetProgress") === "1";
+    const prepare =
+      __DEV__ && Platform.OS === "web"
+        ? preparePreviewProgress(forcePreviewReset)
+        : Promise.resolve();
+
+    prepare
+      .then(loadSavedState)
+      .then(({ profile: savedProfile, progress: savedProgress }) => {
+        if (!mounted) return;
+        setProfile(savedProfile);
+        progressRef.current = savedProgress;
+        setProgress(savedProgress);
+        setHydrated(true);
+        replace("welcome");
+      })
+      .catch((error) => {
+        console.error("[Lumi preview] Não foi possível preparar o progresso.", error);
+        if (mounted) setHydrated(true);
+      });
     return () => {
       mounted = false;
     };

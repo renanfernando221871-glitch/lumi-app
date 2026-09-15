@@ -11,6 +11,8 @@ import {
 
 const PROFILE_KEY = "@lumi/profile";
 const PROGRESS_KEY = "@lumi/progress";
+const PREVIEW_RESET_KEY = "@lumi/preview-progress-reset";
+const PREVIEW_RESET_VERSION = "farm-first-world-order-v1";
 
 export const defaultProfile: ChildProfile = {
   name: "",
@@ -22,6 +24,17 @@ export const defaultProgress: ProgressState = {
   completedActivityIds: [],
   earnedRewardIds: [],
 };
+
+/**
+ * Clears stale progress once in the local web Preview after progression rules
+ * change. Published builds never call this function.
+ */
+export async function preparePreviewProgress(force = false) {
+  const appliedVersion = await AsyncStorage.getItem(PREVIEW_RESET_KEY);
+  if (!force && appliedVersion === PREVIEW_RESET_VERSION) return;
+  await AsyncStorage.removeItem(PROGRESS_KEY);
+  await AsyncStorage.setItem(PREVIEW_RESET_KEY, PREVIEW_RESET_VERSION);
+}
 
 export async function loadSavedState() {
   const catalogIds = worldCatalog.flatMap((world) => world.activityIds);
