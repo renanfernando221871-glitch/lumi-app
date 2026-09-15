@@ -1,5 +1,13 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ImageBackground,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { BackButton } from "../components/BackButton";
 import { LumiSpeechBubble } from "../components/LumiSpeechBubble";
 import { PrimaryButton } from "../components/PrimaryButton";
@@ -32,6 +40,16 @@ export function HouseScreen({
     completedCount === activities.length
       ? "Revisitar atividades"
       : "Começar a brincar";
+
+  if (world.id === "fazenda-das-descobertas") {
+    return (
+      <FarmWorldEntrance
+        nextLabel={nextLabel}
+        onBack={onBack}
+        onStart={onStart}
+      />
+    );
+  }
 
   return (
     <Shell>
@@ -83,7 +101,76 @@ export function HouseScreen({
   );
 }
 
+function FarmWorldEntrance({
+  nextLabel,
+  onBack,
+  onStart,
+}: {
+  nextLabel: string;
+  onBack: () => void;
+  onStart: () => void;
+}) {
+  const { height } = useWindowDimensions();
+
+  return (
+    <Shell>
+      <View style={[styles.farmScreen, { minHeight: height }]}>
+        <ImageBackground
+          accessibilityLabel="Mundo da Fazenda"
+          imageStyle={styles.farmBackgroundImage}
+          resizeMode="cover"
+          source={require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_18_14_43_1789507011759.png")}
+          style={[styles.farmBackground, { height }]}
+        >
+          <Pressable
+            accessibilityLabel="Voltar"
+            accessibilityRole="button"
+            onPress={onBack}
+            style={styles.farmBackHotspot}
+          />
+          <Pressable
+            accessibilityHint="Abre a próxima atividade da Fazenda"
+            accessibilityLabel={nextLabel}
+            accessibilityRole="button"
+            onPress={onStart}
+            style={styles.farmStartHotspot}
+          />
+        </ImageBackground>
+      </View>
+    </Shell>
+  );
+}
+
 const styles = StyleSheet.create({
+  farmScreen: {
+    width: "100%",
+    maxWidth: 520,
+    alignSelf: "center",
+    overflow: "hidden",
+    backgroundColor: "#BCEFFF",
+  },
+  farmBackground: {
+    width: "100%",
+  },
+  farmBackgroundImage: {
+    transform: [{ scale: 1.055 }],
+  },
+  farmBackHotspot: {
+    position: "absolute",
+    top: "7%",
+    left: "4%",
+    width: "17%",
+    height: "9%",
+    borderRadius: 40,
+  },
+  farmStartHotspot: {
+    position: "absolute",
+    left: "12%",
+    bottom: "10%",
+    width: "76%",
+    height: "10%",
+    borderRadius: 40,
+  },
   scroll: {
     flexGrow: 1,
     paddingVertical: 22,
