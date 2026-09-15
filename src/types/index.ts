@@ -24,7 +24,10 @@ export type ActivityItem = {
     | "potted-plant"
     | "safe-crossing"
     | "red-signal"
-    | "outside-crossing";
+    | "outside-crossing"
+    | "help-store"
+    | "walk-away"
+    | "take-toy";
   isTarget?: boolean;
   emojiScale?: number;
 };
@@ -59,7 +62,7 @@ export type TapAndFindActivity = ActivityContent & {
       | "action-options";
     featuredEmoji?: string;
     featuredLabel?: string;
-    featuredVisual?: "traffic-crossing";
+    featuredVisual?: "traffic-crossing" | "help-friend-scene";
   };
 };
 export type TapAndFindActivityDefinition = TapAndFindActivity;

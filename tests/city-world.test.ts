@@ -278,7 +278,7 @@ test("Ajude o amigo keeps helping to store toys as the kind answer", () => {
 
   assert.equal(
     activity.instructionText,
-    "O que podemos fazer para ajudar?",
+    "O amigo derrubou os brinquedos. Como podemos ajudar?",
   );
   assert.equal(activity.config.presentation, "action-options");
   assert.equal(activity.config.targetId, "city-help-pick-up");
@@ -287,16 +287,16 @@ test("Ajude o amigo keeps helping to store toys as the kind answer", () => {
     [
       { id: "city-help-pick-up", label: "ajudar a guardar" },
       { id: "city-walk-away", label: "ir embora" },
-      { id: "city-keep-playing", label: "pegar para si" },
+      { id: "city-keep-playing", label: "pegar um brinquedo" },
     ],
   );
   assert.equal(
     activity.successFeedback,
-    "Isso! Ajudar um amigo é uma atitude gentil.",
+    "Isso! Podemos ajudar a guardar os brinquedos.",
   );
   assert.equal(
     activity.retryFeedback,
-    "Pense no que faria o amigo se sentir melhor.",
+    "O amigo precisa de ajuda. O que podemos fazer juntos?",
   );
 });
 
