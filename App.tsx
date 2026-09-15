@@ -16,7 +16,6 @@ import { HouseScreen } from "./src/screens/HouseScreen";
 import { MapScreen } from "./src/screens/MapScreen";
 import { PersonalizeScreen } from "./src/screens/PersonalizeScreen";
 import { RewardScreen } from "./src/screens/RewardScreen";
-import { SplashScreen } from "./src/screens/SplashScreen";
 import { WelcomeScreen } from "./src/screens/WelcomeScreen";
 import {
   defaultProfile,
@@ -85,9 +84,7 @@ function LumiApp() {
       progressRef.current = savedProgress;
       setProgress(savedProgress);
       setHydrated(true);
-      setTimeout(() => {
-        if (mounted) replace(savedProfile.hasOnboarded ? "map" : "welcome");
-      }, 850);
+      replace(savedProfile.hasOnboarded ? "map" : "welcome");
     });
     return () => {
       mounted = false;
@@ -101,7 +98,14 @@ function LumiApp() {
     navigation.replace("map");
   };
 
-  if (!hydrated || navigation.route === "splash") return <SplashScreen />;
+  if (!hydrated || navigation.route === "splash") {
+    return (
+      <WelcomeScreen
+        disabled={!hydrated}
+        onContinue={() => navigation.replace("personalize")}
+      />
+    );
+  }
 
   if (navigation.route === "welcome") {
     return <WelcomeScreen onContinue={() => navigation.replace("personalize")} />;
@@ -255,5 +259,7 @@ function NavigationRedirect({ onRedirect }: { onRedirect: () => void }) {
   useEffect(() => {
     onRedirect();
   }, [onRedirect]);
-  return <SplashScreen />;
+  return (
+    <WelcomeScreen disabled onContinue={() => undefined} />
+  );
 }
