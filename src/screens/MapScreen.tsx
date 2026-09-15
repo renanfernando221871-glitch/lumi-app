@@ -1,9 +1,12 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { LumiSpeechBubble } from "../components/LumiSpeechBubble";
-import { PrimaryButton } from "../components/PrimaryButton";
+import {
+  ImageBackground,
+  Pressable,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { ChildProfile, RewardDefinition, WorldDefinition } from "../types";
-import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
 
 type Props = {
@@ -16,263 +19,105 @@ type Props = {
   onEditProfile: () => void;
 };
 
+type WorldPosition = {
+  left: `${number}%`;
+  top: `${number}%`;
+  width: `${number}%`;
+  height: `${number}%`;
+};
+
+const worldPositions: Record<string, WorldPosition> = {
+  "fazenda-das-descobertas": { left: "7%", top: "35%", width: "39%", height: "17%" },
+  "parque-das-cores": { left: "58%", top: "35%", width: "38%", height: "17%" },
+  "casa-do-lumi": { left: "29%", top: "48%", width: "43%", height: "17%" },
+  "mercado-do-lumi": { left: "3%", top: "61%", width: "43%", height: "17%" },
+  "cidade-das-aventuras": { left: "55%", top: "63%", width: "42%", height: "17%" },
+};
+
 export function MapScreen({
-  profile,
+  profile: _profile,
   worlds,
   unlockedWorldIds,
-  completedActivityIds,
-  rewards,
+  completedActivityIds: _completedActivityIds,
+  rewards: _rewards,
   onOpenWorld,
   onEditProfile,
 }: Props) {
-  const currentWorld =
-    worlds.find((world) => {
-      const unlocked = unlockedWorldIds.includes(world.id);
-      const complete = world.activityIds.every((id) =>
-        completedActivityIds.includes(id),
-      );
-      return unlocked && !complete;
-    }) ??
-    [...worlds]
-      .reverse()
-      .find((world) => unlockedWorldIds.includes(world.id));
+  const { height } = useWindowDimensions();
 
   return (
     <Shell>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.mapInner}>
-          <View style={styles.mapHeader}>
-            <View>
-              <Text style={styles.greeting}>Oi, {profile.name}!</Text>
-              <Text style={styles.mapTitle}>Seu jardim de descobertas</Text>
-            </View>
-            <Text onPress={onEditProfile} style={styles.profileAvatar}>
-              {profile.avatar}
-            </Text>
-          </View>
-          <View style={styles.mapIllustration}>
-            <Text style={styles.mapSun}>☀️</Text>
-            <Text style={styles.mapCloud}>☁️</Text>
-            <Text style={styles.mapTree}>🌳</Text>
-            <Text style={styles.mapFlower}>🌷 🌼 🌷</Text>
-            <Text style={styles.mapPath}>⌁  ·  ⌁  ·  ⌁</Text>
-          </View>
-          <LumiSpeechBubble expression="encouraging">
-            {currentWorld?.assets.mapPrompt}
-          </LumiSpeechBubble>
-           {worlds.map((world, index) => {
-             const unlocked = unlockedWorldIds.includes(world.id);
-             const reward = rewards[world.rewardId];
-             const completedCount = world.activityIds.filter((id) =>
-               completedActivityIds.includes(id),
-             ).length;
-             const complete = completedCount === world.activityIds.length;
-             return (
-               <View key={world.id}>
-                 <View style={[styles.mapCard, !unlocked && styles.lockedCard]}>
-                   <View style={styles.homeIcon}>
-                     <Text style={styles.homeEmoji}>{world.assets.mapIcon}</Text>
-                   </View>
-                   <View style={styles.homeCopy}>
-                     <Text style={styles.homeEyebrow}>MUNDO {index + 1}</Text>
-                     <Text style={styles.homeTitle}>{world.title}</Text>
-                     <Text style={styles.homeSub}>
-                       {unlocked
-                         ? `${completedCount}/${world.activityIds.length} descobertas`
-                         : "Uma nova descoberta está a caminho"}
-                     </Text>
-                   </View>
-                   <Text style={styles.homeArrow}>{unlocked ? "›" : "☁️"}</Text>
-                 </View>
-                 {unlocked ? (
-                   <PrimaryButton
-                     label={world.assets.entryLabel}
-                     onPress={() => onOpenWorld(world.id)}
-                     variant="blue"
-                     style={styles.fullButton}
-                   />
-                 ) : null}
-                 <View style={styles.progressCard}>
-                   <View style={styles.progressCopy}>
-                     <Text style={styles.progressTitle}>{world.title}</Text>
-                     <Text style={styles.progressSub}>
-                       {complete
-                         ? "Descoberta completa!"
-                         : unlocked
-                           ? "Cada descoberta faz uma conquista crescer."
-                           : "Complete o mundo anterior para explorar."}
-                     </Text>
-                   </View>
-                   <Text style={styles.progressFlower}>
-                     {complete && reward ? reward.icon : reward?.progressLockedIcon ?? "🌱"}
-                   </Text>
-                 </View>
-               </View>
-             );
-           })}
-        </View>
-      </ScrollView>
+      <View style={[styles.screen, { minHeight: height }]}>
+        <ImageBackground
+          accessibilityLabel="Mapa mágico de aventuras da Lumi"
+          resizeMode="stretch"
+          source={require("../../assets/images/world-map-official.png")}
+          style={[styles.map, { height }]}
+        >
+          <Pressable
+            accessibilityLabel="Configurações do perfil"
+            onPress={onEditProfile}
+            style={styles.settingsHotspot}
+          />
+
+          {worlds.map((world) => {
+            const position = worldPositions[world.id];
+            if (!position) return null;
+
+            const unlocked = unlockedWorldIds.includes(world.id);
+            return (
+              <Pressable
+                accessibilityLabel={`${world.title}${unlocked ? "" : ", bloqueado"}`}
+                accessibilityRole="button"
+                accessibilityState={{ disabled: !unlocked }}
+                disabled={!unlocked}
+                key={world.id}
+                onPress={() => onOpenWorld(world.id)}
+                style={[styles.worldHotspot, position]}
+              />
+            );
+          })}
+
+          <Pressable
+            accessibilityLabel="Editar perfil"
+            onPress={onEditProfile}
+            style={styles.profileHotspot}
+          />
+        </ImageBackground>
+      </View>
     </Shell>
   );
 }
 
 const styles = StyleSheet.create({
-  scroll: {
-    flexGrow: 1,
-    paddingVertical: 22,
-  },
-  mapInner: {
+  screen: {
     width: "100%",
-    maxWidth: 740,
+    maxWidth: 520,
     alignSelf: "center",
-    paddingHorizontal: 22,
-    paddingBottom: 30,
-  },
-  mapHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 13,
-  },
-  greeting: {
-    color: colors.green,
-    fontSize: 15,
-    fontWeight: "800",
-  },
-  mapTitle: {
-    color: colors.deepGreen,
-    fontSize: 27,
-    fontWeight: "900",
-    marginTop: 2,
-  },
-  profileAvatar: {
-    width: 52,
-    height: 52,
-    borderRadius: 18,
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 28,
-    backgroundColor: colors.softYellow,
-  },
-  mapIllustration: {
-    height: 230,
-    borderRadius: 28,
-    position: "relative",
     overflow: "hidden",
-    marginBottom: 17,
-    backgroundColor: "#BFE6FA",
-    ...shadow,
+    backgroundColor: "#BCEFFF",
   },
-  mapSun: {
-    position: "absolute",
-    top: 19,
-    right: 30,
-    fontSize: 43,
-  },
-  mapCloud: {
-    position: "absolute",
-    top: 32,
-    left: 35,
-    fontSize: 33,
-  },
-  mapTree: {
-    position: "absolute",
-    bottom: 38,
-    left: 30,
-    fontSize: 72,
-  },
-  mapFlower: {
-    position: "absolute",
-    bottom: 30,
-    right: 20,
-    fontSize: 29,
-  },
-  mapPath: {
-    position: "absolute",
-    bottom: 62,
-    left: "37%",
-    color: colors.yellow,
-    fontSize: 29,
-    fontWeight: "900",
-  },
-  mapCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 15,
-    marginTop: 19,
-    borderRadius: 23,
-    backgroundColor: colors.white,
-    ...shadow,
-  },
-  lockedCard: {
-    opacity: 0.82,
-    backgroundColor: "#F7F5EC",
-  },
-  homeIcon: {
-    width: 68,
-    height: 68,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.softYellow,
-  },
-  homeEmoji: {
-    fontSize: 39,
-  },
-  homeCopy: {
-    flex: 1,
-    marginLeft: 14,
-  },
-  homeEyebrow: {
-    color: colors.coral,
-    fontSize: 11,
-    fontWeight: "900",
-    letterSpacing: 1.1,
-  },
-  homeTitle: {
-    color: colors.deepGreen,
-    fontSize: 21,
-    fontWeight: "900",
-    marginTop: 2,
-  },
-  homeSub: {
-    color: colors.muted,
-    fontSize: 13,
-    marginTop: 2,
-  },
-  homeArrow: {
-    color: colors.green,
-    fontSize: 35,
-    paddingHorizontal: 6,
-  },
-  progressCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 16,
-    marginTop: 14,
-    borderRadius: 23,
-    backgroundColor: colors.softGreen,
-  },
-  progressCopy: {
-    flex: 1,
-  },
-  progressTitle: {
-    color: colors.deepGreen,
-    fontSize: 16,
-    fontWeight: "900",
-  },
-  progressSub: {
-    color: colors.muted,
-    fontSize: 13,
-    marginTop: 3,
-  },
-  progressFlower: {
-    fontSize: 39,
-    marginLeft: 10,
-  },
-  fullButton: {
+  map: {
     width: "100%",
-    marginTop: 20,
+  },
+  worldHotspot: {
+    position: "absolute",
+    borderRadius: 36,
+  },
+  settingsHotspot: {
+    position: "absolute",
+    top: "5%",
+    right: "3%",
+    width: "15%",
+    height: "8%",
+    borderRadius: 40,
+  },
+  profileHotspot: {
+    position: "absolute",
+    right: "3%",
+    bottom: "1.5%",
+    width: "18%",
+    height: "8%",
+    borderRadius: 30,
   },
 });
