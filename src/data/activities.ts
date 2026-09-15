@@ -21,7 +21,7 @@ export const activities: ActivityDefinition[] = [
       items: [
         { id: "lamp", label: "abajur", emoji: "🛋️", color: "#FFD88A" },
         { id: "bed", label: "cama", emoji: "🛏️", color: "#9CC9F5", isTarget: true },
-        { id: "plant", label: "plantinha", emoji: "🪴", color: "#9DDD83" },
+        { id: "plant", label: "plantinha", emoji: "🌱", color: "#9DDD83", itemVisual: "potted-plant" },
         { id: "book", label: "livro", emoji: "📚", color: "#F7A49B" },
       ],
     },

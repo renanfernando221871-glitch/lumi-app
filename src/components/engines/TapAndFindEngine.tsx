@@ -10,6 +10,19 @@ export type TapAndFindEngineProps = {
   disabled?: boolean;
 };
 
+function PottedPlantIcon() {
+  return (
+    <View style={styles.plantIcon}>
+      <View style={[styles.plantLeaf, styles.plantLeafLeft]} />
+      <View style={[styles.plantLeaf, styles.plantLeafTop]} />
+      <View style={[styles.plantLeaf, styles.plantLeafRight]} />
+      <View style={styles.plantStem} />
+      <View style={styles.plantPotRim} />
+      <View style={styles.plantPot} />
+    </View>
+  );
+}
+
 export function TapAndFindEngine({
   activity,
   onInteraction,
@@ -83,17 +96,21 @@ export function TapAndFindEngine({
             },
           ]}
         >
-          <Text
-            style={[
-              styles.itemEmoji,
-              soundOptions && styles.soundText,
-              item.emojiScale
-                ? { fontSize: 47 * item.emojiScale }
-                : undefined,
-            ]}
-          >
-            {item.emoji}
-          </Text>
+          {item.itemVisual === "potted-plant" ? (
+            <PottedPlantIcon />
+          ) : (
+            <Text
+              style={[
+                styles.itemEmoji,
+                soundOptions && styles.soundText,
+                item.emojiScale
+                  ? { fontSize: 47 * item.emojiScale }
+                  : undefined,
+              ]}
+            >
+              {item.emoji}
+            </Text>
+          )}
           {!soundOptions ? (
             <Text style={styles.itemLabel}>{item.label}</Text>
           ) : null}
@@ -148,6 +165,59 @@ const styles = StyleSheet.create({
     ...shadow,
   },
   itemEmoji: { fontSize: 47 },
+  plantIcon: {
+    width: 52,
+    height: 52,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  plantLeaf: {
+    position: "absolute",
+    width: 22,
+    height: 14,
+    borderRadius: 12,
+    backgroundColor: "#3F9A55",
+  },
+  plantLeafLeft: {
+    top: 10,
+    left: 5,
+    transform: [{ rotate: "32deg" }],
+  },
+  plantLeafTop: {
+    top: 2,
+    left: 15,
+    backgroundColor: "#56AD63",
+    transform: [{ rotate: "88deg" }],
+  },
+  plantLeafRight: {
+    top: 10,
+    right: 5,
+    backgroundColor: "#70BC68",
+    transform: [{ rotate: "-32deg" }],
+  },
+  plantStem: {
+    position: "absolute",
+    bottom: 16,
+    width: 4,
+    height: 19,
+    borderRadius: 2,
+    backgroundColor: "#397A46",
+  },
+  plantPotRim: {
+    width: 31,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: "#D87548",
+    zIndex: 1,
+  },
+  plantPot: {
+    width: 25,
+    height: 15,
+    marginTop: -1,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    backgroundColor: "#C65D3B",
+  },
   soundGrid: {
     maxWidth: 390,
     flexWrap: "nowrap",

@@ -17,6 +17,18 @@ import {
   navigationReducer,
 } from "../src/navigation/navigationState";
 
+test("Conheça o quarto renders a supported plant visual and keeps bed correct", () => {
+  const activity = activities.find(({ id }) => id === "find-bed");
+  assert.ok(activity && activity.engineType === "tap-and-find");
+  if (!activity || activity.engineType !== "tap-and-find") return;
+
+  const plant = activity.config.items.find(({ id }) => id === "plant");
+  assert.equal(plant?.label, "plantinha");
+  assert.equal(plant?.itemVisual, "potted-plant");
+  assert.equal(activity.config.targetId, "bed");
+  assert.deepEqual(evaluateTapAndFind(activity, "bed"), { completed: true });
+});
+
 test("production activities use the exhaustive interaction engine contracts", () => {
   const casaActivityIds = casaDoLumi.activityIds;
   assert.deepEqual(

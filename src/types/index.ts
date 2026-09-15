@@ -19,6 +19,8 @@ export type ActivityItem = {
   headwearEmoji?: string;
   /** Optional single-component character visual for roles without a clear emoji. */
   characterVisual?: "driver";
+  /** Optional drawn visual for items whose emoji is not reliably supported. */
+  itemVisual?: "potted-plant";
   isTarget?: boolean;
   emojiScale?: number;
 };
