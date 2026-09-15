@@ -6,8 +6,9 @@ export type LumiExpression =
   | "curious"
   | "happy"
   | "encouraging"
+  | "childIntro"
   | "celebrating";
-export type LumiSize = "small" | "medium" | "large";
+export type LumiSize = "small" | "medium" | "large" | "hero";
 
 type Props = {
   expression?: LumiExpression;
@@ -20,6 +21,7 @@ const sources: Record<LumiExpression, ImageSourcePropType> = {
   curious: require("../../assets/images/lumi/lumi-curious.png"),
   happy: require("../../assets/images/lumi/lumi-happy.png"),
   encouraging: require("../../assets/images/lumi/lumi-gentle.png"),
+  childIntro: require("../../assets/images/lumi/lumi-child-intro.png"),
   celebrating: require("../../assets/images/lumi/lumi-happy.png"),
 };
 
@@ -27,6 +29,7 @@ const sizes = {
   small: { width: 52, height: 58 },
   medium: { width: 88, height: 96 },
   large: { width: 168, height: 178 },
+  hero: { width: 300, height: 435 },
 };
 
 export function LumiCharacter({

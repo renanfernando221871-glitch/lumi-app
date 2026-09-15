@@ -51,13 +51,11 @@ export function ChildIntroScreen({ childName: _childName, onBack, onContinue }: 
         />
 
         <View style={styles.characterStage}>
-          <View style={styles.lumiScale}>
-            <LumiCharacter
-              accessibilityLabel="Lumi, personagem oficial"
-              expression="main"
-              size="large"
-            />
-          </View>
+          <LumiCharacter
+            accessibilityLabel="Lumi, personagem oficial"
+            expression="childIntro"
+            size="hero"
+          />
           <Text style={[styles.ray, styles.rayLeft]}>››</Text>
           <Text style={[styles.ray, styles.rayRight]}>››</Text>
         </View>
@@ -154,7 +152,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "relative",
   },
-  lumiScale: { transform: [{ scale: 2.12 }] },
   ray: {
     position: "absolute",
     color: "#FFBE31",
