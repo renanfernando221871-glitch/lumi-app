@@ -20,7 +20,7 @@ type Props = {
   onContinue: (name: string, avatar: string) => void;
 };
 
-type Gender = "girl" | "boy" | "not-informed";
+type AvatarChoice = "girl" | "boy";
 
 const roundedFont = Platform.select({
   ios: "Arial Rounded MT Bold",
@@ -35,7 +35,7 @@ export function PersonalizeScreen({
 }: Props) {
   const [name, setName] = useState(initialName);
   const [birthDate, setBirthDate] = useState("");
-  const [gender, setGender] = useState<Gender | null>(null);
+  const [avatarChoice, setAvatarChoice] = useState<AvatarChoice | null>(null);
   const [error, setError] = useState("");
 
   const formatBirthDate = (value: string) => {
@@ -54,7 +54,10 @@ export function PersonalizeScreen({
       return;
     }
     setError("");
-    onContinue(name.trim(), "🌻");
+    onContinue(
+      name.trim(),
+      avatarChoice === "girl" ? "🌸" : avatarChoice === "boy" ? "🌱" : "🌻",
+    );
   };
 
   return (
@@ -97,12 +100,12 @@ export function PersonalizeScreen({
           <View style={styles.lumiGreeting}>
             <View style={styles.speechBubble}>
               <Text style={styles.speechText}>
-                Agora me conte sobre quem vai descobrir!
+                Vamos conhecer a criança!
               </Text>
             </View>
             <LumiCharacter
               accessibilityLabel="Lumi, personagem oficial"
-              expression="happy"
+              expression="main"
               size="large"
             />
           </View>
@@ -115,18 +118,19 @@ export function PersonalizeScreen({
           </Text>
 
           <Text style={styles.avatarTitle}>Escolha um avatar</Text>
-          <View style={styles.avatarWrap}>
-            <Image
-              accessibilityLabel="Avatar da criança"
-              resizeMode="cover"
-              source={require("../../assets/images/onboarding/child-avatar.png")}
-              style={styles.avatar}
+          <View accessibilityRole="radiogroup" style={styles.avatarOptions}>
+            <AvatarOption
+              label="Menina"
+              onPress={() => setAvatarChoice("girl")}
+              selected={avatarChoice === "girl"}
+              source={require("../../assets/images/onboarding/girl-avatar.png")}
             />
-            <View accessibilityLabel="Adicionar foto futuramente" style={styles.camera}>
-              <View style={styles.cameraBody}>
-                <View style={styles.cameraLens} />
-              </View>
-            </View>
+            <AvatarOption
+              label="Menino"
+              onPress={() => setAvatarChoice("boy")}
+              selected={avatarChoice === "boy"}
+              source={require("../../assets/images/onboarding/boy-avatar.png")}
+            />
           </View>
 
           <Text style={styles.label}>Nome da criança</Text>
@@ -154,26 +158,6 @@ export function PersonalizeScreen({
             value={birthDate}
           />
 
-          <Text style={styles.genderTitle}>Gênero (opcional)</Text>
-          <View style={styles.genderOptions}>
-            <GenderOption
-              label="Menina"
-              onPress={() => setGender("girl")}
-              selected={gender === "girl"}
-            />
-            <GenderOption
-              label="Menino"
-              onPress={() => setGender("boy")}
-              selected={gender === "boy"}
-            />
-            <GenderOption
-              label="Prefiro não informar"
-              onPress={() => setGender("not-informed")}
-              selected={gender === "not-informed"}
-              wide
-            />
-          </View>
-
           {error ? <Text style={styles.error}>{error}</Text> : null}
 
           <PrimaryButton
@@ -187,35 +171,30 @@ export function PersonalizeScreen({
   );
 }
 
-function GenderOption({
+function AvatarOption({
   label,
   onPress,
   selected,
-  wide = false,
+  source,
 }: {
   label: string;
   onPress: () => void;
   selected: boolean;
-  wide?: boolean;
+  source: number;
 }) {
   return (
     <Pressable
+      accessibilityLabel={`Escolher avatar: ${label}`}
       accessibilityRole="radio"
       accessibilityState={{ checked: selected }}
       onPress={onPress}
       style={({ pressed }) => [
-        styles.genderOption,
-        wide && styles.genderOptionWide,
-        selected && styles.genderSelected,
+        styles.avatarOption,
+        selected && styles.avatarSelected,
         pressed && styles.pressed,
       ]}
     >
-      <View style={[styles.radio, selected && styles.radioSelected]}>
-        {selected ? <View style={styles.radioDot} /> : null}
-      </View>
-      <Text style={[styles.genderLabel, selected && styles.genderLabelSelected]}>
-        {label}
-      </Text>
+      <Image resizeMode="cover" source={source} style={styles.avatar} />
     </Pressable>
   );
 }
@@ -327,7 +306,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   speechBubble: {
-    width: 188,
+    width: 190,
     minHeight: 78,
     borderRadius: 28,
     alignItems: "center",
@@ -339,8 +318,8 @@ const styles = StyleSheet.create({
   speechText: {
     color: "#123C84",
     fontFamily: roundedFont,
-    fontSize: 16,
-    lineHeight: 19,
+    fontSize: 19,
+    lineHeight: 22,
     fontWeight: "900",
     textAlign: "center",
   },
@@ -377,51 +356,29 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     textAlign: "center",
     marginTop: 15,
-    marginBottom: 8,
+    marginBottom: 9,
   },
-  avatarWrap: {
-    width: 116,
-    height: 116,
-    alignSelf: "center",
-    position: "relative",
-    borderWidth: 5,
-    borderColor: "#FFD6ED",
-    borderRadius: 58,
-    backgroundColor: "#FFE8F5",
+  avatarOptions: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 14,
+  },
+  avatarOption: {
+    width: 132,
+    height: 132,
+    borderWidth: 3,
+    borderColor: "transparent",
+    borderRadius: 66,
+    overflow: "hidden",
+  },
+  avatarSelected: {
+    borderColor: colors.green,
+    transform: [{ scale: 1.03 }],
   },
   avatar: {
     width: "100%",
     height: "100%",
-    borderRadius: 53,
-  },
-  camera: {
-    position: "absolute",
-    right: -7,
-    bottom: 0,
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.green,
-    borderWidth: 3,
-    borderColor: colors.white,
-  },
-  cameraBody: {
-    width: 18,
-    height: 13,
-    borderWidth: 2,
-    borderColor: colors.white,
-    borderRadius: 3,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  cameraLens: {
-    width: 6,
-    height: 6,
-    borderWidth: 1.5,
-    borderColor: colors.white,
-    borderRadius: 3,
   },
   label: {
     color: "#173D82",
@@ -440,62 +397,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FBFCFE",
     color: colors.ink,
     fontSize: 16,
-  },
-  genderTitle: {
-    color: "#173D82",
-    fontSize: 14,
-    fontWeight: "800",
-    marginTop: 14,
-    marginBottom: 7,
-  },
-  genderOptions: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-  genderOption: {
-    minHeight: 39,
-    borderWidth: 1.5,
-    borderColor: "#D3DAE3",
-    borderRadius: 14,
-    paddingHorizontal: 11,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 7,
-    backgroundColor: colors.white,
-  },
-  genderOptionWide: {
-    flexGrow: 1,
-  },
-  genderSelected: {
-    borderColor: colors.green,
-    backgroundColor: "#EFFBEF",
-  },
-  radio: {
-    width: 16,
-    height: 16,
-    borderWidth: 1.5,
-    borderColor: "#7F8E99",
-    borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  radioSelected: {
-    borderColor: colors.green,
-  },
-  radioDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: colors.green,
-  },
-  genderLabel: {
-    color: "#435467",
-    fontSize: 12,
-    fontWeight: "600",
-  },
-  genderLabelSelected: {
-    color: colors.deepGreen,
   },
   error: {
     color: "#B64B45",
