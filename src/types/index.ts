@@ -102,6 +102,9 @@ export type OrderingActivity = ActivityContent & {
     items: OrderingItem[];
     correctOrder: string[];
     orderingInstruction: string;
+    presentation?: "sentence";
+    featuredVisual?: "lumi-sees-car";
+    completedText?: string;
   };
 };
 export type OrderingActivityDefinition = OrderingActivity;

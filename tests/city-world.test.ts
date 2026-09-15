@@ -14,6 +14,10 @@ import {
 } from "../src/domain/progress";
 import { normalizeProgress } from "../src/storage/schema";
 import { validateActivityCatalog } from "../src/domain/catalog";
+import {
+  createOrderingState,
+  selectOrderingItem,
+} from "../src/engines/ordering";
 import { ProgressState } from "../src/types";
 
 const empty: ProgressState = {
@@ -160,6 +164,33 @@ test("sentence and story ordering are fully configured by data", () => {
     "sentence-rides",
     "sentence-bike",
   ]);
+  assert.equal(sentence.instructionText, "Coloque as palavras na ordem certa.");
+  assert.equal(sentence.config.presentation, "sentence");
+  assert.equal(sentence.config.featuredVisual, "lumi-sees-car");
+  assert.equal(sentence.config.completedText, "Lumi vê o carro.");
+  assert.deepEqual(
+    sentence.config.items.map(({ label }) => label),
+    ["o carro", "Lumi", "vê"],
+  );
+  assert.equal(sentence.successFeedback, "Muito bem! Você montou a frase.");
+  assert.equal(sentence.retryFeedback, "Vamos tentar de outro jeito.");
+  const first = selectOrderingItem(
+    createOrderingState(),
+    "sentence-boy",
+    sentence.config.correctOrder,
+  );
+  const second = selectOrderingItem(
+    first.state,
+    "sentence-rides",
+    sentence.config.correctOrder,
+  );
+  const complete = selectOrderingItem(
+    second.state,
+    "sentence-bike",
+    sentence.config.correctOrder,
+  );
+  assert.equal(complete.completed, true);
+  assert.equal(complete.incorrect, false);
   assert.deepEqual(story.config.correctOrder, [
     "story-leaves",
     "story-meets",
