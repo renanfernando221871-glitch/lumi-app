@@ -194,6 +194,32 @@ test("C de carro uses initial syllables and keeps CA as the correct answer", () 
   );
 });
 
+test("Onde devemos ir keeps its three requested city associations", () => {
+  const activity = cidadeActivities.find(
+    ({ id }) => id === "cidade-where-to-go",
+  );
+  assert.ok(activity && activity.engineType === "drag-to-target");
+  if (!activity || activity.engineType !== "drag-to-target") return;
+
+  assert.equal(
+    activity.instructionText,
+    "Leve cada situação até o lugar certo.",
+  );
+  assert.equal(
+    activity.hint,
+    "Pão vem da padaria, cuidado no hospital e brincadeira no parque.",
+  );
+  assert.deepEqual(activity.config.pairs, [
+    { draggableItemId: "city-buy-bread", targetId: "city-bakery" },
+    { draggableItemId: "city-care-sick", targetId: "city-hospital" },
+    { draggableItemId: "city-play", targetId: "city-park" },
+  ]);
+  assert.equal(
+    activity.config.items.find(({ id }) => id === "city-play")?.emoji,
+    "⚽",
+  );
+});
+
 test("Quem dirige keeps vehicles in targets and professionals in draggable cards", () => {
   const activity = cidadeActivities.find(
     ({ id }) => id === "cidade-who-drives",

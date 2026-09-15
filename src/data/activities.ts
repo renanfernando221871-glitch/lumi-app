@@ -868,7 +868,7 @@ export const activities: ActivityDefinition[] = [
     worldId: "cidade-das-aventuras",
     engineType: "drag-to-target",
     title: "Onde devemos ir?",
-    instructionText: "Leve cada necessidade até o lugar certo.",
+    instructionText: "Leve cada situação até o lugar certo.",
     instructionAudio: "activity-35-cidade-where-to-go.mp3",
     audioLabel: "Ouvir: Onde devemos ir?",
     learningGoal: "Relacionar necessidades simples aos lugares da cidade.",
