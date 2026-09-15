@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
+  ImageBackground,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -18,8 +20,14 @@ import {
   resetActivitySession,
 } from "../domain/activitySession";
 import { getActivityEngine } from "../engines/activityEngineRegistry";
-import { ActivityDefinition, ActivityInteraction, ActivityResult } from "../types";
+import {
+  ActivityDefinition,
+  ActivityInteraction,
+  ActivityResult,
+  TapAndFindActivity,
+} from "../types";
 import { colors } from "../theme/colors";
+import { evaluateTapAndFind } from "../engines/interactions";
 import {
   createSystemLumiVoiceService,
   LumiVoiceService,
@@ -115,6 +123,25 @@ export function ActivityScreen({
     }
   };
 
+  if (
+    activity.id === "farm-who-moo" &&
+    activity.engineType === "tap-and-find"
+  ) {
+    return (
+      <FarmWhoMooActivity
+        activity={activity}
+        activityNumber={activityNumber}
+        total={total}
+        feedback={session.feedback}
+        complete={session.complete}
+        advancing={session.advancing}
+        onBack={onBack}
+        onInteraction={handleInteraction}
+        onAdvance={advance}
+      />
+    );
+  }
+
   return (
     <View style={styles.screen}>
       <View style={styles.topBar}>
@@ -173,7 +200,161 @@ export function ActivityScreen({
   );
 }
 
+function FarmWhoMooActivity({
+  activity,
+  activityNumber,
+  total,
+  feedback,
+  complete,
+  advancing,
+  onBack,
+  onInteraction,
+  onAdvance,
+}: {
+  activity: TapAndFindActivity;
+  activityNumber: number;
+  total: number;
+  feedback?: string;
+  complete: boolean;
+  advancing: boolean;
+  onBack: () => void;
+  onInteraction: (interaction: ActivityInteraction) => void;
+  onAdvance: () => void;
+}) {
+  const { height } = useWindowDimensions();
+  const choose = (itemId: string) => {
+    if (complete) return;
+    onInteraction(evaluateTapAndFind(activity, itemId));
+  };
+
+  return (
+    <View style={[styles.farmActivityScreen, { minHeight: height }]}>
+      <ImageBackground
+        accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
+        imageStyle={styles.farmActivityBackgroundImage}
+        resizeMode="cover"
+        source={require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_18_40_32_1789508524054.png")}
+        style={[styles.farmActivityBackground, { height }]}
+      >
+        <Pressable
+          accessibilityLabel="Voltar"
+          accessibilityRole="button"
+          onPress={onBack}
+          style={styles.farmActivityBackHotspot}
+        />
+        {activity.config.items.map((item, index) => (
+          <Pressable
+            accessibilityLabel={item.label}
+            accessibilityRole="button"
+            disabled={complete}
+            key={item.id}
+            onPress={() => choose(item.id)}
+            style={[
+              styles.farmAnimalHotspot,
+              { top: `${43.8 + index * 12.6}%` },
+            ]}
+          />
+        ))}
+        {feedback && !complete ? (
+          <View accessibilityLiveRegion="polite" style={styles.farmRetryBubble}>
+            <Text style={styles.farmRetryText}>{feedback}</Text>
+          </View>
+        ) : null}
+        {complete ? (
+          <>
+            <CompletionNarration text={activity.successFeedback} />
+            <View
+              accessibilityLiveRegion="polite"
+              style={styles.farmSuccessBadge}
+            >
+              <Text style={styles.farmSuccessText}>Muito bem! ✓</Text>
+            </View>
+            <Pressable
+              accessibilityLabel={
+                activityNumber === total
+                  ? "Concluir mundo"
+                  : "Próxima atividade"
+              }
+              accessibilityRole="button"
+              disabled={advancing}
+              onPress={onAdvance}
+              style={styles.farmAnswerHotspot}
+            />
+          </>
+        ) : null}
+      </ImageBackground>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
+  farmActivityScreen: {
+    width: "100%",
+    maxWidth: 520,
+    alignSelf: "center",
+    overflow: "hidden",
+    backgroundColor: "#BCEFFF",
+  },
+  farmActivityBackground: {
+    width: "100%",
+  },
+  farmActivityBackgroundImage: {
+    transform: [{ scale: 1.045 }],
+  },
+  farmActivityBackHotspot: {
+    position: "absolute",
+    top: "7%",
+    left: "4%",
+    width: "17%",
+    height: "9%",
+    borderRadius: 40,
+  },
+  farmAnimalHotspot: {
+    position: "absolute",
+    left: "8%",
+    width: "84%",
+    height: "11.5%",
+    borderRadius: 28,
+  },
+  farmAnswerHotspot: {
+    position: "absolute",
+    left: "12%",
+    bottom: "8.5%",
+    width: "76%",
+    height: "9%",
+    borderRadius: 40,
+  },
+  farmRetryBubble: {
+    position: "absolute",
+    left: "16%",
+    right: "16%",
+    bottom: "6.5%",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 18,
+    backgroundColor: "rgba(255, 248, 233, 0.96)",
+  },
+  farmRetryText: {
+    color: "#A84F43",
+    fontSize: 13,
+    fontWeight: "900",
+    textAlign: "center",
+  },
+  farmSuccessBadge: {
+    position: "absolute",
+    left: "31%",
+    right: "31%",
+    bottom: "18%",
+    paddingVertical: 7,
+    borderRadius: 18,
+    backgroundColor: "rgba(83, 185, 74, 0.96)",
+  },
+  farmSuccessText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "900",
+    textAlign: "center",
+  },
   screen: { flex: 1, backgroundColor: colors.cream },
   topBar: {
     width: "100%",
