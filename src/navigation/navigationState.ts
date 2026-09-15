@@ -55,7 +55,7 @@ export function navigationReducer(
         return { route: "welcome" };
       }
       if (state.route === "personalize") {
-        return { route: "welcome" };
+        return { route: "guardian" };
       }
       if (state.route === "house") {
         return { route: "map" };

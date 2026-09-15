@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {
+  Image,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -7,10 +9,9 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { BackButton } from "../components/BackButton";
-import { LumiSpeechBubble } from "../components/LumiSpeechBubble";
+import { LumiCharacter } from "../components/LumiCharacter";
 import { PrimaryButton } from "../components/PrimaryButton";
-import { colors } from "../theme/colors";
+import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
 
 type Props = {
@@ -19,56 +20,166 @@ type Props = {
   onContinue: (name: string, avatar: string) => void;
 };
 
+type Gender = "girl" | "boy" | "not-informed";
+
+const roundedFont = Platform.select({
+  ios: "Arial Rounded MT Bold",
+  android: "sans-serif-rounded",
+  web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
+});
+
 export function PersonalizeScreen({
   initialName,
   onBack,
   onContinue,
 }: Props) {
   const [name, setName] = useState(initialName);
-  const [avatar, setAvatar] = useState("🌻");
-  const avatars = ["🌻", "🦋", "🐰", "🦊"];
+  const [birthDate, setBirthDate] = useState("");
+  const [gender, setGender] = useState<Gender | null>(null);
+  const [error, setError] = useState("");
+
+  const formatBirthDate = (value: string) => {
+    const digits = value.replace(/\D/g, "").slice(0, 8);
+    const parts = [digits.slice(0, 2), digits.slice(2, 4), digits.slice(4, 8)];
+    setBirthDate(parts.filter(Boolean).join("/"));
+  };
+
+  const continueOnboarding = () => {
+    if (!name.trim()) {
+      setError("Digite o nome da criança para continuar.");
+      return;
+    }
+    if (!/^\d{2}\/\d{2}\/\d{4}$/.test(birthDate)) {
+      setError("Digite a data no formato dia, mês e ano.");
+      return;
+    }
+    setError("");
+    onContinue(name.trim(), "🌻");
+  };
 
   return (
     <Shell>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.inner}>
-          <BackButton onPress={onBack} />
-          <Text style={styles.pageKicker}>UM POUQUINHO SOBRE VOCÊ</Text>
-          <Text style={styles.pageTitle}>Como posso te chamar?</Text>
-          <LumiSpeechBubble compact>
-            Escolha um nome e uma carinha!
-          </LumiSpeechBubble>
-          <Text style={styles.inputLabel}>SEU NOME</Text>
-          <TextInput
-            accessibilityLabel="Seu nome"
-            autoCapitalize="words"
-            maxLength={18}
-            placeholder="Seu nome"
-            placeholderTextColor={colors.muted}
-            value={name}
-            onChangeText={setName}
-            style={styles.fakeInput}
-          />
-          <Text style={styles.inputHint}>Pode ser seu nome ou um apelido.</Text>
-          <Text style={styles.inputLabel}>SUA COMPANHEIRA</Text>
-          <View style={styles.avatarRow}>
-            {avatars.map((item) => (
-              <Pressable
-                key={item}
-                onPress={() => setAvatar(item)}
-                accessibilityRole="button"
-                accessibilityLabel={`Escolher companheira ${item}`}
-                style={[styles.avatar, avatar === item && styles.selectedAvatar]}
-              >
-                <Text style={styles.avatarEmoji}>{item}</Text>
-              </Pressable>
-            ))}
+      <View style={styles.background}>
+        <View style={[styles.cloud, styles.cloudLeft]} />
+        <View style={[styles.cloud, styles.cloudRight]} />
+        <View style={styles.hillBack} />
+        <View style={styles.hillFront} />
+        <View style={[styles.bush, styles.bushLeft]} />
+        <View style={[styles.bush, styles.bushRight]} />
+      </View>
+
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.top}>
+          <View style={styles.back}>
+            <Pressable
+              accessibilityLabel="Voltar"
+              accessibilityRole="button"
+              onPress={onBack}
+              style={({ pressed }) => [
+                styles.backButton,
+                pressed && styles.pressed,
+              ]}
+            >
+              <Text style={styles.backIcon}>‹</Text>
+            </Pressable>
           </View>
+
+          <Image
+            accessibilityLabel="Lumi — crescer é descobrir"
+            resizeMode="contain"
+            source={require("../../assets/images/lumi/lumi-logo-guardian.png")}
+            style={styles.logo}
+          />
+
+          <View style={styles.lumiGreeting}>
+            <View style={styles.speechBubble}>
+              <Text style={styles.speechText}>
+                Agora me conte sobre quem vai descobrir!
+              </Text>
+            </View>
+            <LumiCharacter
+              accessibilityLabel="Lumi, personagem oficial"
+              expression="happy"
+              size="large"
+            />
+          </View>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.title}>Perfil da criança</Text>
+          <Text style={styles.description}>
+            Vamos personalizar a experiência para ela aprender do seu jeito.
+          </Text>
+
+          <Text style={styles.avatarTitle}>Escolha um avatar</Text>
+          <View style={styles.avatarWrap}>
+            <Image
+              accessibilityLabel="Avatar da criança"
+              resizeMode="cover"
+              source={require("../../assets/images/onboarding/child-avatar.png")}
+              style={styles.avatar}
+            />
+            <View accessibilityLabel="Adicionar foto futuramente" style={styles.camera}>
+              <View style={styles.cameraBody}>
+                <View style={styles.cameraLens} />
+              </View>
+            </View>
+          </View>
+
+          <Text style={styles.label}>Nome da criança</Text>
+          <TextInput
+            accessibilityLabel="Nome da criança"
+            autoCapitalize="words"
+            maxLength={24}
+            onChangeText={setName}
+            placeholder="Digite o nome da criança"
+            placeholderTextColor="#8B96A3"
+            style={styles.input}
+            value={name}
+          />
+
+          <Text style={styles.label}>Data de nascimento</Text>
+          <TextInput
+            accessibilityLabel="Data de nascimento"
+            inputMode="numeric"
+            keyboardType="number-pad"
+            maxLength={10}
+            onChangeText={formatBirthDate}
+            placeholder="DD / MM / AAAA"
+            placeholderTextColor="#8B96A3"
+            style={styles.input}
+            value={birthDate}
+          />
+
+          <Text style={styles.genderTitle}>Gênero (opcional)</Text>
+          <View style={styles.genderOptions}>
+            <GenderOption
+              label="Menina"
+              onPress={() => setGender("girl")}
+              selected={gender === "girl"}
+            />
+            <GenderOption
+              label="Menino"
+              onPress={() => setGender("boy")}
+              selected={gender === "boy"}
+            />
+            <GenderOption
+              label="Prefiro não informar"
+              onPress={() => setGender("not-informed")}
+              selected={gender === "not-informed"}
+              wide
+            />
+          </View>
+
+          {error ? <Text style={styles.error}>{error}</Text> : null}
+
           <PrimaryButton
-            label="Entrar no meu jardim"
-            onPress={() => onContinue(name.trim() || "Amigo", avatar)}
-            variant="green"
-            style={styles.fullButton}
+            label="Continuar"
+            onPress={continueOnboarding}
+            style={styles.continueButton}
           />
         </View>
       </ScrollView>
@@ -76,82 +187,325 @@ export function PersonalizeScreen({
   );
 }
 
+function GenderOption({
+  label,
+  onPress,
+  selected,
+  wide = false,
+}: {
+  label: string;
+  onPress: () => void;
+  selected: boolean;
+  wide?: boolean;
+}) {
+  return (
+    <Pressable
+      accessibilityRole="radio"
+      accessibilityState={{ checked: selected }}
+      onPress={onPress}
+      style={({ pressed }) => [
+        styles.genderOption,
+        wide && styles.genderOptionWide,
+        selected && styles.genderSelected,
+        pressed && styles.pressed,
+      ]}
+    >
+      <View style={[styles.radio, selected && styles.radioSelected]}>
+        {selected ? <View style={styles.radioDot} /> : null}
+      </View>
+      <Text style={[styles.genderLabel, selected && styles.genderLabelSelected]}>
+        {label}
+      </Text>
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
+  background: {
+    ...StyleSheet.absoluteFillObject,
+    pointerEvents: "none",
+    overflow: "hidden",
+    backgroundColor: "#DDF3FF",
+  },
+  cloud: {
+    position: "absolute",
+    width: 98,
+    height: 48,
+    borderRadius: 28,
+    backgroundColor: "rgba(255,255,255,0.82)",
+  },
+  cloudLeft: {
+    left: "4%",
+    top: "15%",
+  },
+  cloudRight: {
+    right: "3%",
+    top: "8%",
+    transform: [{ scale: 0.72 }],
+  },
+  hillBack: {
+    position: "absolute",
+    width: "135%",
+    height: "31%",
+    left: "-38%",
+    bottom: "-17%",
+    borderRadius: 999,
+    backgroundColor: "#BFE8A8",
+    transform: [{ rotate: "5deg" }],
+  },
+  hillFront: {
+    position: "absolute",
+    width: "135%",
+    height: "29%",
+    right: "-40%",
+    bottom: "-17%",
+    borderRadius: 999,
+    backgroundColor: "#91D17A",
+    transform: [{ rotate: "-5deg" }],
+  },
+  bush: {
+    position: "absolute",
+    bottom: "2%",
+    width: 70,
+    height: 48,
+    borderRadius: 35,
+    backgroundColor: "#68B968",
+  },
+  bushLeft: {
+    left: "8%",
+  },
+  bushRight: {
+    right: "8%",
+  },
   scroll: {
     flexGrow: 1,
-    paddingVertical: 22,
-  },
-  inner: {
-    width: "100%",
-    maxWidth: 560,
-    alignSelf: "center",
+    alignItems: "center",
     paddingHorizontal: 22,
-    paddingBottom: 25,
+    paddingTop: 18,
+    paddingBottom: 70,
   },
-  pageKicker: {
-    color: colors.green,
-    fontSize: 12,
-    fontWeight: "900",
-    letterSpacing: 1.3,
-    marginTop: 11,
+  top: {
+    width: "100%",
+    maxWidth: 400,
+    height: 225,
+    alignItems: "center",
   },
-  pageTitle: {
-    color: colors.deepGreen,
-    fontSize: 32,
-    lineHeight: 38,
-    fontWeight: "900",
-    marginTop: 4,
-    marginBottom: 18,
+  back: {
+    position: "absolute",
+    left: 0,
+    top: 4,
+    zIndex: 3,
   },
-  inputLabel: {
-    color: colors.muted,
-    fontSize: 12,
-    letterSpacing: 1.2,
-    fontWeight: "900",
-    marginTop: 27,
-    marginBottom: 8,
-  },
-  fakeInput: {
-    borderWidth: 2,
-    borderColor: colors.line,
-    borderRadius: 18,
-    paddingHorizontal: 17,
-    paddingVertical: 17,
-    color: colors.deepGreen,
-    fontSize: 16,
-    fontWeight: "700",
-    backgroundColor: colors.white,
-  },
-  inputHint: {
-    color: colors.muted,
-    fontSize: 11,
-    marginTop: 7,
-  },
-  avatarRow: {
-    flexDirection: "row",
-    gap: 12,
-  },
-  avatar: {
-    width: 64,
-    height: 64,
-    borderRadius: 22,
+  backButton: {
+    width: 46,
+    height: 46,
+    borderRadius: 23,
     alignItems: "center",
     justifyContent: "center",
-    overflow: "hidden",
     backgroundColor: colors.white,
-    borderWidth: 2,
-    borderColor: colors.line,
+    ...shadow,
   },
-  avatarEmoji: {
-    fontSize: 34,
+  pressed: {
+    opacity: 0.78,
   },
-  selectedAvatar: {
-    borderColor: colors.green,
-    backgroundColor: colors.softGreen,
-    borderWidth: 4,
+  backIcon: {
+    color: "#1379C7",
+    fontSize: 38,
+    lineHeight: 40,
+    fontWeight: "600",
+    marginTop: -3,
   },
-  fullButton: {
+  logo: {
+    width: 185,
+    height: 86,
+  },
+  lumiGreeting: {
+    position: "absolute",
+    right: -9,
+    bottom: -25,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  speechBubble: {
+    width: 188,
+    minHeight: 78,
+    borderRadius: 28,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    backgroundColor: colors.white,
+    ...shadow,
+  },
+  speechText: {
+    color: "#123C84",
+    fontFamily: roundedFont,
+    fontSize: 16,
+    lineHeight: 19,
+    fontWeight: "900",
+    textAlign: "center",
+  },
+  card: {
     width: "100%",
-    marginTop: 20,
+    maxWidth: 400,
+    borderRadius: 34,
+    paddingHorizontal: 24,
+    paddingTop: 24,
+    paddingBottom: 24,
+    backgroundColor: colors.white,
+    ...shadow,
+  },
+  title: {
+    color: "#123C84",
+    fontFamily: roundedFont,
+    fontSize: 31,
+    lineHeight: 37,
+    fontWeight: "900",
+    textAlign: "center",
+  },
+  description: {
+    maxWidth: 330,
+    alignSelf: "center",
+    color: "#334C78",
+    fontSize: 16,
+    lineHeight: 21,
+    textAlign: "center",
+    marginTop: 3,
+  },
+  avatarTitle: {
+    color: "#173D82",
+    fontSize: 16,
+    fontWeight: "800",
+    textAlign: "center",
+    marginTop: 15,
+    marginBottom: 8,
+  },
+  avatarWrap: {
+    width: 116,
+    height: 116,
+    alignSelf: "center",
+    position: "relative",
+    borderWidth: 5,
+    borderColor: "#FFD6ED",
+    borderRadius: 58,
+    backgroundColor: "#FFE8F5",
+  },
+  avatar: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 53,
+  },
+  camera: {
+    position: "absolute",
+    right: -7,
+    bottom: 0,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.green,
+    borderWidth: 3,
+    borderColor: colors.white,
+  },
+  cameraBody: {
+    width: 18,
+    height: 13,
+    borderWidth: 2,
+    borderColor: colors.white,
+    borderRadius: 3,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  cameraLens: {
+    width: 6,
+    height: 6,
+    borderWidth: 1.5,
+    borderColor: colors.white,
+    borderRadius: 3,
+  },
+  label: {
+    color: "#173D82",
+    fontSize: 14,
+    fontWeight: "800",
+    marginTop: 13,
+    marginBottom: 6,
+  },
+  input: {
+    width: "100%",
+    minHeight: 54,
+    borderWidth: 1.5,
+    borderColor: "#D3DAE3",
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    backgroundColor: "#FBFCFE",
+    color: colors.ink,
+    fontSize: 16,
+  },
+  genderTitle: {
+    color: "#173D82",
+    fontSize: 14,
+    fontWeight: "800",
+    marginTop: 14,
+    marginBottom: 7,
+  },
+  genderOptions: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+  genderOption: {
+    minHeight: 39,
+    borderWidth: 1.5,
+    borderColor: "#D3DAE3",
+    borderRadius: 14,
+    paddingHorizontal: 11,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 7,
+    backgroundColor: colors.white,
+  },
+  genderOptionWide: {
+    flexGrow: 1,
+  },
+  genderSelected: {
+    borderColor: colors.green,
+    backgroundColor: "#EFFBEF",
+  },
+  radio: {
+    width: 16,
+    height: 16,
+    borderWidth: 1.5,
+    borderColor: "#7F8E99",
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  radioSelected: {
+    borderColor: colors.green,
+  },
+  radioDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.green,
+  },
+  genderLabel: {
+    color: "#435467",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  genderLabelSelected: {
+    color: colors.deepGreen,
+  },
+  error: {
+    color: "#B64B45",
+    fontSize: 13,
+    textAlign: "center",
+    marginTop: 10,
+  },
+  continueButton: {
+    width: "100%",
+    minHeight: 60,
+    marginTop: 16,
   },
 });
