@@ -88,14 +88,16 @@ export function MapScreen({
                       <Text style={styles.lockIcon}>🔒</Text>
                     </View>
                   </>
-                ) : completed ? (
+                ) : (
                   <View
-                    accessibilityLabel="Mundo concluído"
+                    accessibilityLabel={
+                      completed ? "Mundo concluído" : "Mundo desbloqueado"
+                    }
                     style={[styles.statusBadge, styles.completedBadge]}
                   >
                     <Text style={styles.completedIcon}>✓</Text>
                   </View>
-                ) : null}
+                )}
               </Pressable>
             );
           })}
