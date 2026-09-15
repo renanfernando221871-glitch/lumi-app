@@ -16,6 +16,7 @@ import { HouseScreen } from "./src/screens/HouseScreen";
 import { GuardianSignupScreen } from "./src/screens/GuardianSignupScreen";
 import { SafetyScreen } from "./src/screens/SafetyScreen";
 import { GuardianHomeScreen } from "./src/screens/GuardianHomeScreen";
+import { ChildIntroScreen } from "./src/screens/ChildIntroScreen";
 import { MapScreen } from "./src/screens/MapScreen";
 import { PersonalizeScreen } from "./src/screens/PersonalizeScreen";
 import { RewardScreen } from "./src/screens/RewardScreen";
@@ -151,7 +152,18 @@ function LumiApp() {
           (total, world) => total + world.activityIds.length,
           0,
         )}
+        onOpenChildMode={() => navigation.replace("childIntro")}
         onOpenActivities={() => navigation.replace("map")}
+      />
+    );
+  }
+
+  if (navigation.route === "childIntro") {
+    return (
+      <ChildIntroScreen
+        childName={profile.name}
+        onBack={navigation.goBack}
+        onContinue={() => navigation.replace("map")}
       />
     );
   }

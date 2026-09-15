@@ -17,6 +17,7 @@ type Props = {
   childName: string;
   completedActivities: number;
   totalActivities: number;
+  onOpenChildMode: () => void;
   onOpenActivities: () => void;
 };
 
@@ -37,6 +38,7 @@ export function GuardianHomeScreen({
   childName,
   completedActivities,
   totalActivities,
+  onOpenChildMode,
   onOpenActivities,
 }: Props) {
   const progressPercent =
@@ -134,6 +136,22 @@ export function GuardianHomeScreen({
             <View style={styles.arrowCircle}>
               <Text style={styles.arrow}>›</Text>
             </View>
+          </Pressable>
+
+          <Pressable
+            accessibilityLabel="Entrar no modo criança"
+            accessibilityRole="button"
+            onPress={onOpenChildMode}
+            style={styles.childModeButton}
+          >
+            <View style={styles.childModeIconCircle}>
+              <Text style={styles.childModeIcon}>★</Text>
+            </View>
+            <View style={styles.childModeCopy}>
+              <Text style={styles.childModeTitle}>Entrar no modo criança</Text>
+              <Text style={styles.childModeText}>Explorar, brincar e descobrir</Text>
+            </View>
+            <Text style={styles.childModeArrow}>›</Text>
           </Pressable>
 
           <View style={styles.statsRow}>
@@ -389,6 +407,40 @@ const styles = StyleSheet.create({
     ...shadow,
   },
   arrow: { color: colors.green, fontSize: 29, lineHeight: 31 },
+  childModeButton: {
+    minHeight: 76,
+    borderRadius: 22,
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+    paddingHorizontal: 14,
+    backgroundColor: "#63C76A",
+    ...shadow,
+  },
+  childModeIconCircle: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFF1A8",
+  },
+  childModeIcon: { color: "#F2A81D", fontSize: 28, lineHeight: 31 },
+  childModeCopy: { flex: 1, paddingHorizontal: 12 },
+  childModeTitle: {
+    color: colors.white,
+    fontFamily: roundedFont,
+    fontSize: 18,
+    lineHeight: 22,
+    fontWeight: "900",
+  },
+  childModeText: { color: "#F2FFF3", fontSize: 12, lineHeight: 17 },
+  childModeArrow: {
+    color: colors.white,
+    fontSize: 34,
+    lineHeight: 36,
+    fontWeight: "600",
+  },
   statsRow: { flexDirection: "row", gap: 7, marginTop: 10 },
   statCard: {
     flex: 1,
