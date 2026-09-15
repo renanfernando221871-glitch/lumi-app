@@ -124,11 +124,12 @@ export function ActivityScreen({
   };
 
   if (
-    activity.id === "farm-who-moo" &&
+    (activity.id === "farm-who-moo" ||
+      activity.id === "farm-find-horse") &&
     activity.engineType === "tap-and-find"
   ) {
     return (
-      <FarmWhoMooActivity
+      <FarmOfficialTapActivity
         activity={activity}
         activityNumber={activityNumber}
         total={total}
@@ -200,7 +201,7 @@ export function ActivityScreen({
   );
 }
 
-function FarmWhoMooActivity({
+function FarmOfficialTapActivity({
   activity,
   activityNumber,
   total,
@@ -222,6 +223,7 @@ function FarmWhoMooActivity({
   onAdvance: () => void;
 }) {
   const { height } = useWindowDimensions();
+  const isFindHorse = activity.id === "farm-find-horse";
   const choose = (itemId: string) => {
     if (complete) return;
     onInteraction(evaluateTapAndFind(activity, itemId));
@@ -233,7 +235,13 @@ function FarmWhoMooActivity({
         accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
         imageStyle={styles.farmActivityBackgroundImage}
         resizeMode="cover"
-        source={require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_18_40_32_1789508524054.png")}
+        source={
+          isFindHorse
+            ? complete
+              ? require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_18_55_13_1789509359047.png")
+              : require("../../attached_assets/lumi-farm-activity-2-initial.png")
+            : require("../../attached_assets/Imagem_do_Codex_15_de_set._de_2026,_18_40_32_1789508524054.png")
+        }
         style={[styles.farmActivityBackground, { height }]}
       >
         <Pressable
@@ -263,12 +271,14 @@ function FarmWhoMooActivity({
         {complete ? (
           <>
             <CompletionNarration text={activity.successFeedback} />
-            <View
-              accessibilityLiveRegion="polite"
-              style={styles.farmSuccessBadge}
-            >
-              <Text style={styles.farmSuccessText}>Muito bem! ✓</Text>
-            </View>
+            {!isFindHorse ? (
+              <View
+                accessibilityLiveRegion="polite"
+                style={styles.farmSuccessBadge}
+              >
+                <Text style={styles.farmSuccessText}>Muito bem! ✓</Text>
+              </View>
+            ) : null}
             <Pressable
               accessibilityLabel={
                 activityNumber === total
