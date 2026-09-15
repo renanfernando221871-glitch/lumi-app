@@ -1,0 +1,81 @@
+Refine somente a Tela de Boas-vindas inicial do app Lumi, melhorando o fundo/cenário para que a tela fique visualmente mais próxima da referência enviada, sem alterar o personagem Lumi atual já aplicado.
+Objetivo
+A tela atual está funcional, mas o fundo ainda está muito vazio.
+Quero que a primeira tela tenha mais cara de universo infantil encantador, com sensação de descoberta, natureza, acolhimento e aventura leve.
+O resultado deve lembrar uma tela de abertura de app infantil educativo: simples, bonito, limpo, amigável e encantador.
+O que deve ser preservado
+- Preservar exatamente o personagem Lumi atual no centro.
+- Não trocar o asset atual do Lumi.
+- Preservar:
+  - logotipo/título “lumi”;
+  - texto de boas-vindas;
+  - botão “Começar”;
+  - fluxo de navegação da tela;
+  - comportamento do botão;
+  - lógica, testes, rotas e funcionamento do app.
+Se necessário, pode apenas fazer pequenos ajustes de espaçamento/alinhamento para harmonizar melhor o layout com o novo fundo.
+O que precisa mudar
+Melhorar o fundo da tela, que hoje está muito neutro, criando um cenário infantil ilustrado, inspirado no estilo da referência.
+Quero um fundo com clima de:
+- descoberta;
+- natureza;
+- segurança;
+- delicadeza;
+- app educativo para crianças pequenas.
+Direção de arte do fundo
+Criar um fundo suave e lúdico com estes elementos:
+Parte superior
+- céu azul claro suave;
+- gradiente muito leve;
+- nuvens pequenas e discretas;
+- sensação de manhã bonita e alegre.
+Parte inferior
+- colinas ou gramado verde suave;
+- base arredondada/orgânica;
+- aparência acolhedora e amigável;
+- sem poluição visual.
+Elementos decorativos opcionais
+Pode incluir bem discretamente:
+- flores pequenas;
+- arbustos simples;
+- caminhos suaves;
+- folhas ou detalhes orgânicos arredondados.
+Esses elementos devem ser leves e servir apenas como cenário de apoio, sem roubar atenção do personagem.
+Composição desejada
+- O Lumi continua sendo o foco principal.
+- O fundo deve emoldurar o personagem, e não competir com ele.
+- O conteúdo central deve continuar com boa leitura.
+- A tela deve parecer mais viva e encantadora, mas ainda limpa.
+Paleta e estilo
+Use uma linguagem visual infantil com:
+- azul claro;
+- verde suave;
+- tons quentes delicados;
+- formas arredondadas;
+- visual fofo e amigável.
+Evitar:
+- fundo branco chapado;
+- elementos escuros;
+- excesso de detalhes;
+- visual adulto/minimalista demais;
+- qualquer mudança no personagem.
+Restrições importantes
+- Não alterar o Lumi atual.
+- Não substituir a arte do personagem.
+- Não alterar o texto do botão “Começar”.
+- Não mudar a navegação.
+- Não mexer na lógica do app.
+- Fazer apenas melhoria visual da tela inicial.
+Critérios de aceite
+1. A Tela de Boas-vindas continua sendo a primeira tela do app.
+2. O personagem Lumi permanece exatamente o mesmo.
+3. O fundo deixa de parecer vazio e passa a ter cenário infantil suave.
+4. A tela fica mais próxima do conceito visual da referência.
+5. O botão Começar continua funcionando normalmente.
+6. O visual final fica mais encantador, acolhedor e coerente com um app infantil educativo.
+Validação final
+- Rodar preview.
+- Confirmar que a tela abre corretamente.
+- Confirmar que o novo fundo aparece.
+- Confirmar que o personagem não foi alterado.
+- Confirmar que o botão continua levando para a próxima etapa.
