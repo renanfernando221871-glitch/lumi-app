@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ActivityInteraction, TapAndFindActivity } from "../../types";
 import { evaluateTapAndFind } from "../../engines/interactions";
@@ -160,6 +160,52 @@ function HelpFriendVisual({
   );
 }
 
+function SeedSequenceVisual({
+  variant,
+  compact = false,
+}: {
+  variant: "seed-before" | "flower-after";
+  compact?: boolean;
+}) {
+  const flower = variant === "flower-after";
+  return (
+    <View style={[styles.seedScene, compact && styles.seedSceneCompact]}>
+      <View style={styles.seedLumi}>
+        <View style={styles.seedLumiHead}>
+          <View style={styles.seedLumiEye} />
+          {flower ? <View style={styles.seedLumiSmile} /> : null}
+        </View>
+        <View style={styles.seedLumiBody} />
+        {!flower ? <View style={styles.seedInHand} /> : null}
+      </View>
+      <View style={styles.groundLine} />
+      <View style={styles.seedPotGroup}>
+        {flower ? (
+          <>
+            <View style={styles.flowerStem} />
+            <View style={[styles.flowerLeaf, styles.flowerLeafLeft]} />
+            <View style={[styles.flowerLeaf, styles.flowerLeafRight]} />
+            <View style={styles.flowerCenter} />
+            {[0, 1, 2, 3, 4, 5].map((petal) => (
+              <View
+                key={petal}
+                style={[
+                  styles.flowerPetal,
+                  { transform: [{ rotate: `${petal * 60}deg` }] },
+                ]}
+              />
+            ))}
+          </>
+        ) : (
+          <View style={styles.potSoil} />
+        )}
+        <View style={styles.sequencePotRim} />
+        <View style={styles.sequencePot} />
+      </View>
+    </View>
+  );
+}
+
 export function TapAndFindEngine({
   activity,
   onInteraction,
@@ -169,9 +215,18 @@ export function TapAndFindEngine({
   const soundOptions = activity.config.presentation === "sound-options";
   const emotionOptions = activity.config.presentation === "emotion-options";
   const actionOptions = activity.config.presentation === "action-options";
+  const sequenceOptions = activity.config.presentation === "sequence-options";
+  const [showSequence, setShowSequence] = useState(false);
+
+  useEffect(() => {
+    setShowSequence(false);
+  }, [activity.id]);
+
   const choose = (id: string) => {
     if (disabled) return;
-    onInteraction(evaluateTapAndFind(activity, id));
+    const interaction = evaluateTapAndFind(activity, id);
+    if (interaction.completed) setShowSequence(true);
+    onInteraction(interaction);
   };
 
   const choices = colorOptions ? (
@@ -224,6 +279,7 @@ export function TapAndFindEngine({
         soundOptions && styles.soundGrid,
         emotionOptions && styles.emotionGrid,
         actionOptions && styles.actionGrid,
+        sequenceOptions && styles.sequenceGrid,
       ]}
     >
       {activity.config.items.map((item) => (
@@ -238,6 +294,7 @@ export function TapAndFindEngine({
             soundOptions && styles.soundCard,
             emotionOptions && styles.emotionCard,
             actionOptions && styles.actionCard,
+            sequenceOptions && styles.sequenceCard,
             {
               backgroundColor: item.color,
               transform: [{ scale: pressed ? 0.96 : 1 }],
@@ -254,6 +311,9 @@ export function TapAndFindEngine({
             item.itemVisual === "walk-away" ||
             item.itemVisual === "take-toy" ? (
             <HelpFriendVisual variant={item.itemVisual} />
+          ) : item.itemVisual === "seed-before" ||
+            item.itemVisual === "flower-after" ? (
+            <SeedSequenceVisual variant={item.itemVisual} />
           ) : (
             <Text
               style={[
@@ -269,7 +329,7 @@ export function TapAndFindEngine({
               {item.emoji}
             </Text>
           )}
-          {!soundOptions && !emotionOptions ? (
+          {!soundOptions && !emotionOptions && !sequenceOptions ? (
             <Text style={[styles.itemLabel, actionOptions && styles.actionLabel]}>
               {item.label}
             </Text>
@@ -306,6 +366,17 @@ export function TapAndFindEngine({
         </View>
       ) : null}
       {choices}
+      {showSequence &&
+      activity.config.completionVisual === "seed-to-flower" ? (
+        <View
+          accessibilityLabel="Primeiro a semente, depois a flor"
+          style={styles.completionSequence}
+        >
+          <SeedSequenceVisual variant="seed-before" compact />
+          <Text style={styles.sequenceArrow}>→</Text>
+          <SeedSequenceVisual variant="flower-after" compact />
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -739,6 +810,170 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     textAlign: "center",
     marginTop: 5,
+  },
+  sequenceGrid: {
+    maxWidth: 440,
+    flexWrap: "nowrap",
+    gap: 22,
+  },
+  sequenceCard: {
+    width: 190,
+    height: 145,
+    borderRadius: 28,
+  },
+  seedScene: {
+    width: 158,
+    height: 112,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-around",
+  },
+  seedSceneCompact: {
+    width: 94,
+    height: 68,
+    transform: [{ scale: 0.62 }],
+  },
+  seedLumi: {
+    width: 52,
+    height: 84,
+    alignItems: "center",
+    zIndex: 2,
+  },
+  seedLumiHead: {
+    width: 37,
+    height: 37,
+    borderRadius: 19,
+    backgroundColor: "#D99A72",
+  },
+  seedLumiEye: {
+    position: "absolute",
+    top: 13,
+    right: 7,
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: "#304A45",
+  },
+  seedLumiSmile: {
+    position: "absolute",
+    right: 5,
+    bottom: 8,
+    width: 11,
+    height: 6,
+    borderBottomWidth: 2,
+    borderBottomColor: "#8C4E42",
+    borderRadius: 6,
+  },
+  seedLumiBody: {
+    width: 34,
+    height: 43,
+    borderTopLeftRadius: 11,
+    borderTopRightRadius: 11,
+    backgroundColor: "#5F91AE",
+  },
+  seedInHand: {
+    position: "absolute",
+    right: -2,
+    top: 45,
+    width: 15,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: "#A86D3D",
+    transform: [{ rotate: "18deg" }],
+  },
+  groundLine: {
+    position: "absolute",
+    left: 7,
+    right: 7,
+    bottom: 4,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: "#8BC47B",
+  },
+  seedPotGroup: {
+    width: 67,
+    height: 91,
+    alignItems: "center",
+    justifyContent: "flex-end",
+    zIndex: 2,
+  },
+  potSoil: {
+    position: "absolute",
+    bottom: 43,
+    width: 51,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: "#704934",
+  },
+  sequencePotRim: {
+    width: 59,
+    height: 13,
+    borderRadius: 6,
+    backgroundColor: "#D77A49",
+    zIndex: 3,
+  },
+  sequencePot: {
+    width: 46,
+    height: 34,
+    backgroundColor: "#E8975F",
+    borderBottomLeftRadius: 11,
+    borderBottomRightRadius: 11,
+  },
+  flowerStem: {
+    position: "absolute",
+    bottom: 42,
+    width: 6,
+    height: 43,
+    borderRadius: 3,
+    backgroundColor: "#58A75D",
+  },
+  flowerLeaf: {
+    position: "absolute",
+    bottom: 55,
+    width: 20,
+    height: 11,
+    borderRadius: 10,
+    backgroundColor: "#75B968",
+  },
+  flowerLeafLeft: {
+    left: 15,
+    transform: [{ rotate: "25deg" }],
+  },
+  flowerLeafRight: {
+    right: 15,
+    transform: [{ rotate: "-25deg" }],
+  },
+  flowerCenter: {
+    position: "absolute",
+    top: 2,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: "#B76B36",
+    zIndex: 3,
+  },
+  flowerPetal: {
+    position: "absolute",
+    top: -5,
+    width: 18,
+    height: 32,
+    borderRadius: 10,
+    backgroundColor: "#F3C557",
+    transformOrigin: "center 16px",
+  },
+  completionSequence: {
+    height: 76,
+    paddingHorizontal: 18,
+    borderRadius: 22,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.softYellow,
+  },
+  sequenceArrow: {
+    color: colors.green,
+    fontSize: 30,
+    fontWeight: "900",
   },
   itemLabel: {
     color: colors.deepGreen,

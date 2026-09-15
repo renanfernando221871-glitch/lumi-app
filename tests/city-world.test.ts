@@ -18,6 +18,7 @@ import {
   createOrderingState,
   selectOrderingItem,
 } from "../src/engines/ordering";
+import { evaluateTapAndFind } from "../src/engines/interactions";
 import { ProgressState } from "../src/types";
 
 const empty: ProgressState = {
@@ -46,7 +47,7 @@ test("Cidade keeps the requested ID order and reuses data-driven engines", () =>
       "tap-and-find",
       "tap-and-find",
       "ordering",
-      "ordering",
+      "tap-and-find",
     ],
   );
   assert.equal(validateActivityCatalog(activities), true);
@@ -148,7 +149,7 @@ test("Cidade grants its reward only after activity eight and revisits go to map"
   );
 });
 
-test("sentence and story ordering are fully configured by data", () => {
+test("sentence ordering and Lumi's first-then sequence are configured by data", () => {
   const sentence = cidadeActivities.find(
     ({ id }) => id === "cidade-build-sentence",
   );
@@ -156,9 +157,9 @@ test("sentence and story ordering are fully configured by data", () => {
     ({ id }) => id === "cidade-lumi-story",
   );
   assert.ok(sentence && sentence.engineType === "ordering");
-  assert.ok(story && story.engineType === "ordering");
+  assert.ok(story && story.engineType === "tap-and-find");
   if (!sentence || sentence.engineType !== "ordering") return;
-  if (!story || story.engineType !== "ordering") return;
+  if (!story || story.engineType !== "tap-and-find") return;
   assert.deepEqual(sentence.config.correctOrder, [
     "sentence-boy",
     "sentence-rides",
@@ -191,42 +192,29 @@ test("sentence and story ordering are fully configured by data", () => {
   );
   assert.equal(complete.completed, true);
   assert.equal(complete.incorrect, false);
-  assert.deepEqual(story.config.correctOrder, [
-    "story-leaves",
-    "story-meets",
-    "story-helps",
-  ]);
-  assert.equal(story.instructionText, "Coloque a história na ordem certa.");
-  assert.equal(story.config.presentation, "story");
+  assert.equal(story.instructionText, "O que aconteceu primeiro?");
+  assert.equal(story.config.presentation, "sequence-options");
+  assert.equal(story.config.targetId, "story-seed");
+  assert.equal(story.config.completionVisual, "seed-to-flower");
   assert.deepEqual(
-    story.config.items.map(({ sceneVisual }) => sceneVisual),
-    ["plays-together", "leaves-home", "meets-at-park"],
+    story.config.items.map(({ itemVisual }) => itemVisual),
+    ["flower-after", "seed-before"],
   );
   assert.equal(
     story.successFeedback,
-    "Muito bem! Você colocou a história na ordem certa.",
+    "Isso! Primeiro Lumi plantou a semente.",
   );
   assert.equal(
     story.retryFeedback,
-    "Vamos pensar no que aconteceu primeiro.",
+    "Olhe de novo. O que aconteceu antes da flor nascer?",
   );
-  const storyFirst = selectOrderingItem(
-    createOrderingState(),
-    "story-leaves",
-    story.config.correctOrder,
+  assert.equal(
+    evaluateTapAndFind(story, "story-flower").completed,
+    false,
   );
-  const storySecond = selectOrderingItem(
-    storyFirst.state,
-    "story-meets",
-    story.config.correctOrder,
-  );
-  const storyComplete = selectOrderingItem(
-    storySecond.state,
-    "story-helps",
-    story.config.correctOrder,
-  );
-  assert.equal(storyComplete.completed, true);
-  assert.equal(storyComplete.incorrect, false);
+  assert.deepEqual(evaluateTapAndFind(story, "story-seed"), {
+    completed: true,
+  });
 });
 
 test("C de carro uses initial syllables and keeps CA as the correct answer", () => {

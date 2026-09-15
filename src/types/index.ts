@@ -27,7 +27,9 @@ export type ActivityItem = {
     | "outside-crossing"
     | "help-store"
     | "walk-away"
-    | "take-toy";
+    | "take-toy"
+    | "seed-before"
+    | "flower-after";
   isTarget?: boolean;
   emojiScale?: number;
 };
@@ -59,10 +61,12 @@ export type TapAndFindActivity = ActivityContent & {
       | "color-options"
       | "sound-options"
       | "emotion-options"
-      | "action-options";
+      | "action-options"
+      | "sequence-options";
     featuredEmoji?: string;
     featuredLabel?: string;
     featuredVisual?: "traffic-crossing" | "help-friend-scene";
+    completionVisual?: "seed-to-flower";
   };
 };
 export type TapAndFindActivityDefinition = TapAndFindActivity;
