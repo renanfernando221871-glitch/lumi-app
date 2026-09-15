@@ -30,6 +30,25 @@ export function ChildIntroScreen({ childName: _childName, onBack, onContinue }: 
       <View style={styles.background}>
         <View style={[styles.cloud, styles.cloudLeft]} />
         <View style={[styles.cloud, styles.cloudRight]} />
+        <View style={styles.meadow} />
+        <View style={[styles.tree, styles.treeLeft]}>
+          <View style={styles.treeTrunk} />
+          <View style={[styles.treeCrown, styles.treeCrownTop]} />
+          <View style={[styles.treeCrown, styles.treeCrownLeft]} />
+          <View style={[styles.treeCrown, styles.treeCrownRight]} />
+        </View>
+        <View style={[styles.tree, styles.treeRight]}>
+          <View style={styles.treeTrunk} />
+          <View style={[styles.treeCrown, styles.treeCrownTop]} />
+          <View style={[styles.treeCrown, styles.treeCrownLeft]} />
+          <View style={[styles.treeCrown, styles.treeCrownRight]} />
+        </View>
+        <View style={[styles.flower, styles.flowerLeft]}>
+          <Text style={styles.flowerGlyph}>✿</Text>
+        </View>
+        <View style={[styles.flower, styles.flowerRight]}>
+          <Text style={styles.flowerGlyph}>✿</Text>
+        </View>
         <View style={styles.hillBack} />
         <View style={styles.hillFront} />
       </View>
@@ -51,13 +70,12 @@ export function ChildIntroScreen({ childName: _childName, onBack, onContinue }: 
         />
 
         <View style={styles.characterStage}>
+          <View style={styles.characterShadow} />
           <LumiCharacter
             accessibilityLabel="Lumi, personagem oficial"
             expression="childIntro"
             size="hero"
           />
-          <Text style={[styles.ray, styles.rayLeft]}>››</Text>
-          <Text style={[styles.ray, styles.rayRight]}>››</Text>
         </View>
 
         <View style={styles.copy}>
@@ -104,6 +122,52 @@ const styles = StyleSheet.create({
   },
   cloudLeft: { left: "-8%", top: "22%" },
   cloudRight: { right: "-9%", top: "20%" },
+  meadow: {
+    position: "absolute",
+    left: "-5%",
+    right: "-5%",
+    top: "55%",
+    bottom: 0,
+    borderTopLeftRadius: 120,
+    borderTopRightRadius: 120,
+    backgroundColor: "#E7F8CF",
+  },
+  tree: {
+    position: "absolute",
+    top: "48%",
+    width: 92,
+    height: 155,
+  },
+  treeLeft: { left: -22, transform: [{ scale: 0.9 }] },
+  treeRight: { right: -24 },
+  treeTrunk: {
+    position: "absolute",
+    left: 39,
+    bottom: 0,
+    width: 16,
+    height: 75,
+    borderRadius: 9,
+    backgroundColor: "#9B6A3E",
+  },
+  treeCrown: {
+    position: "absolute",
+    width: 58,
+    height: 58,
+    borderRadius: 29,
+    backgroundColor: "#66B96A",
+  },
+  treeCrownTop: { left: 18, top: 0 },
+  treeCrownLeft: { left: 0, top: 35 },
+  treeCrownRight: { right: 0, top: 39, backgroundColor: "#78C672" },
+  flower: { position: "absolute", top: "64%", zIndex: 1 },
+  flowerLeft: { left: 62 },
+  flowerRight: { right: 58 },
+  flowerGlyph: {
+    color: colors.white,
+    fontSize: 28,
+    textShadowColor: "#F4C84D",
+    textShadowRadius: 1,
+  },
   hillBack: {
     position: "absolute",
     width: "140%",
@@ -147,10 +211,18 @@ const styles = StyleSheet.create({
   characterStage: {
     width: "100%",
     maxWidth: 400,
-    height: 435,
+    height: 475,
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+  },
+  characterShadow: {
+    position: "absolute",
+    bottom: 17,
+    width: 245,
+    height: 24,
+    borderRadius: 999,
+    backgroundColor: "rgba(88,151,76,0.18)",
   },
   ray: {
     position: "absolute",
@@ -159,9 +231,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "900",
   },
-  rayLeft: { left: 68, top: 254, transform: [{ rotate: "21deg" }] },
-  rayRight: { right: 56, top: 165, transform: [{ rotate: "-20deg" }] },
-  copy: { width: "100%", maxWidth: 400, alignItems: "center", marginTop: -14 },
+  copy: { width: "100%", maxWidth: 400, alignItems: "center", marginTop: -8 },
   helloRow: { height: 52, flexDirection: "row", alignItems: "center", justifyContent: "center" },
   hello: {
     color: "#2765B1",
