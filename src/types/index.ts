@@ -55,7 +55,8 @@ export type TapAndFindActivity = ActivityContent & {
       | "grid"
       | "color-options"
       | "sound-options"
-      | "emotion-options";
+      | "emotion-options"
+      | "action-options";
     featuredEmoji?: string;
     featuredLabel?: string;
     featuredVisual?: "traffic-crossing";

@@ -70,6 +70,7 @@ export function TapAndFindEngine({
   const colorOptions = activity.config.presentation === "color-options";
   const soundOptions = activity.config.presentation === "sound-options";
   const emotionOptions = activity.config.presentation === "emotion-options";
+  const actionOptions = activity.config.presentation === "action-options";
   const choose = (id: string) => {
     if (disabled) return;
     onInteraction(evaluateTapAndFind(activity, id));
@@ -124,6 +125,7 @@ export function TapAndFindEngine({
         styles.grid,
         soundOptions && styles.soundGrid,
         emotionOptions && styles.emotionGrid,
+        actionOptions && styles.actionGrid,
       ]}
     >
       {activity.config.items.map((item) => (
@@ -137,6 +139,7 @@ export function TapAndFindEngine({
             styles.itemCard,
             soundOptions && styles.soundCard,
             emotionOptions && styles.emotionCard,
+            actionOptions && styles.actionCard,
             {
               backgroundColor: item.color,
               transform: [{ scale: pressed ? 0.96 : 1 }],
@@ -155,6 +158,7 @@ export function TapAndFindEngine({
                 styles.itemEmoji,
                 soundOptions && styles.soundText,
               emotionOptions && styles.emotionEmoji,
+              actionOptions && styles.actionEmoji,
                 item.emojiScale
                   ? { fontSize: 47 * item.emojiScale }
                   : undefined,
@@ -164,7 +168,9 @@ export function TapAndFindEngine({
             </Text>
           )}
           {!soundOptions && !emotionOptions ? (
-            <Text style={styles.itemLabel}>{item.label}</Text>
+            <Text style={[styles.itemLabel, actionOptions && styles.actionLabel]}>
+              {item.label}
+            </Text>
           ) : null}
         </Pressable>
       ))}
@@ -388,6 +394,26 @@ const styles = StyleSheet.create({
   },
   emotionEmoji: {
     fontSize: 45,
+  },
+  actionGrid: {
+    maxWidth: 410,
+    flexWrap: "nowrap",
+    gap: 18,
+  },
+  actionCard: {
+    width: 116,
+    height: 108,
+    borderRadius: 24,
+    paddingHorizontal: 6,
+  },
+  actionEmoji: {
+    fontSize: 34,
+  },
+  actionLabel: {
+    fontSize: 13,
+    lineHeight: 16,
+    textAlign: "center",
+    marginTop: 5,
   },
   itemLabel: {
     color: colors.deepGreen,

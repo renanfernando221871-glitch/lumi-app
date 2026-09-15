@@ -269,6 +269,37 @@ test("Quem está triste uses three distinct faces and keeps sad correct", () => 
   assert.equal(activity.retryFeedback, "Olhe bem para os rostinhos.");
 });
 
+test("Ajude o amigo keeps helping to store toys as the kind answer", () => {
+  const activity = cidadeActivities.find(
+    ({ id }) => id === "cidade-help-friend",
+  );
+  assert.ok(activity && activity.engineType === "tap-and-find");
+  if (!activity || activity.engineType !== "tap-and-find") return;
+
+  assert.equal(
+    activity.instructionText,
+    "O que podemos fazer para ajudar?",
+  );
+  assert.equal(activity.config.presentation, "action-options");
+  assert.equal(activity.config.targetId, "city-help-pick-up");
+  assert.deepEqual(
+    activity.config.items.map(({ id, label }) => ({ id, label })),
+    [
+      { id: "city-help-pick-up", label: "ajudar a guardar" },
+      { id: "city-walk-away", label: "ir embora" },
+      { id: "city-keep-playing", label: "pegar para si" },
+    ],
+  );
+  assert.equal(
+    activity.successFeedback,
+    "Isso! Ajudar um amigo é uma atitude gentil.",
+  );
+  assert.equal(
+    activity.retryFeedback,
+    "Pense no que faria o amigo se sentir melhor.",
+  );
+});
+
 test("Quem dirige keeps vehicles in targets and professionals in draggable cards", () => {
   const activity = cidadeActivities.find(
     ({ id }) => id === "cidade-who-drives",
