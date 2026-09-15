@@ -7,6 +7,7 @@ import {
   OrderingState,
 } from "../../engines/ordering";
 import { colors, shadow } from "../../theme/colors";
+import { LumiCharacter } from "../LumiCharacter";
 
 export type OrderingEngineProps = {
   activity: OrderingActivity;
@@ -17,9 +18,15 @@ export type OrderingEngineProps = {
 function LumiSeesCarScene() {
   return (
     <View
-      accessibilityLabel="Um carro"
+      accessibilityLabel="Lumi olhando para um carro"
       style={styles.sentenceScene}
     >
+      <LumiCharacter expression="curious" size="medium" />
+      <View style={styles.lookLine}>
+        <View style={styles.lookDot} />
+        <View style={styles.lookDot} />
+        <View style={styles.lookDot} />
+      </View>
       <View style={styles.sceneCar}>
         <View style={styles.carWindow} />
         <View style={[styles.carWheel, styles.carWheelLeft]} />
@@ -80,6 +87,7 @@ function StoryScene({
           <View style={styles.storyMotionLine} />
           <View style={[styles.storyMotionLine, styles.storyMotionLineShort]} />
         </View>
+        <LumiCharacter expression="main" size="small" />
       </View>
     );
   }
@@ -93,6 +101,7 @@ function StoryScene({
           <View style={styles.treeTop} />
           <View style={styles.treeTrunk} />
         </View>
+        <LumiCharacter expression="curious" size="small" />
         <View style={styles.helloMark}>
           <View style={styles.helloLine} />
           <View style={[styles.helloLine, styles.helloLineTilt]} />
@@ -106,6 +115,7 @@ function StoryScene({
       accessibilityLabel="Lumi brincando com um amigo"
       style={[styles.storyScene, compact && styles.storySceneCompact]}
     >
+      <LumiCharacter expression="happy" size="small" />
       <View style={[styles.storyBall, compact && styles.storyBallCompact]} />
       <StoryPerson friend compact={compact} />
     </View>

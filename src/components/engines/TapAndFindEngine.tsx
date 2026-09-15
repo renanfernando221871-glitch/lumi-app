@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ActivityInteraction, TapAndFindActivity } from "../../types";
 import { evaluateTapAndFind } from "../../engines/interactions";
 import { colors, shadow } from "../../theme/colors";
+import { LumiCharacter } from "../LumiCharacter";
 
 export type TapAndFindEngineProps = {
   activity: TapAndFindActivity;
@@ -170,6 +171,10 @@ function SeedSequenceVisual({
   const flower = variant === "flower-after";
   return (
     <View style={[styles.seedScene, compact && styles.seedSceneCompact]}>
+      <LumiCharacter
+        expression={flower ? "happy" : "main"}
+        size="small"
+      />
       {!flower ? (
         <View style={[styles.wateringCan, styles.wateringCanStandalone]}>
           <View style={styles.wateringCanHandle} />

@@ -8,7 +8,7 @@ export function SplashScreen() {
   return (
     <Shell>
       <View style={styles.splash}>
-        <LumiCharacter expression="happy" size="large" />
+        <LumiCharacter expression="main" size="large" />
         <Text style={styles.brand}>lumi</Text>
         <Text style={styles.splashTagline}>crescer é descobrir</Text>
         <View style={styles.loadingDots}>
