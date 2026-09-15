@@ -27,16 +27,29 @@ const roundedTitleFont = Platform.select({
 export function WelcomeScreen({ onContinue, disabled = false }: Props) {
   const { height, width } = useWindowDimensions();
   const isTallScreen = height / width > 1.5;
+  const isNarrowScreen = width < 380;
 
   return (
     <Shell>
       <View style={styles.background}>
         <View style={styles.skyGlow} />
-        <View style={[styles.cloud, styles.cloudLeft]}>
+        <View
+          style={[
+            styles.cloud,
+            styles.cloudLeft,
+            isNarrowScreen && styles.cloudNarrow,
+          ]}
+        >
           <View style={[styles.cloudPuff, styles.cloudPuffSmall]} />
           <View style={[styles.cloudPuff, styles.cloudPuffLarge]} />
         </View>
-        <View style={[styles.cloud, styles.cloudRight]}>
+        <View
+          style={[
+            styles.cloud,
+            styles.cloudRight,
+            isNarrowScreen && styles.cloudNarrow,
+          ]}
+        >
           <View style={[styles.cloudPuff, styles.cloudPuffSmall]} />
           <View style={[styles.cloudPuff, styles.cloudPuffLarge]} />
         </View>
@@ -111,15 +124,21 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 20,
     backgroundColor: "rgba(255,255,255,0.82)",
+    zIndex: 0,
   },
   cloudLeft: {
-    top: "13%",
-    left: "8%",
+    top: "8%",
+    left: 24,
   },
   cloudRight: {
-    top: "20%",
-    right: "9%",
+    top: "9%",
+    right: 24,
     transform: [{ scale: 0.78 }],
+  },
+  cloudNarrow: {
+    width: 78,
+    height: 27,
+    transform: [{ scale: 0.82 }],
   },
   cloudPuff: {
     position: "absolute",
