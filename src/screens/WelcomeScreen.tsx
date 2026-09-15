@@ -64,11 +64,13 @@ export function WelcomeScreen({ onContinue, disabled = false }: Props) {
           <View style={styles.lumiHero}>
             <View style={styles.softCircle} />
             <View style={styles.smallCircle} />
-            <LumiCharacter
-              accessibilityLabel="Lumi, personagem oficial"
-              expression="main"
-              size="large"
-            />
+            <View style={styles.characterScale}>
+              <LumiCharacter
+                accessibilityLabel="Lumi, personagem oficial"
+                expression="main"
+                size="large"
+              />
+            </View>
           </View>
           <Text style={styles.heroTitle}>Que bom ter você aqui!</Text>
           <Text style={styles.heroSubtitle}>
@@ -208,8 +210,9 @@ const styles = StyleSheet.create({
   },
   scroll: {
     flexGrow: 1,
-    justifyContent: "center",
-    paddingVertical: 28,
+    justifyContent: "flex-start",
+    paddingTop: 34,
+    paddingBottom: 120,
   },
   hero: {
     width: "100%",
@@ -224,21 +227,22 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   brandImage: {
-    width: 320,
-    height: 132,
+    width: 340,
+    maxWidth: "92%",
+    height: 142,
   },
   lumiHero: {
-    width: 230,
-    height: 220,
+    width: 260,
+    height: 252,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 12,
+    marginBottom: 8,
   },
   softCircle: {
     position: "absolute",
-    width: 205,
-    height: 205,
-    borderRadius: 103,
+    width: 235,
+    height: 235,
+    borderRadius: 118,
     backgroundColor: colors.softYellow,
     borderWidth: 7,
     borderColor: colors.white,
@@ -249,12 +253,15 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-    right: 5,
-    top: 22,
+    right: 2,
+    top: 24,
     backgroundColor: colors.softCoral,
   },
+  characterScale: {
+    transform: [{ scale: 1.16 }],
+  },
   heroTitle: {
-    maxWidth: 430,
+    maxWidth: 350,
     color: colors.deepGreen,
     fontFamily: roundedTitleFont,
     fontSize: 34,
