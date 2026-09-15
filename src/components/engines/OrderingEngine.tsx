@@ -41,6 +41,92 @@ function LumiSeesCarScene() {
   );
 }
 
+function StoryPerson({
+  friend = false,
+  compact = false,
+}: {
+  friend?: boolean;
+  compact?: boolean;
+}) {
+  return (
+    <View style={[styles.storyPerson, compact && styles.storyPersonCompact]}>
+      <View
+        style={[
+          styles.storyHead,
+          friend && styles.friendHead,
+          compact && styles.storyHeadCompact,
+        ]}
+      >
+        <View style={styles.storyEye} />
+        <View style={styles.storySmile} />
+      </View>
+      <View
+        style={[
+          styles.storyBody,
+          friend && styles.friendBody,
+          compact && styles.storyBodyCompact,
+        ]}
+      />
+    </View>
+  );
+}
+
+function StoryScene({
+  variant,
+  compact = false,
+}: {
+  variant: "leaves-home" | "meets-at-park" | "plays-together";
+  compact?: boolean;
+}) {
+  if (variant === "leaves-home") {
+    return (
+      <View
+        accessibilityLabel="Lumi saindo de casa"
+        style={[styles.storyScene, compact && styles.storySceneCompact]}
+      >
+        <View style={[styles.storyHouse, compact && styles.storyHouseCompact]}>
+          <View style={styles.storyRoof} />
+          <View style={styles.storyDoor} />
+        </View>
+        <View style={styles.storyMotion}>
+          <View style={styles.storyMotionLine} />
+          <View style={[styles.storyMotionLine, styles.storyMotionLineShort]} />
+        </View>
+        <StoryPerson compact={compact} />
+      </View>
+    );
+  }
+  if (variant === "meets-at-park") {
+    return (
+      <View
+        accessibilityLabel="Lumi encontrando um amigo no parque"
+        style={[styles.storyScene, compact && styles.storySceneCompact]}
+      >
+        <View style={[styles.parkTree, compact && styles.parkTreeCompact]}>
+          <View style={styles.treeTop} />
+          <View style={styles.treeTrunk} />
+        </View>
+        <StoryPerson compact={compact} />
+        <View style={styles.helloMark}>
+          <View style={styles.helloLine} />
+          <View style={[styles.helloLine, styles.helloLineTilt]} />
+        </View>
+        <StoryPerson friend compact={compact} />
+      </View>
+    );
+  }
+  return (
+    <View
+      accessibilityLabel="Lumi brincando com um amigo"
+      style={[styles.storyScene, compact && styles.storySceneCompact]}
+    >
+      <StoryPerson compact={compact} />
+      <View style={[styles.storyBall, compact && styles.storyBallCompact]} />
+      <StoryPerson friend compact={compact} />
+    </View>
+  );
+}
+
 /**
  * A tap-to-build ordering engine. It intentionally has no drag dependency, so
  * the same data contract works with accessibility and touch-only interactions.
@@ -53,6 +139,7 @@ export function OrderingEngine({
   const [state, setState] = useState<OrderingState>(createOrderingState);
   const stateRef = useRef(state);
   const sentenceMode = activity.config.presentation === "sentence";
+  const storyMode = activity.config.presentation === "story";
   const sentenceCompleted =
     sentenceMode &&
     state.selectedItemIds.length === activity.config.correctOrder.length;
@@ -107,20 +194,30 @@ export function OrderingEngine({
               >
                 <Text style={styles.selectedNumber}>{index + 1}</Text>
                 <Text
-                  style={[
-                    styles.emoji,
-                    { fontSize: 38 * (item.size ?? 1) },
-                    sentenceMode && styles.sentenceWord,
-                  ]}
+                  style={styles.srOnly}
+                  accessibilityElementsHidden
                 >
-                  {item.emoji}
+                  {item.label}
                 </Text>
+                {storyMode && item.sceneVisual ? (
+                  <StoryScene variant={item.sceneVisual} compact />
+                ) : (
+                  <Text
+                    style={[
+                      styles.emoji,
+                      { fontSize: 38 * (item.size ?? 1) },
+                      sentenceMode && styles.sentenceWord,
+                    ]}
+                  >
+                    {item.emoji}
+                  </Text>
+                )}
               </View>
             );
           })
         )}
       </View>
-      <View style={styles.options}>
+      <View style={[styles.options, storyMode && styles.storyOptions]}>
         {activity.config.items.map((item) => {
           const selected = state.selectedItemIds.includes(item.id);
           return (
@@ -134,19 +231,24 @@ export function OrderingEngine({
               style={({ pressed }) => [
                 styles.option,
                 sentenceMode && styles.sentenceOption,
+                storyMode && styles.storyOption,
                 selected && styles.optionSelected,
                 pressed && styles.optionPressed,
               ]}
             >
-              <Text
-                style={[
-                  styles.optionEmoji,
-                  { fontSize: 43 * (item.size ?? 1) },
-                  sentenceMode && styles.sentenceOptionWord,
-                ]}
-              >
-                {item.emoji}
-              </Text>
+              {storyMode && item.sceneVisual ? (
+                <StoryScene variant={item.sceneVisual} />
+              ) : (
+                <Text
+                  style={[
+                    styles.optionEmoji,
+                    { fontSize: 43 * (item.size ?? 1) },
+                    sentenceMode && styles.sentenceOptionWord,
+                  ]}
+                >
+                  {item.emoji}
+                </Text>
+              )}
             </Pressable>
           );
         })}
@@ -166,6 +268,177 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     ...shadow,
+  },
+  storyScene: {
+    width: 112,
+    height: 75,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+  storySceneCompact: {
+    width: 82,
+    height: 55,
+    transform: [{ scale: 0.78 }],
+  },
+  storyPerson: {
+    width: 29,
+    height: 54,
+    alignItems: "center",
+    zIndex: 2,
+  },
+  storyPersonCompact: {
+    width: 24,
+    height: 47,
+  },
+  storyHead: {
+    width: 25,
+    height: 25,
+    borderRadius: 13,
+    backgroundColor: "#D99A72",
+  },
+  friendHead: {
+    backgroundColor: "#8F5B3D",
+  },
+  storyHeadCompact: {
+    width: 21,
+    height: 21,
+  },
+  storyEye: {
+    position: "absolute",
+    top: 9,
+    right: 4,
+    width: 3,
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: "#304A45",
+  },
+  storySmile: {
+    position: "absolute",
+    right: 4,
+    bottom: 5,
+    width: 7,
+    height: 4,
+    borderBottomWidth: 2,
+    borderBottomColor: "#8C4E42",
+    borderRadius: 4,
+  },
+  storyBody: {
+    width: 24,
+    height: 27,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    backgroundColor: "#5F91AE",
+  },
+  friendBody: {
+    backgroundColor: "#E7A84B",
+  },
+  storyBodyCompact: {
+    width: 20,
+    height: 23,
+  },
+  storyHouse: {
+    width: 43,
+    height: 39,
+    marginRight: 6,
+    borderRadius: 4,
+    backgroundColor: "#F4C66A",
+  },
+  storyHouseCompact: {
+    width: 35,
+    height: 32,
+  },
+  storyRoof: {
+    position: "absolute",
+    top: -15,
+    left: -4,
+    width: 0,
+    height: 0,
+    borderLeftWidth: 25,
+    borderRightWidth: 25,
+    borderBottomWidth: 19,
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+    borderBottomColor: "#E66D63",
+  },
+  storyDoor: {
+    position: "absolute",
+    bottom: 0,
+    left: 16,
+    width: 13,
+    height: 22,
+    backgroundColor: "#9C6847",
+  },
+  storyMotion: {
+    width: 18,
+    height: 32,
+    marginRight: 2,
+    gap: 7,
+    justifyContent: "center",
+  },
+  storyMotionLine: {
+    width: 16,
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: colors.blue,
+  },
+  storyMotionLineShort: {
+    width: 10,
+  },
+  parkTree: {
+    width: 31,
+    height: 59,
+    marginRight: 3,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  parkTreeCompact: {
+    width: 25,
+    height: 48,
+  },
+  treeTop: {
+    position: "absolute",
+    top: 0,
+    width: 31,
+    height: 31,
+    borderRadius: 16,
+    backgroundColor: "#75B968",
+  },
+  treeTrunk: {
+    width: 8,
+    height: 31,
+    backgroundColor: "#9C6847",
+  },
+  helloMark: {
+    width: 15,
+    height: 31,
+    alignItems: "center",
+    gap: 4,
+  },
+  helloLine: {
+    width: 4,
+    height: 13,
+    borderRadius: 2,
+    backgroundColor: "#F3C557",
+  },
+  helloLineTilt: {
+    height: 8,
+    transform: [{ rotate: "35deg" }],
+  },
+  storyBall: {
+    width: 23,
+    height: 23,
+    marginHorizontal: 8,
+    marginBottom: 5,
+    borderRadius: 12,
+    borderWidth: 4,
+    borderColor: "#FFF0A8",
+    backgroundColor: "#E66D63",
+  },
+  storyBallCompact: {
+    width: 18,
+    height: 18,
+    marginHorizontal: 4,
   },
   sceneLumi: {
     width: 48,
@@ -320,6 +593,15 @@ const styles = StyleSheet.create({
     width: 126,
     minHeight: 74,
   },
+  storyOptions: {
+    flexWrap: "nowrap",
+    gap: 14,
+  },
+  storyOption: {
+    width: 132,
+    minHeight: 105,
+    padding: 6,
+  },
   sentenceOptionWord: {
     fontSize: 24,
     lineHeight: 30,
@@ -329,4 +611,10 @@ const styles = StyleSheet.create({
   },
   optionSelected: { opacity: 0.45, borderColor: colors.green },
   optionPressed: { transform: [{ scale: 0.95 }] },
+  srOnly: {
+    position: "absolute",
+    width: 1,
+    height: 1,
+    opacity: 0,
+  },
 });

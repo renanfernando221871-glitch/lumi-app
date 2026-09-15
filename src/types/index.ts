@@ -94,6 +94,7 @@ export type CountAndSelectActivity = ActivityContent & {
 
 export type OrderingItem = ActivityItem & {
   size?: number;
+  sceneVisual?: "leaves-home" | "meets-at-park" | "plays-together";
 };
 
 export type OrderingActivity = ActivityContent & {
@@ -102,7 +103,7 @@ export type OrderingActivity = ActivityContent & {
     items: OrderingItem[];
     correctOrder: string[];
     orderingInstruction: string;
-    presentation?: "sentence";
+    presentation?: "sentence" | "story";
     featuredVisual?: "lumi-sees-car";
     completedText?: string;
   };

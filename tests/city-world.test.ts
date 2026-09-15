@@ -195,8 +195,38 @@ test("sentence and story ordering are fully configured by data", () => {
     "story-leaves",
     "story-meets",
     "story-helps",
-    "story-home",
   ]);
+  assert.equal(story.instructionText, "Coloque a história na ordem certa.");
+  assert.equal(story.config.presentation, "story");
+  assert.deepEqual(
+    story.config.items.map(({ sceneVisual }) => sceneVisual),
+    ["plays-together", "leaves-home", "meets-at-park"],
+  );
+  assert.equal(
+    story.successFeedback,
+    "Muito bem! Você colocou a história na ordem certa.",
+  );
+  assert.equal(
+    story.retryFeedback,
+    "Vamos pensar no que aconteceu primeiro.",
+  );
+  const storyFirst = selectOrderingItem(
+    createOrderingState(),
+    "story-leaves",
+    story.config.correctOrder,
+  );
+  const storySecond = selectOrderingItem(
+    storyFirst.state,
+    "story-meets",
+    story.config.correctOrder,
+  );
+  const storyComplete = selectOrderingItem(
+    storySecond.state,
+    "story-helps",
+    story.config.correctOrder,
+  );
+  assert.equal(storyComplete.completed, true);
+  assert.equal(storyComplete.incorrect, false);
 });
 
 test("C de carro uses initial syllables and keeps CA as the correct answer", () => {
