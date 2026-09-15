@@ -247,6 +247,28 @@ test("Atravesse com segurança keeps the positive safe crossing answer", () => {
   );
 });
 
+test("Quem está triste uses three distinct faces and keeps sad correct", () => {
+  const activity = cidadeActivities.find(
+    ({ id }) => id === "cidade-who-is-sad",
+  );
+  assert.ok(activity && activity.engineType === "tap-and-find");
+  if (!activity || activity.engineType !== "tap-and-find") return;
+
+  assert.equal(activity.instructionText, "Quem está triste?");
+  assert.equal(activity.config.presentation, "emotion-options");
+  assert.equal(activity.config.targetId, "city-sad-face");
+  assert.deepEqual(
+    activity.config.items.map(({ label, emoji }) => ({ label, emoji })),
+    [
+      { label: "triste", emoji: "😢" },
+      { label: "feliz", emoji: "😊" },
+      { label: "surpreso", emoji: "😮" },
+    ],
+  );
+  assert.equal(activity.successFeedback, "Isso! Essa pessoa está triste.");
+  assert.equal(activity.retryFeedback, "Olhe bem para os rostinhos.");
+});
+
 test("Quem dirige keeps vehicles in targets and professionals in draggable cards", () => {
   const activity = cidadeActivities.find(
     ({ id }) => id === "cidade-who-drives",

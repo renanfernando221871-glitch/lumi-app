@@ -69,6 +69,7 @@ export function TapAndFindEngine({
 }: TapAndFindEngineProps) {
   const colorOptions = activity.config.presentation === "color-options";
   const soundOptions = activity.config.presentation === "sound-options";
+  const emotionOptions = activity.config.presentation === "emotion-options";
   const choose = (id: string) => {
     if (disabled) return;
     onInteraction(evaluateTapAndFind(activity, id));
@@ -118,7 +119,13 @@ export function TapAndFindEngine({
       ))}
     </View>
   ) : (
-    <View style={[styles.grid, soundOptions && styles.soundGrid]}>
+    <View
+      style={[
+        styles.grid,
+        soundOptions && styles.soundGrid,
+        emotionOptions && styles.emotionGrid,
+      ]}
+    >
       {activity.config.items.map((item) => (
         <Pressable
           key={item.id}
@@ -129,6 +136,7 @@ export function TapAndFindEngine({
           style={({ pressed }) => [
             styles.itemCard,
             soundOptions && styles.soundCard,
+            emotionOptions && styles.emotionCard,
             {
               backgroundColor: item.color,
               transform: [{ scale: pressed ? 0.96 : 1 }],
@@ -146,6 +154,7 @@ export function TapAndFindEngine({
               style={[
                 styles.itemEmoji,
                 soundOptions && styles.soundText,
+              emotionOptions && styles.emotionEmoji,
                 item.emojiScale
                   ? { fontSize: 47 * item.emojiScale }
                   : undefined,
@@ -154,7 +163,7 @@ export function TapAndFindEngine({
               {item.emoji}
             </Text>
           )}
-          {!soundOptions ? (
+          {!soundOptions && !emotionOptions ? (
             <Text style={styles.itemLabel}>{item.label}</Text>
           ) : null}
         </Pressable>
@@ -366,6 +375,19 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     color: colors.deepGreen,
     fontWeight: "900",
+  },
+  emotionGrid: {
+    maxWidth: 410,
+    flexWrap: "nowrap",
+    gap: 20,
+  },
+  emotionCard: {
+    width: 112,
+    height: 102,
+    borderRadius: 24,
+  },
+  emotionEmoji: {
+    fontSize: 45,
   },
   itemLabel: {
     color: colors.deepGreen,

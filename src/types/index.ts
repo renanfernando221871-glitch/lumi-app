@@ -51,7 +51,11 @@ export type TapAndFindActivity = ActivityContent & {
   config: {
     items: ActivityItem[];
     targetId: string;
-    presentation?: "grid" | "color-options" | "sound-options";
+    presentation?:
+      | "grid"
+      | "color-options"
+      | "sound-options"
+      | "emotion-options";
     featuredEmoji?: string;
     featuredLabel?: string;
     featuredVisual?: "traffic-crossing";
