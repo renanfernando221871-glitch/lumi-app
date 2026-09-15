@@ -24,7 +24,7 @@ const roundedFont = Platform.select({
   web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
 });
 
-export function ChildIntroScreen({ childName, onBack, onContinue }: Props) {
+export function ChildIntroScreen({ childName: _childName, onBack, onContinue }: Props) {
   return (
     <Shell>
       <View style={styles.background}>
@@ -50,28 +50,38 @@ export function ChildIntroScreen({ childName, onBack, onContinue }: Props) {
           style={styles.logo}
         />
 
-        <View style={styles.card}>
-          <View style={styles.sparkleLeft}><Text style={styles.sparkle}>★</Text></View>
-          <View style={styles.sparkleRight}><Text style={styles.sparkle}>★</Text></View>
-          <LumiCharacter
-            accessibilityLabel="Lumi, personagem oficial"
-            expression="main"
-            size="large"
-          />
-          <Text style={styles.title}>Olá! Eu sou a Lumi!</Text>
+        <View style={styles.characterStage}>
+          <View style={styles.lumiScale}>
+            <LumiCharacter
+              accessibilityLabel="Lumi, personagem oficial"
+              expression="main"
+              size="large"
+            />
+          </View>
+          <Text style={[styles.ray, styles.rayLeft]}>››</Text>
+          <Text style={[styles.ray, styles.rayRight]}>››</Text>
+        </View>
+
+        <View style={styles.copy}>
+          <View style={styles.helloRow}>
+            <Text style={[styles.ray, styles.helloRayLeft]}>››</Text>
+            <Text style={styles.hello}>Olá!</Text>
+            <Text style={[styles.ray, styles.helloRayRight]}>‹‹</Text>
+          </View>
+          <Text style={styles.title}>
+            Eu sou a <Text style={styles.lumiWord}>Lumi</Text>!
+          </Text>
           <Text style={styles.subtitle}>
-            {childName
-              ? `${childName}, vamos explorar, brincar e descobrir juntos?`
-              : "Vamos explorar, brincar e descobrir juntos?"}
+            Vamos explorar, brincar e descobrir?
           </Text>
 
           <Pressable
-            accessibilityLabel="Começar a explorar"
+            accessibilityLabel="Vamos lá!"
             accessibilityRole="button"
             onPress={onContinue}
             style={styles.continueButton}
           >
-            <Text style={styles.continueText}>Vamos explorar!</Text>
+            <Text style={styles.continueText}>Vamos lá!</Text>
             <Text style={styles.continueArrow}>›</Text>
           </Pressable>
         </View>
@@ -92,39 +102,39 @@ const styles = StyleSheet.create({
     width: 105,
     height: 44,
     borderRadius: 24,
-    backgroundColor: "rgba(255,255,255,0.84)",
+    backgroundColor: "rgba(255,255,255,0.9)",
   },
-  cloudLeft: { left: "-4%", top: "16%" },
-  cloudRight: { right: "-4%", top: "9%" },
+  cloudLeft: { left: "-8%", top: "22%" },
+  cloudRight: { right: "-9%", top: "20%" },
   hillBack: {
     position: "absolute",
     width: "140%",
-    height: "28%",
-    left: "-42%",
-    bottom: "-14%",
+    height: "18%",
+    left: "-38%",
+    bottom: "-10%",
     borderRadius: 999,
     backgroundColor: "#BFE8A8",
   },
   hillFront: {
     position: "absolute",
     width: "145%",
-    height: "26%",
-    right: "-45%",
-    bottom: "-14%",
+    height: "17%",
+    right: "-40%",
+    bottom: "-9%",
     borderRadius: 999,
     backgroundColor: "#87CE72",
   },
   scroll: {
     flexGrow: 1,
     alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 22,
-    paddingVertical: 24,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 24,
   },
   backButton: {
     position: "absolute",
-    top: 24,
-    left: 22,
+    top: 22,
+    left: 20,
     zIndex: 2,
     width: 46,
     height: 46,
@@ -135,54 +145,77 @@ const styles = StyleSheet.create({
     ...shadow,
   },
   backIcon: { color: "#123C84", fontSize: 38, lineHeight: 39 },
-  logo: { width: 175, height: 82, marginBottom: 6 },
-  card: {
+  logo: { width: 184, height: 92 },
+  characterStage: {
     width: "100%",
-    maxWidth: 390,
-    minHeight: 590,
-    borderRadius: 34,
+    maxWidth: 400,
+    height: 435,
     alignItems: "center",
     justifyContent: "center",
-    padding: 24,
-    backgroundColor: "rgba(255,255,255,0.94)",
-    ...shadow,
+    position: "relative",
   },
-  sparkleLeft: { position: "absolute", left: 34, top: 95, transform: [{ rotate: "-15deg" }] },
-  sparkleRight: { position: "absolute", right: 38, top: 150, transform: [{ rotate: "12deg" }] },
-  sparkle: { color: "#FFD34D", fontSize: 28 },
-  title: {
-    color: "#123C84",
+  lumiScale: { transform: [{ scale: 2.12 }] },
+  ray: {
+    position: "absolute",
+    color: "#FFBE31",
     fontFamily: roundedFont,
-    fontSize: 30,
-    lineHeight: 36,
+    fontSize: 32,
+    fontWeight: "900",
+  },
+  rayLeft: { left: 68, top: 254, transform: [{ rotate: "21deg" }] },
+  rayRight: { right: 56, top: 165, transform: [{ rotate: "-20deg" }] },
+  copy: { width: "100%", maxWidth: 400, alignItems: "center", marginTop: -14 },
+  helloRow: { height: 52, flexDirection: "row", alignItems: "center", justifyContent: "center" },
+  hello: {
+    color: "#2765B1",
+    fontFamily: roundedFont,
+    fontSize: 50,
+    lineHeight: 54,
+    fontWeight: "900",
+  },
+  helloRayLeft: { position: "relative", fontSize: 25, marginRight: 11, transform: [{ rotate: "54deg" }] },
+  helloRayRight: { position: "relative", fontSize: 25, marginLeft: 11, transform: [{ rotate: "-54deg" }] },
+  title: {
+    color: "#2765B1",
+    fontFamily: roundedFont,
+    fontSize: 42,
+    lineHeight: 46,
     fontWeight: "900",
     textAlign: "center",
-    marginTop: 10,
   },
+  lumiWord: { color: "#F17C68" },
   subtitle: {
-    maxWidth: 290,
-    color: "#405473",
+    color: "#24508A",
+    fontFamily: roundedFont,
     fontSize: 17,
-    lineHeight: 24,
+    lineHeight: 22,
+    fontWeight: "800",
     textAlign: "center",
-    marginTop: 10,
+    marginTop: 12,
   },
   continueButton: {
-    width: "100%",
-    minHeight: 62,
-    borderRadius: 31,
+    width: "90%",
+    minHeight: 70,
+    borderRadius: 35,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 24,
+    marginTop: 22,
     backgroundColor: "#63C76A",
     ...shadow,
   },
   continueText: {
     color: colors.white,
     fontFamily: roundedFont,
-    fontSize: 19,
+    fontSize: 28,
     fontWeight: "900",
   },
-  continueArrow: { color: colors.white, fontSize: 32, lineHeight: 34, marginLeft: 10 },
+  continueArrow: {
+    position: "absolute",
+    right: 24,
+    color: colors.white,
+    fontSize: 39,
+    lineHeight: 41,
+    fontWeight: "800",
+  },
 });
