@@ -3,6 +3,7 @@ import {
   ImageBackground,
   Pressable,
   StyleSheet,
+  Text,
   useWindowDimensions,
   View,
 } from "react-native";
@@ -38,7 +39,7 @@ export function MapScreen({
   profile: _profile,
   worlds,
   unlockedWorldIds,
-  completedActivityIds: _completedActivityIds,
+  completedActivityIds,
   rewards: _rewards,
   onOpenWorld,
   onEditProfile,
@@ -65,16 +66,37 @@ export function MapScreen({
             if (!position) return null;
 
             const unlocked = unlockedWorldIds.includes(world.id);
+            const completed = world.activityIds.every((activityId) =>
+              completedActivityIds.includes(activityId),
+            );
             return (
               <Pressable
-                accessibilityLabel={`${world.title}${unlocked ? "" : ", bloqueado"}`}
+                accessibilityLabel={`${world.title}${
+                  completed ? ", concluído" : unlocked ? "" : ", bloqueado"
+                }`}
                 accessibilityRole="button"
                 accessibilityState={{ disabled: !unlocked }}
                 disabled={!unlocked}
                 key={world.id}
                 onPress={() => onOpenWorld(world.id)}
                 style={[styles.worldHotspot, position]}
-              />
+              >
+                {!unlocked ? (
+                  <>
+                    <View style={styles.lockedOverlay} />
+                    <View style={styles.statusBadge}>
+                      <Text style={styles.lockIcon}>🔒</Text>
+                    </View>
+                  </>
+                ) : completed ? (
+                  <View
+                    accessibilityLabel="Mundo concluído"
+                    style={[styles.statusBadge, styles.completedBadge]}
+                  >
+                    <Text style={styles.completedIcon}>✓</Text>
+                  </View>
+                ) : null}
+              </Pressable>
             );
           })}
 
@@ -103,6 +125,39 @@ const styles = StyleSheet.create({
   worldHotspot: {
     position: "absolute",
     borderRadius: 36,
+    overflow: "hidden",
+  },
+  lockedOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: 36,
+    backgroundColor: "rgba(72, 92, 102, 0.18)",
+    pointerEvents: "none",
+  },
+  statusBadge: {
+    position: "absolute",
+    top: 8,
+    right: 9,
+    width: 38,
+    height: 38,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 19,
+    backgroundColor: "rgba(255, 255, 255, 0.96)",
+    borderWidth: 2,
+    borderColor: "rgba(78, 98, 105, 0.25)",
+    pointerEvents: "none",
+  },
+  lockIcon: {
+    fontSize: 20,
+  },
+  completedBadge: {
+    backgroundColor: "#53B94A",
+    borderColor: "rgba(255, 255, 255, 0.92)",
+  },
+  completedIcon: {
+    color: "#FFFFFF",
+    fontSize: 24,
+    fontWeight: "900",
   },
   settingsHotspot: {
     position: "absolute",
