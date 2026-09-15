@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  useWindowDimensions,
   View,
 } from "react-native";
 import { PrimaryButton } from "../components/PrimaryButton";
@@ -24,6 +25,9 @@ const roundedTitleFont = Platform.select({
 });
 
 export function WelcomeScreen({ onContinue, disabled = false }: Props) {
+  const { height, width } = useWindowDimensions();
+  const isTallScreen = height / width > 1.5;
+
   return (
     <Shell>
       <View style={styles.background}>
@@ -52,7 +56,7 @@ export function WelcomeScreen({ onContinue, disabled = false }: Props) {
         </View>
       </View>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.hero}>
+        <View style={[styles.hero, isTallScreen && styles.heroTall]}>
           <View accessibilityLabel="Logomarca Lumi" style={styles.brand}>
             <Image
               accessibilityLabel="Lumi — crescer é descobrir"
@@ -141,9 +145,9 @@ const styles = StyleSheet.create({
   hillBack: {
     position: "absolute",
     width: "125%",
-    height: "38%",
+    height: "32%",
     left: "-34%",
-    bottom: "-19%",
+    bottom: "-17%",
     borderRadius: 999,
     backgroundColor: "#BFE8A8",
     transform: [{ rotate: "4deg" }],
@@ -151,9 +155,9 @@ const styles = StyleSheet.create({
   hillFront: {
     position: "absolute",
     width: "130%",
-    height: "34%",
+    height: "29%",
     right: "-39%",
-    bottom: "-18%",
+    bottom: "-16%",
     borderRadius: 999,
     backgroundColor: "#91D17A",
     transform: [{ rotate: "-5deg" }],
@@ -211,20 +215,23 @@ const styles = StyleSheet.create({
   scroll: {
     flexGrow: 1,
     justifyContent: "flex-start",
-    paddingTop: 34,
-    paddingBottom: 120,
   },
   hero: {
     width: "100%",
-    maxWidth: 500,
+    maxWidth: 430,
+    minHeight: "100%",
     alignSelf: "center",
     alignItems: "center",
-    paddingHorizontal: 24,
-    paddingVertical: 20,
+    paddingHorizontal: 30,
+    paddingTop: 54,
+    paddingBottom: 145,
+  },
+  heroTall: {
+    paddingTop: 128,
   },
   brand: {
     alignItems: "center",
-    marginBottom: 4,
+    marginBottom: 10,
   },
   brandImage: {
     width: 340,
@@ -236,7 +243,7 @@ const styles = StyleSheet.create({
     height: 252,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 8,
+    marginBottom: 16,
   },
   softCircle: {
     position: "absolute",
@@ -261,7 +268,7 @@ const styles = StyleSheet.create({
     transform: [{ scale: 1.16 }],
   },
   heroTitle: {
-    maxWidth: 350,
+    maxWidth: 330,
     color: colors.deepGreen,
     fontFamily: roundedTitleFont,
     fontSize: 34,
@@ -270,19 +277,19 @@ const styles = StyleSheet.create({
     fontWeight: "900",
   },
   heroSubtitle: {
-    maxWidth: 360,
+    maxWidth: 330,
     color: colors.ink,
     fontSize: 18,
     lineHeight: 26,
     fontWeight: "600",
     textAlign: "center",
-    marginTop: 10,
+    marginTop: 12,
   },
   fullButton: {
     width: "100%",
     maxWidth: 360,
     minHeight: 64,
     borderRadius: 24,
-    marginTop: 28,
+    marginTop: 24,
   },
 });

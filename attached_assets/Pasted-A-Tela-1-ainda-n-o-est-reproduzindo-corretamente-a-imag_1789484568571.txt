@@ -1,0 +1,42 @@
+A Tela 1 ainda não está reproduzindo corretamente a imagem de referência anexada.
+Refaça somente a Tela 1 — Boas-vindas, ajustando tecnicamente o layout para ficar o mais próximo possível da referência.
+Trabalhe diretamente nos estilos do componente da tela.
+Ajustes esperados:
+- paddingHorizontal: reduzir/aumentar conforme necessário para aproximar as margens da referência;
+- paddingTop: ajustar para posicionar o logo mais próximo do topo;
+- gap / marginVertical: corrigir os espaços entre logo, personagem, título, subtítulo e botão;
+- fontSize e lineHeight: ajustar título e subtítulo para corresponder às proporções da referência;
+- width e height da imagem do logo: aumentar e posicionar corretamente;
+- width e height da imagem da Lumi: ajustar para ocupar a mesma proporção visual da referência;
+- borderRadius: manter botões e elementos arredondados;
+- alignItems: 'center';
+- justifyContent: usar distribuição vertical que respeite a composição da referência;
+- fundo deve ocupar flex: 1;
+- usar position: 'absolute' apenas para elementos decorativos do fundo, se necessário;
+- garantir que o botão “Começar” fique na mesma posição relativa da referência.
+Estrutura visual desejada:
+1. logo Lumi no topo;
+2. personagem Lumi centralizada;
+3. título “Que bom ter você aqui!”;
+4. subtítulo;
+5. botão “Começar”;
+6. colinas/gramado na base.
+Não reutilize os valores atuais sem revisar. A versão atual está visualmente diferente da referência.
+Use a imagem anexada como especificação de:
+- proporção;
+- espaçamento;
+- tamanho dos elementos;
+- hierarquia visual;
+- composição vertical.
+Preserve:
+- asset oficial da Lumi;
+- textos;
+- funcionamento do botão;
+- navegação;
+- lógica;
+- demais telas.
+Antes de concluir:
+- abra o Preview;
+- compare lado a lado com a imagem de referência;
+- ajuste padding, margin, gap, fontSize, lineHeight, width, height e posicionamento até a tela ficar visualmente próxima;
+- não considere concluído apenas porque o código foi alterado. Valide visualmente no Preview.
