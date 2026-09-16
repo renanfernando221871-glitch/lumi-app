@@ -1,5 +1,10 @@
 import React from "react";
-import { Image, ImageSourcePropType, StyleSheet } from "react-native";
+import {
+  Image,
+  ImageSourcePropType,
+  ImageStyle,
+  StyleSheet,
+} from "react-native";
 
 export type LumiExpression =
   | "main"
@@ -15,10 +20,11 @@ type Props = {
   expression?: LumiExpression;
   size?: LumiSize;
   accessibilityLabel?: string;
+  style?: ImageStyle;
 };
 
 const sources: Record<LumiExpression, ImageSourcePropType> = {
-  main: require("../../assets/images/lumi/lumi-main.png"),
+  main: require("../../assets/images/lumi/lumi-child-intro.png"),
   curious: require("../../assets/images/lumi/lumi-curious.png"),
   happy: require("../../assets/images/lumi/lumi-happy.png"),
   encouraging: require("../../assets/images/lumi/lumi-gentle.png"),
@@ -39,13 +45,14 @@ export function LumiCharacter({
   expression = "happy",
   size = "medium",
   accessibilityLabel = "Lumi",
+  style,
 }: Props) {
   return (
     <Image
       accessibilityLabel={accessibilityLabel}
       resizeMode="contain"
       source={sources[expression]}
-      style={[styles.image, sizes[size]]}
+      style={[styles.image, sizes[size], style]}
     />
   );
 }

@@ -1,0 +1,196 @@
+Corrija exclusivamente a tela “Perfil da criança” para que fique visualmente idêntica à arte de referência anexada.
+
+A arte anexada é a fonte visual principal. Não faça uma interpretação aproximada: reproduza sua composição, proporções, alinhamentos, distâncias, tipografia, cores e hierarquia.
+
+Não altere a tela “Crie sua conta” nesta etapa.
+
+BALÃO DE FALA
+
+Substitua o texto atual do balão por exatamente:
+
+“Vamos conhecer a criança!”
+
+Preserve o ponto de exclamação.
+
+Use a mesma quebra de linha da referência:
+
+Vamos conhecer a
+criança!
+
+Posicione o balão imediatamente à esquerda do rosto da Leluá.
+
+Aproxime o balão da boca da personagem.
+
+A ponta do balão deve sair do lado direito e apontar diretamente para a boca da Leluá.
+
+Não direcione a ponta para a mão, para a bolsa ou para o corpo.
+
+Não deixe um grande espaço entre a ponta do balão e a boca.
+
+A ponta deve parecer parte contínua do balão.
+
+O balão não pode ficar encostado na borda esquerda da tela.
+
+O texto deve ficar perfeitamente centralizado dentro do balão.
+
+Use fonte arredondada, azul-escura e em peso 700.
+
+O balão deve permanecer atrás da personagem, mas à frente do plano de fundo.
+
+Não permita que nuvens atravessem o balão ou prejudiquem sua leitura.
+
+POSIÇÃO DA LELUÁ
+
+Posicione a Leluá à direita do balão, exatamente como na referência.
+
+O rosto deve ficar próximo à ponta do balão.
+
+A cabeça deve ficar ligeiramente voltada para o usuário.
+
+Preserve a pose de cumprimento.
+
+Mostre integralmente as duas folhas, o rosto e a mão erguida.
+
+A mão não pode ficar cortada pela borda direita.
+
+A bolsa marrom e a estrela amarela devem permanecer visíveis.
+
+A parte inferior da personagem pode ficar parcialmente atrás do cartão branco, como ocorre na referência.
+
+Não altere o rosto, a postura, as cores ou as proporções da personagem.
+
+Não gere uma nova versão da Leluá.
+
+LOGOTIPO
+
+Posicione o logotipo completo abaixo da câmera ou Dynamic Island.
+
+Nenhuma letra, folha ou acento pode ficar escondido.
+
+O nome deve permanecer exatamente “Leluá”.
+
+Centralize o logotipo horizontalmente.
+
+Centralize o slogan “crescer é descobrir” logo abaixo.
+
+Preserve uma separação clara entre logotipo, balão e personagem.
+
+CARTÃO BRANCO
+
+O retângulo branco que contém as informações está desalinhado. Centralize-o em relação à área útil da tela, exatamente como na arte de referência.
+
+Use a mesma margem do lado esquerdo e do lado direito.
+
+O cartão não pode ficar deslocado lateralmente.
+
+Sua largura deve acompanhar a referência.
+
+Preserve os quatro cantos arredondados.
+
+O cartão deve começar abaixo do balão e da personagem.
+
+A borda superior deve ficar na mesma posição visual da referência.
+
+O cartão deve terminar acima da paisagem verde inferior.
+
+Não deixe o cartão encostado na moldura do telefone.
+
+Não use transformações para corrigir somente a aparência em uma resolução.
+
+Centralize usando o contêiner da área útil, por exemplo com largura responsiva, max-width e margin-inline: auto.
+
+CONTEÚDO DO CARTÃO
+
+Mantenha esta ordem e estes textos:
+
+“Perfil da criança”
+
+“Vamos personalizar a experiência para ela aprender do seu jeito.”
+
+“Escolha um avatar”
+
+Os dois avatares
+
+“Nome da criança”
+
+Campo com o nome digitado
+
+“Data de nascimento”
+
+Campo “DD / MM / AAAA”
+
+Botão “Continuar →”
+
+Centralize título, texto explicativo e “Escolha um avatar”.
+
+Mantenha os dois avatares centralizados como um conjunto.
+
+Use tamanhos iguais para os dois círculos dos avatares.
+
+Alinhe os campos pelo mesmo eixo vertical.
+
+Use a mesma largura nos dois campos e no botão.
+
+Preserve margens internas iguais nos lados esquerdo e direito.
+
+Não comprima verticalmente o conteúdo.
+
+Não altere os valores digitados pelo usuário.
+
+Preserve o funcionamento dos campos, avatares e botão.
+
+PLANO DE FUNDO
+
+Preserve o fundo azul-claro e as nuvens.
+
+Posicione as nuvens atrás da composição, sem invadir o balão, o logotipo ou o rosto da personagem.
+
+Preserve as colinas verdes na parte inferior.
+
+Centralize o cartão em relação ao fundo e à moldura do aparelho.
+
+O fundo não deve parecer deslocado para um lado.
+
+Não use a imagem da tela inteira como fundo.
+
+Todos os controles devem permanecer reais e funcionais.
+
+ÁREA SEGURA E RESPONSIVIDADE
+
+Respeite env(safe-area-inset-top) e env(safe-area-inset-bottom).
+
+Não permita que a câmera cubra o logotipo.
+
+Não use transform: scale() na tela inteira.
+
+Não use zoom para encaixar o conteúdo.
+
+Não use coordenadas fixas baseadas na moldura da imagem.
+
+Use a área útil interna do aparelho como referência de alinhamento.
+
+Teste em viewport móvel próximo de 390 × 844 px.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir, compare a implementação lado a lado com a arte anexada e confirme:
+
+O balão contém exatamente “Vamos conhecer a criança!”.
+
+A ponta do balão está próxima e apontada para a boca da Leluá.
+
+Balão e personagem estão na mesma posição relativa da referência.
+
+A mão e as folhas da personagem estão inteiras.
+
+O logotipo está completamente visível.
+
+O cartão branco está centralizado horizontalmente.
+
+As margens laterais do cartão são iguais.
+
+Os avatares, campos e botão estão alinhados.
+
+A composição está visualmente idêntica à referência.
+
+Todas as funções permanecem ativas.

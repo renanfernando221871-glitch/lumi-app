@@ -1,5 +1,11 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, ViewStyle } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 import { colors, shadow } from "../theme/colors";
 
 type Props = {
@@ -8,6 +14,7 @@ type Props = {
   variant?: "green" | "blue" | "yellow";
   disabled?: boolean;
   style?: ViewStyle;
+  textStyle?: TextStyle;
 };
 
 export function PrimaryButton({
@@ -16,6 +23,7 @@ export function PrimaryButton({
   variant = "green",
   disabled = false,
   style,
+  textStyle,
 }: Props) {
   const backgroundColor =
     variant === "blue"
@@ -37,8 +45,8 @@ export function PrimaryButton({
         style,
       ]}
     >
-      <Text style={[styles.label, { color: textColor }]}>{label}</Text>
-      <Text style={[styles.arrow, { color: textColor }]}>→</Text>
+      <Text style={[styles.label, { color: textColor }, textStyle]}>{label}</Text>
+      <Text style={[styles.arrow, { color: textColor }, textStyle]}>→</Text>
     </Pressable>
   );
 }

@@ -1,0 +1,126 @@
+Faça uma correção visual pontual nas três primeiras telas do aplicativo Leluá. Não reconstrua as telas e não altere os campos, textos, botões, avatares, navegação ou funcionalidades que já estão corretos.
+
+PROBLEMA PRINCIPAL — MÃO CORTADA
+
+Nas três telas, a mão erguida da personagem, localizada no lado direito da imagem para quem olha a tela, está cortada, escondida ou ultrapassando os limites do contêiner.
+
+Corrija da seguinte forma:
+
+- Mostre o braço e a mão erguida por inteiro.
+- A mão deve ter todos os dedos definidos no mesmo estilo arredondado da personagem.
+- Deve existir uma margem livre entre a mão e qualquer borda, círculo, cartão ou recorte.
+- Não use `overflow: hidden` no contêiner da personagem.
+- Se o contêiner precisar continuar com `overflow: hidden` por causa do layout, crie uma camada externa com `overflow: visible` exclusivamente para a personagem.
+- Use `object-fit: contain`, nunca `cover`.
+- Não aumente a personagem a ponto de cortar folhas, cabeça, mão, pés ou bolsa.
+- Não esconda a mão atrás do cartão branco.
+- Não tente recriar ou completar a mão com CSS.
+- Utilize a ilustração oficial completa da Leluá, preferencialmente em PNG ou WebP com fundo transparente.
+
+Considere como “mão direita” nesta solicitação a mão erguida que aparece no lado direito da imagem para o observador.
+
+IDENTIDADE OBRIGATÓRIA DA PERSONAGEM
+
+A mesma ilustração oficial da Leluá deve ser usada nas três telas. Não gere versões diferentes da personagem para cada tela.
+
+Características que precisam permanecer idênticas:
+
+- corpo verde-menta;
+- rosto e barriga em tom creme;
+- olhos grandes castanhos;
+- bochechas rosadas;
+- duas folhas verdes assimétricas com nervuras discretas;
+- cabeça e corpo com proporções arredondadas;
+- bolsa transversal marrom;
+- estrela amarela de cinco pontas na bolsa;
+- mão erguida em gesto de cumprimento;
+- expressão alegre e acolhedora;
+- textura tridimensional suave, semelhante a pelúcia.
+
+Não alterar:
+
+- formato do rosto;
+- tamanho e posição dos olhos;
+- desenho das folhas;
+- formato da boca;
+- proporção entre cabeça e corpo;
+- cor da personagem;
+- modelo da bolsa;
+- posição da estrela;
+- estilo de renderização.
+
+TELA 1 — BOAS-VINDAS
+
+- Mantenha a Leluá centralizada no círculo.
+- Reduza levemente a personagem, se necessário, para que folhas, mão erguida, braço, bolsa e pés apareçam integralmente.
+- A mão erguida deve ficar completamente dentro do círculo, com margem visual ao redor.
+- Não corte a mão na borda circular.
+- Preserve o fundo amarelo-claro e a borda branca.
+- Não crie fundo quadrado ao redor da personagem.
+- Mantenha todos os outros elementos exatamente como estão.
+
+TELA 2 — CADASTRO DO RESPONSÁVEL
+
+A personagem dessa tela ficou diferente da referência oficial. Substitua-a pela mesma Leluá oficial usada na tela 1.
+
+- Não use uma nova interpretação ou variação da personagem.
+- Preserve o mesmo rosto, olhos, folhas, cores, textura, bolsa e estrela.
+- Utilize uma versão completa da personagem oficial em pose de cumprimento.
+- Posicione a personagem no alto, à direita do balão “Vamos começar?”.
+- Mostre integralmente as duas folhas, cabeça, rosto, mão erguida, braço e parte suficiente da bolsa para que a estrela seja reconhecida.
+- A mão não pode ficar cortada pela borda direita.
+- A mão não pode ficar escondida atrás do cartão branco.
+- Reduza a escala da personagem e mova-a alguns pixels para a esquerda e para cima, se necessário.
+- O balão não deve cobrir o rosto ou a mão.
+- A personagem não deve cobrir o logotipo.
+- Preserve integralmente o formulário e seus elementos.
+
+TELA 3 — PERFIL DA CRIANÇA
+
+- Utilize exatamente a mesma Leluá oficial das telas anteriores.
+- Posicione-a à direita do balão “Vamos conhecer a criança!”.
+- Mostre integralmente as folhas, cabeça, rosto, braço e mão erguida.
+- A mão não pode ficar cortada pela borda direita nem escondida atrás do cartão branco.
+- A parte inferior do corpo pode ficar parcialmente atrás do cartão, conforme a composição original, mas braço, mão, bolsa e estrela precisam permanecer reconhecíveis.
+- Não modifique os avatares, campos ou botão.
+
+LOGOTIPO E ÁREA SEGURA
+
+Nas telas 2 e 3, o logotipo ainda está atrás da câmera do aparelho.
+
+- Mova o logotipo completo para baixo da Dynamic Island.
+- Nenhuma letra, folha, acento ou elemento decorativo pode ficar coberto.
+- Respeite `env(safe-area-inset-top)`.
+- Acrescente uma margem de segurança mínima entre a câmera e o logotipo.
+- Não reduza excessivamente o logotipo para resolver o problema.
+- Reorganize apenas a área superior da tela.
+- O nome deve continuar escrito exatamente como “Leluá”.
+- Preserve o acento agudo do “á”.
+- Preserve o slogan “crescer é descobrir”.
+
+IMPLEMENTAÇÃO
+
+- Localize o componente compartilhado responsável pela personagem.
+- Faça as três telas reutilizarem o mesmo arquivo oficial da Leluá.
+- Não mantenha três imagens diferentes ou três recriações independentes.
+- Separe o componente da personagem de contêineres que recortem o conteúdo.
+- Verifique regras como `overflow: hidden`, `object-fit: cover`, alturas fixas, margens negativas e transformações de escala.
+- Remova apenas as regras que estejam cortando a personagem.
+- Não utilize `transform: scale()` no contêiner completo da tela.
+- Preserve a responsividade.
+
+VALIDAÇÃO OBRIGATÓRIA
+
+Antes de concluir, apresente novas capturas das três telas e confirme:
+
+1. A mão erguida está inteira nas três telas.
+2. Há espaço visível entre a mão e as bordas.
+3. As duas folhas estão inteiras.
+4. A personagem da tela 2 é visualmente idêntica à referência oficial.
+5. A bolsa marrom e a estrela amarela estão presentes.
+6. O logotipo está totalmente abaixo da câmera nas telas 2 e 3.
+7. Nenhum texto, botão, campo ou comportamento foi alterado.
+8. Não existe fundo quadrado atrás da personagem.
+9. As três telas utilizam o mesmo arquivo-base da Leluá.
+
+Não avance para outras telas antes de apresentar essas três correções.

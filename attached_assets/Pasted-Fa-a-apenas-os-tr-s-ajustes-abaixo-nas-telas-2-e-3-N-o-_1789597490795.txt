@@ -1,0 +1,159 @@
+Faça apenas os três ajustes abaixo nas telas 2 e 3. Não altere fontes, campos, botões, personagens, logotipos, cartões ou funcionalidades que já estão corretos.
+
+TELA 2 — APROXIMAR O BALÃO
+
+Na tela “Crie sua conta”:
+
+Aproxime horizontalmente o balão “Vamos começar?” da Leluá.
+
+Mova o balão para a direita, em direção ao rosto da personagem.
+
+Mantenha uma pequena distância visual entre a ponta do balão e a boca.
+
+A ponta deve apontar diretamente para a boca da Leluá.
+
+Não altere o tamanho do balão.
+
+Não altere a posição ou o tamanho da personagem.
+
+Não deixe o balão encostar ou cobrir o rosto.
+
+Não mova o cartão branco.
+
+Não altere o botão de voltar, o logotipo ou o slogan.
+
+O balão e a personagem devem parecer uma única composição de fala.
+
+TELA 3 — REPOSICIONAR O BALÃO
+
+Na tela “Perfil da criança”:
+
+O balão “Vamos conhecer a criança!” está excessivamente encostado na borda esquerda.
+
+Mova o balão para a direita.
+
+Deixe uma margem visível entre o balão e a borda interna da tela.
+
+Aproxime o balão do rosto da Leluá.
+
+A ponta do balão deve apontar diretamente para a boca da personagem.
+
+Preserve o texto exatamente como:
+
+“Vamos conhecer a criança!”
+
+Preserve a quebra em duas linhas.
+
+Não corte nenhuma letra.
+
+Não deixe o balão ultrapassar a borda esquerda.
+
+Não permita que o balão cubra o rosto, a mão ou a bolsa.
+
+Não altere o tamanho ou a posição da Leluá.
+
+Não altere a posição do cartão branco.
+
+TELA 3 — REMOVER A FAIXA BRANCA DA BORDA DIREITA
+
+Existe uma pequena faixa branca vertical na borda direita da área interna da tela. Corrija o alinhamento e a largura do plano de fundo para que o fundo azul e a paisagem preencham toda a largura útil.
+
+Verifique e corrija:
+
+margens padrão do body;
+
+padding lateral não intencional;
+
+largura do contêiner principal;
+
+deslocamentos causados por left, right ou translateX;
+
+elementos configurados com 100vw dentro de contêineres que possuem margens;
+
+largura insuficiente da camada de fundo;
+
+imagem de fundo desalinhada;
+
+diferença entre a largura do fundo e a largura do viewport;
+
+rolagem horizontal;
+
+bordas ou fundos brancos aplicados ao contêiner externo.
+
+Aplique estas regras conceituais ao contêiner da tela:
+
+margin: 0;
+
+padding: 0, exceto onde o layout exigir espaçamento interno;
+
+width: 100%;
+
+min-width: 100%;
+
+max-width: 100%;
+
+box-sizing: border-box;
+
+plano de fundo cobrindo integralmente a área;
+
+nenhuma margem branca lateral;
+
+nenhum deslocamento horizontal.
+
+A aplicação também deve usar globalmente:
+
+html, body e contêiner raiz com largura e altura completas;
+
+box-sizing: border-box;
+
+ausência de margem padrão do navegador;
+
+controle de overflow-x após corrigir a verdadeira causa do desalinhamento.
+
+Não esconda simplesmente o defeito usando apenas overflow-x: hidden. Primeiro corrija o elemento que está mais estreito ou deslocado. Depois, overflow-x: hidden pode ser mantido apenas como proteção.
+
+Se o plano de fundo for uma imagem:
+
+use background-size: cover;
+
+use background-position: center;
+
+use background-repeat: no-repeat;
+
+garanta que a imagem cubra toda a largura;
+
+não estique apenas um lado da imagem.
+
+Se o plano de fundo for construído com elementos ou gradientes:
+
+faça a camada ocupar inset: 0;
+
+alinhe-a ao contêiner raiz;
+
+elimine qualquer diferença de largura na borda direita.
+
+VALIDAÇÃO
+
+Mostre novas capturas das duas telas e confirme:
+
+Na tela 2, o balão está mais próximo da boca da Leluá.
+
+Na tela 3, o balão não está encostado na borda esquerda.
+
+Na tela 3, o balão está próximo da boca da personagem.
+
+As pontas dos dois balões apontam para as respectivas bocas.
+
+Nenhum texto foi cortado.
+
+A faixa branca vertical da tela 3 desapareceu completamente.
+
+O fundo cobre igualmente as bordas esquerda e direita.
+
+Não existe rolagem horizontal.
+
+Nenhum outro elemento mudou de posição ou tamanho.
+
+Todos os campos e botões continuam funcionando.
+
+Não modifique nenhuma outra tela nesta etapa.

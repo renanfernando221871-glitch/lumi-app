@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Image,
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -20,11 +19,7 @@ type Props = {
   onContinue: () => void;
 };
 
-const roundedFont = Platform.select({
-  ios: "Arial Rounded MT Bold",
-  android: "sans-serif-rounded",
-  web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
-});
+const roundedFont = "Fredoka_700Bold";
 
 export function GuardianSignupScreen({ onBack, onContinue }: Props) {
   const [name, setName] = useState("");
@@ -82,12 +77,21 @@ export function GuardianSignupScreen({ onBack, onContinue }: Props) {
           <LeluaLogo compact style={styles.logo} />
           <View style={styles.lumiGreeting}>
             <View style={styles.speechBubble}>
-              <Text style={styles.speechText}>Vamos{"\n"}começar?</Text>
+              <Text style={styles.speechText}>
+                <Text style={styles.speechLead}>Vamos</Text>
+                {"\n"}
+                <Text style={styles.speechHighlight}>começar?</Text>
+              </Text>
+              <View style={styles.speechTail} />
+              <View style={[styles.speechSpark, styles.speechSparkTop]} />
+              <View style={[styles.speechSpark, styles.speechSparkMiddle]} />
+              <View style={[styles.speechSpark, styles.speechSparkBottom]} />
             </View>
             <LumiCharacter
               accessibilityLabel="Leluá, personagem broto"
               expression="main"
               size="large"
+              style={styles.greetingCharacter}
             />
           </View>
         </View>
@@ -100,14 +104,14 @@ export function GuardianSignupScreen({ onBack, onContinue }: Props) {
 
           <SignupField
             autoCapitalize="words"
-            icon="○"
+            icon="user"
             label="Nome"
             onChangeText={setName}
             value={name}
           />
           <SignupField
             autoCapitalize="none"
-            icon="@"
+            icon="mail"
             keyboardType="email-address"
             label="E-mail"
             onChangeText={setEmail}
@@ -116,7 +120,7 @@ export function GuardianSignupScreen({ onBack, onContinue }: Props) {
           <View style={styles.passwordWrap}>
             <SignupField
               autoCapitalize="none"
-              icon="□"
+              icon="lock"
               label="Senha"
               onChangeText={setPassword}
               secureTextEntry={!showPassword}
@@ -128,16 +132,19 @@ export function GuardianSignupScreen({ onBack, onContinue }: Props) {
               onPress={() => setShowPassword((visible) => !visible)}
               style={styles.eyeButton}
             >
-              <Text style={styles.eyeIcon}>{showPassword ? "◉" : "◎"}</Text>
+              <FieldIcon type={showPassword ? "eyeClosed" : "eye"} />
             </Pressable>
           </View>
 
-          {error ? <Text style={styles.error}>{error}</Text> : null}
+          <View style={styles.errorSlot}>
+            {error ? <Text style={styles.error}>{error}</Text> : null}
+          </View>
 
           <PrimaryButton
             label="Continuar"
             onPress={continueLocally}
             style={styles.continueButton}
+            textStyle={styles.primaryButtonText}
           />
 
           <View style={styles.dividerRow}>
@@ -170,14 +177,16 @@ export function GuardianSignupScreen({ onBack, onContinue }: Props) {
 }
 
 type SignupFieldProps = React.ComponentProps<typeof TextInput> & {
-  icon: string;
+  icon: "user" | "mail" | "lock";
   label: string;
 };
 
 function SignupField({ icon, label, ...props }: SignupFieldProps) {
   return (
     <View style={styles.field}>
-      <Text style={styles.fieldIcon}>{icon}</Text>
+      <View style={styles.fieldIcon}>
+        <FieldIcon type={icon} />
+      </View>
       <TextInput
         accessibilityLabel={label}
         placeholder={label}
@@ -185,6 +194,43 @@ function SignupField({ icon, label, ...props }: SignupFieldProps) {
         style={styles.input}
         {...props}
       />
+    </View>
+  );
+}
+
+function FieldIcon({
+  type,
+}: {
+  type: "user" | "mail" | "lock" | "eye" | "eyeClosed";
+}) {
+  if (type === "user") {
+    return (
+      <View style={styles.userIcon}>
+        <View style={styles.userHead} />
+        <View style={styles.userBody} />
+      </View>
+    );
+  }
+  if (type === "mail") {
+    return (
+      <View style={styles.mailIcon}>
+        <View style={[styles.mailFold, styles.mailFoldLeft]} />
+        <View style={[styles.mailFold, styles.mailFoldRight]} />
+      </View>
+    );
+  }
+  if (type === "lock") {
+    return (
+      <View style={styles.lockIcon}>
+        <View style={styles.lockShackle} />
+        <View style={styles.lockBody} />
+      </View>
+    );
+  }
+  return (
+    <View style={styles.eyeShape}>
+      <View style={styles.eyePupil} />
+      {type === "eyeClosed" ? <View style={styles.eyeSlash} /> : null}
     </View>
   );
 }
@@ -243,13 +289,13 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.8)",
   },
   cloudLeft: {
-    left: "11%",
-    top: "14%",
+    left: -18,
+    top: "17%",
   },
   cloudRight: {
-    right: "8%",
-    top: "9%",
-    transform: [{ scale: 0.7 }],
+    right: -24,
+    top: "13%",
+    transform: [{ scale: 0.62 }],
   },
   hillBack: {
     position: "absolute",
@@ -289,14 +335,16 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: "center",
     paddingHorizontal: 22,
-    paddingTop: 18,
-    paddingBottom: 70,
+    paddingTop: 14,
+    paddingBottom: 16,
   },
   top: {
     width: "100%",
     maxWidth: 400,
-    height: 215,
+    height: 196,
     alignItems: "center",
+    position: "relative",
+    overflow: "visible",
   },
   back: {
     position: "absolute",
@@ -324,40 +372,98 @@ const styles = StyleSheet.create({
     marginTop: -3,
   },
   logo: {
-    width: 185,
-    height: 86,
+    width: 210,
+    height: 94,
   },
   lumiGreeting: {
     position: "absolute",
-    right: -8,
-    bottom: -25,
+    right: 0,
+    bottom: -20,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
+    overflow: "visible",
   },
   speechBubble: {
-    width: 116,
-    minHeight: 64,
-    borderRadius: 32,
+    width: 126,
+    minHeight: 66,
+    borderTopLeftRadius: 34,
+    borderTopRightRadius: 23,
+    borderBottomRightRadius: 35,
+    borderBottomLeftRadius: 26,
+    borderWidth: 2,
+    borderColor: "#F7FCFF",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: colors.white,
+    marginTop: 38,
+    marginRight: 0,
+    zIndex: 2,
+    overflow: "visible",
+    transform: [{ rotate: "-3deg" }],
     ...shadow,
   },
+  speechTail: {
+    position: "absolute",
+    right: -8,
+    top: 25,
+    width: 19,
+    height: 19,
+    borderBottomRightRadius: 6,
+    borderRightWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: "#F7FCFF",
+    backgroundColor: colors.white,
+    transform: [{ rotate: "45deg" }],
+    zIndex: 1,
+  },
   speechText: {
-    color: colors.deepGreen,
     fontFamily: roundedFont,
     fontSize: 17,
-    lineHeight: 20,
-    fontWeight: "900",
+    lineHeight: 22,
+    fontWeight: "700",
     textAlign: "center",
+    transform: [{ rotate: "3deg" }],
+    zIndex: 2,
+  },
+  speechLead: {
+    color: "#164C70",
+  },
+  speechHighlight: {
+    color: "#2FAE67",
+    fontSize: 18,
+    fontWeight: "700",
+  },
+  speechSpark: {
+    position: "absolute",
+    left: -12,
+    width: 9,
+    height: 3,
+    borderRadius: 3,
+    backgroundColor: "#F6C945",
+  },
+  speechSparkTop: {
+    top: 16,
+    transform: [{ rotate: "28deg" }],
+  },
+  speechSparkMiddle: {
+    top: 29,
+    left: -15,
+  },
+  speechSparkBottom: {
+    top: 42,
+    transform: [{ rotate: "-28deg" }],
+  },
+  greetingCharacter: {
+    width: 145,
+    height: 155,
   },
   card: {
     width: "100%",
     maxWidth: 400,
     borderRadius: 34,
     paddingHorizontal: 24,
-    paddingTop: 24,
-    paddingBottom: 24,
+    paddingTop: 20,
+    paddingBottom: 16,
     backgroundColor: colors.white,
     ...shadow,
   },
@@ -373,11 +479,12 @@ const styles = StyleSheet.create({
     maxWidth: 320,
     alignSelf: "center",
     color: "#435D68",
+    fontFamily: "Nunito_400Regular",
     fontSize: 16,
     lineHeight: 21,
     textAlign: "center",
     marginTop: 2,
-    marginBottom: 18,
+    marginBottom: 12,
   },
   field: {
     minHeight: 58,
@@ -387,14 +494,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 16,
-    marginTop: 10,
+    marginTop: 8,
     backgroundColor: "#FAFCFD",
   },
   fieldIcon: {
     width: 30,
-    color: "#587181",
-    fontSize: 23,
-    textAlign: "center",
+    height: 28,
+    alignItems: "center",
+    justifyContent: "center",
   },
   input: {
     flex: 1,
@@ -402,6 +509,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     color: colors.ink,
     fontSize: 16,
+    fontFamily: "Nunito_500Medium",
   },
   passwordWrap: {
     position: "relative",
@@ -409,32 +517,127 @@ const styles = StyleSheet.create({
   eyeButton: {
     position: "absolute",
     right: 12,
-    top: 18,
+    top: 16,
     width: 42,
     height: 42,
     alignItems: "center",
     justifyContent: "center",
   },
-  eyeIcon: {
-    color: "#587181",
-    fontSize: 25,
+  userIcon: {
+    width: 20,
+    height: 24,
+    alignItems: "center",
+  },
+  userHead: {
+    width: 8,
+    height: 8,
+    borderWidth: 2,
+    borderColor: "#587181",
+    borderRadius: 4,
+  },
+  userBody: {
+    position: "absolute",
+    bottom: 0,
+    width: 18,
+    height: 11,
+    borderWidth: 2,
+    borderBottomWidth: 0,
+    borderColor: "#587181",
+    borderTopLeftRadius: 9,
+    borderTopRightRadius: 9,
+  },
+  mailIcon: {
+    width: 22,
+    height: 16,
+    borderWidth: 2,
+    borderColor: "#587181",
+    borderRadius: 3,
+    overflow: "hidden",
+  },
+  mailFold: {
+    position: "absolute",
+    top: 1,
+    width: 15,
+    height: 2,
+    backgroundColor: "#587181",
+  },
+  mailFoldLeft: {
+    left: -1,
+    transform: [{ rotate: "31deg" }],
+  },
+  mailFoldRight: {
+    right: -1,
+    transform: [{ rotate: "-31deg" }],
+  },
+  lockIcon: {
+    width: 20,
+    height: 23,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  lockShackle: {
+    position: "absolute",
+    top: 0,
+    width: 11,
+    height: 11,
+    borderWidth: 2,
+    borderBottomWidth: 0,
+    borderColor: "#587181",
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+  },
+  lockBody: {
+    width: 18,
+    height: 14,
+    borderWidth: 2,
+    borderColor: "#587181",
+    borderRadius: 3,
+  },
+  eyeShape: {
+    width: 24,
+    height: 16,
+    borderWidth: 2,
+    borderColor: "#587181",
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  eyePupil: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "#587181",
+  },
+  eyeSlash: {
+    position: "absolute",
+    width: 27,
+    height: 2,
+    backgroundColor: "#587181",
+    transform: [{ rotate: "-35deg" }],
+  },
+  errorSlot: {
+    height: 18,
+    marginTop: 2,
+    alignItems: "center",
+    justifyContent: "center",
   },
   error: {
     color: "#B64B45",
-    fontSize: 13,
+    fontSize: 12,
+    lineHeight: 16,
+    fontFamily: "Nunito_500Medium",
     textAlign: "center",
-    marginTop: 10,
   },
   continueButton: {
     width: "100%",
     minHeight: 60,
-    marginTop: 16,
+    marginTop: 0,
   },
   dividerRow: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
-    marginVertical: 16,
+    marginVertical: 12,
   },
   divider: {
     flex: 1,
@@ -444,9 +647,10 @@ const styles = StyleSheet.create({
   dividerText: {
     color: "#60737E",
     fontSize: 14,
+    fontFamily: "Nunito_400Regular",
   },
   socialButton: {
-    minHeight: 55,
+    minHeight: 54,
     borderWidth: 1.5,
     borderColor: "#D4DEE5",
     borderRadius: 19,
@@ -478,6 +682,7 @@ const styles = StyleSheet.create({
     color: "#18252B",
     fontSize: 16,
     fontWeight: "600",
+    fontFamily: "Nunito_700Bold",
   },
   securityRow: {
     flexDirection: "row",
@@ -493,5 +698,9 @@ const styles = StyleSheet.create({
   securityText: {
     color: "#526772",
     fontSize: 12,
+    fontFamily: "Nunito_400Regular",
+  },
+  primaryButtonText: {
+    fontFamily: "Fredoka_700Bold",
   },
 });

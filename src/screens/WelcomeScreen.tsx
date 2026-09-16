@@ -1,16 +1,14 @@
 import React from "react";
 import {
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
   useWindowDimensions,
   View,
 } from "react-native";
 import { PrimaryButton } from "../components/PrimaryButton";
+import { LumiCharacter } from "../components/LumiCharacter";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
-import { LumiCharacter } from "../components/LumiCharacter";
 import { LeluaLogo } from "../components/LeluaLogo";
 
 type Props = {
@@ -18,11 +16,7 @@ type Props = {
   disabled?: boolean;
 };
 
-const roundedTitleFont = Platform.select({
-  ios: "Arial Rounded MT Bold",
-  android: "sans-serif-rounded",
-  web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
-});
+const roundedTitleFont = "Fredoka_700Bold";
 
 export function WelcomeScreen({ onContinue, disabled = false }: Props) {
   const { height, width } = useWindowDimensions();
@@ -68,14 +62,18 @@ export function WelcomeScreen({ onContinue, disabled = false }: Props) {
           <View style={styles.flowerCenter} />
         </View>
       </View>
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <View style={styles.scroll}>
         <View style={[styles.hero, isTallScreen && styles.heroTall]}>
           <LeluaLogo style={styles.brand} />
-          <View style={styles.lumiHero}>
+          <View
+            accessibilityLabel="Leluá, personagem broto"
+            style={styles.lumiaMedallion}
+          >
             <LumiCharacter
               accessibilityLabel="Leluá, personagem broto"
-              expression="welcome"
+              expression="main"
               size="medallion"
+              style={styles.lumiaImage}
             />
           </View>
           <Text style={styles.heroTitle}>Que bom ter você aqui!</Text>
@@ -88,9 +86,10 @@ export function WelcomeScreen({ onContinue, disabled = false }: Props) {
             onPress={onContinue}
             variant="green"
             style={styles.fullButton}
+            textStyle={styles.primaryButtonText}
           />
         </View>
-      </ScrollView>
+      </View>
     </Shell>
   );
 }
@@ -221,7 +220,7 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.75 }],
   },
   scroll: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: "flex-start",
   },
   hero: {
@@ -235,23 +234,29 @@ const styles = StyleSheet.create({
     paddingBottom: 120,
   },
   heroTall: {
-    paddingTop: 112,
+    paddingTop: 76,
   },
   brand: {
-    alignItems: "center",
+    width: 320,
+    height: 142,
     marginBottom: 12,
   },
-  brandImage: {
-    width: 270,
-    maxWidth: "92%",
-    height: 122,
-  },
-  lumiHero: {
-    width: 260,
-    height: 260,
+  lumiaMedallion: {
+    width: 238,
+    height: 238,
+    borderRadius: 119,
+    borderWidth: 7,
+    borderColor: colors.white,
+    backgroundColor: "#FFF1C9",
+    overflow: "visible",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 18,
+    marginBottom: 16,
+    ...shadow,
+  },
+  lumiaImage: {
+    width: 204,
+    height: 218,
   },
   heroTitle: {
     maxWidth: 330,
@@ -268,6 +273,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 26,
     fontWeight: "600",
+    fontFamily: "Nunito_500Medium",
     textAlign: "center",
     marginTop: 10,
   },
@@ -277,5 +283,8 @@ const styles = StyleSheet.create({
     minHeight: 68,
     borderRadius: 28,
     marginTop: 26,
+  },
+  primaryButtonText: {
+    fontFamily: "Fredoka_700Bold",
   },
 });

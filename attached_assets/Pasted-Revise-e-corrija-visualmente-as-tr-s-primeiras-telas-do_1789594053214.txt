@@ -1,0 +1,157 @@
+Revise e corrija visualmente as três primeiras telas do aplicativo Leluá, comparando-as cuidadosamente com as três artes de referência que enviei.
+
+IMPORTANTE:
+As imagens enviadas são referências visuais. Não transforme as telas em imagens estáticas. Todos os campos, botões, seletores, links, validações e ações devem continuar funcionando normalmente.
+
+OBJETIVO GERAL
+
+Reproduza com fidelidade:
+
+- proporções;
+- posicionamento;
+- alinhamento;
+- espaçamento;
+- tamanhos;
+- tipografia;
+- cores;
+- cantos arredondados;
+- sombras;
+- hierarquia visual.
+
+Não faça uma simples aproximação. Compare cada tela com sua referência correspondente e ajuste o código da interface.
+
+TIPOGRAFIA
+
+A fonte atual está diferente e excessivamente fina.
+
+- Use “Fredoka” nos títulos, subtítulos destacados, botões e textos infantis.
+- Use “Nunito” nos textos explicativos, campos e informações auxiliares.
+- Se essas fontes ainda não estiverem disponíveis, importe-as do Google Fonts.
+- Títulos devem usar peso 600 ou 700.
+- Botões devem usar peso 700.
+- Textos explicativos devem usar peso 400 ou 500.
+- Não use Arial, Times New Roman ou a fonte padrão do navegador.
+- Preserve corretamente todos os acentos da língua portuguesa.
+
+LOGOTIPO
+
+Use o logotipo oficial “Leluá”, com as letras arredondadas e coloridas, exatamente como aparece nas artes de referência.
+
+- Não recrie o logotipo apenas com texto HTML simples.
+- Utilize o arquivo visual oficial do logotipo, preferencialmente com fundo transparente.
+- Preserve suas proporções.
+- Não achate, estique ou corte o logotipo.
+- Mantenha o texto “crescer é descobrir” logo abaixo.
+- O logotipo deve ficar inteiramente abaixo da câmera ou recorte superior do aparelho.
+- Adicione espaçamento superior baseado na safe area do dispositivo.
+- Nunca deixe o logotipo escondido pela Dynamic Island ou pelo notch.
+
+PERSONAGEM
+
+Use a Leluá oficial nas três telas:
+
+- corpo verde-menta;
+- rosto e barriga em tom creme;
+- olhos grandes castanhos;
+- bochechas rosadas;
+- duas folhas verdes assimétricas;
+- bolsa transversal marrom;
+- estrela amarela de cinco pontas na bolsa.
+
+Preserve a proporção da personagem. Não cortar folhas, cabeça, rosto, braços ou bolsa.
+
+A imagem da personagem deve possuir fundo transparente. Remova qualquer quadrado ou retângulo visível em volta dela.
+
+RESPONSIVIDADE E ÁREA SEGURA
+
+- Respeite `safe-area-inset-top` e `safe-area-inset-bottom`.
+- O conteúdo não pode ficar sob a câmera, o notch, a Dynamic Island ou a barra inferior.
+- Centralize a interface em relação à área útil da tela, e não em relação à imagem completa do aparelho.
+- Use dimensões responsivas, mas estabeleça limites mínimos e máximos para evitar que o conteúdo fique excessivamente pequeno.
+- Em telas estreitas, reduza espaçamentos de forma proporcional; não reduza toda a interface indiscriminadamente.
+- Não use uma transformação global como `transform: scale(...)` para encaixar a tela.
+- Não altere o zoom do navegador para simular responsividade.
+- A tela deve utilizar toda a altura disponível sem apresentar rolagem desnecessária.
+
+TELA 1 — BOAS-VINDAS
+
+Corrija a tela para ficar igual à primeira referência:
+
+- Posicione o logotipo Leluá abaixo da área segura superior.
+- Aumente o logotipo para recuperar o destaque visual da arte.
+- Mantenha o slogan imediatamente abaixo dele.
+- Aumente a ilustração central da Leluá.
+- Remova o retângulo ou fundo quadrado visível atrás da personagem.
+- Mantenha a personagem dentro do círculo amarelo-claro com borda branca.
+- Aumente o título “Que bom ter você aqui!”.
+- Use fonte Fredoka arredondada, peso 700 e cor verde-escura.
+- Preserve a quebra em duas linhas.
+- Aumente levemente o texto “Aprender também pode ser uma grande aventura!”.
+- Deixe o botão “Começar →” mais alto e largo, como na referência.
+- Posicione o botão acima das colinas, com margem lateral uniforme.
+- Preserve as nuvens, colinas, plantas e flores do cenário.
+- Distribua verticalmente o conteúdo para eliminar o excesso de espaço vazio.
+
+TELA 2 — CADASTRO DO RESPONSÁVEL
+
+Corrija a tela para ficar igual à segunda referência:
+
+- Recoloque o logotipo completo no alto da tela, abaixo da área segura.
+- O logotipo não pode ficar escondido pela câmera.
+- Posicione a personagem no canto superior direito sem cortar sua cabeça ou suas folhas.
+- Mostre a bolsa com a estrela sempre que o enquadramento permitir.
+- Posicione o balão “Vamos começar?” à esquerda da personagem.
+- O cartão branco deve começar abaixo do conjunto formado pelo logotipo, balão e personagem.
+- Não deixe a personagem sobreposta à câmera ou cortada pela borda superior.
+- Aumente o título “Crie sua conta”.
+- Aumente o texto explicativo e preserve sua largura e quebra de linhas.
+- Amplie os campos Nome, E-mail e Senha.
+- Restaure os ícones corretos: usuário, envelope, cadeado e visualização da senha.
+- Mantenha altura, espaçamento e cantos arredondados uniformes nos três campos.
+- Aumente o botão “Continuar →”.
+- Preserve o separador “ou continue com”.
+- Mantenha os botões do Google e da Apple com tamanho e alinhamento equivalentes.
+- Preserve a mensagem “Seus dados estão seguros com a gente.” na parte inferior do cartão.
+- O cartão deve terminar antes das colinas, como na referência.
+
+TELA 3 — PERFIL DA CRIANÇA
+
+Corrija a tela para ficar igual à terceira referência:
+
+- Mova o logotipo para baixo da câmera e exiba-o integralmente.
+- Preserve o botão de voltar no canto superior esquerdo.
+- Posicione o balão “Vamos conhecer a criança!” à esquerda.
+- Posicione a Leluá à direita, com cabeça, folhas, braço e bolsa totalmente visíveis.
+- Não comprima o logotipo, o balão e a personagem na área superior.
+- O cartão branco deve começar abaixo desse conjunto.
+- Aumente o título “Perfil da criança”.
+- Use Fredoka em peso 700 e mantenha a cor azul-escura da referência.
+- Preserve o texto explicativo em duas linhas.
+- Mantenha “Escolha um avatar” centralizado.
+- Aumente os dois avatares e preserve os círculos rosa e azul.
+- Mantenha os avatares alinhados, com tamanhos iguais.
+- Dê mais espaço entre os avatares e o campo “Nome da criança”.
+- Preserve os campos:
+  - “Nome da criança”
+  - “Digite o nome da criança”
+  - “Data de nascimento”
+  - “DD / MM / AAAA”
+- Aumente a altura e a legibilidade dos campos.
+- Aumente o botão “Continuar →” e preserve sua posição acima da paisagem inferior.
+- Mantenha as colinas, plantas e flores visíveis na base.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir:
+
+1. Compare cada tela lado a lado com sua respectiva arte de referência.
+2. Confirme que nenhum elemento está coberto pela câmera ou pelo notch.
+3. Confirme que não existe fundo quadrado atrás da personagem.
+4. Confirme que o logotipo está completo nas três telas.
+5. Confirme que todos os textos estão escritos corretamente.
+6. Confirme que os campos e botões continuam funcionais.
+7. Confirme que não houve alteração na navegação.
+8. Teste em uma tela móvel próxima de 390 × 844 px.
+9. Mostre uma prévia das três telas corrigidas antes de modificar outras páginas.
+
+Não altere nenhuma tela além dessas três nesta etapa.

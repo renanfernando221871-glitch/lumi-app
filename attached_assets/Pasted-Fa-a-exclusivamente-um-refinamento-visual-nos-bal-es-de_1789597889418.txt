@@ -1,0 +1,211 @@
+Faça exclusivamente um refinamento visual nos balões de fala das telas 2 e 3. Não altere nenhum outro elemento da interface.
+
+OBJETIVO
+
+Deixe os balões mais lúdicos, infantis e expressivos, seguindo o estilo das artes de referência:
+
+formato orgânico;
+
+leve inclinação;
+
+fonte arredondada e amigável;
+
+palavras destacadas com cores;
+
+pequena sombra;
+
+ponta direcionada para a boca da Leluá;
+
+detalhes decorativos discretos.
+
+Não use um balão retangular convencional.
+
+ESTILO DOS BALÕES
+
+Use formato branco ou creme-claro, arredondado e levemente irregular.
+
+Evite uma forma perfeitamente simétrica.
+
+Aplique uma inclinação suave, entre 2 e 4 graus.
+
+A inclinação deve parecer divertida, não torta ou desalinhada.
+
+Use uma sombra suave em azul-claro ou cinza azulado.
+
+Adicione uma borda branca sutil ou um contorno azul muito claro.
+
+Preserve boa legibilidade.
+
+Mantenha uma área interna confortável ao redor do texto.
+
+A ponta deve ser arredondada e integrada ao corpo do balão.
+
+A ponta deve apontar diretamente para a boca da Leluá.
+
+TIPOGRAFIA
+
+Use a fonte “Fredoka”, peso 600 ou 700.
+
+Se Fredoka não estiver disponível, importe-a do Google Fonts.
+
+Não use Arial, fonte padrão do navegador ou letras excessivamente estreitas.
+
+A tipografia deve ser arredondada, infantil e amigável.
+
+Aumente ligeiramente a altura entre as linhas.
+
+Centralize o texto horizontal e verticalmente.
+
+Não distorça as letras junto com o formato do balão.
+
+Preserve todos os acentos e sinais de pontuação.
+
+TELA 2 — “VAMOS COMEÇAR?”
+
+Mantenha o texto exatamente assim:
+
+Vamos
+começar?
+
+Estilo:
+
+Incline o balão aproximadamente 3 graus para a esquerda.
+
+Use “Vamos” em azul-escuro ou verde-escuro.
+
+Destaque “começar?” em verde mais vivo.
+
+A palavra destacada pode ter tamanho discretamente maior.
+
+Não use mais de duas cores no texto.
+
+Adicione dois ou três pequenos traços amarelos próximos à parte externa do balão, como elementos de entusiasmo.
+
+Os traços não podem tocar as letras, a personagem ou o logotipo.
+
+Mantenha o balão próximo da boca da Leluá.
+
+Preserve uma pequena distância entre a ponta do balão e a boca.
+
+TELA 3 — “VAMOS CONHECER A CRIANÇA!”
+
+Mantenha o texto exatamente assim:
+
+Vamos conhecer a
+criança!
+
+Estilo:
+
+Incline o balão aproximadamente 2 ou 3 graus para a direita.
+
+Use “Vamos” em azul-escuro.
+
+Destaque “conhecer” em verde.
+
+Destaque “criança!” em azul mais vivo.
+
+A palavra “criança!” pode ser discretamente maior.
+
+Não use mais de três cores.
+
+Adicione pequenos traços amarelos ou uma estrela minúscula do lado externo do balão.
+
+Os elementos decorativos não podem competir com o texto.
+
+Mantenha o balão afastado da borda esquerda.
+
+Preserve sua proximidade com a boca da Leluá.
+
+DESTAQUES
+
+Os destaques devem ser feitos por:
+
+mudança suave de cor;
+
+pequeno aumento de tamanho;
+
+peso tipográfico maior;
+
+no máximo um sublinhado curvo muito discreto.
+
+Não utilizar:
+
+efeitos neon;
+
+contornos escuros pesados;
+
+muitas cores;
+
+letras individualmente coloridas;
+
+animações excessivas;
+
+emojis dentro do texto;
+
+efeitos que prejudiquem a leitura.
+
+ANIMAÇÃO OPCIONAL
+
+Se o aplicativo já utilizar animações, aplique apenas uma entrada suave:
+
+pequeno movimento vertical;
+
+rotação retornando à inclinação final;
+
+duração entre 300 e 450 milissegundos;
+
+executar somente quando a tela for aberta.
+
+Não deixe o balão se movimentando continuamente.
+
+PRESERVAR
+
+Não altere:
+
+posição da personagem;
+
+posição do logotipo;
+
+cartão branco;
+
+fundo;
+
+campos;
+
+botões;
+
+avatares;
+
+textos restantes;
+
+navegação;
+
+validações;
+
+faixa de segurança do aparelho.
+
+VALIDAÇÃO
+
+Antes de concluir, confirme:
+
+Os balões têm aparência infantil e orgânica.
+
+A inclinação é suave.
+
+A fonte é Fredoka ou equivalente arredondada.
+
+As palavras destacadas continuam perfeitamente legíveis.
+
+A ponta de cada balão aponta para a boca da Leluá.
+
+Nenhum balão encosta nas bordas.
+
+Nenhuma palavra foi alterada ou escrita incorretamente.
+
+Os detalhes amarelos não cobrem outros elementos.
+
+Nenhum outro componente mudou de posição.
+
+As telas continuam funcionais.
+
+Mostre as duas telas corrigidas antes de alterar qualquer outra página.

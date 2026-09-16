@@ -1,0 +1,142 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "EqiJggJacf9k-tE9O6g2X"
+uri = "file://screenshots/lelua-welcome-mao-completa.png"
+type = "image"
+title = "Boas-vindas — mão completa"
+description = "Captura final em 390×844 com a Leluá inteira dentro do círculo."
+logical_id = "a90831b7-4472-4f25-9450-4ccc948001cd"
+content_hash = "sha256:231af42796a59b6531a0b051f8f48010765171847b85536780c8c62b0a0c811e"
+size = 102858
+mtime_ms = 1789595278959
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/a90831b7-4472-4f25-9450-4ccc948001cd/29aed66e-3143-480e-9e35-142031812a7c"
+storage_version_token = "1789595298676417"
+content_type = "image/png"
+
+[[outputs]]
+id = "mzyi3cwGbqlS78CeGifbL"
+uri = "file://screenshots/lelua-cadastro-mao-completa.png"
+type = "image"
+title = "Cadastro — mão completa"
+description = "Captura final em 390×844 com personagem oficial, logo seguro e formulário preservado."
+logical_id = "0ea9f357-c6bf-468c-95a2-a02c73804d5a"
+content_hash = "sha256:d3b4a9075095c208577ee9006bb51f517435ab6b14c7c35683a72783c940cc2a"
+size = 86163
+mtime_ms = 1789595278961
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/0ea9f357-c6bf-468c-95a2-a02c73804d5a/ce5d5d6d-0c3f-43d6-aeba-a039da0e4230"
+storage_version_token = "1789595299218314"
+content_type = "image/png"
+
+[[outputs]]
+id = "UbG2NyAKspSH1q6LSKAiB"
+uri = "file://screenshots/lelua-perfil-mao-completa.png"
+type = "image"
+title = "Perfil da criança — mão completa"
+description = "Captura final em 390×844 com mão e folhas inteiras e campos preservados."
+logical_id = "5767aff9-4a1b-4486-8492-1db75689b80f"
+content_hash = "sha256:ee5833dfdeb1d1cb133c2d34b5b702bd292aad8e9547c024a99ac947ad872913"
+size = 134876
+mtime_ms = 1789595278965
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/5767aff9-4a1b-4486-8492-1db75689b80f/c675aefe-b59c-4eb3-8730-d6f886df5570"
+storage_version_token = "1789595299765897"
+content_type = "image/png"
+
+[[outputs]]
+id = "BBl-sd07rcjzOWFlGc9Cj"
+uri = "file://screenshots/lelua-cadastro-cabecalho-normal.png"
+type = "image"
+title = "Cadastro — estado normal"
+description = "Captura 390×844 com balão apontando para a boca e composição superior corrigida."
+logical_id = "7a5b0a2d-4ee6-4c64-bb5b-dcfbacbdb568"
+content_hash = "sha256:c801e128f8200595e9fe6d2d83ebe0da8102639bfad989232de3ecf685d04649"
+size = 81850
+mtime_ms = 1789595869318
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/7a5b0a2d-4ee6-4c64-bb5b-dcfbacbdb568/c9c51516-e55f-463c-8788-b59c8aee3bd9"
+storage_version_token = "1789595878091369"
+content_type = "image/png"
+
+[[outputs]]
+id = "bB04udNUc0UVumIwnCl3k"
+uri = "file://screenshots/lelua-cadastro-cabecalho-erro.png"
+type = "image"
+title = "Cadastro — estado de erro"
+description = "Captura 390×844 mostrando a mensagem reservada sem deslocar logo, balão, personagem ou cartão."
+logical_id = "64340db9-1a0f-4a4b-acaa-45b6b5fc9596"
+content_hash = "sha256:67ac56fbf01a382e01c07f10108419e17db4b56e768f7f6ad704bb92adfae09c"
+size = 84054
+mtime_ms = 1789595869322
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/64340db9-1a0f-4a4b-acaa-45b6b5fc9596/694ea942-02f1-4c6c-a5f6-d6ad2c9542fe"
+storage_version_token = "1789595878623470"
+content_type = "image/png"
+
+[[outputs]]
+id = "ZVgKUSTGHU5qcMVkl-rsG"
+uri = "file://screenshots/lelua-perfil-referencia-final.png"
+type = "image"
+title = "Perfil da criança — versão corrigida"
+description = "Captura final em 390×844 comparada com a referência, com balão, personagem e cartão realinhados."
+logical_id = "267b4755-82c6-4f4d-8eb3-ce058dccda0a"
+content_hash = "sha256:91abf7c8e6490a441fed50f3e16cad415734d66266cf40aa25b7680d44586840"
+size = 130706
+mtime_ms = 1789596713251
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/267b4755-82c6-4f4d-8eb3-ce058dccda0a/a6908e65-6e33-47e1-84ef-6926fb4b0136"
+storage_version_token = "1789596723485203"
+content_type = "image/png"
+
+[[outputs]]
+id = "najMs_jb6ra43dmZP-j80"
+uri = "file://screenshots/tela-2-balao-aproximado.png"
+type = "image"
+title = "Tela 2 — balão aproximado"
+description = "Captura em 390×844 com o balão Vamos começar? aproximado da boca da Leluá."
+logical_id = "608ab7ae-135e-4755-9146-b3f72729d34b"
+content_hash = "sha256:b0d1a2fc8f705644e7c52f0afc0e8998b4a291e14feb919f564df014a470d335"
+size = 81869
+mtime_ms = 1789597585723
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/608ab7ae-135e-4755-9146-b3f72729d34b/f9a2e92c-2d6c-4878-ab6a-120d1fcd92cd"
+storage_version_token = "1789597598307388"
+content_type = "image/png"
+
+[[outputs]]
+id = "T_WGeTIdIbT7gAt6aTTbc"
+uri = "file://screenshots/tela-3-balao-e-fundo-corrigidos.png"
+type = "image"
+title = "Tela 3 — balão e fundo corrigidos"
+description = "Captura em 390×844 com margem esquerda no balão, ponta próxima à boca e fundo cobrindo toda a largura."
+logical_id = "358dc960-205d-4ae7-be6f-83fe2d096a67"
+content_hash = "sha256:d7cd5c2595e0855f6700f6c2081c6fd0802c058861b4869cb1cbd588eb309814"
+size = 125356
+mtime_ms = 1789597585729
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/358dc960-205d-4ae7-be6f-83fe2d096a67/fe47cc5b-4323-4ba0-aa71-ca9554e09f84"
+storage_version_token = "1789597598896588"
+content_type = "image/png"
+
+[[outputs]]
+id = "2nbiLS4ad17TEX5QYXzni"
+uri = "file://screenshots/tela-2-balao-ludico.png"
+type = "image"
+title = "Tela 2 — balão lúdico refinado"
+description = "Captura final em 390×844 com forma orgânica, inclinação suave, palavras destacadas e detalhes amarelos."
+logical_id = "c3ed5eb6-4028-48b6-a741-6e1f0dd66f4b"
+content_hash = "sha256:a7b6ecbd1b70aef3f0877935b7959b5bdece558fcfd9fe09b611bffee0e890a0"
+size = 83118
+mtime_ms = 1789597980655
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/c3ed5eb6-4028-48b6-a741-6e1f0dd66f4b/fbfaf5a0-2463-4212-89b3-e395a8fdac3c"
+storage_version_token = "1789597992904893"
+content_type = "image/png"
+
+[[outputs]]
+id = "DyT1-hLlaJyQEAO1tKz7Y"
+uri = "file://screenshots/tela-3-balao-ludico.png"
+type = "image"
+title = "Tela 3 — balão lúdico refinado"
+description = "Captura final em 390×844 com a frase preservada em duas linhas, destaques por cor e ponta direcionada à boca."
+logical_id = "282447e8-041e-4539-a767-b129e1847bf7"
+content_hash = "sha256:9cf39a79b9668cf9f492a20e457ddfca4078848283e156106aa6a975d46493a6"
+size = 127218
+mtime_ms = 1789597981091
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/282447e8-041e-4539-a767-b129e1847bf7/ac7bd930-0e27-48d2-b80f-bc1ebdd50ecd"
+storage_version_token = "1789597993468148"
+content_type = "image/png"

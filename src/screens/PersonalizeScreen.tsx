@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Image,
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -23,11 +22,7 @@ type Props = {
 
 type AvatarChoice = "girl" | "boy";
 
-const roundedFont = Platform.select({
-  ios: "Arial Rounded MT Bold",
-  android: "sans-serif-rounded",
-  web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
-});
+const roundedFont = "Fredoka_700Bold";
 
 export function PersonalizeScreen({
   initialName,
@@ -75,6 +70,7 @@ export function PersonalizeScreen({
       <ScrollView
         contentContainerStyle={styles.scroll}
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
         <View style={styles.top}>
           <View style={styles.back}>
@@ -96,13 +92,21 @@ export function PersonalizeScreen({
           <View style={styles.lumiGreeting}>
             <View style={styles.speechBubble}>
               <Text style={styles.speechText}>
-                Vamos conhecer a criança!
+                <Text style={styles.speechLead}>Vamos </Text>
+                <Text style={styles.speechHighlight}>conhecer</Text>
+                <Text style={styles.speechLead}> a</Text>
+                {"\n"}
+                <Text style={styles.speechAccent}>criança!</Text>
               </Text>
+              <View style={styles.speechTail} />
+              <View style={[styles.speechSpark, styles.speechSparkTop]} />
+              <View style={[styles.speechSpark, styles.speechSparkBottom]} />
             </View>
             <LumiCharacter
               accessibilityLabel="Leluá, personagem broto"
               expression="main"
               size="large"
+              style={styles.greetingCharacter}
             />
           </View>
         </View>
@@ -160,6 +164,7 @@ export function PersonalizeScreen({
             label="Continuar"
             onPress={continueOnboarding}
             style={styles.continueButton}
+            textStyle={styles.primaryButtonText}
           />
         </View>
       </ScrollView>
@@ -210,13 +215,13 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.82)",
   },
   cloudLeft: {
-    left: "4%",
-    top: "15%",
+    left: -20,
+    top: "18%",
   },
   cloudRight: {
-    right: "3%",
-    top: "8%",
-    transform: [{ scale: 0.72 }],
+    right: -24,
+    top: "13%",
+    transform: [{ scale: 0.64 }],
   },
   hillBack: {
     position: "absolute",
@@ -257,13 +262,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 22,
     paddingTop: 18,
-    paddingBottom: 70,
+    paddingBottom: 62,
   },
   top: {
     width: "100%",
     maxWidth: 400,
-    height: 225,
+    height: 210,
     alignItems: "center",
+    position: "relative",
+    overflow: "visible",
   },
   back: {
     position: "absolute",
@@ -291,33 +298,93 @@ const styles = StyleSheet.create({
     marginTop: -3,
   },
   logo: {
-    width: 185,
-    height: 86,
+    width: 210,
+    height: 94,
   },
   lumiGreeting: {
     position: "absolute",
-    right: -9,
-    bottom: -25,
+    right: 0,
+    bottom: -22,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
+    overflow: "visible",
   },
   speechBubble: {
     width: 190,
     minHeight: 78,
-    borderRadius: 28,
+    borderTopLeftRadius: 35,
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 38,
+    borderBottomLeftRadius: 28,
+    borderWidth: 2,
+    borderColor: "#F7FCFF",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
     backgroundColor: colors.white,
+    marginTop: 36,
+    marginRight: -8,
+    zIndex: 1,
+    overflow: "visible",
+    transform: [{ rotate: "2.5deg" }],
     ...shadow,
   },
+  speechTail: {
+    position: "absolute",
+    right: -8,
+    top: 28,
+    width: 21,
+    height: 21,
+    borderBottomRightRadius: 7,
+    borderRightWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: "#F7FCFF",
+    backgroundColor: colors.white,
+    transform: [{ rotate: "45deg" }],
+    zIndex: 1,
+  },
   speechText: {
-    color: "#123C84",
     fontFamily: roundedFont,
-    fontSize: 19,
-    lineHeight: 22,
-    fontWeight: "900",
+    fontSize: 18,
+    lineHeight: 25,
+    fontWeight: "700",
     textAlign: "center",
+    transform: [{ rotate: "-2.5deg" }],
+    zIndex: 2,
+  },
+  speechLead: {
+    color: "#123C84",
+  },
+  speechHighlight: {
+    color: "#2FAE67",
+    fontWeight: "700",
+  },
+  speechAccent: {
+    color: "#168AC5",
+    fontSize: 19,
+    fontWeight: "700",
+  },
+  speechSpark: {
+    position: "absolute",
+    left: -10,
+    width: 10,
+    height: 3,
+    borderRadius: 3,
+    backgroundColor: "#F6C945",
+  },
+  speechSparkTop: {
+    top: 22,
+    transform: [{ rotate: "28deg" }],
+  },
+  speechSparkBottom: {
+    top: 39,
+    left: -12,
+    transform: [{ rotate: "-24deg" }],
+  },
+  greetingCharacter: {
+    width: 150,
+    height: 160,
+    zIndex: 2,
   },
   card: {
     width: "100%",
@@ -341,6 +408,7 @@ const styles = StyleSheet.create({
     maxWidth: 330,
     alignSelf: "center",
     color: "#334C78",
+    fontFamily: "Nunito_400Regular",
     fontSize: 16,
     lineHeight: 21,
     textAlign: "center",
@@ -349,6 +417,7 @@ const styles = StyleSheet.create({
   avatarTitle: {
     color: "#173D82",
     fontSize: 16,
+    fontFamily: "Nunito_700Bold",
     fontWeight: "800",
     textAlign: "center",
     marginTop: 15,
@@ -361,8 +430,8 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   avatarOption: {
-    width: 132,
-    height: 132,
+    width: 146,
+    height: 146,
     borderWidth: 3,
     borderColor: "transparent",
     borderRadius: 66,
@@ -379,13 +448,14 @@ const styles = StyleSheet.create({
   label: {
     color: "#173D82",
     fontSize: 14,
+    fontFamily: "Nunito_700Bold",
     fontWeight: "800",
     marginTop: 13,
     marginBottom: 6,
   },
   input: {
     width: "100%",
-    minHeight: 54,
+    minHeight: 60,
     borderWidth: 1.5,
     borderColor: "#D3DAE3",
     borderRadius: 16,
@@ -393,6 +463,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FBFCFE",
     color: colors.ink,
     fontSize: 16,
+    fontFamily: "Nunito_500Medium",
   },
   error: {
     color: "#B64B45",
@@ -402,7 +473,10 @@ const styles = StyleSheet.create({
   },
   continueButton: {
     width: "100%",
-    minHeight: 60,
+    minHeight: 64,
     marginTop: 16,
+  },
+  primaryButtonText: {
+    fontFamily: "Fredoka_700Bold",
   },
 });

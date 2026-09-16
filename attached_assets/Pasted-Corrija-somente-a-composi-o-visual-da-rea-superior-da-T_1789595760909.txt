@@ -1,0 +1,121 @@
+Corrija somente a composição visual da área superior da TELA 2 — Cadastro do responsável. Preserve os campos, botões, textos, validações e funcionalidades existentes.
+
+BALÃO DE FALA
+
+O balão “Vamos começar?” deve representar claramente uma fala da Leluá.
+
+- Posicione o balão à esquerda do rosto da personagem.
+- Adicione uma ponta triangular arredondada no lado direito do balão.
+- A ponta deve apontar diretamente para a região da boca da Leluá.
+- A ponta deve parecer integrada ao balão, sem espaço ou linha de separação.
+- Não posicione a ponta em direção ao corpo, à bolsa ou à mão.
+- Não coloque o balão sobre a personagem.
+- Não deixe o balão flutuando sem uma indicação clara de quem está falando.
+- Preserve o texto exatamente como “Vamos começar?”.
+- Centralize o texto dentro do balão.
+- Use a mesma fonte arredondada do restante da interface.
+- Mantenha o balão branco ou creme-claro, com sombra muito suave.
+- O balão deve ficar visualmente à frente da nuvem do cenário.
+
+Não use um balão genérico separado da personagem. Ele deve formar uma composição única com a Leluá, como se a frase estivesse saindo de sua boca.
+
+POSIÇÃO DA PERSONAGEM
+
+- Posicione a Leluá no canto superior direito da área útil.
+- Mantenha sua cabeça abaixo do logotipo e fora da região da câmera.
+- Mostre integralmente as duas folhas, o rosto e a mão erguida.
+- A mão erguida não pode ser cortada pela borda direita.
+- Mantenha o corpo em posição vertical, com leve orientação em direção ao balão.
+- O rosto deve estar ligeiramente voltado para o balão e para o usuário.
+- A bolsa marrom e a estrela amarela devem permanecer visíveis.
+- A personagem deve terminar visualmente atrás da parte superior do cartão branco, sem parecer flutuar.
+- Não deixe um espaço vazio entre a base da personagem e o cartão.
+- Não estique, comprima ou incline excessivamente a personagem.
+
+ALINHAMENTO DA COMPOSIÇÃO SUPERIOR
+
+Organize logotipo, balão e personagem dentro de uma única área superior responsiva.
+
+A hierarquia deve ser:
+
+1. Botão de voltar no canto superior esquerdo.
+2. Logotipo Leluá centralizado abaixo da área segura.
+3. Slogan “crescer é descobrir” logo abaixo do logotipo.
+4. Balão de fala na região inferior esquerda.
+5. Personagem na região inferior direita.
+6. Cartão branco começando imediatamente abaixo dessa composição.
+
+- O logotipo deve estar centralizado horizontalmente em relação à tela.
+- A câmera ou Dynamic Island não pode cobrir nenhuma parte do logotipo.
+- O slogan deve estar centralizado com o logotipo.
+- Balão e personagem devem compartilhar o mesmo alinhamento vertical.
+- O centro do balão deve ficar aproximadamente na altura da boca da personagem.
+- A ponta do balão deve alcançar visualmente a direção da boca.
+- Preserve uma margem lateral equilibrada nos dois lados.
+- Não permita que o balão encoste no botão de voltar.
+- Não permita que a personagem ultrapasse a borda direita.
+- Não permita sobreposição entre logotipo e folhas da personagem.
+
+PLANO DE FUNDO
+
+- Preserve o fundo azul-claro.
+- Alinhe as nuvens com a composição, usando-as apenas como elementos secundários.
+- As nuvens não podem atravessar o rosto, as folhas, o texto do balão ou o logotipo.
+- Não utilize as nuvens como fundo direto de textos importantes.
+- Evite que uma nuvem branca se confunda com a borda do balão.
+- Mantenha os elementos decorativos amarelos próximos à personagem, sem tocar na mão ou no rosto.
+- O cartão branco deve ficar visualmente à frente do plano de fundo.
+- As colinas verdes devem permanecer somente na parte inferior da tela.
+- Não deixe as colinas invadirem o cartão.
+- Centralize o cartão em relação à largura útil do aparelho.
+
+ALINHAMENTO DO CARTÃO
+
+- O cartão branco deve começar abaixo do balão e da personagem.
+- Mantenha o cartão centralizado horizontalmente.
+- Use margens laterais iguais.
+- Os cantos superiores devem estar na mesma altura.
+- Não deixe o cartão deslocado para a esquerda ou para a direita.
+- O título “Crie sua conta” deve estar centralizado em relação ao cartão, e não em relação à tela inteira.
+- Campos, botão e opções de login devem compartilhar o mesmo eixo central.
+- Preserve distâncias laterais iguais dentro do cartão.
+
+ESTADO NORMAL E ESTADO DE ERRO
+
+Os dois estados apresentados devem manter exatamente o mesmo posicionamento da área superior.
+
+- Logotipo, balão, personagem, nuvens e cartão não podem mudar de posição quando surgir uma mensagem de erro.
+- Reserve previamente uma pequena área abaixo do campo de senha para mensagens de validação.
+- Quando não houver erro, essa área pode permanecer vazia.
+- Quando houver erro, mostre nela a mensagem “Digite seu nome para continuar.”.
+- A mensagem de erro não deve empurrar o cartão, a personagem, o balão ou o logotipo.
+- Não altere a altura ou a posição dos campos entre os estados.
+- Apenas a mensagem de erro e o destaque do campo correspondente devem mudar.
+
+IMPLEMENTAÇÃO
+
+- Crie um contêiner próprio para a composição superior.
+- Use posicionamento relativo dentro desse contêiner.
+- Evite coordenadas absolutas baseadas na imagem completa do aparelho.
+- Não use uma imagem única contendo logotipo, balão e personagem.
+- Mantenha cada elemento separado para permitir alinhamento responsivo.
+- Use `object-fit: contain` para a personagem e o logotipo.
+- Garanta `overflow: visible` ao redor da personagem e da ponta do balão.
+- Respeite a área segura superior com `env(safe-area-inset-top)`.
+
+VALIDAÇÃO FINAL
+
+Apresente capturas do estado normal e do estado com erro e confirme:
+
+1. A ponta do balão aponta para a boca da Leluá.
+2. O balão não parece flutuar isoladamente.
+3. A personagem está alinhada ao cartão e ao cenário.
+4. A mão e as folhas estão completamente visíveis.
+5. O logotipo não está coberto pela câmera.
+6. As nuvens não interferem nos elementos principais.
+7. O cartão está centralizado.
+8. A mensagem de erro não movimenta nenhuma arte.
+9. Os dois estados mantêm exatamente a mesma composição superior.
+10. Nenhuma funcionalidade foi alterada.
+
+Não modifique as telas 1 e 3 nesta correção.
