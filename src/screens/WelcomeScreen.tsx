@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Image,
   Platform,
   ScrollView,
   StyleSheet,
@@ -12,6 +11,7 @@ import { PrimaryButton } from "../components/PrimaryButton";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
 import { LumiCharacter } from "../components/LumiCharacter";
+import { LeluaLogo } from "../components/LeluaLogo";
 
 type Props = {
   onContinue: () => void;
@@ -70,17 +70,10 @@ export function WelcomeScreen({ onContinue, disabled = false }: Props) {
       </View>
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={[styles.hero, isTallScreen && styles.heroTall]}>
-          <View accessibilityLabel="Logomarca Lumi" style={styles.brand}>
-            <Image
-              accessibilityLabel="Lumi — crescer é descobrir"
-              resizeMode="contain"
-              source={require("../../assets/images/lumi/lumi-logo-official.png")}
-              style={styles.brandImage}
-            />
-          </View>
+          <LeluaLogo style={styles.brand} />
           <View style={styles.lumiHero}>
             <LumiCharacter
-              accessibilityLabel="Lumi, personagem oficial"
+              accessibilityLabel="Leluá, personagem broto"
               expression="welcome"
               size="medallion"
             />

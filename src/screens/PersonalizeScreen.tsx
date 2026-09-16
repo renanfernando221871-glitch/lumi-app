@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { LumiCharacter } from "../components/LumiCharacter";
+import { LeluaLogo } from "../components/LeluaLogo";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
@@ -90,12 +91,7 @@ export function PersonalizeScreen({
             </Pressable>
           </View>
 
-          <Image
-            accessibilityLabel="Lumi — crescer é descobrir"
-            resizeMode="contain"
-            source={require("../../assets/images/lumi/lumi-logo-guardian.png")}
-            style={styles.logo}
-          />
+          <LeluaLogo compact style={styles.logo} />
 
           <View style={styles.lumiGreeting}>
             <View style={styles.speechBubble}>
@@ -104,7 +100,7 @@ export function PersonalizeScreen({
               </Text>
             </View>
             <LumiCharacter
-              accessibilityLabel="Lumi, personagem oficial"
+              accessibilityLabel="Leluá, personagem broto"
               expression="main"
               size="large"
             />

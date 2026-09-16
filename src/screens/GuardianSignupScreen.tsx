@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { LumiCharacter } from "../components/LumiCharacter";
+import { LeluaLogo } from "../components/LeluaLogo";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
@@ -78,18 +79,13 @@ export function GuardianSignupScreen({ onBack, onContinue }: Props) {
               <Text style={styles.backIcon}>‹</Text>
             </Pressable>
           </View>
-          <Image
-            accessibilityLabel="Lumi — crescer é descobrir"
-            resizeMode="contain"
-            source={require("../../assets/images/lumi/lumi-logo-guardian.png")}
-            style={styles.logo}
-          />
+          <LeluaLogo compact style={styles.logo} />
           <View style={styles.lumiGreeting}>
             <View style={styles.speechBubble}>
               <Text style={styles.speechText}>Vamos{"\n"}começar?</Text>
             </View>
             <LumiCharacter
-              accessibilityLabel="Lumi, personagem oficial"
+              accessibilityLabel="Leluá, personagem broto"
               expression="main"
               size="large"
             />
