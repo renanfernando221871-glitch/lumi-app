@@ -4,3 +4,4 @@
 - [Official activity success art](official-activity-success-art.md) — when supplied art already shows success, use a neutral derivative before interaction and reveal the original after success.
 - [Embedded mock status cleanup](embedded-mock-status-cleanup.md) — remove phone-status glyphs from official art with native-coordinate pixel inpainting, not layout overlays or generative edits.
 - [Leluá transparent brand assets](lelua-transparent-brand-assets.md) — use the complete greeting-pose asset through the shared character component; verify logo alpha numerically.
+- [Auditoria do vertical slice](lumi-validation.md) — diferencie “não observado” de “falhou” quando não houver implementação executável.
