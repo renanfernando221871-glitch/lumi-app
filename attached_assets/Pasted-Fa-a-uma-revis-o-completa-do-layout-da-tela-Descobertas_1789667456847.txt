@@ -1,0 +1,412 @@
+Faça uma revisão completa do layout da tela “Descobertas da Fazenda”, adequando-a ao padrão visual aprovado do aplicativo Leluá.
+
+Use a imagem anexada como referência do conteúdo e da ambientação, mas corrija todos os problemas de:
+
+- alinhamento;
+- espaçamento;
+- sobreposição;
+- cortes;
+- tipografia;
+- hierarquia;
+- área segura;
+- organização das atividades;
+- posicionamento do botão principal.
+
+Não transforme a tela em uma imagem estática. Preserve todas as atividades, estados, progressos, bloqueios e funcionalidades.
+
+Modifique somente esta tela.
+
+IDENTIDADE
+
+- Substitua qualquer ocorrência de “Lumi” por “Leluá”.
+- Use o logotipo oficial já existente.
+- Preserve o acento agudo.
+- Use Fredoka nos títulos, números e botões.
+- Use Nunito nos textos explicativos.
+- Preserve a Leluá oficial com folhas assimétricas, bolsa marrom e estrela amarela.
+- Não crie uma versão diferente da personagem.
+
+ESTRUTURA DA TELA
+
+Organize a tela em cinco áreas claramente separadas:
+
+1. Cabeçalho.
+2. Título ilustrado da Fazenda.
+3. Texto de orientação.
+4. Cartão com progresso e atividades.
+5. Área do botão “Começar atividade”.
+
+Nenhuma área deve invadir a outra.
+
+CABEÇALHO
+
+Organize uma linha superior contendo:
+
+- botão de voltar à esquerda;
+- logotipo Leluá centralizado;
+- botão de configurações à direita.
+
+REGRAS DO CABEÇALHO
+
+- Respeite `env(safe-area-inset-top)`.
+- Não desenhe uma Dynamic Island artificial.
+- Se o retângulo preto fizer parte do aplicativo, remova-o.
+- Se pertencer apenas ao simulador, mantenha-o somente na prévia.
+- Nenhuma parte do logotipo pode ficar atrás da câmera.
+- Botões de voltar e configurações devem possuir o mesmo tamanho.
+- Use círculos brancos.
+- Centralize as setas e a engrenagem.
+- Mostre todos os dentes da engrenagem.
+- Use área de toque mínima de 44 × 44 px.
+- Mantenha margens laterais iguais.
+- Os três elementos devem compartilhar o mesmo centro vertical.
+
+TÍTULO ILUSTRADO
+
+Mantenha a placa de madeira com o texto:
+
+“Descobertas da Fazenda”
+
+- Use Fredoka.
+- Preserve “Descobertas da” em tamanho menor.
+- Dê destaque principal a “Fazenda”.
+- Centralize os textos na placa.
+- Não corte nenhuma letra.
+- Não permita que folhas, personagem ou moinho cubram o título.
+- Posicione a placa abaixo do cabeçalho, com espaço visível.
+- Não deixe a placa encostar no logotipo.
+- Preserve a leve inclinação lúdica, sem prejudicar a leitura.
+
+PERSONAGEM
+
+Posicione a Leluá ao lado direito da placa:
+
+- rosto completamente visível;
+- duas folhas inteiras;
+- mão completamente visível;
+- bolsa e estrela reconhecíveis;
+- expressão curiosa e acolhedora;
+- fundo transparente.
+
+- Não corte a personagem na borda direita.
+- Não deixe a placa atravessar seu rosto.
+- Não permita sobreposição com a engrenagem.
+- Não altere sua identidade visual.
+
+ELEMENTOS DO CENÁRIO
+
+Preserve:
+
+- moinho;
+- celeiro;
+- árvores;
+- cerca;
+- plantações;
+- flores;
+- estrada;
+- vegetação.
+
+Esses elementos devem permanecer no plano de fundo.
+
+- Não deixe o moinho encostar no botão de voltar.
+- Não cubra textos ou controles.
+- Não deixe árvores atravessarem o cartão de atividades.
+- Preserve contraste suficiente entre fundo e conteúdo.
+
+TEXTO DE ORIENTAÇÃO
+
+Mantenha exatamente:
+
+“Escolha uma atividade para começar a explorar!”
+
+- Use Nunito em peso 600.
+- Use azul-escuro.
+- Centralize horizontalmente.
+- Posicione abaixo da placa, com espaço superior e inferior.
+- Não encoste no cartão.
+- Não permita que a personagem cubra o texto.
+- Não reduza excessivamente a fonte.
+
+CARTÃO DE ATIVIDADES
+
+Centralize o cartão branco em relação à área útil da tela.
+
+- Use margens laterais iguais.
+- Preserve cantos arredondados.
+- Use sombra suave.
+- Crie espaçamento interno consistente.
+- Não encoste o cartão nas bordas do aparelho.
+- Não deixe a lista ultrapassar o cartão.
+- Não permita faixa branca lateral.
+- Separe visualmente o cartão do botão principal.
+
+CABEÇALHO DO CARTÃO
+
+Exiba:
+
+“5 de 8 atividades”
+
+E:
+
+“Muitas descobertas te esperam!”
+
+- O valor do progresso deve permanecer dinâmico.
+- Não fixe “5 de 8” se os dados do usuário forem diferentes.
+- Use uma área horizontal com duas colunas.
+- Alinhe o progresso à esquerda.
+- Alinhe a mensagem à direita.
+- Reserve largura suficiente para os dois textos.
+- Não deixe textos encostarem.
+- Não corte palavras.
+- Use Fredoka no progresso.
+- Use Nunito ou Fredoka menor na mensagem.
+- Preserve a estrela amarela completamente visível.
+- Centralize a estrela verticalmente.
+- Não corte nenhuma ponta.
+
+LISTA DE ATIVIDADES
+
+Preserve estas atividades:
+
+1. “Quem faz muuu?”
+2. “Encontre o cavalo”
+3. “O animal marrom”
+4. “Conte os pintinhos”
+5. “Do maior para o menor”
+6. “De onde vem?”
+7. “Na frente ou atrás?”
+8. “Ajude na colheita”
+
+Crie oito linhas com estrutura consistente.
+
+Cada linha deve ter quatro áreas:
+
+1. Número ou estado à esquerda.
+2. Ícone da atividade.
+3. Título.
+4. Indicador de conclusão, seleção ou bloqueio à direita.
+
+PADRÃO DAS LINHAS
+
+- Mesma largura.
+- Mesma altura mínima.
+- Mesmo raio de borda.
+- Mesmo espaçamento interno.
+- Mesma distância vertical.
+- Alinhamento pelo mesmo eixo.
+- Nenhum ícone cortado.
+- Nenhum texto sobreposto.
+- Nenhuma linha encostando na seguinte.
+- Área de toque confortável.
+- Use Flexbox ou Grid.
+
+COLUNA DE NÚMERO E ESTADO
+
+- Use círculos com tamanho idêntico.
+- Centralize números e marcas.
+- Atividades concluídas podem usar círculo verde com marca branca.
+- A atividade atual pode usar número verde ou destaque equivalente.
+- Atividades bloqueadas devem usar número cinza.
+- Não misture número e marca de conclusão de maneira confusa.
+- Preserve estados baseados nos dados reais.
+
+ÍCONES DAS ATIVIDADES
+
+Mostre integralmente:
+
+- vaca;
+- cavalo;
+- animal marrom;
+- pintinhos;
+- comparação de tamanhos;
+- origem dos produtos;
+- posição espacial;
+- colheita.
+
+- Use uma área fixa e igual para todos.
+- Use `object-fit: contain`.
+- Preserve proporções.
+- Não corte orelhas, pernas, asas ou outros detalhes.
+- Não permita que os ícones invadam o texto.
+- Use fundo transparente.
+
+TÍTULOS
+
+- Use Fredoka em peso 600.
+- Use azul-escuro ou verde-escuro.
+- Alinhe à esquerda.
+- Preserve acentos e sinais.
+- Não comprima horizontalmente.
+- Não use reticências.
+- Permita quebra controlada apenas se necessário.
+- Mantenha a mesma margem em todas as linhas.
+
+INDICADORES À DIREITA
+
+Atividade concluída:
+
+- marca de verificação verde completamente visível.
+
+Atividade selecionada:
+
+- seta verde ou indicador de seleção completamente visível.
+
+Atividade bloqueada:
+
+- cadeado azul-escuro completo;
+- arco e base inteiros;
+- área de toque ou informação acessível sobre o bloqueio.
+
+- Use o mesmo espaço reservado para todos os indicadores.
+- Centralize-os verticalmente.
+- Não deixe indicadores encostarem na borda.
+- Não deixe indicadores cobrirem títulos.
+
+ESTADOS VISUAIS
+
+Concluída:
+
+- fundo verde muito claro;
+- marca de verificação.
+
+Selecionada:
+
+- fundo verde um pouco mais destacado;
+- borda verde suave;
+- seta ou indicador de seleção.
+
+Bloqueada:
+
+- fundo cinza ou azul muito claro;
+- menor contraste, sem prejudicar a leitura;
+- cadeado visível.
+
+Não altere a lógica real de progresso e desbloqueio.
+
+BOTÃO “COMEÇAR ATIVIDADE”
+
+O botão está atualmente colado ao cartão da lista. Separe-o visualmente.
+
+- Coloque o botão em um contêiner próprio abaixo do cartão.
+- Use margem superior mínima de 16 px, preferencialmente entre 16 e 20 px.
+- Preserve uma margem inferior segura.
+- Não encoste o botão na última atividade.
+- Não coloque o botão dentro da última linha.
+- Não permita que a sombra do cartão se misture com a sombra do botão.
+- Centralize horizontalmente.
+- Use a mesma margem lateral do cartão.
+- Use altura confortável.
+- Use cantos arredondados.
+- Use verde vivo.
+- Use texto branco.
+- Use Fredoka em peso 700.
+- Mostre a seta branca completamente.
+- Preserve o texto exato:
+
+“Começar atividade →”
+
+- Preserve a ação de iniciar a atividade selecionada.
+- Se nenhuma atividade disponível estiver selecionada, mostre o estado desabilitado de forma clara.
+- Não permita iniciar atividades bloqueadas.
+
+ÁREA INFERIOR
+
+- Preserve flores, folhas e caminho no plano de fundo.
+- Não deixe elementos decorativos cobrir o botão.
+- Não posicione o botão sobre a barra de gesto do aparelho.
+- Respeite `env(safe-area-inset-bottom)`.
+- Garanta espaço abaixo do botão.
+- Não corte as flores na base de maneira abrupta.
+
+ROLAGEM
+
+Se todo o conteúdo não couber confortavelmente:
+
+- permita rolagem vertical suave;
+- mantenha o cabeçalho organizado;
+- não reduza excessivamente textos e ícones;
+- não use escala global;
+- garanta que o botão permaneça acessível;
+- não crie rolagem horizontal.
+
+Uma opção aceitável é manter o botão em uma área inferior fixa ou aderente, desde que:
+
+- não cubra atividades;
+- tenha fundo ou gradiente próprio;
+- respeite a área segura;
+- a última linha possa ser totalmente visualizada acima dele.
+
+ALINHAMENTO GLOBAL
+
+Confirme que:
+
+- botão de voltar, logotipo e configurações estão alinhados;
+- placa e personagem não se sobrepõem;
+- subtítulo está centralizado;
+- cartão está centralizado;
+- todas as linhas possuem o mesmo eixo;
+- números e indicadores estão alinhados;
+- botão principal está separado do cartão;
+- margens esquerda e direita são iguais;
+- não existe faixa branca lateral;
+- não existe rolagem horizontal.
+
+TIPOGRAFIA
+
+Use:
+
+- Fredoka 700 para título da placa, progresso e botão;
+- Fredoka 600 para atividades;
+- Nunito 500 ou 600 para instruções e textos auxiliares.
+
+Não use fonte padrão do navegador.
+
+Não reduza textos até ficarem ilegíveis.
+
+RESPONSIVIDADE
+
+Teste em:
+
+- 390 × 844 px;
+- 375 × 812 px;
+- 360 × 800 px.
+
+- Respeite áreas seguras.
+- Use `box-sizing: border-box`.
+- Não use `transform: scale()` na tela completa.
+- Não use margens negativas.
+- Não fixe posições em relação à moldura externa do celular.
+- Use contêineres responsivos.
+
+ACESSIBILIDADE
+
+- Adicione rótulos às atividades.
+- Informe estado concluído, disponível ou bloqueado.
+- Preserve foco visível.
+- Use áreas de toque adequadas.
+- Não comunique estados apenas pela cor.
+- Garanta contraste suficiente.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir:
+
+1. Confirme que o nome exibido é Leluá.
+2. Confirme que o cabeçalho está abaixo da câmera.
+3. Confirme que a placa está legível.
+4. Confirme que a personagem não está cortada.
+5. Confirme que o cartão está centralizado.
+6. Confirme que as oito linhas estão alinhadas.
+7. Confirme que nenhum ícone está cortado.
+8. Confirme que os cadeados aparecem inteiros.
+9. Confirme que os estados continuam dinâmicos.
+10. Confirme que o botão está separado da lista por pelo menos 16 px.
+11. Confirme que existe espaço abaixo do botão.
+12. Confirme que o botão inicia a atividade selecionada.
+13. Confirme que não existe faixa branca lateral.
+14. Confirme que não existe rolagem horizontal.
+15. Execute os testes existentes.
+16. Apresente uma captura em 390 × 844 px.
+17. Informe os arquivos modificados.
+
+Não encerre a tarefa enquanto houver qualquer sobreposição, corte ou desalinhamento visível.

@@ -1,0 +1,109 @@
+Preciso acessar novamente as atividades já concluídas da Fazenda para revisar e atualizar suas telas.
+
+Atualmente, o aplicativo impede o acesso porque o desafio já foi concluído. Corrija esse comportamento sem apagar ou reiniciar o progresso do usuário.
+
+OBJETIVO
+
+Permitir que qualquer atividade concluída seja selecionada e repetida.
+
+- Não apagar o progresso.
+- Não remover marcas de conclusão.
+- Não bloquear mundos já liberados.
+- Não diminuir pontuação ou conquistas.
+- Não duplicar recompensas ao repetir uma atividade.
+- Não alterar a ordem das atividades.
+- Não alterar o estado das atividades ainda bloqueadas.
+
+ATIVIDADES CONCLUÍDAS
+
+As linhas concluídas, identificadas pela marca verde, devem continuar clicáveis.
+
+Ao tocar em uma atividade concluída:
+
+- selecione visualmente a linha;
+- preserve a marca de conclusão;
+- destaque a seleção com uma borda verde ou fundo ligeiramente diferente;
+- atualize o botão inferior para:
+
+“Refazer atividade →”
+
+- permita abrir novamente a atividade correspondente;
+- execute a atividade em modo de revisão.
+
+MODO DE REVISÃO
+
+Ao entrar em uma atividade já concluída:
+
+- abra a mesma tela original do desafio;
+- carregue normalmente imagens, perguntas, sons e interações;
+- permita completar o desafio novamente;
+- preserve o progresso anterior;
+- não conceda novamente recompensas únicas;
+- não aumente indevidamente contadores;
+- não bloqueie atividades posteriores;
+- ao terminar, retorne à tela da Fazenda.
+
+ATIVIDADE NÃO CONCLUÍDA
+
+Quando uma atividade disponível e ainda não concluída estiver selecionada, mantenha:
+
+“Começar atividade →”
+
+ATIVIDADE CONCLUÍDA
+
+Quando uma atividade concluída estiver selecionada, mostre:
+
+“Refazer atividade →”
+
+ATIVIDADE BLOQUEADA
+
+- Continue impedindo a abertura.
+- Mantenha o cadeado.
+- Informe de forma amigável o requisito para desbloqueio.
+- Não permita selecionar pelo botão principal.
+
+ACESSO PARA REVISÃO DE DESIGN
+
+Além do fluxo normal, crie uma forma segura de abrir diretamente qualquer atividade durante o desenvolvimento.
+
+Preferencialmente, adicione uma rota ou parâmetro disponível somente no ambiente de desenvolvimento, por exemplo:
+
+`/farm/activity/:activityId?preview=true`
+
+Essa rota deve:
+
+- funcionar somente em desenvolvimento;
+- permitir revisar a interface sem alterar o progresso;
+- não conceder recompensas;
+- não aparecer para usuários na versão publicada;
+- reutilizar o componente real da atividade;
+- não criar uma tela falsa ou imagem estática.
+
+Não inclua credenciais, atalhos inseguros ou controles administrativos na versão publicada.
+
+PRIMEIRA ATIVIDADE A ABRIR
+
+Depois da implementação:
+
+1. Selecione a primeira atividade concluída da Fazenda.
+2. Abra a tela real do desafio.
+3. Não altere o progresso salvo.
+4. Apresente uma captura completa em 390 × 844 px.
+5. Informe o nome do componente e dos arquivos responsáveis pela tela.
+
+VALIDAÇÃO
+
+Confirme que:
+
+1. Atividades concluídas podem ser selecionadas.
+2. O botão muda para “Refazer atividade →”.
+3. A atividade abre normalmente.
+4. A marca de conclusão permanece.
+5. O progresso não é apagado.
+6. Recompensas únicas não são duplicadas.
+7. Atividades bloqueadas continuam protegidas.
+8. Atividades posteriores não voltam a ser bloqueadas.
+9. A rota de prévia funciona apenas no desenvolvimento.
+10. Os testes existentes continuam aprovados.
+
+Não reinicie nem apague os dados do usuário para realizar esta tarefa.

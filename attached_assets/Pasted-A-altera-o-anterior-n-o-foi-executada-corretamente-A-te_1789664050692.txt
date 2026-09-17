@@ -1,0 +1,155 @@
+A alteração anterior não foi executada corretamente.
+
+A tela atual continua usando o layout antigo e o ponto de exclamação de “Olá, responsável!” permanece sozinho em uma terceira linha.
+
+Pare de fazer pequenos ajustes no CSS atual. Substitua a implementação visual desta tela pelo layout da imagem anexada:
+
+`lelua-tela-05-painel-responsavel-recriada.png`
+
+A imagem é uma referência visual. Não a utilize como uma imagem estática de fundo. Reconstrua o layout com componentes reais e funcionais.
+
+ANTES DE ALTERAR
+
+1. Localize o componente exato que renderiza a tela inicial do responsável.
+2. Identifique o arquivo de estilos usado por esse componente.
+3. Confirme que a imagem anexada está disponível nos recursos do projeto.
+4. Remova ou substitua as regras antigas que continuam controlando o layout.
+5. Não apenas adicione novas regras por cima das antigas.
+6. Ao terminar, informe os nomes dos arquivos efetivamente alterados.
+
+CORREÇÃO OBRIGATÓRIA DO TÍTULO
+
+O título deve ser renderizado exatamente em duas linhas:
+
+Olá,  
+responsável!
+
+O ponto de exclamação deve ficar unido à palavra “responsável”.
+
+Não permita esta apresentação incorreta:
+
+Olá,  
+responsável  
+!
+
+Implemente o título como dois elementos ou duas linhas explícitas.
+
+Para React web, use uma estrutura equivalente a:
+
+```jsx
+<h1 className="responsibleGreeting">
+  <span>Olá,</span>
+  <span className="responsibleGreetingSecondLine">responsável!</span>
+</h1>
+```
+
+E estilos equivalentes a:
+
+```css
+.responsibleGreeting {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.responsibleGreetingSecondLine {
+  display: inline-block;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+```
+
+Se o projeto usar React Native, utilize dois componentes `Text` separados:
+
+```jsx
+<View>
+  <Text>Olá,</Text>
+  <Text numberOfLines={1}>responsável!</Text>
+</View>
+```
+
+Não insira `<br>` entre a palavra e o ponto de exclamação.
+
+Não deixe o navegador decidir a quebra entre “responsável” e “!”.
+
+ESPAÇO PARA O TÍTULO
+
+A correção não deve depender somente de `white-space: nowrap`.
+
+- Aumente a largura disponível para a saudação.
+- Reduza discretamente a personagem ou mova-a um pouco para a direita.
+- Preserve uma separação clara entre texto e personagem.
+- Não sobreponha a personagem ao título.
+- Não reduza excessivamente a fonte.
+- Preserve Fredoka, peso 700 e azul-escuro.
+- Mantenha a frase inteira dentro da área útil.
+
+SUBSTITUIÇÃO DO LAYOUT
+
+Recrie a tela para corresponder à imagem anexada:
+
+- cabeçalho abaixo da câmera;
+- botão de menu à esquerda;
+- logotipo Leluá centralizado;
+- campainha completa à direita;
+- saudação à esquerda;
+- Leluá completa à direita;
+- cartão de incentivo;
+- botão do modo criança;
+- três cartões iguais de resumo;
+- título “Acesso rápido”;
+- quatro atalhos completos;
+- paisagem verde inferior.
+
+Não mantenha dimensões, posições ou estilos antigos quando divergirem da nova imagem.
+
+ÍCONES
+
+Garanta que estes ícones apareçam integralmente:
+
+- campainha e indicador coral;
+- livros;
+- estrela do modo criança;
+- relógio;
+- estrela de atividades;
+- gráfico de progresso;
+- joystick;
+- livro da biblioteca;
+- relatório;
+- engrenagem.
+
+Use `object-fit: contain`, contêineres com espaço interno e SVGs com `viewBox` completo.
+
+Não permita cortes por `overflow: hidden`.
+
+CONTEÚDO INFERIOR
+
+Na tela atual, “Acesso rápido” e seus cartões estão parcialmente fora da área visível.
+
+- Organize o conteúdo em uma coluna com rolagem vertical suave.
+- Preserve a paisagem no final da tela.
+- Não corte os atalhos inferiores.
+- Não use escala global para encaixar o conteúdo.
+- Não crie rolagem horizontal.
+
+VALIDAÇÃO OBRIGATÓRIA
+
+Não encerre a tarefa apenas informando que realizou as mudanças.
+
+Antes de concluir:
+
+1. Execute o aplicativo.
+2. Abra especificamente a tela inicial do responsável.
+3. Capture a tela em 390 × 844 px.
+4. Compare lado a lado com a imagem anexada.
+5. Confirme que o título aparece exatamente em duas linhas.
+6. Confirme que `responsável!` permanece unido.
+7. Confirme que o layout antigo foi realmente substituído.
+8. Confirme que todos os ícones aparecem inteiros.
+9. Confirme que os quatro atalhos inferiores estão visíveis.
+10. Informe os arquivos que foram modificados.
+11. Não altere outras telas.
+
+Se a nova captura continuar mostrando o ponto sozinho ou o layout antigo, a tarefa ainda não está concluída.

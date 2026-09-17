@@ -1,0 +1,268 @@
+Faça uma revisão completa do layout da tela “Descobertas da Fazenda”.
+
+A tela atual apresenta estes problemas:
+
+- placa de madeira grande demais;
+- personagem pequena em relação à placa;
+- logotipo parcialmente escondido;
+- cabeçalho desequilibrado;
+- excesso de altura ocupado na parte superior;
+- cartão da lista muito próximo da base;
+- botão “Começar atividade” parcialmente cortado;
+- falta de espaço entre lista, botão e área segura inferior.
+
+Corrija a composição completa sem alterar os textos, os dados dinâmicos, a lógica de progresso ou as funcionalidades.
+
+Modifique somente esta tela.
+
+CABEÇALHO
+
+Organize uma única linha contendo:
+
+- botão de voltar à esquerda;
+- logotipo Leluá centralizado;
+- botão de configurações à direita.
+
+- Respeite `env(safe-area-inset-top)`.
+- Nenhum elemento deve ficar atrás da câmera.
+- Se o retângulo preto for desenhado pelo aplicativo, remova-o.
+- Se for apenas parte do simulador, não tente reproduzi-lo no app.
+- Mostre integralmente o logotipo Leluá.
+- Preserve o acento e o slogan “crescer é descobrir”.
+- Não reduza o logotipo até ficar ilegível.
+- Use botões laterais do mesmo tamanho.
+- Centralize seta e engrenagem.
+- Mostre todos os dentes da engrenagem.
+- Mantenha margens laterais iguais.
+
+COMPOSIÇÃO DA PLACA E DA PERSONAGEM
+
+Crie uma composição horizontal equilibrada abaixo do cabeçalho:
+
+- placa de madeira à esquerda;
+- Leluá à direita.
+
+PLACA DE MADEIRA
+
+A placa atual está excessivamente grande.
+
+- Reduza sua largura aproximadamente entre 25% e 35%.
+- Reduza sua altura proporcionalmente.
+- Preserve a proporção original.
+- Não deforme ou achate a placa.
+- Use largura máxima aproximada entre 50% e 55% da área útil.
+- Não deixe a placa ocupar quase toda a largura.
+- Deixe espaço visível entre a placa e as bordas.
+- Posicione-a abaixo do logotipo.
+- Não permita que encoste no botão de voltar.
+- Preserve o texto centralizado.
+
+Texto exato:
+
+“Descobertas da  
+Fazenda”
+
+- Use Fredoka em peso 700.
+- Mantenha “Descobertas da” menor.
+- Mantenha “Fazenda” em destaque.
+- Não corte nenhuma letra.
+- Preserve margens internas confortáveis.
+- Não aumente a placa para fazer o texto caber; ajuste a tipografia de forma equilibrada.
+
+PERSONAGEM
+
+A personagem atual está pequena demais.
+
+- Aumente a Leluá aproximadamente entre 25% e 35%.
+- Mantenha proporção natural.
+- Posicione-a à direita da placa.
+- Faça sua altura visual ficar próxima da altura da placa ou discretamente maior.
+- Mostre integralmente as duas folhas.
+- Mostre rosto, mão, braço, bolsa e estrela.
+- Não corte a personagem na borda direita.
+- Não coloque a personagem atrás da placa.
+- Não deixe sua cabeça encostar na engrenagem.
+- Preserve fundo transparente.
+- Use `object-fit: contain`.
+
+O objetivo é que placa e personagem tenham importância visual semelhante.
+
+ESPAÇAMENTO DA COMPOSIÇÃO SUPERIOR
+
+- Reduza o espaço vertical desperdiçado entre cabeçalho, placa e instrução.
+- Preserve uma separação visível, mas compacta.
+- Não use margens negativas.
+- Não permita sobreposições.
+- A composição superior deve ocupar menos altura do que atualmente para liberar espaço para a lista e o botão.
+
+INSTRUÇÃO
+
+Mantenha exatamente:
+
+“Escolha uma atividade para começar a explorar!”
+
+- Use Nunito em peso 600.
+- Centralize.
+- Use azul-escuro.
+- Posicione abaixo da placa e da personagem.
+- Preserve uma margem superior e inferior equilibrada.
+- Não encoste no cartão.
+- Não permita quebra desequilibrada.
+- Não reduza excessivamente.
+
+CARTÃO DE ATIVIDADES
+
+- Centralize o cartão branco.
+- Use margens laterais iguais.
+- Preserve cantos arredondados.
+- Reduza apenas espaços vazios, não a legibilidade.
+- Mantenha o cabeçalho e as oito linhas.
+- Não deixe o cartão encostar no botão inferior.
+- Não permita que o cartão ultrapasse a área segura.
+
+PROGRESSO
+
+O progresso deve permanecer dinâmico.
+
+A tela atual mostra “4 de 8 atividades”, mas esse valor deve vir dos dados reais.
+
+- Não fixe “4 de 8”.
+- Preserve a estrela inteira.
+- Preserve a barra de progresso.
+- Alinhe o valor à esquerda.
+- Alinhe “Muitas descobertas te esperam!” à direita.
+- Não sobreponha os textos.
+- Não corte a mensagem.
+
+LINHAS DAS ATIVIDADES
+
+Preserve as oito atividades e seus estados reais.
+
+- Mesma altura.
+- Mesmo espaçamento.
+- Números alinhados.
+- Ícones alinhados.
+- Títulos alinhados.
+- Indicadores alinhados.
+- Nenhum ícone cortado.
+- Nenhum cadeado cortado.
+- Nenhum texto comprimido.
+- Não reduza excessivamente as linhas apenas para fazer o botão aparecer.
+
+Se a lista não couber, torne somente a área da lista rolável.
+
+ÁREA ROLÁVEL
+
+Estruture a tela com:
+
+1. cabeçalho fixo ou estável;
+2. apresentação superior;
+3. cartão de atividades com lista rolável;
+4. área inferior do botão sempre visível.
+
+- A lista deve rolar verticalmente dentro do espaço disponível.
+- A última atividade deve poder ser visualizada completamente.
+- Adicione espaço inferior à lista para que a última linha não fique atrás do botão.
+- Não crie rolagem horizontal.
+- Não esconda a barra de rolagem se isso prejudicar a compreensão, mas use aparência discreta.
+
+BOTÃO “COMEÇAR ATIVIDADE”
+
+O botão não pode permanecer parcialmente escondido na base.
+
+Mantenha exatamente:
+
+“Começar atividade →”
+
+- Posicione-o integralmente dentro da área útil.
+- Coloque-o em um rodapé próprio abaixo da lista.
+- Use `position: sticky` no rodapé interno, se necessário.
+- Respeite `env(safe-area-inset-bottom)`.
+- Preserve espaço visível abaixo do botão.
+- Use margem superior mínima de 12 a 16 px em relação ao cartão.
+- Use margem inferior mínima correspondente à área segura.
+- Centralize horizontalmente.
+- Use a mesma margem lateral do cartão.
+- Mostre a seta inteira.
+- Não deixe o botão atrás da barra de gesto.
+- Não permita que flores ou vegetação cubram o botão.
+- Não deixe o botão ultrapassar a moldura.
+- Não coloque o botão sobre a última atividade.
+
+O botão deve permanecer visível e acessível mesmo quando a lista rolar.
+
+RODAPÉ DO BOTÃO
+
+Se necessário, crie uma área inferior:
+
+- fundo branco translúcido ou verde muito claro;
+- leve gradiente superior;
+- espaço interno confortável;
+- botão centralizado;
+- paisagem ainda visível de forma discreta;
+- nenhuma linha da lista aparecendo atrás do botão.
+
+PLANO DE FUNDO
+
+- Preserve a fazenda ilustrada.
+- Preserve vegetação, flores e caminho.
+- Não permita que o fundo interfira na leitura.
+- Não deixe faixa branca lateral.
+- Não estique a imagem.
+- Use enquadramento central.
+- Não permita rolagem horizontal.
+
+ALINHAMENTO GLOBAL
+
+Confirme:
+
+- botão de voltar e engrenagem têm o mesmo tamanho;
+- logotipo está centralizado;
+- placa e personagem estão equilibradas;
+- instrução está centralizada;
+- cartão está centralizado;
+- linhas possuem o mesmo eixo;
+- botão está totalmente visível;
+- margens esquerda e direita são iguais;
+- nenhuma área está colada à seguinte.
+
+RESPONSIVIDADE
+
+Teste em:
+
+- 390 × 844 px;
+- 375 × 812 px;
+- 360 × 800 px.
+
+Em todas:
+
+- logotipo totalmente visível;
+- placa proporcional;
+- Leluá legível e completa;
+- lista rolável quando necessário;
+- botão principal totalmente visível;
+- última atividade acessível;
+- nenhuma rolagem horizontal;
+- nenhuma faixa branca lateral.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir:
+
+1. Compare a nova tela com a captura atual.
+2. Confirme que a placa ficou entre 25% e 35% menor.
+3. Confirme que a personagem ficou entre 25% e 35% maior.
+4. Confirme que placa e personagem estão visualmente equilibradas.
+5. Confirme que o logotipo está completamente visível.
+6. Confirme que as oito atividades continuam presentes.
+7. Confirme que o progresso continua dinâmico.
+8. Confirme que a lista pode rolar sem esconder linhas.
+9. Confirme que o botão aparece completamente.
+10. Confirme que existe espaço abaixo do botão.
+11. Confirme que o botão não cobre a última atividade.
+12. Confirme que nenhuma função foi alterada.
+13. Execute os testes existentes.
+14. Apresente captura em 390 × 844 px.
+15. Informe os arquivos modificados.
+
+Não encerre a tarefa enquanto o botão estiver parcialmente fora da tela ou a placa continuar desproporcional à personagem.

@@ -1,0 +1,339 @@
+Faça uma revisão completa do layout da tela inicial do responsável, adequando-a ao padrão visual aprovado do aplicativo Leluá.
+
+A tela deve parecer profissional, acolhedora, infantil e organizada. Corrija a estrutura do layout, não apenas posições isoladas.
+
+Não transforme a tela em imagem estática. Preserve todas as ações, dados dinâmicos, botões, navegação e funcionalidades existentes.
+
+PROBLEMAS QUE DEVEM SER CORRIGIDOS
+
+- Logotipo parcialmente encoberto pela câmera.
+- Cabeçalho desalinhado.
+- Ícones superiores em posições diferentes.
+- Texto de saudação muito próximo da personagem.
+- Personagem invadindo a área do texto.
+- Ícones cortados dentro dos cartões.
+- Títulos e descrições sem alinhamento comum.
+- Cartões com alturas e margens inconsistentes.
+- Indicadores de resumo comprimidos.
+- Textos excessivamente pequenos.
+- Navegação de acesso rápido desalinhada.
+- Falta de espaço seguro nas laterais.
+- Hierarquia visual pouco clara.
+- Elementos sem eixo central comum.
+
+ESTRUTURA GERAL
+
+Organize a tela nesta ordem:
+
+1. Cabeçalho com menu, logotipo e notificações.
+2. Saudação ao responsável e personagem Leluá.
+3. Cartão de incentivo do dia.
+4. Botão “Entrar no modo criança”.
+5. Resumo diário com três indicadores.
+6. Seção “Acesso rápido”.
+7. Quatro atalhos funcionais.
+
+Use um contêiner principal centralizado, com margens laterais iguais.
+
+A tela deve utilizar toda a área útil, respeitando a câmera, a barra superior e a barra inferior do aparelho.
+
+CABEÇALHO
+
+Crie uma linha superior perfeitamente alinhada:
+
+- botão de menu à esquerda;
+- logotipo Leluá centralizado;
+- botão de notificações à direita.
+
+Os três elementos devem compartilhar o mesmo centro vertical.
+
+BOTÃO DE MENU
+
+- Use um botão circular branco.
+- Centralize o ícone de três linhas dentro do círculo.
+- Não corte nenhuma linha.
+- Use azul-escuro ou verde-escuro.
+- Preserve a ação já existente.
+- Utilize uma área de toque mínima de 44 × 44 px.
+
+LOGOTIPO
+
+- Substitua definitivamente “Lumi” pelo logotipo oficial “Leluá”.
+- Não recrie o logotipo com texto simples.
+- Preserve as letras coloridas, o acento e o elemento de folhas.
+- Mantenha o slogan “crescer é descobrir”.
+- Posicione todo o conjunto abaixo da câmera.
+- Nenhuma letra ou folha pode ficar encoberta.
+- Não comprima ou deforme o logotipo.
+
+NOTIFICAÇÕES
+
+- Use um botão circular branco do mesmo tamanho do botão de menu.
+- Centralize o sino.
+- Preserve a ação de abrir notificações.
+- Se existir uma notificação não lida, exiba um pequeno indicador coral no canto superior direito.
+- O sino e o indicador não podem ser cortados.
+
+SAUDAÇÃO E PERSONAGEM
+
+Organize a saudação e a Leluá em duas áreas distintas da mesma linha.
+
+À esquerda:
+
+“Olá, responsável!”
+
+Abaixo:
+
+“Aqui está o resumo da jornada de Renan hoje.”
+
+- Preserve o nome da criança como dado dinâmico.
+- Não fixe “Renan” diretamente no componente se o aplicativo já utiliza o perfil cadastrado.
+- Use Fredoka, peso 700, no título.
+- Use Nunito, peso 400 ou 500, no texto explicativo.
+- Use azul-escuro.
+- Alinhe os textos à esquerda.
+- Dê largura suficiente para as frases.
+- Não permita que o texto fique atrás da personagem.
+
+À direita:
+
+- Use a Leluá oficial aprovada.
+- Preserve folhas assimétricas, rosto creme, olhos castanhos, bochechas rosadas, bolsa marrom e estrela amarela.
+- Mostre integralmente a cabeça, as folhas, o rosto e a mão.
+- Não corte nenhuma parte da personagem.
+- Não permita que a personagem invada a coluna de texto.
+- Use `object-fit: contain`.
+- Não aplique fundo quadrado.
+
+Mantenha um espaço mínimo claro entre texto e personagem.
+
+CARTÃO “HOJE É UM ÓTIMO DIA”
+
+Crie um cartão horizontal com:
+
+- fundo verde muito claro;
+- bordas arredondadas;
+- ilustração de livros à esquerda;
+- texto no centro;
+- botão circular com seta à direita.
+
+Texto principal:
+
+“Hoje é um ótimo dia para aprender!”
+
+Texto secundário:
+
+“Conhecimento, diversão e descobertas esperam por você.”
+
+- Use Fredoka no título.
+- Use Nunito na descrição.
+- Não reduza a descrição a ponto de ficar ilegível.
+- Centralize verticalmente ícone, texto e seta.
+- Reserve uma coluna fixa para o ícone.
+- O ícone deve aparecer inteiro, sem cortes.
+- Reserve uma área separada para a seta.
+- Nenhum texto pode entrar nas áreas do ícone ou da seta.
+- Preserve a ação já existente ao tocar no cartão.
+- Toda a área do cartão pode ser clicável.
+
+BOTÃO “ENTRAR NO MODO CRIANÇA”
+
+Mantenha:
+
+“Entrar no modo criança”
+
+E abaixo:
+
+“Explorar, brincar e descobrir”
+
+- Use um botão verde com cantos arredondados.
+- Posicione uma estrela amarela à esquerda.
+- Use uma seta branca à direita.
+- Centralize título e subtítulo verticalmente.
+- Não corte a estrela ou a seta.
+- Use Fredoka no título e Nunito no subtítulo.
+- Mantenha contraste suficiente.
+- Preserve a ação existente para entrar no modo infantil.
+- Use área de toque confortável.
+
+RESUMO DIÁRIO
+
+Crie uma grade com três cartões exatamente da mesma largura e altura.
+
+Cartão 1:
+
+- ícone de relógio;
+- título “Tempo de uso”;
+- valor dinâmico, atualmente “1h 20min”;
+- informação complementar, atualmente “de 2h por dia”.
+
+Cartão 2:
+
+- ícone de atividades;
+- título “Atividades realizadas”;
+- valor dinâmico, atualmente “4”;
+- informação complementar “hoje”.
+
+Cartão 3:
+
+- ícone de gráfico;
+- título “Progresso”;
+- mensagem dinâmica, atualmente “Muito bom!”;
+- percentual ou informação complementar disponível.
+
+REGRAS DOS TRÊS CARTÕES
+
+- Mesma largura.
+- Mesma altura.
+- Mesmo espaçamento interno.
+- Mesmo alinhamento superior.
+- Ícones completamente visíveis.
+- Ícones centralizados.
+- Títulos com a mesma altura reservada.
+- Valores alinhados na mesma linha visual.
+- Textos complementares alinhados na base.
+- Nenhuma palavra cortada.
+- Não permitir sobreposição.
+- Use cores suaves diferentes para distinguir os cartões.
+- Preserve todos os dados como valores dinâmicos.
+- Não fixe estatísticas apenas para reproduzir o print.
+
+Se três colunas não couberem com boa leitura em uma tela estreita, mantenha três colunas, mas ajuste tipografia e espaçamento dentro de limites legíveis. Não corte conteúdo para fazê-las caber.
+
+SEÇÃO “ACESSO RÁPIDO”
+
+Mantenha o título:
+
+“Acesso rápido”
+
+- Use Fredoka, peso 700.
+- Alinhe à esquerda com os cartões acima.
+- Dê espaço vertical antes dos atalhos.
+
+Crie uma grade com quatro atalhos:
+
+1. Atividades
+2. Biblioteca
+3. Relatórios
+4. Configurações
+
+Cada atalho deve conter:
+
+- fundo colorido suave;
+- ícone completamente visível;
+- nome centralizado;
+- cantos arredondados;
+- mesma largura;
+- mesma altura;
+- mesma distância entre os elementos;
+- área de toque mínima adequada.
+
+Ícones:
+
+- Atividades: controle ou símbolo de atividades.
+- Biblioteca: livro.
+- Relatórios: gráfico ou documento.
+- Configurações: engrenagem.
+
+REGRAS DOS ATALHOS
+
+- Não cortar nenhum ícone.
+- Não cortar nenhum texto.
+- Não permitir que os ícones ultrapassem seus cartões.
+- Centralizar ícone e legenda pelo mesmo eixo.
+- Usar o mesmo tamanho visual nos quatro ícones.
+- Preservar as ações já existentes.
+- Exibir resposta visual ao toque.
+- Não deixar os cartões encostarem nas bordas da tela.
+
+TIPOGRAFIA
+
+Use somente o padrão já aprovado:
+
+- Fredoka para títulos, números principais, botões e legendas destacadas.
+- Nunito para descrições e informações auxiliares.
+- Peso 700 para títulos.
+- Peso 600 ou 700 para botões.
+- Peso 400 ou 500 para descrições.
+
+Não use fonte padrão do navegador.
+
+Não reduza textos importantes abaixo de um tamanho confortável para dispositivos móveis.
+
+ESPAÇAMENTO E ALINHAMENTO
+
+Use um sistema consistente de espaçamento, preferencialmente múltiplos de 4 ou 8 px.
+
+- Margens laterais iguais.
+- Distância uniforme entre seções.
+- Alinhamento comum à esquerda para títulos.
+- Conteúdo centralizado dentro dos cartões.
+- Nenhum elemento deve depender de margens negativas.
+- Não use posições absolutas para montar o conteúdo principal.
+- Use Flexbox ou Grid.
+- Reserve posicionamento absoluto apenas para pequenos elementos decorativos.
+
+PLANO DE FUNDO
+
+- Preserve o céu azul-claro.
+- Use nuvens discretas sem interferir no conteúdo.
+- Preserve a paisagem verde inferior.
+- O fundo deve cobrir toda a largura da área interna.
+- Não deixe faixa branca vertical.
+- Não permita rolagem horizontal.
+- Garanta contraste entre cartões e plano de fundo.
+
+RESPONSIVIDADE
+
+- Respeite `env(safe-area-inset-top)` e `env(safe-area-inset-bottom)`.
+- Use `box-sizing: border-box`.
+- Não use `transform: scale()` na tela inteira.
+- Não use zoom para encaixar o layout.
+- Não comprima toda a interface.
+- Permita rolagem vertical suave se a altura disponível for insuficiente.
+- Preserve o cabeçalho e os controles em diferentes alturas de tela.
+- Teste em viewport próximo de 390 × 844 px.
+
+ACESSIBILIDADE
+
+- Garanta contraste adequado.
+- Use áreas de toque mínimas de 44 × 44 px.
+- Adicione rótulos acessíveis aos botões de menu, notificações e atalhos.
+- Não dependa somente das cores para comunicar informações.
+- Preserve foco visível para navegação por teclado.
+
+VALIDAÇÃO FUNCIONAL
+
+Confirme que continuam funcionando:
+
+- botão do menu;
+- botão de notificações;
+- cartão de incentivo;
+- botão “Entrar no modo criança”;
+- cartão de tempo de uso;
+- cartão de atividades;
+- cartão de progresso;
+- atalho Atividades;
+- atalho Biblioteca;
+- atalho Relatórios;
+- atalho Configurações.
+
+VALIDAÇÃO VISUAL
+
+Antes de concluir, apresente uma captura e confirme:
+
+1. O logotipo está totalmente abaixo da câmera.
+2. Menu, logotipo e notificações estão alinhados.
+3. Saudação e personagem não se sobrepõem.
+4. A personagem está completamente visível.
+5. Todos os ícones aparecem inteiros.
+6. Os três cartões de resumo têm o mesmo tamanho.
+7. Os quatro atalhos estão alinhados.
+8. Nenhum texto está cortado.
+9. Não existe faixa branca lateral.
+10. Não existe rolagem horizontal.
+11. Os valores continuam dinâmicos.
+12. A tela segue o mesmo padrão das telas anteriores.
+13. Todos os testes existentes continuam aprovados.
+
+Modifique somente esta tela nesta etapa. Não altere outras páginas do aplicativo.

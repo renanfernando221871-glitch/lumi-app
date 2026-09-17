@@ -1,0 +1,332 @@
+Faça uma revisão pontual da atividade 4 — “Conte os pintinhos”.
+
+Objetivos:
+
+1. Substituir o logotipo antigo “Lumi” por “Leluá”.
+2. Centralizar toda a arte em relação à área interna do celular.
+3. Corrigir eventuais diferenças entre as margens esquerda e direita.
+4. Revisar o alinhamento vertical e horizontal de todos os elementos.
+
+Não refaça o design.
+
+Não altere:
+
+- cenário;
+- personagem;
+- placa;
+- ilustração da galinha e dos pintinhos;
+- textos;
+- alternativas;
+- resposta correta;
+- cores;
+- fontes;
+- lógica;
+- progresso;
+- sons;
+- animações;
+- funcionalidades.
+
+LOGOTIPO
+
+Substitua o logotipo “Lumi” pelo logotipo oficial “Leluá” já existente no projeto.
+
+- Não recrie o logotipo usando texto HTML.
+- Use o mesmo arquivo oficial das telas anteriores.
+- Preserve letras arredondadas e coloridas.
+- Preserve o acento agudo de “Leluá”.
+- Preserve as folhas.
+- Preserve o slogan:
+
+“crescer é descobrir”
+
+- Mantenha proporção natural.
+- Use `object-fit: contain`.
+- Não comprima ou estique.
+- Não corte letras, folhas ou acento.
+- Posicione abaixo da área da câmera.
+- Não desenhe uma Dynamic Island artificial.
+- Mantenha o logotipo centralizado em relação à área útil da tela.
+
+CABEÇALHO
+
+Organize o cabeçalho em uma grade de três colunas:
+
+1. botão de voltar;
+2. logotipo;
+3. botão de configurações.
+
+- Reserve a mesma largura para as colunas laterais.
+- Centralize o logotipo pela tela inteira, não apenas pelo espaço restante.
+- Use botões circulares de tamanho idêntico.
+- Centralize seta e engrenagem.
+- Mostre todos os dentes da engrenagem.
+- Preserve áreas de toque de pelo menos 44 × 44 px.
+- Use margens laterais iguais.
+- Respeite `env(safe-area-inset-top)`.
+
+CENTRALIZAÇÃO GLOBAL
+
+Verifique o contêiner raiz.
+
+Ele deve:
+
+- usar `width: 100%`;
+- usar `max-width: 100%`;
+- usar `min-height: 100dvh`;
+- usar `box-sizing: border-box`;
+- usar `margin: 0`;
+- usar `position: relative`;
+- usar `overflow-x: hidden`;
+- respeitar as áreas seguras;
+- não possuir deslocamento horizontal;
+- não depender das dimensões da moldura externa do celular.
+
+Não use:
+
+- `left` ou `right` para centralizar a tela;
+- `translateX` no contêiner principal;
+- margens negativas;
+- `transform: scale()` na tela inteira;
+- largura superior a 100%;
+- `100vw` dentro de contêiner com padding;
+- zoom.
+
+A distância entre o conteúdo e a borda esquerda deve ser igual à distância da borda direita.
+
+CENÁRIO
+
+Preserve o cenário atual da Fazenda:
+
+- céu;
+- moinho;
+- celeiro;
+- árvores;
+- cerca;
+- flores;
+- vegetação;
+- caminho.
+
+Corrija apenas o enquadramento, se necessário:
+
+- centralize horizontalmente;
+- use `background-position: center`;
+- use `background-size: cover`;
+- use `background-repeat: no-repeat`;
+- preencha toda a área interna;
+- não deixe faixa branca nas laterais;
+- não deixe espaço branco na base;
+- não estique a ilustração;
+- não corte elementos importantes de forma assimétrica.
+
+PERSONAGEM
+
+Preserve a Leluá no lado esquerdo da placa.
+
+- Mostre o rosto completamente.
+- Mostre as duas folhas.
+- Mostre a mão, a bolsa e a estrela.
+- Não corte excessivamente a personagem.
+- Preserve a mesma distância da borda esquerda observada entre o moinho e a borda direita.
+- Não permita sobreposição com o botão de voltar.
+- Não permita que a personagem cubra o título.
+
+PLACA
+
+Mantenha:
+
+“Atividade 4”
+
+“Conte os pintinhos”
+
+- Centralize a placa em relação à tela.
+- Não centralize em relação ao cenário.
+- Preserve sua inclinação lúdica.
+- Não permita que o personagem ou o moinho cubram palavras.
+- Mantenha margens equilibradas nos lados esquerdo e direito.
+- Não altere tamanho, textura ou tipografia, salvo ajuste mínimo necessário para centralização.
+
+PROGRESSO
+
+Mantenha o valor dinâmico, atualmente:
+
+“4 de 8 atividades”
+
+- Centralize o indicador abaixo da placa.
+- Mostre a estrela inteira.
+- Alinhe estrela, texto e fundo pelo mesmo eixo.
+- Não deixe o indicador deslocado para um dos lados.
+- Não fixe o valor no código se ele vier do progresso real.
+
+PERGUNTA
+
+Mantenha exatamente:
+
+“Quantos pintinhos estão na imagem?”
+
+- Centralize o cartão branco.
+- Use margens laterais iguais.
+- Centralize o texto horizontal e verticalmente.
+- Preserve a quebra equilibrada em duas linhas.
+- Não deixe palavras ou pontuação isoladas.
+- Não altere a fonte ou a cor.
+
+ILUSTRAÇÃO CENTRAL
+
+- Centralize o quadro da galinha e dos pintinhos.
+- Use a mesma largura do cartão da pergunta.
+- Use margens laterais iguais.
+- Preserve toda a ilustração.
+- Não corte pintinhos.
+- Não altere o número de animais.
+- Não mova animais dentro da cena.
+- Use `object-fit: cover` somente se nenhum animal for cortado; caso contrário, use `contain`.
+- Não deixe a ilustração inclinada ou deslocada.
+
+ALTERNATIVAS NUMÉRICAS
+
+Mantenha:
+
+“3”
+
+“4”
+
+“5”
+
+- Crie três cartões exatamente iguais.
+- Mesma largura.
+- Mesma altura.
+- Mesmo raio.
+- Mesma borda.
+- Mesma sombra.
+- Mesmo tamanho de fonte.
+- Mesmo espaço entre eles.
+- Centralize o conjunto em relação à tela.
+- Use Grid com três colunas iguais.
+- Preserve margens iguais nos lados do conjunto.
+- Centralize cada número horizontal e verticalmente.
+- Não permita que um cartão fique mais próximo da borda que o outro.
+
+RESPOSTA CORRETA
+
+A imagem contém quatro pintinhos.
+
+- Preserve “4” como resposta correta.
+- Não altere a lógica da atividade.
+- Preserve o estado de seleção.
+- Não revele antecipadamente a resposta, salvo no modo de revisão.
+- Preserve feedback de acerto e erro.
+
+BOTÃO
+
+Mantenha exatamente:
+
+“Responder →”
+
+- Centralize horizontalmente.
+- Use a mesma largura visual do conjunto de conteúdo.
+- Preserve o verde.
+- Preserve Fredoka em peso 700.
+- Mostre a seta inteira.
+- Mantenha margens iguais.
+- Dê espaço acima e abaixo.
+- Respeite `env(safe-area-inset-bottom)`.
+- Não permita que flores cubram o botão.
+- Não deixe o botão encostar na base.
+
+ALINHAMENTO VERTICAL
+
+Revise as distâncias entre:
+
+- cabeçalho e placa;
+- placa e progresso;
+- progresso e pergunta;
+- pergunta e ilustração;
+- ilustração e alternativas;
+- alternativas e botão;
+- botão e base da tela.
+
+Use um ritmo consistente de espaçamento.
+
+Não comprima uma área e deixe outra excessivamente vazia.
+
+AUDITORIA DE CORTES
+
+Verifique individualmente:
+
+- seta de voltar;
+- logotipo;
+- acento de Leluá;
+- folhas do logotipo;
+- engrenagem;
+- personagem;
+- folhas da personagem;
+- mão;
+- bolsa;
+- placa;
+- estrela do progresso;
+- moinho;
+- celeiro;
+- galinha;
+- todos os pintinhos;
+- cartões numéricos;
+- seta do botão;
+- flores inferiores.
+
+Nenhum desses elementos pode aparecer cortado ou encostado acidentalmente nas bordas.
+
+RESPONSIVIDADE
+
+Teste em:
+
+- 390 × 844 px;
+- 375 × 812 px;
+- 360 × 800 px.
+
+Confirme em todos:
+
+- composição centralizada;
+- margens laterais iguais;
+- nenhum corte;
+- nenhuma faixa branca;
+- nenhum deslocamento horizontal;
+- botão visível;
+- ausência de rolagem horizontal.
+
+VERIFICAÇÃO DO NOME
+
+Pesquise nos arquivos desta atividade por referências destinadas ao usuário contendo:
+
+- `Lumi`;
+- `lumi`;
+- textos alternativos;
+- `aria-label`;
+- narração;
+- legendas.
+
+Substitua por “Leluá”.
+
+Não renomeie identificadores internos se isso puder quebrar o projeto.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir:
+
+1. O logotipo mostra “Leluá”.
+2. O acento está visível.
+3. O cabeçalho está centralizado.
+4. As margens esquerda e direita são iguais.
+5. A placa está centralizada.
+6. O progresso está centralizado.
+7. A pergunta está centralizada.
+8. A ilustração está centralizada.
+9. Os três cartões numéricos estão alinhados.
+10. O botão está centralizado.
+11. Todos os pintinhos estão visíveis.
+12. A resposta correta continua sendo 4.
+13. Nenhum elemento está cortado.
+14. Não existe faixa branca lateral.
+15. Não existe rolagem horizontal.
+16. Nenhuma outra tela foi modificada.
+17. Os testes existentes continuam aprovados.
+
+Apresente uma captura final em 390 × 844 px e informe os arquivos alterados.

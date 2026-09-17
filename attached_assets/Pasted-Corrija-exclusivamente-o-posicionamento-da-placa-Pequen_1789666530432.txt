@@ -1,0 +1,90 @@
+Corrija exclusivamente o posicionamento da placa:
+
+“Pequenas descobertas, um grande amanhã!”
+
+Atualmente, a placa está encostada e parcialmente sobreposta ao texto:
+
+“Escolha um mundo e descubra coisas incríveis!”
+
+Esses dois elementos precisam ficar visualmente separados.
+
+SEPARAÇÃO DAS ÁREAS
+
+Divida a parte superior em duas áreas distintas:
+
+1. Cabeçalho:
+   - logotipo;
+   - personagem;
+   - título;
+   - subtítulo.
+
+2. Área do mapa:
+   - placa de madeira;
+   - caminhos;
+   - destinos;
+   - elementos decorativos.
+
+A placa de madeira deve pertencer à área do mapa, não ao contêiner do título ou do subtítulo.
+
+POSIÇÃO DA PLACA
+
+- Mova a placa para baixo.
+- Posicione-a no canto superior direito da área do mapa.
+- Deixe uma distância mínima de aproximadamente 20 a 24 px entre a última linha do subtítulo e a parte superior da placa.
+- Preserve uma margem segura em relação à borda direita.
+- Mantenha a leve inclinação lúdica.
+- Não altere o texto da placa.
+- Não aumente excessivamente a placa.
+- Não cubra árvores, caminhos, destinos, cadeados ou etiquetas.
+- Não deixe a placa sobre o botão de configurações.
+- Não permita que a placa volte a entrar na área do cabeçalho.
+
+SUBTÍTULO
+
+Mantenha exatamente:
+
+“Escolha um mundo e descubra coisas incríveis!”
+
+- Garanta largura suficiente para o texto.
+- Não permita que a placa cubra nenhuma palavra.
+- Preserve a fonte Nunito.
+- Preserve a legibilidade.
+- Não comprima o texto para abrir espaço para a placa.
+- Não reduza excessivamente a fonte.
+- Mantenha uma margem inferior clara depois da última linha.
+
+ALINHAMENTO
+
+- O título e o subtítulo devem permanecer alinhados entre si.
+- A placa deve se alinhar visualmente ao lado direito do mapa.
+- Preserve um espaço vazio claro entre texto e placa.
+- A composição não deve parecer apertada.
+- Não desloque a personagem para corrigir a sobreposição.
+- Não altere o logotipo.
+- Não modifique a posição dos destinos, exceto se um ajuste mínimo for indispensável para evitar nova sobreposição.
+
+IMPLEMENTAÇÃO
+
+- Use contêineres separados para cabeçalho e mapa.
+- Evite posicionar a placa em relação à tela inteira.
+- Posicione-a relativamente ao contêiner do mapa.
+- Não use margem negativa.
+- Não use `transform: scale()` para resolver o problema.
+- Não esconda o texto atrás da placa.
+- Se utilizar `position: absolute`, o elemento pai deve ser exclusivamente a área do mapa e usar `position: relative`.
+
+VALIDAÇÃO
+
+Confirme que:
+
+1. A placa não toca o subtítulo.
+2. Nenhuma palavra está coberta.
+3. Existe espaço visual evidente entre os dois elementos.
+4. A placa está dentro da área do mapa.
+5. A placa não cobre destinos ou cadeados.
+6. O título e o subtítulo continuam legíveis.
+7. A personagem e o logotipo não foram alterados.
+8. A tela continua sem rolagem horizontal.
+9. Nenhuma outra página foi modificada.
+
+Apresente uma captura atualizada antes de concluir.

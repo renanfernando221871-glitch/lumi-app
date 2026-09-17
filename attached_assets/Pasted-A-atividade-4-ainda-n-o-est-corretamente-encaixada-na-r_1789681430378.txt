@@ -1,0 +1,306 @@
+A atividade 4 ainda não está corretamente encaixada na área interna do celular.
+
+Não faça novos ajustes isolados com `left`, `right`, margens negativas ou transformações. Corrija o contêiner estrutural responsável pelo enquadramento da tela.
+
+PROBLEMAS QUE PERMANECEM
+
+- Conteúdo superior muito próximo ou parcialmente atrás da área da câmera.
+- Cenário cortado de maneira diferente nas laterais.
+- Personagem excessivamente cortada à esquerda.
+- Celeiro e moinho excessivamente cortados à direita.
+- Cartões centrais ocupando quase toda a largura, sem margem suficiente.
+- Elementos superiores e inferiores usando larguras ou eixos diferentes.
+- Botão inferior muito próximo da base.
+- Composição não seguindo exatamente o mesmo viewport das atividades 1 e 2.
+
+SOLUÇÃO OBRIGATÓRIA
+
+Faça a atividade 4 reutilizar exatamente:
+
+- o mesmo contêiner raiz;
+- o mesmo cabeçalho;
+- a mesma área segura;
+- a mesma largura de conteúdo;
+- as mesmas margens;
+- o mesmo sistema de fundo;
+- a mesma estrutura vertical;
+- o mesmo botão inferior;
+
+utilizados nas atividades 1 e 2 aprovadas.
+
+Não crie um contêiner diferente para esta atividade.
+
+AUDITORIA DOS COMPONENTES
+
+1. Localize o componente estrutural das atividades 1 e 2.
+2. Identifique o wrapper que define largura, altura e áreas seguras.
+3. Identifique como o cenário é enquadrado.
+4. Identifique a largura dos cartões de alternativas.
+5. Identifique as margens laterais do botão.
+6. Aplique os mesmos componentes e valores na atividade 4.
+7. Remova estilos exclusivos que alterem o enquadramento desta tela.
+
+Informe ao final quais estilos divergentes foram encontrados e removidos.
+
+CONTÊINER RAIZ
+
+Use um único contêiner interno equivalente a:
+
+```css
+.activityViewport {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100dvh;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: clip;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+```
+
+Se a aplicação estiver sendo exibida dentro de uma moldura simulada de celular:
+
+- aplique essas dimensões à área interna da tela;
+- não calcule posições em relação à moldura externa;
+- não inclua a espessura da moldura nos cálculos;
+- não use a largura da captura de tela;
+- use o tamanho real do viewport da aplicação.
+
+REMOVA
+
+Remova desta atividade qualquer regra como:
+
+- largura maior que 100%;
+- `width: 100vw` dentro de um contêiner com padding;
+- `left` ou `right` negativos;
+- `margin-left` ou `margin-right` negativos;
+- `translateX`;
+- `transform: scale`;
+- zoom;
+- altura fixa baseada em uma imagem;
+- posicionamento absoluto do conteúdo principal;
+- estilos inline que desloquem toda a arte;
+- padding aplicado duas vezes;
+- bordas ou margens invisíveis no contêiner externo.
+
+CABEÇALHO
+
+O cabeçalho deve ficar inteiramente abaixo da área segura.
+
+Organize em três colunas iguais nas laterais:
+
+- esquerda: botão de voltar;
+- centro: logotipo Leluá;
+- direita: configurações.
+
+- Use a mesma estrutura das atividades 1 e 2.
+- Não permita que o logotipo suba atrás da câmera.
+- Deixe um espaço visível entre a área da câmera e o logotipo.
+- Centralize o logotipo em relação ao viewport inteiro.
+- Mostre seta e engrenagem integralmente.
+- Preserve margens laterais iguais.
+
+Não desenhe uma câmera ou Dynamic Island artificial.
+
+CENÁRIO
+
+O cenário precisa preencher a tela, mas seus elementos narrativos não podem ser cortados de forma desequilibrada.
+
+- Use o mesmo método de enquadramento das atividades 1 e 2.
+- Centralize a imagem de fundo.
+- Preserve personagem à esquerda e moinho/celeiro à direita.
+- Ajuste o ponto focal do fundo, não a posição de todo o aplicativo.
+- Use `background-size: cover` apenas se o corte continuar equilibrado.
+- Se elementos essenciais forem cortados, use uma imagem de fundo preparada para a proporção da tela ou `background-size: auto 100%` com preenchimento complementar.
+- Não use `contain` se isso criar faixas brancas.
+- Não estique a ilustração.
+- Não deixe faixa branca superior, lateral ou inferior.
+
+PERSONAGEM E CENÁRIO LATERAL
+
+- Mostre integralmente o rosto da Leluá.
+- Mostre as duas folhas.
+- Mostre a mão, a bolsa e a estrela.
+- Apenas uma pequena parte do corpo pode ultrapassar a lateral como escolha artística.
+- Não corte o rosto ou metade da cabeça.
+- Preserve uma margem visual entre o rosto e a borda.
+
+Do lado direito:
+
+- Preserve parte suficiente do moinho e do celeiro para serem reconhecíveis.
+- Não corte os dois elementos exatamente na borda do conteúdo principal.
+- Mantenha equilíbrio visual com a personagem à esquerda.
+
+LARGURA PADRÃO DO CONTEÚDO
+
+Defina uma única largura compartilhada para:
+
+- indicador de progresso;
+- cartão da pergunta;
+- ilustração dos pintinhos;
+- grupo de alternativas;
+- botão “Responder”.
+
+Use algo equivalente a:
+
+```css
+.activityContent {
+  width: calc(100% - 32px);
+  max-width: 358px;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+```
+
+Adapte os valores ao sistema já usado nas atividades 1 e 2.
+
+O importante é:
+
+- mesma margem esquerda;
+- mesma margem direita;
+- mesmo eixo central;
+- nenhum bloco mais largo que os demais sem motivo.
+
+PLACA E PROGRESSO
+
+- Centralize a placa pelo viewport.
+- Centralize o progresso pelo mesmo eixo.
+- Não alinhe esses elementos pela imagem de fundo.
+- Preserve espaço entre placa e indicador.
+- Não deixe folhas ou cenário alterarem visualmente o centro.
+
+PERGUNTA E ILUSTRAÇÃO
+
+Mantenha:
+
+“Quantos pintinhos estão na imagem?”
+
+- Cartão centralizado.
+- Margens laterais iguais.
+- Texto centralizado.
+
+A ilustração:
+
+- deve usar exatamente a mesma largura do cartão da pergunta;
+- deve ficar diretamente abaixo;
+- deve compartilhar o mesmo raio ou alinhamento;
+- não pode ultrapassar as margens;
+- não pode cortar nenhum pintinho;
+- não pode ficar deslocada para esquerda ou direita.
+
+ALTERNATIVAS
+
+Mantenha:
+
+“3”  
+“4”  
+“5”
+
+- Use grade com três colunas iguais.
+- Use largura total igual à do cartão da pergunta.
+- Use `grid-template-columns: repeat(3, 1fr)`.
+- Use o mesmo espaço entre as colunas.
+- Centralize os números.
+- Preserve cartões com tamanhos idênticos.
+- Não permita que o primeiro ou o terceiro cartão encoste nas bordas.
+
+BOTÃO
+
+Mantenha:
+
+“Responder →”
+
+- Use a mesma largura de conteúdo dos demais blocos.
+- Centralize com `margin-inline: auto`.
+- Preserve espaço superior.
+- Garanta espaço inferior adicional além da área segura.
+- Não deixe o botão encostar na barra inferior.
+- Não deixe flores cobrirem o botão.
+- Mostre a seta completamente.
+
+ALINHAMENTO VERTICAL
+
+Distribua o conteúdo dentro da altura disponível.
+
+Não empurre o cabeçalho para cima para ganhar espaço.
+
+Se necessário:
+
+- reduza discretamente espaços verticais;
+- reduza levemente a altura da ilustração;
+- preserve legibilidade;
+- permita rolagem vertical suave em telas menores.
+
+Não reduza toda a tela com escala.
+
+COMPARAÇÃO OBRIGATÓRIA
+
+Abra lado a lado:
+
+- atividade 1;
+- atividade 2;
+- atividade 4.
+
+Compare:
+
+- posição do cabeçalho;
+- tamanho do logotipo;
+- margens laterais;
+- largura da placa;
+- posição do progresso;
+- largura da pergunta;
+- largura das alternativas;
+- posição do botão;
+- distância da base.
+
+A atividade 4 deve utilizar exatamente o mesmo enquadramento estrutural.
+
+TESTE DE MEDIÇÃO
+
+No viewport de 390 × 844 px, verifique com `getBoundingClientRect()` ou ferramenta equivalente:
+
+- borda esquerda de cada bloco;
+- borda direita de cada bloco;
+- centro horizontal;
+- largura total;
+- distância da área segura superior;
+- distância da área segura inferior.
+
+Para os blocos centrais:
+
+- margem esquerda e direita devem diferir no máximo 1 ou 2 px;
+- nenhum elemento pode ultrapassar o viewport;
+- `scrollWidth` não pode ser maior que `clientWidth`.
+
+VALIDAÇÃO FINAL
+
+Confirme:
+
+1. O cabeçalho está completamente abaixo da área segura.
+2. O logotipo está centralizado.
+3. O cenário está centralizado.
+4. A personagem não está excessivamente cortada.
+5. Moinho e celeiro estão equilibrados.
+6. Placa e progresso compartilham o mesmo centro.
+7. Pergunta e ilustração têm a mesma largura.
+8. Alternativas estão centralizadas.
+9. Botão está centralizado.
+10. Margens esquerda e direita são iguais.
+11. Não existe faixa branca.
+12. Não existe rolagem horizontal.
+13. O botão possui espaço inferior.
+14. A resposta correta continua sendo 4.
+15. Nenhuma outra tela foi alterada.
+16. Os testes existentes continuam aprovados.
+
+Apresente:
+
+- captura da atividade 4 em 390 × 844 px;
+- captura da atividade 2 na mesma dimensão;
+- comparação lado a lado;
+- nomes dos componentes reutilizados;
+- estilos exclusivos removidos.
+
+A tarefa não está concluída enquanto a atividade 4 não compartilhar exatamente o mesmo enquadramento estrutural das atividades 1 e 2.

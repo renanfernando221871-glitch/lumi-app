@@ -1,0 +1,355 @@
+Substitua completamente o layout atual da tela inicial do responsável pelo layout apresentado na imagem de referência anexada:
+
+`lelua-tela-05-painel-responsavel-recriada.png`
+
+A imagem anexada é a referência visual oficial desta tela. Reproduza com máxima fidelidade:
+
+- composição;
+- proporções;
+- posicionamento;
+- espaçamentos;
+- alinhamentos;
+- cores;
+- tipografia;
+- tamanhos;
+- ícones;
+- cartões;
+- sombras;
+- cantos arredondados;
+- plano de fundo;
+- identidade da personagem Leluá.
+
+IMPORTANTE
+
+Não utilize a imagem completa como fundo da tela.
+
+Reconstrua a interface usando componentes reais e funcionais em React/React Native, conforme a tecnologia já utilizada pelo projeto.
+
+Todos os botões, cartões, atalhos, dados e navegações devem continuar funcionando.
+
+Não modifique outras telas nesta etapa.
+
+IDENTIDADE VISUAL
+
+Use o padrão já aprovado:
+
+- Fredoka para títulos, números, botões e textos destacados;
+- Nunito para descrições e textos auxiliares;
+- azul-escuro nos títulos;
+- verde nos botões principais;
+- fundos suaves em azul, verde, amarelo, rosa e lilás;
+- cartões brancos ou em tons pastel;
+- sombras leves;
+- cantos grandes e arredondados;
+- visual infantil, acolhedor e profissional.
+
+CABEÇALHO
+
+Reproduza o cabeçalho da referência:
+
+- botão circular de menu à esquerda;
+- logotipo oficial Leluá centralizado;
+- slogan “crescer é descobrir” abaixo do logotipo;
+- botão circular de notificações à direita;
+- pequeno indicador coral de notificação.
+
+Regras:
+
+- Posicione todo o cabeçalho abaixo da câmera ou Dynamic Island.
+- Respeite `env(safe-area-inset-top)`.
+- Não cubra nenhuma parte do logotipo.
+- Preserve integralmente o acento de “Leluá”.
+- Centralize os ícones dentro dos botões.
+- A campainha e o indicador coral devem aparecer completamente.
+- Botões de menu e notificação devem ter área de toque mínima de 44 × 44 px.
+- Preserve suas funcionalidades atuais.
+
+SAUDAÇÃO
+
+Reproduza:
+
+“Olá, responsável!”
+
+E abaixo:
+
+“Aqui está o resumo da jornada de Renan hoje.”
+
+- O nome da criança deve continuar vindo dos dados do perfil.
+- Não fixe “Renan” diretamente no código se já existir um valor dinâmico.
+- Use Fredoka em peso 700 no título.
+- Use Nunito no texto auxiliar.
+- Alinhe à esquerda.
+- Preserve as quebras e proporções apresentadas na referência.
+- Não permita sobreposição com a personagem.
+
+PERSONAGEM
+
+Use a ilustração oficial da Leluá já existente nos arquivos do projeto.
+
+Características obrigatórias:
+
+- corpo verde-menta;
+- rosto e barriga creme;
+- olhos castanhos;
+- bochechas rosadas;
+- duas folhas assimétricas;
+- mão erguida;
+- bolsa marrom;
+- estrela amarela.
+
+Posicione a personagem à direita da saudação, conforme a referência.
+
+- Mostre integralmente folhas, cabeça, mão, braço, bolsa e pés.
+- Use imagem com fundo transparente.
+- Use `object-fit: contain`.
+- Não corte nenhuma parte.
+- Não gere ou desenhe uma personagem diferente.
+- Não permita sobreposição com os textos.
+
+CARTÃO DE INCENTIVO
+
+Reproduza o cartão verde-claro com:
+
+- livros coloridos completos à esquerda;
+- texto no centro;
+- botão circular com seta verde à direita.
+
+Texto principal:
+
+“Hoje é um ótimo dia para aprender!”
+
+Descrição:
+
+“Conhecimento, diversão e descobertas esperam por você.”
+
+- Use Fredoka no título.
+- Use Nunito na descrição.
+- Preserve a ação existente.
+- Toda a área do cartão pode ser clicável.
+- Não corte o ícone, o texto ou a seta.
+
+BOTÃO DO MODO CRIANÇA
+
+Reproduza o botão verde:
+
+Título:
+
+“Entrar no modo criança”
+
+Subtítulo:
+
+“Explorar, brincar e descobrir”
+
+Elementos:
+
+- círculo creme com estrela amarela completa à esquerda;
+- textos centralizados verticalmente;
+- seta branca completa à direita.
+
+- Preserve a ação de entrada no modo infantil.
+- Não corte nenhuma ponta da estrela.
+- Use Fredoka no título e Nunito no subtítulo.
+- Mantenha contraste e área de toque adequados.
+
+RESUMO DIÁRIO
+
+Crie três cartões com exatamente a mesma largura e altura.
+
+CARTÃO 1
+
+- fundo azul-claro;
+- relógio azul completo;
+- “Tempo de uso”;
+- valor dinâmico “1h 20min”;
+- informação complementar “de 2h por dia”.
+
+CARTÃO 2
+
+- fundo amarelo-claro;
+- estrela amarela completa;
+- “Atividades realizadas”;
+- valor dinâmico “4”;
+- informação complementar “hoje”.
+
+CARTÃO 3
+
+- fundo lilás-claro;
+- gráfico roxo completo;
+- “Progresso”;
+- mensagem dinâmica “Muito bom!”;
+- informação complementar “100% concluído”.
+
+Os valores apresentados são exemplos visuais. Continue usando os dados reais e dinâmicos do aplicativo.
+
+REGRAS DOS CARTÕES
+
+- Mesma largura e altura.
+- Mesmo espaçamento interno.
+- Ícones centralizados e inteiros.
+- Títulos alinhados pela mesma linha visual.
+- Valores principais alinhados.
+- Informações complementares alinhadas na base.
+- Nenhuma palavra cortada.
+- Nenhum ícone encostando nas bordas.
+- Use Grid ou Flexbox.
+- Não posicione individualmente com coordenadas absolutas.
+
+ACESSO RÁPIDO
+
+Mantenha o título:
+
+“Acesso rápido”
+
+Crie quatro atalhos iguais:
+
+1. Atividades
+2. Biblioteca
+3. Relatórios
+4. Configurações
+
+ATALHO ATIVIDADES
+
+- fundo verde-claro;
+- joystick verde completamente visível;
+- legenda “Atividades”.
+
+ATALHO BIBLIOTECA
+
+- fundo rosa-claro;
+- livro coral completamente visível;
+- legenda “Biblioteca”.
+
+ATALHO RELATÓRIOS
+
+- fundo lilás-claro;
+- gráfico roxo completamente visível;
+- legenda “Relatórios”.
+
+ATALHO CONFIGURAÇÕES
+
+- fundo azul-claro;
+- engrenagem azul completamente visível;
+- legenda “Configurações”.
+
+REGRAS DOS ATALHOS
+
+- Quatro colunas com a mesma largura.
+- Mesma altura.
+- Mesmo espaçamento interno.
+- Mesmo raio de borda.
+- Ícones com peso visual equivalente.
+- Ícones centralizados.
+- Legendas centralizadas.
+- Nenhum texto comprimido ou cortado.
+- Preserve “ç” e “õ” em “Configurações”.
+- Preserve todas as ações atuais dos atalhos.
+- Utilize área de toque adequada.
+
+TRATAMENTO DOS ÍCONES
+
+Todos os ícones devem aparecer integralmente:
+
+- menu;
+- campainha;
+- indicador coral;
+- livros;
+- setas;
+- estrela do modo criança;
+- relógio;
+- estrela de atividades;
+- gráfico;
+- joystick;
+- livro da biblioteca;
+- relatório;
+- engrenagem.
+
+Para imagens:
+
+- use `object-fit: contain`;
+- preserve proporções;
+- não use `cover`.
+
+Para SVG:
+
+- use `viewBox` completo;
+- defina largura e altura;
+- use `display: block`;
+- mantenha espaço ao redor dos traços;
+- não corte sombras, contornos, pontas ou dentes.
+
+Nos contêineres:
+
+- use `display: flex`;
+- use `align-items: center`;
+- use `justify-content: center`;
+- use `flex-shrink: 0`;
+- dê espaço interno suficiente;
+- evite `overflow: hidden` quando provocar cortes.
+
+PLANO DE FUNDO
+
+Reproduza:
+
+- céu azul muito claro;
+- nuvens brancas discretas;
+- colinas verdes na base;
+- pequenas folhas decorativas inferiores.
+
+- O fundo deve ocupar toda a largura.
+- Não deixe faixa branca lateral.
+- As colinas não podem cobrir os atalhos.
+- Não permita rolagem horizontal.
+- Não coloque nuvens atrás de textos de maneira que prejudique a leitura.
+
+LAYOUT E RESPONSIVIDADE
+
+- Use a imagem anexada como referência para viewport próximo de 390 × 844 px.
+- Respeite `safe-area-inset-top` e `safe-area-inset-bottom`.
+- Use `box-sizing: border-box`.
+- Use margens laterais iguais.
+- Adote espaçamento consistente em múltiplos de 4 ou 8 px.
+- Não use `transform: scale()` no contêiner da tela.
+- Não use zoom para ajustar o conteúdo.
+- Não use margens negativas.
+- Não crie rolagem horizontal.
+- Se necessário em telas menores, permita rolagem vertical suave.
+- Não diminua os textos até ficarem ilegíveis.
+- Não deixe elementos encostarem na moldura.
+
+FUNCIONALIDADES A PRESERVAR
+
+Confirme que continuam funcionando:
+
+- menu;
+- notificações;
+- cartão de incentivo;
+- entrada no modo criança;
+- visualização do tempo de uso;
+- atividades realizadas;
+- progresso;
+- atalho Atividades;
+- atalho Biblioteca;
+- atalho Relatórios;
+- atalho Configurações;
+- carregamento dos dados reais do perfil.
+
+Não substitua dados dinâmicos por textos fixos apenas para imitar a imagem.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir:
+
+1. Compare a implementação lado a lado com a imagem anexada.
+2. Confirme que o cabeçalho está abaixo da câmera.
+3. Confirme que a Leluá está inteira.
+4. Confirme que nenhum ícone está cortado.
+5. Confirme que os três cartões têm o mesmo tamanho.
+6. Confirme que os quatro atalhos estão alinhados.
+7. Confirme que todos os textos estão corretos.
+8. Confirme que não existe faixa branca lateral.
+9. Confirme que não existe rolagem horizontal.
+10. Confirme que todos os dados continuam dinâmicos.
+11. Execute os testes existentes.
+12. Apresente uma captura da tela final em 390 × 844 px.
+
+Modifique somente a tela inicial do responsável. Não altere nenhuma outra página.

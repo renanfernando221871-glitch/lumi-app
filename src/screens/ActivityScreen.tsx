@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   ImageBackground,
+  Image,
+  ImageSourcePropType,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -225,6 +227,31 @@ export function ActivityScreen({
   );
 }
 
+function FarmOfficialActivityViewport({
+  accessibilityLabel,
+  children,
+  source,
+}: {
+  accessibilityLabel: string;
+  children: React.ReactNode;
+  source: ImageSourcePropType;
+}) {
+  const { height } = useWindowDimensions();
+
+  return (
+    <View style={[styles.farmActivityScreen, { minHeight: height }]}>
+      <ImageBackground
+        accessibilityLabel={accessibilityLabel}
+        resizeMode="cover"
+        source={source}
+        style={[styles.farmActivityBackground, { height }]}
+      >
+        {children}
+      </ImageBackground>
+    </View>
+  );
+}
+
 function FarmCountChicksActivity({
   activity,
   activityNumber,
@@ -246,21 +273,16 @@ function FarmCountChicksActivity({
   onInteraction: (interaction: ActivityInteraction) => void;
   onAdvance: () => void;
 }) {
-  const { height } = useWindowDimensions();
   const choose = (count: number) => {
     if (complete) return;
     onInteraction(evaluateCountAndSelect(activity, count));
   };
 
   return (
-    <View style={[styles.farmActivityScreen, { minHeight: height }]}>
-      <ImageBackground
-        accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
-        imageStyle={styles.farmActivityBackgroundImage}
-        resizeMode="cover"
-        source={require("../../attached_assets/farm-activity-4-no-mock-status.png")}
-        style={[styles.farmActivityBackground, { height }]}
-      >
+    <FarmOfficialActivityViewport
+      accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
+      source={require("../../attached_assets/farm-activity-4-lelua-official-viewport.png")}
+    >
         <Pressable
           accessibilityLabel="Voltar"
           accessibilityRole="button"
@@ -276,7 +298,7 @@ function FarmCountChicksActivity({
             onPress={() => choose(option)}
             style={[
               styles.farmCountOptionHotspot,
-              { left: `${13 + index * 27}%` },
+              { left: `${12 + index * 27}%` },
             ]}
           />
         ))}
@@ -307,8 +329,7 @@ function FarmCountChicksActivity({
             />
           </>
         ) : null}
-      </ImageBackground>
-    </View>
+    </FarmOfficialActivityViewport>
   );
 }
 
@@ -333,7 +354,6 @@ function FarmOfficialTapActivity({
   onInteraction: (interaction: ActivityInteraction) => void;
   onAdvance: () => void;
 }) {
-  const { height } = useWindowDimensions();
   const isFindHorse = activity.id === "farm-find-horse";
   const isBrownAnimal = activity.id === "farm-brown-animal";
   const displayedItems = isBrownAnimal
@@ -351,29 +371,29 @@ function FarmOfficialTapActivity({
   };
 
   return (
-    <View style={[styles.farmActivityScreen, { minHeight: height }]}>
-      <ImageBackground
-        accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
-        imageStyle={styles.farmActivityBackgroundImage}
-        resizeMode="cover"
-        source={
-          isBrownAnimal
-            ? complete
-              ? require("../../attached_assets/farm-activity-3-no-mock-status.png")
-              : require("../../attached_assets/lumi-farm-activity-3-initial-no-mock-status.png")
-            : isFindHorse
-            ? complete
-              ? require("../../attached_assets/farm-activity-2-no-mock-status.png")
-              : require("../../attached_assets/lumi-farm-activity-2-initial-no-mock-status.png")
-            : require("../../attached_assets/farm-activity-1-no-mock-status.png")
-        }
-        style={[styles.farmActivityBackground, { height }]}
-      >
+    <FarmOfficialActivityViewport
+      accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
+      source={
+        isBrownAnimal
+          ? complete
+            ? require("../../attached_assets/generated_images/activity3-official-success.png")
+            : require("../../attached_assets/generated_images/activity3-official-initial.png")
+          : isFindHorse
+          ? complete
+            ? require("../../attached_assets/farm-activity-2-lelua-selected-no-mock-status.png")
+            : require("../../attached_assets/farm-activity-2-lelua-initial-no-mock-status.png")
+          : require("../../attached_assets/farm-activity-1-lelua-no-mock-status.png")
+      }
+    >
         <Pressable
           accessibilityLabel="Voltar"
           accessibilityRole="button"
           onPress={onBack}
-          style={styles.farmActivityBackHotspot}
+          style={
+            isBrownAnimal
+              ? styles.farmBrownBackHotspot
+              : styles.farmActivityBackHotspot
+          }
         />
         {displayedItems.map((item, index) => (
           <Pressable
@@ -383,8 +403,10 @@ function FarmOfficialTapActivity({
             key={item.id}
             onPress={() => choose(item.id)}
             style={[
-              styles.farmAnimalHotspot,
-              { top: `${43.8 + index * 12.6}%` },
+              isBrownAnimal ? styles.farmBrownAnimalHotspot : styles.farmAnimalHotspot,
+              isBrownAnimal
+                ? { top: `${53 + index * 10.8}%` }
+                : { top: `${43.8 + index * 12.6}%` },
             ]}
           />
         ))}
@@ -413,16 +435,43 @@ function FarmOfficialTapActivity({
               accessibilityRole="button"
               disabled={advancing}
               onPress={onAdvance}
-              style={styles.farmAnswerHotspot}
+              style={
+                isBrownAnimal
+                  ? styles.farmBrownAnswerHotspot
+                  : styles.farmAnswerHotspot
+              }
             />
           </>
         ) : null}
-      </ImageBackground>
-    </View>
+    </FarmOfficialActivityViewport>
   );
 }
 
 const styles = StyleSheet.create({
+  farmBrownBackHotspot: {
+    position: "absolute",
+    top: "2%",
+    left: "1%",
+    width: "20%",
+    height: "8%",
+    borderRadius: 40,
+    zIndex: 2,
+  },
+  farmBrownAnimalHotspot: {
+    position: "absolute",
+    left: "6%",
+    width: "88%",
+    height: "10%",
+    borderRadius: 28,
+  },
+  farmBrownAnswerHotspot: {
+    position: "absolute",
+    left: "10%",
+    width: "80%",
+    bottom: "4%",
+    height: "7%",
+    borderRadius: 40,
+  },
   farmActivityScreen: {
     width: "100%",
     maxWidth: 520,
@@ -432,9 +481,6 @@ const styles = StyleSheet.create({
   },
   farmActivityBackground: {
     width: "100%",
-  },
-  farmActivityBackgroundImage: {
-    transform: [{ scale: 1.045 }],
   },
   farmActivityBackHotspot: {
     position: "absolute",

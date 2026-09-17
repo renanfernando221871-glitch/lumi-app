@@ -1,0 +1,122 @@
+Faça somente a atualização da identidade da personagem nesta tela de atividade.
+
+Não altere:
+
+- layout;
+- posições;
+- dimensões;
+- cenário;
+- placa da atividade;
+- personagem;
+- cartões de resposta;
+- ilustrações dos animais;
+- fontes;
+- cores;
+- botão;
+- navegação;
+- regras da atividade;
+- progresso;
+- sons;
+- animações;
+- funcionalidades.
+
+LOGOTIPO
+
+Substitua o logotipo antigo “Lumi” pelo logotipo oficial “Leluá” já utilizado nas demais telas.
+
+- Use o arquivo oficial existente no projeto.
+- Não recrie o logotipo com texto HTML simples.
+- Preserve as letras arredondadas e coloridas.
+- Preserve o acento agudo de “Leluá”.
+- Preserve o elemento de folhas.
+- Preserve o slogan:
+
+“crescer é descobrir”
+
+- Mantenha aproximadamente o mesmo tamanho e posição.
+- Garanta que o logotipo apareça completamente.
+- Não deixe letras, folhas ou acento escondidos pela câmera.
+- Preserve a proporção.
+- Use `object-fit: contain`.
+- Não estique ou comprima.
+- Não exiba fundo quadrado.
+
+PERSONAGEM
+
+A personagem exibida pode permanecer na mesma posição e postura, desde que seja a identidade oficial da Leluá:
+
+- corpo verde-menta;
+- rosto e barriga creme;
+- olhos castanhos;
+- bochechas rosadas;
+- duas folhas assimétricas;
+- bolsa marrom;
+- estrela amarela.
+
+Não altere a personagem se ela já estiver usando esses elementos corretamente.
+
+VERIFICAÇÃO DO NOME ANTIGO
+
+Pesquise nesta tela e nos arquivos diretamente relacionados por qualquer ocorrência de:
+
+- `Lumi`;
+- `lumi`;
+- “personagem Lumi”;
+- textos de acessibilidade;
+- `aria-label`;
+- textos alternativos de imagens;
+- mensagens de áudio ou narração;
+- legendas;
+- nomes visíveis de recursos.
+
+Substitua referências destinadas ao usuário por:
+
+“Leluá”
+
+Não renomeie arquivos, rotas, variáveis internas ou identificadores técnicos se isso puder quebrar o aplicativo. Priorize somente o conteúdo exibido ou narrado ao usuário.
+
+PRESERVAR OS TEXTOS DA ATIVIDADE
+
+Mantenha exatamente:
+
+“Atividade 1”
+
+“Quem faz mu?”
+
+“1 de 8 atividades”
+
+“Toque no animal que faz mu.”
+
+“vaca”
+
+“cavalo”
+
+“galinha”
+
+“Responder →”
+
+O progresso deve continuar dinâmico; não fixe “1 de 8” se o valor vier dos dados reais.
+
+VALIDAÇÃO FUNCIONAL
+
+Confirme que:
+
+1. A opção “vaca” continua sendo a resposta correta.
+2. “cavalo” e “galinha” continuam funcionando como alternativas.
+3. O botão “Responder” continua funcional.
+4. Sons e animações continuam funcionando.
+5. O progresso continua sendo registrado.
+6. Refazer a atividade não duplica recompensas.
+7. Nenhum texto ou elemento mudou de posição.
+8. Nenhuma outra tela foi modificada.
+
+VALIDAÇÃO VISUAL
+
+Apresente uma captura final e confirme:
+
+1. O logotipo mostra “Leluá”.
+2. O acento está visível.
+3. O slogan está legível.
+4. Não aparece mais “Lumi”.
+5. O restante da tela permanece visualmente idêntico.
+6. Nenhum elemento foi cortado.

@@ -1,0 +1,424 @@
+Refaça completamente a interface da atividade 3 — “O animal marrom”.
+
+A tela atual não deve ser usada como referência visual final. Preserve somente:
+
+- conteúdo pedagógico;
+- alternativas;
+- resposta correta;
+- áudio;
+- progresso;
+- navegação;
+- regras;
+- animações;
+- recompensas;
+- funcionalidades.
+
+Reconstrua toda a apresentação visual de acordo com o padrão aprovado das atividades 1 e 2 e com a identidade oficial da Leluá.
+
+Modifique somente esta atividade.
+
+NÃO FAÇA PEQUENOS AJUSTES NO LAYOUT ATUAL
+
+- Substitua a estrutura visual desta tela.
+- Remova estilos específicos antigos que estejam causando desalinhamentos.
+- Não apenas acrescente novas regras sobre as antigas.
+- Não reutilize a faixa marrom retangular atual.
+- Não mantenha a personagem minúscula.
+- Não mantenha o fundo apagado.
+- Não mantenha o excesso de espaço vazio na base.
+- Não use a captura como imagem estática.
+
+PRESERVE A LÓGICA
+
+A resposta correta deve continuar sendo:
+
+“cavalo”
+
+As alternativas devem continuar sendo:
+
+- “ovelha”
+- “cavalo”
+- “pintinho”
+
+O progresso deve permanecer dinâmico.
+
+O áudio deve continuar funcional.
+
+O botão “Responder” deve validar a alternativa selecionada.
+
+ESTRUTURA NOVA
+
+Organize a tela nesta ordem:
+
+1. Cabeçalho.
+2. Placa ilustrada da atividade.
+3. Personagem Leluá.
+4. Indicador de progresso.
+5. Instrução com botão de áudio.
+6. Três alternativas ilustradas.
+7. Texto auxiliar.
+8. Botão “Responder”.
+9. Espaço inferior seguro.
+
+CABEÇALHO
+
+Crie uma linha superior com:
+
+- botão de voltar à esquerda;
+- logotipo Leluá centralizado;
+- botão de configurações à direita.
+
+BOTÃO DE VOLTAR
+
+- Círculo branco ou creme.
+- Seta azul completamente visível.
+- Área de toque mínima de 44 × 44 px.
+- Preserve a ação existente.
+
+LOGOTIPO
+
+- Use o logotipo oficial “Leluá”.
+- Não use “Lumi”.
+- Não recrie o logotipo com texto simples.
+- Preserve letras coloridas, acento e folhas.
+- Preserve o slogan “crescer é descobrir”.
+- Posicione abaixo da área da câmera.
+- Nenhuma parte pode ficar escondida.
+- Use `object-fit: contain`.
+
+CONFIGURAÇÕES
+
+- Use círculo branco.
+- Mostre a engrenagem azul completamente.
+- Preserve todos os dentes.
+- Centralize o ícone.
+- Preserve a ação existente.
+- Não deixe encostar na borda direita.
+
+RETÂNGULO PRETO
+
+Verifique a faixa preta superior:
+
+- se for desenhada pelo aplicativo, remova-a;
+- se pertencer somente à moldura do simulador, não a reproduza;
+- mantenha apenas a área segura real;
+- respeite `env(safe-area-inset-top)`.
+
+PLACA DA ATIVIDADE
+
+Substitua a faixa marrom atual por uma placa de madeira orgânica e ilustrada, igual ao estilo das atividades 1 e 2.
+
+Texto menor:
+
+“Atividade 3”
+
+Texto principal:
+
+“O animal marrom”
+
+- Use Fredoka em peso 700.
+- Centralize os textos.
+- Dê destaque ao título principal.
+- Use letras brancas ou creme com contraste suficiente.
+- Preserve textura suave de madeira.
+- Use contorno e sombra leves.
+- Mantenha leve inclinação lúdica.
+- Não faça uma barra retangular genérica.
+- Não corte letras.
+- Não deixe a placa encostar no cabeçalho.
+
+PERSONAGEM LELUÁ
+
+Inclua a Leluá oficial em tamanho legível, integrada ao cenário.
+
+Características:
+
+- corpo verde-menta;
+- rosto e barriga creme;
+- olhos castanhos;
+- bochechas rosadas;
+- folhas assimétricas;
+- bolsa marrom;
+- estrela amarela;
+- expressão curiosa e acolhedora.
+
+Posição:
+
+- à esquerda ou ao lado inferior da placa;
+- suficientemente grande para reconhecer rosto, folhas e bolsa;
+- sem cobrir o título;
+- sem encostar no botão de voltar;
+- sem ser cortada pela lateral;
+- com fundo transparente.
+
+Não use a personagem minúscula presente na versão atual.
+
+INDICADOR DE PROGRESSO
+
+Mantenha o progresso real da atividade.
+
+A referência atual mostra:
+
+“3 de 8 atividades”
+
+- Não fixe esse valor se vier dos dados do usuário.
+- Use um cartão branco ou creme em formato de pílula.
+- Posicione abaixo da placa.
+- Use uma estrela amarela completa à esquerda.
+- Mostre uma barra de progresso verde.
+- Centralize os elementos verticalmente.
+- Use Fredoka.
+- Não corte estrela, texto ou barra.
+- Não faça o indicador ocupar largura excessiva.
+
+INSTRUÇÃO
+
+Mantenha exatamente:
+
+“Toque no animal marrom.”
+
+- Use Fredoka em peso 600 ou 700.
+- Use azul-escuro.
+- Coloque em um cartão branco arredondado.
+- Centralize verticalmente.
+- Alinhe o texto à esquerda dentro da área disponível.
+- Preserve margem interna confortável.
+- Não corte nenhuma palavra.
+
+BOTÃO DE ÁUDIO
+
+Mantenha o botão:
+
+“Ouvir”
+
+- Posicione à direita da instrução.
+- Use botão azul-claro ou branco com contorno azul.
+- Use ícone de reprodução ou alto-falante completamente visível.
+- Use Nunito ou Fredoka em peso 600.
+- Preserve área de toque mínima de 44 × 44 px.
+- Não deixe o botão comprimir a frase.
+- Não deixe texto e botão se sobreporem.
+- Preserve a reprodução da narração.
+- Adicione rótulo acessível.
+
+ALTERNATIVAS
+
+Crie três cartões ilustrados, iguais aos das atividades anteriores.
+
+Cada cartão deve conter:
+
+- ilustração do animal à esquerda;
+- nome do animal à direita;
+- fundo branco ou azul muito claro;
+- borda azul-clara;
+- cantos arredondados;
+- sombra suave;
+- área de toque completa.
+
+Cartão 1:
+
+- ovelha;
+- texto “ovelha”.
+
+Cartão 2:
+
+- cavalo marrom;
+- texto “cavalo”.
+
+Cartão 3:
+
+- pintinho amarelo;
+- texto “pintinho”.
+
+REGRAS DOS CARTÕES
+
+- Mesma largura.
+- Mesma altura.
+- Mesmas margens.
+- Mesmo espaçamento interno.
+- Animais com tamanho visual semelhante.
+- Use `object-fit: contain`.
+- Não corte patas, orelhas, cauda ou cabeça.
+- Alinhe todos os animais na mesma coluna.
+- Alinhe todos os textos na mesma coluna.
+- Use Fredoka em peso 700.
+- Use azul-escuro.
+- Não use imagens minúsculas.
+- Não deixe espaço vazio exagerado.
+
+ESTADO SELECIONADO
+
+Quando uma alternativa estiver selecionada:
+
+- fundo verde muito claro;
+- borda verde;
+- sombra verde suave;
+- sem alteração de tamanho;
+- sem deslocar os demais cartões;
+- opcionalmente, marca verde discreta à direita.
+
+O cavalo deve continuar sendo a resposta correta.
+
+Não mostre a resposta correta antes da confirmação, salvo se isso já fizer parte do modo de revisão.
+
+TEXTO AUXILIAR
+
+Mantenha exatamente:
+
+“Procure o animal da cor marrom.”
+
+- Use Nunito em peso 500 ou 600.
+- Use verde-escuro ou azul acinzentado.
+- Centralize.
+- Posicione abaixo das alternativas.
+- Dê espaço acima e abaixo.
+- Não use fonte minúscula.
+- Não encoste no botão.
+
+BOTÃO “RESPONDER”
+
+Mantenha exatamente:
+
+“Responder →”
+
+- Use botão verde vivo.
+- Use Fredoka em peso 700.
+- Use texto branco.
+- Mostre a seta completamente.
+- Centralize.
+- Use largura próxima à dos cartões.
+- Use cantos arredondados.
+- Use sombra suave.
+- Preserve a função de validar a resposta.
+- Use estado desabilitado apenas quando nenhuma alternativa estiver selecionada.
+- No estado desabilitado, mantenha o texto legível.
+- No estado ativo, use verde com contraste suficiente.
+
+POSICIONAMENTO DO BOTÃO
+
+- Não deixe o botão flutuando no meio de uma grande área vazia.
+- Posicione-o logo após o texto auxiliar.
+- Use margem superior entre 12 e 16 px.
+- Preserve margem inferior segura.
+- Respeite `env(safe-area-inset-bottom)`.
+- Não deixe o botão atrás da barra de gesto.
+- Não permita que flores ou cenário cubram o botão.
+
+CENÁRIO
+
+Reconstrua o fundo da Fazenda com contraste e riqueza visual semelhantes às atividades 1 e 2:
+
+- céu azul-claro;
+- nuvens;
+- moinho;
+- celeiro;
+- árvores;
+- cerca;
+- plantação;
+- caminho;
+- flores;
+- vegetação.
+
+- Não use o fundo esbranquiçado e apagado da versão atual.
+- O cenário deve ser colorido, mas não competir com os cartões.
+- Preserve uma área mais clara atrás do conteúdo.
+- Preencha toda a largura.
+- Não deixe faixa branca nas laterais ou na base.
+- Não estique a ilustração.
+- Use `background-size: cover`.
+- Use `background-position: center`.
+- Não crie rolagem horizontal.
+
+COMPOSIÇÃO E ESPAÇAMENTO
+
+Use um sistema consistente:
+
+- margens laterais iguais;
+- espaçamento vertical de 8, 12 ou 16 px;
+- cartões centralizados;
+- mesmo eixo para placa, progresso, instrução, alternativas e botão;
+- nenhuma margem negativa;
+- nenhuma posição absoluta para o conteúdo principal;
+- Flexbox ou Grid.
+
+Elimine o grande espaço vazio existente na parte inferior.
+
+RESPONSIVIDADE
+
+Use um contêiner raiz com:
+
+- `width: 100%`;
+- `min-height: 100dvh`;
+- `box-sizing: border-box`;
+- `overflow-x: hidden`;
+- áreas seguras superior e inferior.
+
+Teste em:
+
+- 390 × 844 px;
+- 375 × 812 px;
+- 360 × 800 px.
+
+Se não couber:
+
+- permita rolagem vertical suave;
+- não reduza tudo com `transform: scale()`;
+- não comprima textos e animais;
+- mantenha o botão acessível.
+
+TIPOGRAFIA
+
+Use:
+
+- Fredoka 700 para placa, alternativas e botão;
+- Fredoka 600 ou 700 para instrução;
+- Nunito 500 ou 600 para texto auxiliar;
+- Nunito ou Fredoka 600 para “Ouvir”.
+
+Não use fonte padrão do navegador.
+
+ACESSIBILIDADE
+
+- Adicione rótulos às alternativas.
+- Informe seleção.
+- Adicione rótulo ao botão de áudio.
+- Preserve foco visível.
+- Use áreas de toque confortáveis.
+- Garanta contraste.
+- Não dependa somente da cor para mostrar seleção.
+
+VALIDAÇÃO FUNCIONAL
+
+Confirme:
+
+1. O áudio “Ouvir” funciona.
+2. A ovelha pode ser selecionada.
+3. O cavalo pode ser selecionado.
+4. O pintinho pode ser selecionado.
+5. O cavalo é a resposta correta.
+6. O botão valida a escolha.
+7. O progresso continua sendo registrado.
+8. O modo de revisão não duplica recompensas.
+9. A navegação de voltar funciona.
+10. Configurações continua funcionando.
+
+VALIDAÇÃO VISUAL
+
+Antes de concluir:
+
+1. Confirme que o logotipo mostra “Leluá”.
+2. Confirme que a placa foi realmente redesenhada.
+3. Confirme que a Leluá está em tamanho legível.
+4. Confirme que o fundo está colorido e alinhado.
+5. Confirme que os três cartões têm o mesmo tamanho.
+6. Confirme que nenhum animal está cortado.
+7. Confirme que não existe espaço vazio exagerado.
+8. Confirme que o botão está bem posicionado.
+9. Confirme que não existe faixa branca lateral ou inferior.
+10. Confirme que não existe rolagem horizontal.
+11. Compare com as atividades 1 e 2.
+12. Execute os testes existentes.
+13. Apresente uma captura em 390 × 844 px.
+14. Informe os arquivos modificados.
+
+Não encerre a tarefa enquanto a tela ainda parecer uma adaptação do layout atual. Ela deve ser visualmente reconstruída no padrão das atividades anteriores.

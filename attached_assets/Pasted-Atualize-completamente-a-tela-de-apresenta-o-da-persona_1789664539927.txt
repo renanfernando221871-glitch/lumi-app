@@ -1,0 +1,247 @@
+Atualize completamente a tela de apresentação da personagem, mantendo o padrão visual aprovado do aplicativo Leluá.
+
+Use a imagem anexada como referência de composição, mas substitua toda a identidade antiga “Lumi” pela identidade oficial “Leluá”.
+
+Não transforme a tela em imagem estática. Preserve o botão, a navegação e as funcionalidades existentes.
+
+MODIFIQUE SOMENTE ESTA TELA.
+
+LOGOTIPO
+
+- Substitua o logotipo “Lumi” pelo logotipo oficial “Leluá”.
+- Não recrie o logotipo usando texto HTML simples.
+- Use o arquivo visual oficial já existente no projeto.
+- Preserve as letras arredondadas e coloridas.
+- Preserve o acento agudo de “Leluá”.
+- Preserve o elemento de folhas.
+- Mantenha o slogan exatamente:
+
+“crescer é descobrir”
+
+- Centralize o conjunto.
+- Posicione todo o logotipo abaixo da câmera ou Dynamic Island.
+- Nenhuma letra, folha, estrela ou acento pode ficar encoberto.
+- Respeite `env(safe-area-inset-top)`.
+
+BOTÃO DE VOLTAR
+
+- Preserve o botão circular branco no canto superior esquerdo.
+- Centralize a seta dentro do círculo.
+- Use o mesmo estilo das telas anteriores.
+- Garanta área de toque mínima de 44 × 44 px.
+- Preserve sua funcionalidade.
+
+PERSONAGEM
+
+Substitua a personagem atual pela Leluá oficial aprovada.
+
+Características obrigatórias:
+
+- corpo verde-menta;
+- rosto e barriga em tom creme;
+- olhos grandes castanhos;
+- bochechas rosadas;
+- duas folhas verdes assimétricas com nervuras;
+- braços abertos em pose acolhedora;
+- mãos completamente visíveis;
+- bolsa transversal marrom;
+- estrela amarela de cinco pontas;
+- expressão alegre;
+- acabamento tridimensional suave.
+
+POSICIONAMENTO DA PERSONAGEM
+
+- Centralize a Leluá horizontalmente.
+- Preserve a pose de braços abertos.
+- Mostre integralmente folhas, cabeça, mãos, braços, bolsa e pés.
+- Não corte nenhuma mão.
+- Não deixe as folhas encostarem no logotipo.
+- Não permita sobreposição com os textos inferiores.
+- Use `object-fit: contain`.
+- Preserve fundo transparente.
+- Não exiba quadrado ou retângulo ao redor da personagem.
+- Mantenha proporções semelhantes às telas anteriormente aprovadas.
+- Não crie uma versão diferente da personagem.
+
+TEXTO DE APRESENTAÇÃO
+
+Substitua os textos antigos pelos seguintes textos exatos:
+
+Título:
+
+“Olá!”
+
+Apresentação:
+
+“Eu sou a Leluá!”
+
+Pergunta:
+
+“Vamos explorar, brincar e descobrir?”
+
+Botão:
+
+“Vamos lá! →”
+
+Nunca mostre novamente “Lumi” nesta tela.
+
+TIPOGRAFIA ABAIXO DA PERSONAGEM
+
+Esta seção precisa seguir exatamente o padrão tipográfico das telas anteriores.
+
+TÍTULO “OLÁ!”
+
+- Use Fredoka.
+- Peso 700.
+- Cor azul viva ou azul-escura.
+- Centralize horizontalmente.
+- Use tamanho grande e acolhedor.
+- Mantenha o ponto de exclamação junto à palavra.
+- Renderize “Olá!” como uma unidade sem quebra.
+- Não deixe o sinal de exclamação isolado.
+
+APRESENTAÇÃO “EU SOU A LELUÁ!”
+
+- Use Fredoka.
+- Peso 700.
+- Centralize horizontalmente.
+- Mantenha a frase preferencialmente em uma linha.
+- Use azul-escuro em “Eu sou a”.
+- Destaque “Leluá!” em coral, mantendo o acento agudo.
+- O ponto de exclamação deve permanecer unido a “Leluá”.
+- Não permita quebra entre “Leluá” e “!”.
+- Não comprima horizontalmente a fonte.
+- Dê largura suficiente ao contêiner.
+
+Implemente o destaque com elementos separados, mas na mesma linha, por exemplo:
+
+```jsx
+<p className="characterIntroduction">
+  <span>Eu sou a </span>
+  <span className="characterName">Leluá!</span>
+</p>
+```
+
+Use:
+
+```css
+.characterIntroduction {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.characterName {
+  color: var(--coral);
+  white-space: nowrap;
+}
+```
+
+Se o projeto usar React Native, utilize elementos `Text` aninhados e `numberOfLines={1}`.
+
+PERGUNTA
+
+Texto exato:
+
+“Vamos explorar, brincar e descobrir?”
+
+- Use Nunito.
+- Peso 500 ou 600.
+- Cor azul-escura.
+- Centralize horizontalmente.
+- Preserve boa legibilidade.
+- Mantenha uma distância confortável da apresentação.
+- Não use fonte padrão do navegador.
+- Não reduza excessivamente.
+- Garanta que o ponto de interrogação permaneça junto à palavra “descobrir”.
+
+HIERARQUIA DOS TEXTOS
+
+A ordem deve ser:
+
+1. “Olá!”
+2. “Eu sou a Leluá!”
+3. “Vamos explorar, brincar e descobrir?”
+4. Botão “Vamos lá! →”
+
+- Use espaçamento uniforme entre as linhas.
+- Não deixe os textos encostarem na personagem.
+- Não deixe os textos encostarem no botão.
+- Centralize todo o conjunto em relação à área útil da tela.
+- Preserve largura interna confortável.
+- Não use margens negativas.
+- Não use transformações para forçar o alinhamento.
+
+DETALHES LÚDICOS
+
+- Preserve pequenos detalhes amarelos ou estrelas próximos de “Olá!”.
+- Use-os com discrição.
+- Não deixe os elementos decorativos cobrirem letras.
+- Mantenha o mesmo estilo amarelo das telas anteriores.
+- Não adicione personagens ou objetos novos.
+
+BOTÃO “VAMOS LÁ!”
+
+Reproduza o botão verde aprovado nas outras telas.
+
+Texto:
+
+“Vamos lá! →”
+
+- Use Fredoka em peso 700.
+- Use texto branco.
+- Centralize o texto e a seta.
+- Preserve o ponto de exclamação.
+- Use botão largo, com margens laterais iguais.
+- Use cantos arredondados.
+- Aplique sombra verde muito suave.
+- Garanta área de toque confortável.
+- Preserve a navegação existente.
+- Não substitua o botão por uma imagem.
+
+PLANO DE FUNDO
+
+- Preserve o céu azul-claro.
+- Preserve as nuvens brancas.
+- Preserve a paisagem verde.
+- Mantenha as árvores laterais como moldura.
+- Não permita que árvores cubram mãos, bolsa ou textos.
+- O fundo deve preencher toda a largura.
+- Não deixe faixa branca nas laterais.
+- Não permita rolagem horizontal.
+- Mantenha pequenos detalhes florais próximos aos pés sem cobrir a personagem.
+
+RESPONSIVIDADE
+
+- Teste em 390 × 844 px.
+- Respeite as áreas seguras superior e inferior.
+- Use `box-sizing: border-box`.
+- Não use `transform: scale()` na tela inteira.
+- Não utilize zoom para encaixar o conteúdo.
+- Não diminua toda a interface.
+- Distribua verticalmente os elementos conforme a altura disponível.
+- Em telas menores, permita ajustes proporcionais de espaçamento sem cortar conteúdo.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir, confirme:
+
+1. Não existe mais nenhuma ocorrência visual de “Lumi”.
+2. O logotipo mostra “Leluá” corretamente.
+3. O acento de “Leluá” está visível.
+4. A personagem oficial está centralizada.
+5. As duas mãos estão completamente visíveis.
+6. As folhas não estão cortadas.
+7. O título aparece como “Olá!”.
+8. A frase aparece como “Eu sou a Leluá!”.
+9. “Leluá!” está destacada em coral.
+10. Nenhum sinal de pontuação ficou isolado.
+11. Fredoka foi usada nos títulos e no botão.
+12. Nunito foi usada na pergunta.
+13. O botão continua funcional.
+14. Não existe faixa branca lateral.
+15. Nenhuma outra tela foi alterada.
+
+Apresente uma captura final em 390 × 844 px e informe os arquivos modificados.

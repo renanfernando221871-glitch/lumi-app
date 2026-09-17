@@ -1,0 +1,383 @@
+A atividade 3 ainda não segue a programação visual das atividades 1 e 2.
+
+Não tente melhorar o layout atual novamente. Substitua a apresentação da atividade 3 pela mesma estrutura visual e pelos mesmos componentes usados nas atividades 1 e 2.
+
+OBJETIVO PRINCIPAL
+
+A atividade 3 deve parecer parte da mesma sequência das atividades anteriores.
+
+A única diferença entre as atividades deve ser:
+
+- número;
+- título;
+- instrução;
+- animais;
+- resposta correta;
+- áudio;
+- progresso.
+
+Todo o restante deve ser compartilhado:
+
+- cabeçalho;
+- logotipo;
+- placa;
+- personagem;
+- indicador de progresso;
+- cartão de instrução;
+- cartões de alternativas;
+- tipografia;
+- cores;
+- bordas;
+- sombras;
+- espaçamentos;
+- botão;
+- cenário;
+- responsividade.
+
+NÃO CRIE UM NOVO DESIGN
+
+- Não crie estilos exclusivos para a atividade 3.
+- Não mantenha a estrutura visual atual.
+- Não tente aproximar manualmente o layout.
+- Não duplique CSS das atividades 1 e 2.
+- Reutilize diretamente os componentes e estilos já aprovados.
+- Remova regras específicas da atividade 3 que sobrescrevam o padrão compartilhado.
+
+AUDITORIA INICIAL
+
+Antes de alterar:
+
+1. Localize o componente da atividade 1 — “Quem faz mu?”.
+2. Localize o componente da atividade 2 — “Encontre o cavalo”.
+3. Identifique os componentes compartilhados usados nessas duas telas.
+4. Identifique os estilos compartilhados.
+5. Faça a atividade 3 usar exatamente a mesma árvore estrutural.
+6. Informe quais componentes foram reutilizados.
+
+Se as atividades 1 e 2 ainda estiverem implementadas separadamente, extraia um modelo compartilhado, por exemplo:
+
+- `FarmActivityScreen`;
+- `ActivityHeader`;
+- `ActivityWoodSign`;
+- `ActivityProgress`;
+- `ActivityInstruction`;
+- `ActivityOptionCard`;
+- `ActivityPrimaryButton`.
+
+Os nomes podem seguir o padrão já existente no projeto.
+
+DADOS DA ATIVIDADE 3
+
+Renderize a tela compartilhada com os seguintes dados:
+
+```text
+activityNumber: 3
+activityTitle: O animal marrom
+instruction: Toque no animal marrom.
+helperText: Procure o animal da cor marrom.
+correctAnswer: cavalo
+progress: valor dinâmico existente
+```
+
+Alternativas:
+
+```text
+1. ovelha
+2. cavalo
+3. pintinho
+```
+
+Não fixe o progresso se ele vier do estado do usuário.
+
+CABEÇALHO IDÊNTICO
+
+Copie exatamente o cabeçalho aprovado das atividades 1 e 2:
+
+- botão circular de voltar à esquerda;
+- logotipo Leluá centralizado;
+- botão circular de configurações à direita;
+- mesmas dimensões;
+- mesmas margens;
+- mesmas posições;
+- mesma área segura.
+
+O logotipo deve ficar completamente visível.
+
+Não mantenha o logotipo minúsculo ou escondido da versão atual.
+
+Não desenhe uma Dynamic Island artificial.
+
+PLACA IDÊNTICA
+
+Use exatamente o mesmo componente de placa de madeira das atividades 1 e 2.
+
+Substitua somente os textos:
+
+“Atividade 3”
+
+“O animal marrom”
+
+A placa deve ter:
+
+- mesma largura;
+- mesma altura;
+- mesma textura;
+- mesma inclinação;
+- mesmo contorno;
+- mesma sombra;
+- mesma tipografia;
+- mesma posição.
+
+Não use a placa larga e plana da versão atual.
+
+Não adicione folhas decorativas diferentes se elas não existirem no componente aprovado.
+
+PERSONAGEM IDÊNTICA
+
+Use a mesma Leluá, no mesmo tamanho e posição das atividades 1 e 2.
+
+- Não use a personagem pequena da tela atual.
+- Não deixe a personagem flutuando separada.
+- Preserve rosto, folhas, mão, bolsa e estrela.
+- Use o mesmo recurso visual.
+- Use o mesmo enquadramento.
+- Não altere a pose ou escala apenas na atividade 3.
+
+PROGRESSO IDÊNTICO
+
+Use o mesmo componente de progresso das atividades anteriores.
+
+- Mesma pílula branca.
+- Mesma estrela amarela.
+- Mesma tipografia.
+- Mesma altura.
+- Mesma posição.
+- Mesma sombra.
+- Mesmo espaçamento.
+
+Exiba o progresso dinâmico correspondente, atualmente:
+
+“3 de 8 atividades”
+
+Não mantenha a barra longa e estreita da versão atual se ela não existir nas atividades 1 e 2.
+
+INSTRUÇÃO IDÊNTICA
+
+Use o mesmo cartão de instrução das atividades anteriores.
+
+Texto:
+
+“Toque no animal marrom.”
+
+- Mesma largura dos cartões de alternativas.
+- Mesmo fundo branco.
+- Mesmos cantos arredondados.
+- Mesma borda azul-clara.
+- Mesma sombra.
+- Mesma tipografia.
+- Mesmo espaçamento.
+
+ÁUDIO
+
+A atividade 3 possui o botão “Ouvir”.
+
+Integre o áudio ao cartão de instrução sem alterar seu padrão visual:
+
+- botão pequeno à direita;
+- ícone azul completamente visível;
+- texto “Ouvir”;
+- fundo azul muito claro;
+- cantos arredondados;
+- área de toque adequada;
+- sem comprimir a instrução;
+- sem aumentar excessivamente a altura do cartão.
+
+Se as outras atividades também tiverem áudio, reutilize exatamente o mesmo componente.
+
+CARTÕES DAS ALTERNATIVAS
+
+Use exatamente o mesmo componente visual empregado nas atividades 1 e 2.
+
+Todos os cartões devem ter:
+
+- mesma largura;
+- mesma altura;
+- mesmo fundo;
+- mesma borda;
+- mesmo raio;
+- mesma sombra;
+- mesma margem;
+- mesma distribuição interna.
+
+Alternativas:
+
+1. Ilustração de ovelha + “ovelha”
+2. Ilustração de cavalo marrom + “cavalo”
+3. Ilustração de pintinho + “pintinho”
+
+- Use animais no mesmo estilo gráfico das atividades anteriores.
+- Use o mesmo tamanho visual.
+- Alinhe-os na mesma coluna.
+- Não use imagens pequenas ou realistas de estilo divergente.
+- Não corte patas, cabeça ou cauda.
+- Use Fredoka no nome dos animais.
+- Preserve o mesmo tamanho da fonte.
+
+ESTADO SELECIONADO
+
+Reutilize exatamente o estado de seleção das atividades 1 e 2:
+
+- fundo verde muito claro;
+- borda verde;
+- sem mudança de tamanho;
+- sem deslocamento das outras alternativas.
+
+O cavalo deve continuar sendo a resposta correta.
+
+Não exiba antecipadamente que é a resposta correta, salvo se o modo de revisão já fizer isso nas demais atividades.
+
+TEXTO AUXILIAR
+
+Mantenha:
+
+“Procure o animal da cor marrom.”
+
+- Use o mesmo componente e estilo de texto auxiliar das atividades anteriores.
+- Use Nunito.
+- Centralize.
+- Não use a fonte minúscula da versão atual.
+- Dê espaço acima e abaixo.
+
+BOTÃO IDÊNTICO
+
+Use exatamente o mesmo botão “Responder” das atividades 1 e 2:
+
+“Responder →”
+
+- Mesmo verde sólido.
+- Mesma largura.
+- Mesma altura.
+- Mesmo raio.
+- Mesma sombra.
+- Mesma tipografia.
+- Mesma posição.
+- Mesmas margens.
+- Seta completamente visível.
+
+Não use o botão transparente e sem contraste da versão atual.
+
+No estado desabilitado:
+
+- use o mesmo padrão de desabilitado das atividades anteriores;
+- preserve legibilidade.
+
+No estado ativo:
+
+- use verde sólido com texto branco.
+
+CENÁRIO IDÊNTICO
+
+Use o mesmo cenário e tratamento de fundo das atividades 1 e 2.
+
+- Mesmo nível de saturação.
+- Mesmo contraste.
+- Mesma posição dos elementos principais.
+- Mesma área clara atrás dos cartões.
+- Mesmas flores e vegetação na base.
+- Mesmo enquadramento.
+
+Não mantenha o fundo apagado, esbranquiçado ou fotográfico da versão atual.
+
+Não crie uma nova composição de fazenda somente para a atividade 3.
+
+ARQUITETURA RECOMENDADA
+
+A atividade 3 deve ser configurada por dados, por exemplo:
+
+```jsx
+<FarmActivityScreen
+  activityNumber={3}
+  title="O animal marrom"
+  instruction="Toque no animal marrom."
+  helperText="Procure o animal da cor marrom."
+  options={[
+    { id: "sheep", label: "ovelha", image: sheepAsset },
+    { id: "horse", label: "cavalo", image: horseAsset },
+    { id: "chick", label: "pintinho", image: chickAsset }
+  ]}
+  correctAnswer="horse"
+  audio={activityThreeAudio}
+/>
+```
+
+Adapte ao código real do projeto sem criar dependências desnecessárias.
+
+Não transforme este exemplo em uma segunda implementação paralela se já existir um sistema de configuração de atividades.
+
+REMOVER SOBRESCRITAS
+
+Pesquise e remova da atividade 3 estilos específicos que provoquem divergência, incluindo:
+
+- dimensões exclusivas;
+- cabeçalho exclusivo;
+- placa exclusiva;
+- fundo exclusivo;
+- tamanho exclusivo da personagem;
+- cartões exclusivos;
+- botão exclusivo;
+- margens negativas;
+- `transform`;
+- posições absolutas desnecessárias;
+- estilos inline que sobrescrevam o padrão compartilhado.
+
+PRESERVAR FUNCIONALIDADES
+
+- áudio “Ouvir”;
+- seleção das três alternativas;
+- cavalo como resposta correta;
+- botão “Responder”;
+- feedback de acerto e erro;
+- progresso;
+- recompensa;
+- modo de revisão;
+- retorno para a lista;
+- configurações;
+- botão de voltar.
+
+VALIDAÇÃO COMPARATIVA
+
+Antes de concluir, abra lado a lado:
+
+- atividade 1;
+- atividade 2;
+- atividade 3.
+
+Confirme:
+
+1. Cabeçalhos idênticos.
+2. Logotipos com o mesmo tamanho.
+3. Placas com as mesmas dimensões.
+4. Personagens com o mesmo tamanho e posição.
+5. Indicadores de progresso iguais.
+6. Cartões de instrução iguais.
+7. Alternativas com as mesmas dimensões.
+8. Tipografia idêntica.
+9. Espaçamentos idênticos.
+10. Botões “Responder” idênticos.
+11. Cenários com o mesmo tratamento visual.
+12. Nenhum estilo exclusivo alterando a atividade 3.
+13. Todos os elementos cabem em 390 × 844 px.
+14. Não existe rolagem horizontal.
+15. Não existem faixas brancas.
+16. Os testes existentes continuam aprovados.
+
+Apresente capturas das três atividades no mesmo tamanho para comprovar a consistência.
+
+Informe:
+
+- componentes reutilizados;
+- estilos removidos;
+- arquivos modificados;
+- testes executados.
+
+A tarefa não está concluída se a atividade 3 continuar parecendo uma tela criada separadamente.

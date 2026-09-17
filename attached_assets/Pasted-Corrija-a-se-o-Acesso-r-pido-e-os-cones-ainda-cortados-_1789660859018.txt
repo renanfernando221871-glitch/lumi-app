@@ -1,0 +1,157 @@
+Corrija a seção “Acesso rápido” e os ícones ainda cortados na tela inicial do responsável.
+
+Não modifique textos, valores, cores, navegação ou funcionalidades.
+
+ÍCONES QUE CONTINUAM CORTADOS
+
+Os seguintes ícones ainda não aparecem integralmente:
+
+- relógio do cartão “Tempo de uso”;
+- estrela do cartão “Atividades realizadas”;
+- joystick do atalho “Atividades”;
+- as duas engrenagens existentes na interface, incluindo a engrenagem do atalho “Configurações”.
+
+Todos eles devem aparecer inteiros, com todos os contornos, pontas, botões e dentes visíveis.
+
+REGRAS OBRIGATÓRIAS PARA ESSES ÍCONES
+
+- Mostre 100% do desenho de cada ícone.
+- Não permita cortes na parte superior, inferior ou nas laterais.
+- Preserve uma margem interna visível ao redor do ícone.
+- Não encoste o desenho nas bordas do contêiner.
+- Centralize horizontal e verticalmente.
+- Preserve a proporção original.
+- Não deforme, estique ou comprima.
+- Não reduza excessivamente.
+- Use `object-fit: contain` para arquivos de imagem.
+- Use `object-position: center`.
+- Use `flex-shrink: 0`.
+- Garanta que o contêiner tenha largura e altura suficientes.
+- Remova margens negativas e deslocamentos que provoquem cortes.
+- Não utilize `object-fit: cover`.
+- Não use `overflow: hidden` no elemento que contém o ícone quando isso cortar partes do desenho.
+
+Se os ícones forem SVG:
+
+- corrija o `viewBox` para abranger todo o desenho;
+- preserve espaço ao redor dos traços externos;
+- defina largura e altura explícitas;
+- use `display: block`;
+- verifique se todos os `path` estão dentro do `viewBox`;
+- use `overflow: visible` quando necessário;
+- não corte sombras, contornos ou dentes.
+
+RELÓGIO
+
+- Mostre o círculo completo.
+- Preserve todo o contorno azul.
+- Exiba integralmente os ponteiros.
+- Deixe espaço em volta do círculo.
+- Centralize o relógio acima de “Tempo de uso”.
+- Não deixe o título invadir a área do relógio.
+
+ESTRELA
+
+- Mostre integralmente as cinco pontas.
+- Garanta espaço acima da ponta superior.
+- Não corte as pontas laterais ou inferiores.
+- Centralize a estrela acima de “Atividades realizadas”.
+- Não permita sobreposição com o texto.
+
+JOYSTICK
+
+- Mostre completamente o corpo do controle.
+- Mostre as duas laterais, alavancas, botões e detalhes.
+- Não corte a parte superior ou inferior.
+- Centralize-o no cartão “Atividades”.
+- Deixe uma distância uniforme entre o joystick e a legenda.
+
+DUAS ENGRENAGENS
+
+- Identifique as duas engrenagens existentes nessa interface.
+- Mostre todos os dentes das duas engrenagens.
+- Não corte os lados, a parte superior ou a base.
+- Centralize cada engrenagem em seu respectivo contêiner.
+- Preserve o furo ou detalhe central.
+- Garanta espaço interno suficiente em todos os lados.
+- A engrenagem do atalho “Configurações” não pode invadir a legenda.
+- Se uma engrenagem estiver combinada com outro símbolo, preserve o conjunto completo.
+- Não substitua as engrenagens por desenhos diferentes apenas para fazê-las caber.
+
+ATALHOS DE ACESSO RÁPIDO
+
+Atalhos:
+
+- Atividades
+- Biblioteca
+- Relatórios
+- Configurações
+
+Faça os quatro cartões terem:
+
+- exatamente a mesma largura;
+- exatamente a mesma altura;
+- mesmo raio de borda;
+- mesmo espaçamento interno;
+- mesmo alinhamento vertical;
+- mesma distância entre cartões.
+
+Aumente discretamente a altura dos cartões para acomodar ícones e legendas sem compressão.
+
+PADRONIZAÇÃO DOS ÍCONES
+
+- Reserve uma área de tamanho idêntico para os quatro ícones.
+- Normalize o tamanho visual, não apenas a largura numérica.
+- Preserve todos os detalhes.
+- Nenhum ícone pode tocar a legenda ou as bordas.
+- Mantenha uma distância uniforme entre ícone e texto.
+- Livro e relatório também devem permanecer totalmente visíveis.
+
+LEGENDAS
+
+- Aumente ligeiramente o tamanho das legendas.
+- Use Fredoka em peso 600 ou 700.
+- Garanta boa leitura em tela móvel.
+- Centralize horizontalmente.
+- Reserve a mesma altura para o texto nos quatro cartões.
+- Não use reticências.
+- Não corte letras.
+- Não comprima horizontalmente a fonte.
+
+Para “Configurações”:
+
+- Preserve corretamente o “ç” e o “õ”.
+- Não deixe a palavra tocar as bordas.
+- Não diminua somente essa legenda para fazê-la caber.
+- Preferencialmente, mantenha em uma linha.
+- Se realmente necessário, use uma quebra equilibrada em duas linhas, sem cortar caracteres.
+
+GRADE
+
+- Use `display: grid`.
+- Use quatro colunas de largura igual.
+- Centralize a grade no contêiner principal.
+- Mantenha margens laterais iguais.
+- Use espaçamento uniforme entre as colunas.
+- Não permita que a grade ultrapasse a largura disponível.
+- Não crie rolagem horizontal.
+
+AUDITORIA FINAL
+
+Depois de corrigir os elementos indicados, examine todos os demais ícones da tela e verifique se existe qualquer corte semelhante.
+
+Confirme individualmente:
+
+1. Relógio completamente visível.
+2. Estrela com as cinco pontas visíveis.
+3. Joystick completamente visível.
+4. Primeira engrenagem completamente visível.
+5. Segunda engrenagem completamente visível.
+6. Livro e relatório completamente visíveis.
+7. Quatro atalhos com o mesmo tamanho.
+8. Legendas legíveis e centralizadas.
+9. “Configurações” sem cortes ou compressão.
+10. Nenhum `overflow` recortando os desenhos.
+11. Nenhuma rolagem horizontal.
+12. Todos os atalhos e controles continuam funcionando.
+13. Nenhuma outra s

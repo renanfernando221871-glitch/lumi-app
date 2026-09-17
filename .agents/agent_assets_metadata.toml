@@ -140,3 +140,283 @@ mtime_ms = 1789597981091
 storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/282447e8-041e-4539-a767-b129e1847bf7/ac7bd930-0e27-48d2-b80f-bc1ebdd50ecd"
 storage_version_token = "1789597993468148"
 content_type = "image/png"
+
+[[outputs]]
+id = "52DVwUtXLZCCHdbJudEYU"
+uri = "file://screenshots/tela-seguranca-lelua-topo.png"
+type = "image"
+title = "Tela de segurança — composição principal"
+description = "Captura em 390×844 mostrando logo oficial, balão, Leluá, título e os quatro blocos informativos."
+logical_id = "63cbe4e4-cb1a-4b46-9c59-5720109c1f9c"
+content_hash = "sha256:1cc3b5206529159f094461a142a5d54a10857f034cf5ca1f22571daeba14ad19"
+size = 135489
+mtime_ms = 1789658494145
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/63cbe4e4-cb1a-4b46-9c59-5720109c1f9c/f482f8b8-e219-4cf0-9df1-0a0701a71155"
+storage_version_token = "1789658515124248"
+content_type = "image/png"
+
+[[outputs]]
+id = "wNs1NhXNI53ygGkLnNhCR"
+uri = "file://screenshots/tela-seguranca-lelua-final.png"
+type = "image"
+title = "Tela de segurança — conteúdo e botão"
+description = "Captura em 390×844 após rolagem, mostrando os quatro blocos alinhados, mensagem final e botão funcional."
+logical_id = "c327f044-1066-4437-83f3-934f1db58eb4"
+content_hash = "sha256:201435a8a5dc4dc95848f4958ec62148ed0c94c107f846a7f1691c682acd81a4"
+size = 122370
+mtime_ms = 1789658494493
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/c327f044-1066-4437-83f3-934f1db58eb4/a1be4a06-6621-4748-9982-920752da1f3f"
+storage_version_token = "1789658515729178"
+content_type = "image/png"
+
+[[outputs]]
+id = "QL-ZRs-zeOdpurzN9iBrP"
+uri = "file://screenshots/tela-inicial-responsavel-topo.png"
+type = "image"
+title = "Home do responsável — composição principal"
+description = "Captura em 390×844 mostrando cabeçalho alinhado, logo oficial Leluá, saudação, personagem e resumo diário."
+logical_id = "e728fb98-f0d9-4f43-891c-3266a3be1169"
+content_hash = "sha256:c56b3dc6b794c6f66a8b8f009cbf62a5ef762d0d8eada42633046c1f5ee72e24"
+size = 119809
+mtime_ms = 1789659551633
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/e728fb98-f0d9-4f43-891c-3266a3be1169/605fd653-3f4d-452d-a49e-cf94bcec6f96"
+storage_version_token = "1789659584140093"
+content_type = "image/png"
+
+[[outputs]]
+id = "tWKXhSkr_diTxROD8CDQW"
+uri = "file://screenshots/tela-inicial-responsavel-final.png"
+type = "image"
+title = "Home do responsável — atalhos e navegação"
+description = "Captura após rolagem mostrando os três indicadores iguais, quatro atalhos alinhados e barra inferior preservada."
+logical_id = "d6900b84-660a-4d12-b9a1-6ee97037735e"
+content_hash = "sha256:fc354414e9f8d43a68102e9d1b79acc4db26f34561a20bbbe0d63ab766b14aa7"
+size = 110802
+mtime_ms = 1789659552013
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/d6900b84-660a-4d12-b9a1-6ee97037735e/9d80958f-cac4-478e-a5ac-4cb142577549"
+storage_version_token = "1789659584745640"
+content_type = "image/png"
+
+[[outputs]]
+id = "nWL6VBR0nLAxrFwDeH40K"
+uri = "file://screenshots/auditoria-home-completa-390x844.png"
+type = "image"
+title = "Auditoria completa da home do responsável"
+description = "Captura completa da tela validada em 390×844, incluindo cabeçalho, resumo, atalhos e navegação inferior."
+logical_id = "18466bd8-b744-4f67-82d2-1443be16ebe9"
+content_hash = "sha256:fa12deba410c705a09606d435a91147e425aeffea1878fe511935f8e58aad1c1"
+size = 126764
+mtime_ms = 1789660301952
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/18466bd8-b744-4f67-82d2-1443be16ebe9/10bdc058-843a-44db-85cb-1514da7b4d80"
+storage_version_token = "1789660317843874"
+content_type = "image/png"
+
+[[outputs]]
+id = "w4wmUoLopoB51q3GdrpX_"
+uri = "file://screenshots/acesso-rapido-icones-corrigidos.png"
+type = "image"
+title = "Acesso rápido e ícones corrigidos"
+description = "Captura completa em 390×844 mostrando os ícones reenquadrados, quatro atalhos uniformes e as duas engrenagens totalmente visíveis."
+logical_id = "571e069d-9154-4d31-8791-bf78316553d1"
+content_hash = "sha256:bec75cb00d0a94bfe7db483e537e1e5be411bfb8e353ed9a746d371d73962c98"
+size = 125598
+mtime_ms = 1789661023729
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/571e069d-9154-4d31-8791-bf78316553d1/819717c1-c8f7-481d-8bcb-3db348d1f826"
+storage_version_token = "1789661040438411"
+content_type = "image/png"
+
+[[outputs]]
+id = "9YxGcNdwX9rEgog3_HcWW"
+uri = "file://screenshots/home-responsavel-referencia-final.png"
+type = "image"
+title = "Home do responsável — referência oficial"
+description = "Captura completa da implementação reconstruída em 390×844, com dados dinâmicos e controles reais preservados."
+logical_id = "1e17fe01-7038-4387-b92e-4db043ec79a9"
+content_hash = "sha256:94da642de49a2c0a5e32c1797f082e41265b522ce553bd6f7cd0657d4e2482aa"
+size = 128083
+mtime_ms = 1789663304601
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/1e17fe01-7038-4387-b92e-4db043ec79a9/b1cfd601-b339-4eaf-be25-eee9764b94d0"
+storage_version_token = "1789663327603939"
+content_type = "image/png"
+
+[[outputs]]
+id = "EFhv-SxSDz-yn8evqGP5C"
+uri = "file://screenshots/auditoria-home-390x844.png"
+type = "image"
+title = "Home do responsável — validação 390×844"
+description = "Captura atualizada com o título em dois elementos, responsável! unido e os quatro atalhos visíveis."
+logical_id = "a2d48faf-8941-4f18-a061-6c004628d050"
+content_hash = "sha256:b0c83998cf8846d0683095db8236e2932dbb6b109a05965cbc5304fe329bddcb"
+size = 117264
+mtime_ms = 1789664112273
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/a2d48faf-8941-4f18-a061-6c004628d050/65ed28a2-082c-48dc-b6df-1207747e3808"
+storage_version_token = "1789664143267165"
+content_type = "image/png"
+
+[[outputs]]
+id = "Jrx3MvYi_LFQ4Q432DtxB"
+uri = "file://screenshots/child-intro-lelua-390x844.png"
+type = "image"
+title = "Apresentação da Leluá — 390×844"
+description = "Captura final com a Leluá frontal, centralizada, braços e mãos abertos, bolsa e estrela visíveis."
+logical_id = "e0108509-29dd-4167-b0b5-7f06d4a014a0"
+content_hash = "sha256:8db40ce55c476520327a3aa2a0248f5ec84c6965382ef1b433fcb039ae34a9d8"
+size = 157043
+mtime_ms = 1789664749585
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/e0108509-29dd-4167-b0b5-7f06d4a014a0/f305f7eb-7810-493e-a18c-ba3a8551d85f"
+storage_version_token = "1789664792481792"
+content_type = "image/png"
+
+[[outputs]]
+id = "JN5nIHals3yRTGHC-Jr9J"
+uri = "file://screenshots/mapa-aventuras-lelua-390x844.png"
+type = "image"
+title = "Mapa Leluá — placa reposicionada"
+description = "Captura atualizada em 390×844 com a placa dentro da área do mapa e separada do subtítulo."
+logical_id = "35990829-1dab-4e8a-9a5e-d6ebb7b00ddf"
+content_hash = "sha256:5ebe720291ac6b6cd88f2f984fd0b36a57c792bd1736a12f955bade30aaffa8a"
+size = 414786
+mtime_ms = 1789666652584
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/35990829-1dab-4e8a-9a5e-d6ebb7b00ddf/cd5acdab-f273-4f08-b36f-847c68188ad2"
+storage_version_token = "1789666669725998"
+content_type = "image/png"
+
+[[outputs]]
+id = "TGM9rwfL7YRt7Z2Tb0DQy"
+uri = "file://screenshots/preview-sem-moldura.jpg"
+type = "image"
+title = "Prévia do aplicativo sem moldura"
+description = "Captura direta do app publicada pelo servidor de desenvolvimento, sem Dynamic Island ou câmera artificial."
+logical_id = "be6fdc15-c7d0-4ca3-b6e1-a7281eeb4592"
+content_hash = "sha256:1e4a840e880e8c437f6a565620db79a737a80a3dfdd8d700242c67760df75d1d"
+size = 35828
+mtime_ms = 1789667112188
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/be6fdc15-c7d0-4ca3-b6e1-a7281eeb4592/95b67813-b58b-4f02-9a5e-c751e492f3d0"
+storage_version_token = "1789667120373951"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "2CppidllSxgPEVxtbooxh"
+uri = "file://screenshots/descobertas-fazenda-390x844.png"
+type = "image"
+title = "Descobertas da Fazenda — composição compacta"
+description = "Captura final em 390×844 com placa reduzida, Leluá ampliada, lista rolável internamente e botão sempre visível dentro da área segura."
+logical_id = "280ea818-ab26-4d17-9c00-1550426cdf8c"
+content_hash = "sha256:e3c76b512b6e6c547fee109432c78a21d0d978964577814561d473bf9c245898"
+size = 195672
+mtime_ms = 1789673789440
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/280ea818-ab26-4d17-9c00-1550426cdf8c/1cf1e4dc-527d-4e45-ac56-b2be754efa34"
+storage_version_token = "1789673815188072"
+content_type = "image/png"
+
+[[outputs]]
+id = "3BlEE0n4EXAyqk2ssiPkY"
+uri = "file://screenshots/farm-activity-review-390x844.png"
+type = "image"
+title = "Atividade 1 da Fazenda — modo de revisão"
+description = "Captura completa em 390×844 da atividade real Quem faz muu?, aberta após selecionar uma atividade concluída, sem alterar o progresso."
+logical_id = "93efaaab-065e-4b83-8d23-bba8bfd69de7"
+content_hash = "sha256:b362207068b55a334c056c18017e971dbd75202db9c6aff132d2189b3bd7e17d"
+size = 438688
+mtime_ms = 1789674696716
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/93efaaab-065e-4b83-8d23-bba8bfd69de7/8e51abb0-6cb3-4971-9305-42b3d90d5df1"
+storage_version_token = "1789674804377282"
+content_type = "image/png"
+
+[[outputs]]
+id = "chNzPw0AccmZlfhECD-e_"
+uri = "file://screenshots/farm-activity-lelua-390x844.png"
+type = "image"
+title = "Atividade 1 com identidade Leluá"
+description = "Captura final em 390×844. O logo oficial Leluá substitui Lumi; acento, folhas e slogan estão completos, sem alterações no restante da atividade."
+logical_id = "0dcdb054-9903-412f-846b-1f1fd40315e7"
+content_hash = "sha256:e7aa41457cf4f81a479bcf354980f895a1ba73eb9a8658764d22cb212be601bb"
+size = 433305
+mtime_ms = 1789675266944
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/0dcdb054-9903-412f-846b-1f1fd40315e7/769063f0-06c4-47e3-8fb6-a78732cf3bbb"
+storage_version_token = "1789675287509727"
+content_type = "image/png"
+
+[[outputs]]
+id = "RLXT1d1Q-HIPxt8Hr_VJY"
+uri = "file://screenshots/farm-activity-2-lelua-390x844.png"
+type = "image"
+title = "Atividade 2 com identidade Leluá"
+description = "Captura final em 390×844 com o logo oficial Leluá e o cavalo corretamente destacado em verde; o restante da tela foi preservado."
+logical_id = "145192c8-a24f-4aa5-ad43-cfd32b5b6335"
+content_hash = "sha256:f12392a5dbcc100c08e978b79371c21f7ed73f4fb59ce017b7f906b49f013d10"
+size = 432424
+mtime_ms = 1789675630545
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/145192c8-a24f-4aa5-ad43-cfd32b5b6335/a8646c07-1834-4000-a892-926fd47c18e9"
+storage_version_token = "1789675645929760"
+content_type = "image/png"
+
+[[outputs]]
+id = "SM6EU2LKy_zpspkIzes74"
+uri = "file://screenshots/activity-3-lelua-responsive-390x844.png"
+type = "image"
+title = "Atividade 3 — reconstrução final em 390×844"
+description = "Implementação atual correspondente à especificação reenviada: placa ilustrada, Leluá legível, Fazenda colorida, seleção antes da validação e botão Responder."
+logical_id = "0d70453b-4bf9-47aa-9b17-3253804002fc"
+content_hash = "sha256:d387653a0e514c9a5cce1cbeaada0d314a6c3e7fe9d6a908d00ac79139ef4cb5"
+size = 362609
+mtime_ms = 1789678474136
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/0d70453b-4bf9-47aa-9b17-3253804002fc/1a4cd1ac-097b-4884-a4c7-a8396d8490fe"
+storage_version_token = "1789678677124905"
+content_type = "image/png"
+
+[[outputs]]
+id = "jaI_INicx8Kz7sZA04lUd"
+uri = "file://screenshots/activity4-390x844.png"
+type = "image"
+title = "Atividade 4 — 390 × 844 px"
+description = "Captura final da atividade Conte os pintinhos, com logotipo Leluá oficial e enquadramento centralizado."
+logical_id = "9ba1d31b-ae8c-4436-b26e-b77a052410f7"
+content_hash = "sha256:9566cf39fbe5adfad74757927ecb28fc249b23ac15580d9b604666fdab580ed5"
+size = 401117
+mtime_ms = 1789681177415
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/9ba1d31b-ae8c-4436-b26e-b77a052410f7/49c7e52f-04e8-42a8-ad08-2533664efcd1"
+storage_version_token = "1789681213055646"
+content_type = "image/png"
+
+[[outputs]]
+id = "cNHnt3FE6inAZxkEYOm_F"
+uri = "file://screenshots/activity4-final-390x844.png"
+type = "image"
+title = "Atividade 4 — 390 × 844"
+description = "Captura final com o viewport estrutural compartilhado."
+logical_id = "888fdb83-e540-48d7-a5a7-7b00b1e1a0e4"
+content_hash = "sha256:d8560dd45966fe9ad6c66dca3f3abc4a2337ef2e77446af117d51db590ce62ea"
+size = 430064
+mtime_ms = 1789681748132
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/888fdb83-e540-48d7-a5a7-7b00b1e1a0e4/6d830447-9f49-4612-8a8c-24c490b90b76"
+storage_version_token = "1789681799630915"
+content_type = "image/png"
+
+[[outputs]]
+id = "_JHwtub71kaYywbfVibdc"
+uri = "file://screenshots/activity2-final-390x844.png"
+type = "image"
+title = "Atividade 2 — 390 × 844"
+description = "Captura de referência no mesmo viewport estrutural."
+logical_id = "cc6bfd22-df16-4255-8723-673e3dc6e32f"
+content_hash = "sha256:8e3d1040de6d9fad63efb1d46c4e1a248762de2afd9efd6c6701ebb49dbdba06"
+size = 415238
+mtime_ms = 1789681756292
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/cc6bfd22-df16-4255-8723-673e3dc6e32f/845fb32d-9a1f-4308-b6a3-7a1152056d5a"
+storage_version_token = "1789681800274566"
+content_type = "image/png"
+
+[[outputs]]
+id = "5dwOXpSHaqXCcic5HXYzW"
+uri = "file://screenshots/atividade2-atividade4-comparacao-final.png"
+type = "image"
+title = "Comparação — Atividades 2 e 4"
+description = "Comparação lado a lado das duas atividades em viewport real de 390 × 844."
+logical_id = "0e0870cd-8d4d-4e42-ad1c-53de9f0ea83d"
+content_hash = "sha256:345d47171d59ecc3ca96ae87da9f761cff80df3b43ea5809408356ef82021c4c"
+size = 928623
+mtime_ms = 1789681757668
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/0e0870cd-8d4d-4e42-ad1c-53de9f0ea83d/60cb64fc-b8e8-42f2-ac22-2a2f07864190"
+storage_version_token = "1789681800842904"
+content_type = "image/png"

@@ -1,0 +1,517 @@
+PARE as alterações incrementais atuais.
+
+As últimas mudanças introduziram regressões visuais nas telas da Fazenda:
+
+- telas aprovadas foram modificadas;
+- cabeçalhos ficaram diferentes;
+- ícones foram desalinhados;
+- tamanhos e posições variam entre atividades;
+- a atividade 3 recebeu outro modelo visual;
+- a personagem da atividade 3 foi substituída por uma versão diferente;
+- componentes compartilhados foram alterados sem validação das demais telas.
+
+Não continue adicionando correções sobre os estilos atuais.
+
+Faça uma auditoria, restaure o padrão aprovado e só depois implemente a atividade 3 corretamente.
+
+ETAPA 1 — CRIAR UM PONTO DE SEGURANÇA
+
+Antes de modificar:
+
+1. Registre o estado atual em um checkpoint local ou commit de segurança.
+2. Não envie esse checkpoint para produção se ele contiver regressões.
+3. Examine o `git diff` das últimas alterações.
+4. Identifique quais arquivos compartilhados foram modificados.
+5. Identifique quais mudanças afetaram atividades que não deveriam ter sido alteradas.
+6. Não use `git reset --hard`.
+7. Não descarte alterações não relacionadas ao conjunto de telas da Fazenda.
+
+Informe quais arquivos causaram as regressões.
+
+ETAPA 2 — DEFINIR AS REFERÊNCIAS
+
+Considere as imagens anexadas das atividades 1, 2 e 4 como referência visual obrigatória para o modelo das atividades da Fazenda.
+
+Os elementos que devem ser padronizados são:
+
+- cabeçalho;
+- botão de voltar;
+- logotipo Leluá;
+- botão de configurações;
+- cenário da Fazenda;
+- personagem oficial;
+- placa de madeira;
+- indicador de progresso;
+- cartão de instrução;
+- cartões de resposta;
+- botão “Responder”;
+- tipografia;
+- margens;
+- espaçamentos;
+- cores;
+- bordas;
+- sombras.
+
+A atividade 3 deve utilizar esse mesmo modelo.
+
+Não utilize a imagem anexada da atividade 3 como referência de estilo. Ela demonstra a regressão que deve ser corrigida.
+
+ETAPA 3 — CONGELAR AS TELAS APROVADAS
+
+Não redesenhe as atividades 1, 2 e 4.
+
+Restaure e preserve seus layouts aprovados.
+
+ATIVIDADE 1
+
+Preserve:
+
+“Atividade 1”
+
+“Quem faz mu?”
+
+“Toque no animal que faz mu.”
+
+Alternativas:
+
+- vaca;
+- cavalo;
+- galinha.
+
+Resposta correta:
+
+- vaca.
+
+ATIVIDADE 2
+
+Preserve:
+
+“Atividade 2”
+
+“Encontre o cavalo”
+
+“Toque no cavalo.”
+
+Alternativas:
+
+- vaca;
+- cavalo;
+- galinha.
+
+Resposta correta:
+
+- cavalo.
+
+ATIVIDADE 4
+
+Preserve:
+
+“Atividade 4”
+
+“Conte os pintinhos”
+
+“Quantos pintinhos estão na imagem?”
+
+Alternativas:
+
+- 3;
+- 4;
+- 5.
+
+Resposta correta:
+
+- 4.
+
+Não altere ilustrações, textos ou lógica dessas atividades.
+
+ETAPA 4 — PERSONAGEM OFICIAL ÚNICA
+
+A atividade 3 está usando uma personagem diferente. Isso é proibido.
+
+Localize o arquivo exato da Leluá usado nas atividades 1, 2 e 4 e utilize esse mesmo arquivo na atividade 3.
+
+Não use:
+
+- outra versão da personagem;
+- personagem gerada novamente;
+- desenho parecido;
+- emoji;
+- personagem recriada por CSS;
+- arquivo alternativo;
+- ilustração encontrada em outro diretório;
+- personagem com rosto, folhas ou proporções diferentes.
+
+A personagem oficial deve manter:
+
+- corpo verde-menta;
+- rosto e barriga creme;
+- olhos grandes castanhos;
+- bochechas rosadas;
+- duas folhas verdes assimétricas;
+- bolsa transversal marrom;
+- estrela amarela;
+- mesmas proporções;
+- mesmo acabamento;
+- mesmo estilo tridimensional.
+
+Verifique o caminho real do arquivo usado nas atividades aprovadas e reutilize-o diretamente.
+
+Informe no final o caminho do recurso utilizado.
+
+Não altere esse arquivo.
+
+ETAPA 5 — CABEÇALHO ÚNICO
+
+Crie ou restaure um único componente compartilhado de cabeçalho para todas as atividades da Fazenda.
+
+Estrutura:
+
+1. botão de voltar;
+2. logotipo Leluá;
+3. botão de configurações.
+
+REGRAS
+
+- Mesma altura nas quatro telas.
+- Mesmo posicionamento vertical.
+- Mesmas margens laterais.
+- Botões com exatamente o mesmo tamanho.
+- Ícones com exatamente o mesmo tamanho visual.
+- Áreas de toque mínimas de 44 × 44 px.
+- Seta totalmente visível.
+- Engrenagem totalmente visível.
+- Todos os dentes da engrenagem visíveis.
+- Logotipo centralizado em relação ao viewport.
+- Logotipo abaixo da área segura.
+- Nenhuma sobreposição com a câmera.
+- Nenhuma diferença de posição entre as atividades.
+
+Não use coordenadas específicas por atividade.
+
+Use uma grade de três colunas:
+
+- esquerda: 44 px ou o padrão do projeto;
+- centro: flexível;
+- direita: mesma largura da esquerda.
+
+O botão esquerdo e o direito devem ter exatamente o mesmo centro vertical.
+
+ETAPA 6 — LOGOTIPO ÚNICO
+
+Use o mesmo componente e o mesmo arquivo do logotipo oficial em todas as atividades.
+
+- Texto visual: “Leluá”.
+- Slogan: “crescer é descobrir”.
+- Mesmo tamanho.
+- Mesma posição.
+- Mesma proporção.
+- Mesmo espaço superior.
+- Mesmo espaço inferior.
+- Mesmo `object-fit: contain`.
+
+Não permita que uma tela apresente logotipo maior, menor, mais alto ou mais baixo.
+
+Não mostre “Lumi”.
+
+Não desenhe uma câmera ou Dynamic Island artificial.
+
+ETAPA 7 — MODELO COMPARTILHADO DE ATIVIDADE
+
+As atividades 1, 2 e 3 devem usar exatamente o mesmo componente estrutural.
+
+A atividade 4 pode utilizar uma variação apenas na área da pergunta, pois possui uma ilustração de contagem, mas deve compartilhar cabeçalho, placa, progresso, botão e dimensões gerais.
+
+Crie ou restaure um modelo configurável, por exemplo:
+
+```jsx
+<FarmActivityScreen
+  activityNumber={number}
+  title={title}
+  instruction={instruction}
+  options={options}
+  correctAnswer={correctAnswer}
+  progress={progress}
+  characterAsset={officialLeluaAsset}
+  backgroundAsset={approvedFarmBackground}
+  audio={audio}
+/>
+```
+
+Adapte ao código real.
+
+Não crie quatro páginas com CSS independente.
+
+ETAPA 8 — ATIVIDADE 3
+
+Reconstrua a atividade 3 usando exatamente o modelo das atividades 1 e 2.
+
+Dados:
+
+```text
+Atividade 3
+O animal marrom
+Toque no animal marrom.
+Procure o animal da cor marrom.
+```
+
+Alternativas:
+
+- ovelha;
+- cavalo;
+- pintinho.
+
+Resposta correta:
+
+- cavalo.
+
+Áudio:
+
+- preservar o botão “Ouvir” e sua função;
+- integrar o botão ao cartão de instrução;
+- não alterar as dimensões do modelo compartilhado.
+
+A atividade 3 deve herdar automaticamente:
+
+- cabeçalho;
+- logotipo;
+- personagem;
+- placa;
+- cenário;
+- progresso;
+- cartões;
+- tipografia;
+- botão;
+- margens;
+- sombras;
+- responsividade.
+
+Não use o cenário diferente mostrado na regressão.
+
+Não use a personagem diferente mostrada na regressão.
+
+Não use a placa quadrada e larga mostrada na regressão.
+
+Não use cartões com contorno verde permanente.
+
+Não use um botão diferente.
+
+ETAPA 9 — PLACA PADRONIZADA
+
+Use a mesma placa de madeira das atividades aprovadas.
+
+Todas devem ter:
+
+- mesma largura;
+- mesma altura;
+- mesma textura;
+- mesma sombra;
+- mesma inclinação;
+- mesmo raio;
+- mesma posição;
+- mesma tipografia.
+
+Altere somente:
+
+- número da atividade;
+- título.
+
+Na atividade 3:
+
+“Atividade 3”
+
+“O animal marrom”
+
+ETAPA 10 — PROGRESSO PADRONIZADO
+
+Use o mesmo indicador nas quatro telas:
+
+- estrela amarela;
+- pílula branca;
+- texto azul;
+- mesmas dimensões;
+- mesma posição;
+- mesma sombra.
+
+Valores dinâmicos:
+
+- atividade 1: progresso correspondente;
+- atividade 2: progresso correspondente;
+- atividade 3: progresso correspondente;
+- atividade 4: progresso correspondente.
+
+Não fixe os valores se eles vierem do estado real.
+
+ETAPA 11 — CARTÕES PADRONIZADOS
+
+Nas atividades 1, 2 e 3:
+
+- três cartões com mesma largura;
+- mesma altura;
+- mesmo raio;
+- mesma borda azul-clara;
+- mesma sombra;
+- mesmo fundo;
+- mesmos espaços;
+- animais na mesma coluna;
+- nomes na mesma coluna;
+- Fredoka no mesmo tamanho.
+
+Estado selecionado:
+
+- fundo verde muito claro;
+- borda verde;
+- sem mudar tamanho ou posição.
+
+Não use borda verde em todas as opções.
+
+Não mostre antecipadamente a resposta correta, exceto no modo de revisão quando previsto pela lógica.
+
+ETAPA 12 — ÍCONES E ALINHAMENTOS
+
+Audite todos os ícones das telas anexadas:
+
+- seta de voltar;
+- engrenagem;
+- estrela do progresso;
+- ícone do áudio;
+- seta do botão;
+- indicadores de seleção.
+
+Todos devem:
+
+- aparecer integralmente;
+- estar centralizados;
+- usar o mesmo tamanho;
+- possuir margem interna;
+- não tocar bordas;
+- não ser recortados por `overflow: hidden`;
+- não usar margens negativas;
+- não depender de ajuste específico por tela.
+
+Para SVG:
+
+- use `viewBox` completo;
+- defina largura e altura;
+- use `display: block`;
+- preserve todos os traços.
+
+ETAPA 13 — CONTÊINER E CENTRALIZAÇÃO
+
+Todas as atividades devem usar o mesmo contêiner raiz.
+
+- `width: 100%`;
+- `max-width: 100%`;
+- `min-height: 100dvh`;
+- `box-sizing: border-box`;
+- `margin: 0`;
+- `overflow-x: hidden`;
+- áreas seguras superior e inferior;
+- mesmo eixo central;
+- mesmas margens laterais.
+
+Não use:
+
+- `transform: scale()` na tela inteira;
+- zoom;
+- `translateX`;
+- margens negativas;
+- largura acima de 100%;
+- posicionamento baseado na moldura externa;
+- ajustes individuais para “parecer centralizado”.
+
+ETAPA 14 — NÃO MODIFICAR A LISTA DA FAZENDA
+
+A tela da lista “Descobertas da Fazenda” deve manter sua estrutura e funcionalidades.
+
+Corrija apenas, se necessário:
+
+- logotipo totalmente visível;
+- alinhamento do botão de voltar;
+- alinhamento da engrenagem;
+- personagem oficial;
+- botão “Começar atividade” totalmente visível.
+
+Não altere:
+
+- progresso;
+- ordem das atividades;
+- estados;
+- cadeados;
+- textos;
+- dados;
+- navegação.
+
+ETAPA 15 — PROTEÇÃO CONTRA NOVAS REGRESSÕES
+
+Adicione testes visuais ou estruturais que garantam:
+
+- todas as atividades usam o mesmo cabeçalho;
+- todas usam o mesmo logotipo;
+- atividades 1, 2 e 3 usam o mesmo modelo de cartões;
+- todas usam o mesmo recurso da Leluá;
+- não existe “Lumi” visível;
+- os ícones laterais possuem as mesmas dimensões;
+- nenhuma tela possui rolagem horizontal;
+- nenhuma tela usa personagem alternativa.
+
+Se houver sistema de screenshots ou testes de componentes, registre capturas de referência.
+
+Não sobrescreva capturas aprovadas sem apresentar comparação.
+
+ETAPA 16 — VALIDAÇÃO LADO A LADO
+
+Apresente simultaneamente, todas em 390 × 844 px:
+
+1. Lista da Fazenda.
+2. Atividade 1.
+3. Atividade 2.
+4. Atividade 3.
+5. Atividade 4.
+
+Confirme:
+
+- mesmo cabeçalho;
+- mesmo tamanho do logotipo;
+- botões superiores alinhados;
+- mesma personagem oficial;
+- mesma placa;
+- mesmo progresso;
+- cartões padronizados;
+- botões padronizados;
+- margens iguais;
+- nenhuma faixa branca;
+- nenhuma rolagem horizontal;
+- nenhuma alteração indevida de conteúdo.
+
+VALIDAÇÃO ESPECÍFICA DA ATIVIDADE 3
+
+Confirme:
+
+1. A personagem é exatamente a mesma das atividades 1 e 2.
+2. O arquivo da personagem é o mesmo.
+3. O cenário é o mesmo modelo.
+4. A placa é a mesma.
+5. Os cartões são os mesmos.
+6. O cavalo continua sendo a resposta correta.
+7. O áudio funciona.
+8. O botão funciona.
+9. A atividade não possui CSS visual exclusivo.
+10. A tela parece parte da mesma sequência.
+
+ENTREGA
+
+Ao concluir, informe:
+
+- arquivos alterados;
+- arquivos restaurados;
+- componentes compartilhados;
+- estilos de regressão removidos;
+- caminho do recurso oficial da Leluá;
+- testes executados;
+- resultados dos testes.
+
+Não encerre a tarefa apresentando apenas uma descrição.
+
+Mostre as cinco capturas comparativas.
+
+Se qualquer tela continuar com personagem, cabeçalho, ícones, placa ou alinhamento diferentes, a correção ainda não está concluída.

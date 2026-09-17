@@ -1,0 +1,240 @@
+Atualize a tela “Um ambiente seguro para explorar” para seguir exatamente a identidade visual aprovada do aplicativo Leluá.
+
+Use as telas anteriores aprovadas como padrão de:
+
+- personagem;
+- tipografia;
+- cores;
+- balões;
+- cartões;
+- espaçamento;
+- botões;
+- plano de fundo;
+- elementos decorativos.
+
+Não transforme a tela em uma imagem estática. O botão e todos os elementos interativos devem continuar funcionando.
+
+ÁREA SUPERIOR
+
+Organize a parte superior da tela da seguinte forma:
+
+- botão de voltar no canto superior esquerdo;
+- logotipo oficial Leluá centralizado abaixo da câmera;
+- slogan “crescer é descobrir” abaixo do logotipo;
+- balão de fala à esquerda;
+- Leluá oficial à direita;
+- cartão branco começando abaixo da composição.
+
+Respeite a área segura do aparelho. Nenhuma parte do logotipo, das folhas ou da personagem pode ficar escondida pela câmera.
+
+BALÃO DE FALA
+
+Mantenha exatamente esta frase:
+
+“Um lugar seguro para aprender e se divertir!”
+
+Use a quebra:
+
+Um lugar seguro  
+para aprender e se  
+divertir!
+
+- Use um balão branco ou creme-claro, orgânico e levemente irregular.
+- Incline-o aproximadamente 2 ou 3 graus para a esquerda.
+- Use a fonte Fredoka em peso 600 ou 700.
+- Centralize o texto.
+- Use azul-escuro como cor principal.
+- Destaque “seguro” em verde.
+- Destaque “divertir!” em azul vivo.
+- A ponta do balão deve sair do lado direito e apontar diretamente para a boca da Leluá.
+- Aproxime o balão da personagem.
+- Não deixe o balão encostar na borda esquerda.
+- Adicione dois ou três pequenos traços amarelos externos, com discrição.
+- Não permita que nuvens atravessem o texto.
+
+PERSONAGEM
+
+Use exatamente a Leluá oficial aprovada:
+
+- corpo verde-menta;
+- rosto e barriga em tom creme;
+- olhos castanhos grandes;
+- bochechas rosadas;
+- duas folhas verdes assimétricas;
+- mão erguida completamente visível;
+- bolsa transversal marrom;
+- estrela amarela de cinco pontas.
+
+Posicione a Leluá à direita do balão.
+
+- Preserve a pose de cumprimento.
+- Mostre integralmente folhas, rosto, mão e braço.
+- Não corte a mão na borda direita.
+- Deixe a personagem levemente orientada para o balão e para o usuário.
+- A parte inferior pode ficar parcialmente atrás do cartão.
+- Não gere uma versão diferente da personagem.
+- Use fundo transparente na ilustração.
+- Não permita fundo quadrado ou retangular ao redor dela.
+
+CARTÃO PRINCIPAL
+
+Centralize o cartão branco em relação à área útil da tela.
+
+- Use margens laterais iguais.
+- Preserve cantos grandes e arredondados.
+- Aplique sombra azul-clara muito suave.
+- Não deixe faixa branca vertical nas bordas da tela.
+- O cartão deve começar abaixo do balão e da personagem.
+- O cartão deve terminar acima da paisagem verde inferior.
+- Distribua o conteúdo verticalmente sem comprimir textos ou ícones.
+
+TÍTULO
+
+Mantenha exatamente:
+
+“Um ambiente seguro para explorar”
+
+Use a quebra:
+
+Um ambiente  
+seguro  
+para explorar
+
+- Fonte Fredoka, peso 700.
+- Cor azul-escura.
+- Texto centralizado.
+- Tamanho semelhante ao título “Perfil da criança”.
+- Destaque “seguro” em azul mais vivo ou verde, sem prejudicar a leitura.
+
+TEXTO EXPLICATIVO
+
+Mantenha exatamente:
+
+“Aqui, a diversão vem junto com aprendizado, tranquilidade e proteção.”
+
+- Use Nunito, peso 400 ou 500.
+- Centralize o texto.
+- Use azul acinzentado.
+- Preserve margens internas confortáveis.
+- Não reduza excessivamente a fonte.
+
+BLOCOS INFORMATIVOS
+
+Crie quatro blocos horizontais, com o mesmo tamanho e alinhamento.
+
+Cada bloco deve conter:
+
+- ícone circular ou ilustração à esquerda;
+- título em destaque;
+- explicação curta à direita;
+- fundo azul muito claro;
+- cantos arredondados;
+- espaçamento uniforme.
+
+Bloco 1:
+
+Título: “Sem anúncios”
+
+Descrição: “Uma experiência livre de publicidade para mais foco e tranquilidade.”
+
+Ícone: símbolo de anúncio riscado em vermelho e branco.
+
+Bloco 2:
+
+Título: “Conteúdo educativo”
+
+Descrição: “Atividades que estimulam a curiosidade e o aprendizado.”
+
+Ícone: livros infantis coloridos.
+
+Bloco 3:
+
+Título: “Tempo de uso personalizável”
+
+Descrição: “Você define os horários e o tempo de uso.”
+
+Ícone: relógio verde em fundo creme-claro.
+
+Bloco 4:
+
+Título: “Acompanhamento da família”
+
+Descrição: “Acompanhe o progresso e participe dessa jornada.”
+
+Ícone: família sorridente no mesmo estilo infantil dos avatares.
+
+PADRONIZAÇÃO DOS BLOCOS
+
+- Use Fredoka em peso 600 ou 700 nos títulos.
+- Use Nunito nos textos explicativos.
+- Alinhe todos os ícones pelo mesmo eixo vertical.
+- Use o mesmo tamanho nos quatro ícones.
+- Use a mesma altura nos quatro blocos.
+- Não estique ou comprima os ícones.
+- Mantenha distância igual entre os blocos.
+- Não corte nenhuma palavra.
+- Garanta contraste e leitura em telas pequenas.
+
+MENSAGEM FINAL
+
+Mantenha exatamente:
+
+“Você continua no controle.”
+
+- Centralize a frase.
+- Use Fredoka em peso 600.
+- Use verde-escuro.
+- Adicione um pequeno sublinhado curvo verde abaixo de “controle”.
+- Não transforme a frase em botão.
+
+BOTÃO
+
+Mantenha:
+
+“Continuar →”
+
+- Use o mesmo botão verde das telas anteriores.
+- Centralize-o horizontalmente.
+- Use a mesma largura dos campos e blocos.
+- Preserve altura, cantos arredondados e sombra.
+- Use Fredoka em peso 700 e texto branco.
+- Mantenha a ação de navegação já existente.
+- Não crie um botão apenas decorativo.
+
+PLANO DE FUNDO
+
+- Preserve o céu azul-claro.
+- Use nuvens discretas atrás da composição.
+- Mantenha a paisagem verde na parte inferior.
+- O plano de fundo deve cobrir toda a largura.
+- Não deixe faixa branca nas bordas.
+- Não permita rolagem horizontal.
+- Não deixe nuvens atrás de textos a ponto de reduzir o contraste.
+
+RESPONSIVIDADE
+
+- Respeite `env(safe-area-inset-top)` e `env(safe-area-inset-bottom)`.
+- Não use `transform: scale()` na tela inteira.
+- Não use zoom para encaixar o conteúdo.
+- Use `box-sizing: border-box`.
+- Centralize pelo contêiner da área útil.
+- Teste em viewport próximo de 390 × 844 px.
+- Se o conteúdo exigir rolagem vertical em aparelhos menores, permita rolagem suave, mantendo o botão acessível.
+- Não reduza toda a interface a ponto de deixar os textos ilegíveis.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir, apresente uma captura e confirme:
+
+1. O logotipo está totalmente visível abaixo da câmera.
+2. O balão está próximo da boca da Leluá.
+3. A mão e as folhas estão completamente visíveis.
+4. O cartão está centralizado.
+5. Os quatro blocos possuem o mesmo alinhamento.
+6. Nenhuma palavra está cortada.
+7. Não existe faixa branca lateral.
+8. O botão continua funcional.
+9. A tela utiliza as mesmas fontes e cores das telas aprovadas.
+10. Nenhuma outra tela foi modificada.
+
+Modifique somente esta tela nesta etapa.

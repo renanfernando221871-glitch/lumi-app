@@ -1,0 +1,285 @@
+Faça uma auditoria completa de cortes, enquadramentos e alinhamentos na tela inicial do responsável.
+
+Não altere a estrutura, os textos, os dados, as cores ou as funcionalidades já aprovadas. Corrija somente elementos cortados, deformados, comprimidos ou desalinhados.
+
+PROBLEMAS VISÍVEIS
+
+Corrija obrigatoriamente:
+
+- campainha no canto superior direito;
+- indicador vermelho da campainha;
+- logotipo encoberto pela câmera;
+- relógio do cartão “Tempo de uso”;
+- estrela do cartão “Atividades realizadas”;
+- gráfico do cartão “Progresso”;
+- joystick do atalho “Atividades”;
+- livro do atalho “Biblioteca”;
+- ícone do atalho “Relatórios”;
+- engrenagem do atalho “Configurações”;
+- qualquer outro ícone ou texto parcialmente cortado.
+
+Não limite a revisão a essa lista. Inspecione todos os elementos da tela.
+
+CAUSA TÉCNICA
+
+Verifique em cada ícone:
+
+- `overflow: hidden`;
+- largura ou altura insuficiente;
+- `line-height` inadequado;
+- `padding` insuficiente;
+- margem negativa;
+- `transform: scale()` ou `translate()` excessivo;
+- `flex-shrink`;
+- SVG com `viewBox` incorreto;
+- SVG sem largura e altura definidas;
+- imagem usando `object-fit: cover`;
+- elemento posicionado fora do contêiner;
+- recorte causado pelo raio de borda;
+- contêiner herdando altura menor que o conteúdo.
+
+Não esconda o problema reduzindo excessivamente os ícones.
+
+PADRÃO DOS ÍCONES
+
+Crie um componente visual compartilhado para os ícones:
+
+- contêiner quadrado;
+- largura e altura consistentes;
+- alinhamento com `display: flex`;
+- `align-items: center`;
+- `justify-content: center`;
+- `flex-shrink: 0`;
+- `box-sizing: border-box`;
+- espaço interno suficiente;
+- ícone completamente visível;
+- proporção preservada.
+
+Para SVGs:
+
+- use um `viewBox` que contenha todo o desenho;
+- defina `width` e `height`;
+- use `display: block`;
+- preserve a proporção;
+- evite traços encostados nas extremidades do `viewBox`;
+- use `overflow: visible` quando o desenho possuir traços externos;
+- não corte sombras, contornos ou detalhes.
+
+Para PNG ou WebP:
+
+- use `object-fit: contain`;
+- use `object-position: center`;
+- não use `cover`;
+- mantenha fundo transparente;
+- não estique a imagem.
+
+CAMPAINHA
+
+Reconstrua corretamente o botão de notificações:
+
+- círculo branco com o mesmo tamanho do botão de menu;
+- área de toque mínima de 44 × 44 px;
+- campainha completamente centralizada;
+- margem interna em todos os lados;
+- nenhum traço da campainha pode tocar ou ultrapassar o círculo;
+- indicador coral ou vermelho inteiramente visível;
+- indicador posicionado no canto superior direito do botão;
+- não cortar o indicador pela borda circular;
+- o contêiner externo do indicador deve usar `overflow: visible`;
+- mantenha o botão afastado da borda direita;
+- alinhe o centro vertical da campainha com o centro do botão de menu.
+
+LOGOTIPO E CÂMERA
+
+O logotipo ainda está parcialmente encoberto pela câmera.
+
+- Mova o logotipo inteiro para baixo da Dynamic Island.
+- Preserve o nome “Leluá” e o slogan.
+- Nenhuma letra, folha, acento ou detalhe pode ficar sob a câmera.
+- Não reduza o logotipo excessivamente.
+- Aumente a altura reservada ao cabeçalho.
+- Respeite `env(safe-area-inset-top)`.
+- Menu, logotipo e campainha devem compartilhar o mesmo alinhamento vertical sem entrar na área da câmera.
+
+CARTÕES DE RESUMO
+
+Os três cartões devem permanecer com a mesma largura e altura.
+
+Em cada cartão, reserve áreas específicas para:
+
+1. ícone;
+2. título;
+3. valor principal;
+4. informação complementar.
+
+RELÓGIO
+
+- Mostre o círculo completo do relógio.
+- Preserve todos os ponteiros.
+- Não corte o contorno azul.
+- Centralize-o horizontalmente.
+- Deixe espaço entre o relógio e o título “Tempo de uso”.
+
+ESTRELA
+
+- Mostre as cinco pontas integralmente.
+- Não permita que a ponta superior seja cortada.
+- Preserve uma margem clara em torno da estrela.
+- Centralize-a sobre “Atividades realizadas”.
+- Não deixe a estrela invadir o título.
+
+GRÁFICO
+
+- Mostre integralmente todas as barras.
+- Preserve espaço acima da barra mais alta.
+- Centralize o conjunto.
+- Não deixe nenhuma barra tocar o topo do cartão.
+
+REGRAS DOS CARTÕES
+
+- Não use alturas diferentes.
+- Não deixe títulos invadirem os ícones.
+- Não corte palavras.
+- Permita quebra de linha controlada nos títulos.
+- Use a mesma área reservada para os três ícones.
+- Alinhe os valores principais pela mesma linha horizontal.
+- Alinhe os textos complementares na base.
+- Preserve os dados dinâmicos.
+
+ATALHOS INFERIORES
+
+Corrija os quatro atalhos:
+
+- Atividades;
+- Biblioteca;
+- Relatórios;
+- Configurações.
+
+Cada atalho deve ter:
+
+- mesma largura;
+- mesma altura;
+- mesmo espaço interno;
+- ícone centralizado;
+- legenda centralizada;
+- área reservada para o ícone;
+- área reservada para o texto;
+- nenhuma sobreposição.
+
+JOYSTICK
+
+- Mostre o controle inteiro.
+- Não corte as laterais, botões ou alavancas.
+- Preserve margem em todos os lados.
+- Não deixe o joystick tocar a legenda.
+
+LIVRO
+
+- Mostre capa e páginas integralmente.
+- Não corte a base ou a lateral.
+- Centralize o livro dentro do cartão.
+
+RELATÓRIOS
+
+- Mostre integralmente o documento ou gráfico.
+- Não corte a parte superior.
+- Preserve todas as barras ou linhas internas.
+
+ENGRENAGEM
+
+- Mostre todos os dentes da engrenagem.
+- Não corte as laterais.
+- Dê espaço entre o ícone e a borda do cartão.
+- Não deixe a engrenagem invadir a palavra “Configurações”.
+
+LEGENDAS DOS ATALHOS
+
+- Não reduzir excessivamente a fonte.
+- Usar Fredoka em peso 600.
+- Centralizar o texto.
+- Permitir quebra somente quando necessária.
+- Garantir que “Configurações” caiba sem sair do cartão.
+- Se necessário, aumente discretamente a largura total disponível ou reduza o espaçamento entre os cartões.
+- Não cortar letras usando `text-overflow`.
+- Não usar reticências.
+
+AUDITORIA COMPLETA
+
+Inspecione também:
+
+- botão de menu;
+- personagem Leluá;
+- folhas da personagem;
+- mão erguida;
+- bolsa e estrela;
+- ícone dos livros;
+- estrela do botão “Entrar no modo criança”;
+- setas dos cartões;
+- títulos;
+- descrições;
+- números;
+- textos complementares;
+- paisagem inferior.
+
+Para cada elemento, confirme:
+
+- está inteiramente dentro da área visível;
+- não está coberto por outro elemento;
+- não invade a área de texto;
+- não toca uma borda de forma acidental;
+- está centralizado em seu próprio contêiner;
+- possui espaço interno adequado;
+- mantém sua proporção original.
+
+ALINHAMENTO GLOBAL
+
+- Use margens laterais iguais.
+- Preserve um eixo comum entre saudação, cartões e “Acesso rápido”.
+- Centralize os três cartões de resumo como grupo.
+- Centralize os quatro atalhos como grupo.
+- Mantenha espaçamentos iguais entre cartões vizinhos.
+- Não use margens negativas.
+- Não use `transform: scale()` na tela inteira.
+- Não use posições absolutas para corrigir os ícones individualmente.
+- Prefira Flexbox ou Grid.
+- Não crie rolagem horizontal.
+- Não deixe faixa branca nas bordas.
+
+TESTES
+
+Teste a tela em:
+
+- 390 × 844 px;
+- 375 × 812 px;
+- 360 × 800 px.
+
+Em todas as dimensões:
+
+- nenhum ícone pode ser cortado;
+- nenhum texto pode sair do cartão;
+- o cabeçalho deve respeitar a câmera;
+- todos os botões devem permanecer clicáveis;
+- a tela pode usar rolagem vertical suave se necessário.
+
+VALIDAÇÃO FINAL
+
+Apresente uma captura completa da tela e confirme individualmente:
+
+1. Campainha inteira.
+2. Indicador vermelho inteiro.
+3. Logotipo abaixo da câmera.
+4. Relógio inteiro.
+5. Estrela inteira.
+6. Gráfico inteiro.
+7. Joystick inteiro.
+8. Livro inteiro.
+9. Relatório inteiro.
+10. Engrenagem inteira.
+11. Todas as legendas legíveis.
+12. Nenhum outro corte encontrado.
+13. Cartões perfeitamente alinhados.
+14. Atalhos perfeitamente alinhados.
+15. Todas as ações continuam funcionando.
+16. Testes existentes continuam aprovados.
+
+Modifique somente esta tela. Não altere outras páginas.

@@ -219,3 +219,23 @@ test("navigation stores world/activity IDs and preserves back behavior", () => {
   assert.equal(reward.rewardId, "lumi-flower");
   assert.equal(navigationReducer(reward, { type: "back" }).route, "map");
 });
+
+test("navigation preserves review and preview activity modes", () => {
+  const review = navigationReducer(initialNavigationState, {
+    type: "startActivity",
+    worldId: "fazenda-das-descobertas",
+    activityId: "farm-who-moo",
+    activityMode: "review",
+  });
+  assert.equal(review.route, "activity");
+  assert.equal(review.activityMode, "review");
+
+  const preview = navigationReducer(initialNavigationState, {
+    type: "startActivity",
+    worldId: "fazenda-das-descobertas",
+    activityId: "farm-find-horse",
+    activityMode: "preview",
+  });
+  assert.equal(preview.route, "activity");
+  assert.equal(preview.activityMode, "preview");
+});

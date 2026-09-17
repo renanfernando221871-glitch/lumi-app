@@ -8,6 +8,8 @@ export type StaticRoute =
   | "childIntro"
   | "map";
 
+export type ActivityLaunchMode = "review" | "preview";
+
 export type NavigationState =
   | { route: "splash" }
   | { route: "welcome" }
@@ -22,13 +24,19 @@ export type NavigationState =
       route: "activity";
       worldId: string;
       activityId: string;
+      activityMode?: ActivityLaunchMode;
       rewardId?: string;
     };
 
 export type NavigationAction =
   | { type: "replace"; route: StaticRoute }
   | { type: "openWorld"; worldId: string }
-  | { type: "startActivity"; worldId: string; activityId: string }
+  | {
+      type: "startActivity";
+      worldId: string;
+      activityId: string;
+      activityMode?: ActivityLaunchMode;
+    }
   | { type: "showReward"; rewardId: string }
   | { type: "back" };
 
@@ -50,6 +58,7 @@ export function navigationReducer(
         route: "activity",
         worldId: action.worldId,
         activityId: action.activityId,
+        ...(action.activityMode ? { activityMode: action.activityMode } : {}),
       };
     case "showReward":
       if (state.route !== "activity") {

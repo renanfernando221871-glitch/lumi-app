@@ -1,0 +1,118 @@
+Atualize somente a identidade da personagem na tela da atividade 2 — “Encontre o cavalo”.
+
+Não refaça o layout e não altere nenhuma funcionalidade.
+
+LOGOTIPO
+
+Substitua o logotipo antigo “Lumi” pelo logotipo oficial “Leluá” já existente no projeto.
+
+- Use o mesmo arquivo oficial utilizado nas telas anteriores.
+- Não recrie o logotipo com texto HTML.
+- Preserve as letras arredondadas e coloridas.
+- Preserve o acento agudo de “Leluá”.
+- Preserve o elemento de folhas.
+- Preserve o slogan “crescer é descobrir”.
+- Mantenha aproximadamente o mesmo tamanho e posicionamento.
+- Mostre o logotipo completamente.
+- Nenhuma letra, folha ou acento pode ficar escondido.
+- Preserve a proporção.
+- Use `object-fit: contain`.
+- Não estique, comprima ou corte.
+- Não exiba fundo quadrado.
+
+PERSONAGEM
+
+Preserve a posição e a postura atuais da personagem.
+
+Confirme que ela mantém a identidade oficial da Leluá:
+
+- corpo verde-menta;
+- rosto e barriga creme;
+- olhos castanhos;
+- bochechas rosadas;
+- duas folhas assimétricas;
+- bolsa marrom;
+- estrela amarela.
+
+Não mova, redimensione ou substitua a personagem se ela já estiver correta.
+
+PRESERVE A TELA
+
+Mantenha exatamente:
+
+“Atividade 2”
+
+“Encontre o cavalo”
+
+“2 de 8 atividades”
+
+“Toque no cavalo.”
+
+“vaca”
+
+“cavalo”
+
+“galinha”
+
+“Responder →”
+
+Não altere:
+
+- placa de madeira;
+- cenário da fazenda;
+- moinho;
+- celeiro;
+- flores;
+- cartões;
+- ilustrações dos animais;
+- bordas de seleção;
+- fontes;
+- cores;
+- espaçamentos;
+- botão;
+- navegação;
+- progresso;
+- sons;
+- animações.
+
+FUNCIONAMENTO
+
+- “cavalo” deve continuar sendo a resposta correta.
+- Preserve o destaque verde quando o cavalo estiver selecionado.
+- “vaca” e “galinha” devem continuar como alternativas.
+- O botão “Responder” deve continuar funcional.
+- O progresso deve continuar dinâmico.
+- Refazer a atividade não deve duplicar recompensas.
+
+VERIFICAÇÃO DO NOME
+
+Procure nos arquivos diretamente relacionados a esta atividade por referências destinadas ao usuário contendo:
+
+- `Lumi`;
+- `lumi`;
+- textos alternativos;
+- `aria-label`;
+- narrações;
+- legendas;
+- mensagens visíveis.
+
+Substitua essas referências por “Leluá”.
+
+Não renomeie rotas, arquivos ou variáveis internas se houver risco de quebrar o aplicativo.
+
+VALIDAÇÃO
+
+Antes de concluir, confirme:
+
+1. O logotipo mostra “Leluá”.
+2. O acento está visível.
+3. O slogan está legível.
+4. Nenhuma ocorrência visual ou narrada de “Lumi” permanece.
+5. O cavalo continua sendo a resposta correta.
+6. A seleção verde continua funcionando.
+7. O botão “Responder” continua funcionando.
+8. Nenhum elemento mudou de posição.
+9. Nenhuma outra tela foi modificada.
+10. Os testes existentes continuam aprovados.
+
+Apresente uma captura final mostrando que somente o logotipo foi atualizado.

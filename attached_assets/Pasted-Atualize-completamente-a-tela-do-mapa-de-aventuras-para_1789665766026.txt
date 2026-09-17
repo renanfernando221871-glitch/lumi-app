@@ -1,0 +1,372 @@
+Atualize completamente a tela do mapa de aventuras para o padrão visual oficial do aplicativo Leluá.
+
+Use a imagem anexada como referência de estrutura e narrativa, preservando:
+
+- mapa ilustrado;
+- caminhos;
+- mundos;
+- destinos;
+- estados bloqueados e desbloqueados;
+- navegação inferior;
+- funcionalidades existentes.
+
+Não transforme a tela inteira em uma imagem estática.
+
+O mapa pode continuar sendo uma ilustração de fundo, mas destinos, cadeados, indicadores, menu, configurações e navegação devem permanecer como componentes reais, acessíveis e funcionais.
+
+Modifique somente esta tela.
+
+IDENTIDADE DA MARCA
+
+Substitua toda ocorrência visual de “Lumi” por “Leluá”.
+
+- Use o logotipo oficial Leluá já existente no projeto.
+- Não recrie o logotipo usando texto simples.
+- Preserve as letras arredondadas e coloridas.
+- Preserve o acento agudo de “Leluá”.
+- Preserve o elemento de folhas.
+- Não deixe o logotipo atrás da câmera ou Dynamic Island.
+- Posicione o logotipo integralmente abaixo da área segura.
+- Não permita que nuvens cubram letras, folhas ou acento.
+- Remova completamente o nome antigo “Lumi”.
+
+CABEÇALHO
+
+Organize o cabeçalho nesta ordem:
+
+- logotipo Leluá à esquerda ou centralizado dentro da área disponível;
+- chamada principal abaixo ou ao lado;
+- botão de configurações no canto superior direito.
+
+Texto principal exato:
+
+“Qual aventura vamos explorar hoje?”
+
+Texto secundário exato:
+
+“Escolha um mundo e descubra coisas incríveis!”
+
+TIPOGRAFIA DO CABEÇALHO
+
+Texto principal:
+
+- Fredoka;
+- peso 700;
+- cor azul-escura;
+- boa legibilidade;
+- quebra equilibrada em duas linhas;
+- nenhum sinal de pontuação isolado.
+
+Texto secundário:
+
+- Nunito;
+- peso 500 ou 600;
+- cor azul-escura ou azul acinzentada;
+- tamanho menor, mas perfeitamente legível;
+- não cortar nenhuma palavra.
+
+Não use fonte padrão do navegador.
+
+Não permita sobreposição entre:
+
+- logotipo;
+- personagem;
+- título;
+- subtítulo;
+- botão de configurações;
+- placa decorativa.
+
+BOTÃO DE CONFIGURAÇÕES
+
+- Preserve o botão circular branco no canto superior direito.
+- Use uma engrenagem azul completamente visível.
+- Todos os dentes devem aparecer.
+- Centralize a engrenagem no círculo.
+- Não corte o ícone ou sua sombra.
+- Use área de toque mínima de 44 × 44 px.
+- Preserve a ação já existente.
+- Posicione abaixo da área da câmera.
+- Mantenha distância segura da borda direita.
+
+PERSONAGEM
+
+Substitua a personagem atual pela Leluá oficial.
+
+Nesta tela, utilize uma pose de exploradora acolhedora:
+
+- corpo verde-menta;
+- rosto e barriga creme;
+- olhos grandes castanhos;
+- bochechas rosadas;
+- duas folhas verdes assimétricas;
+- uma mão levantada indicando ou convidando para a aventura;
+- outra mão próxima ao corpo;
+- bolsa transversal marrom;
+- estrela amarela de cinco pontas;
+- expressão alegre e curiosa.
+
+- Mostre integralmente as folhas, o rosto, a mão levantada e a bolsa.
+- Não corte nenhuma mão.
+- Não cubra a personagem com o título.
+- Não deixe a personagem encostar no logotipo.
+- Use imagem com fundo transparente.
+- Use `object-fit: contain`.
+- Não exiba fundo quadrado.
+- Preserve a identidade visual das telas anteriores.
+
+PLACA DE MENSAGEM
+
+Mantenha exatamente:
+
+“Pequenas descobertas, um grande amanhã!”
+
+- Use uma pequena placa de madeira no lado direito.
+- Use Fredoka ou Nunito em peso 600.
+- Centralize o texto.
+- Não corte palavras.
+- Não permita que a placa cubra o título ou um destino do mapa.
+- Use leve inclinação para manter o aspecto lúdico.
+- Preserve contraste suficiente entre texto e madeira.
+
+MAPA
+
+Preserve a ideia de um mapa infantil colorido com:
+
+- caminhos;
+- colinas;
+- árvores;
+- rios;
+- pontes;
+- cachoeira;
+- construções;
+- flores;
+- pequenos elementos naturais;
+- áreas distintas para cada mundo.
+
+O mapa deve preencher toda a área entre o cabeçalho e a navegação inferior.
+
+- Não deixar faixa branca lateral.
+- Não esticar ou deformar a ilustração.
+- Use `background-size: cover` ou uma composição equivalente que mantenha o enquadramento.
+- Centralize o mapa.
+- Garanta que os destinos importantes não sejam cortados.
+- Não permita rolagem horizontal.
+- Se houver rolagem vertical dentro do mapa, preserve limites claros e navegação suave.
+
+DESTINOS
+
+Preserve estes destinos:
+
+1. Fazenda
+2. Parque
+3. Casa
+4. Mercado
+5. Cidade
+
+Cada destino deve possuir:
+
+- ilustração própria;
+- etiqueta branca;
+- nome centralizado;
+- fonte Fredoka em peso 600 ou 700;
+- texto azul-escuro;
+- cantos arredondados;
+- sombra leve;
+- área clicável independente;
+- estado visual claramente identificável.
+
+Os nomes devem aparecer exatamente como:
+
+“Fazenda”  
+“Parque”  
+“Casa”  
+“Mercado”  
+“Cidade”
+
+Não corte nenhuma letra.
+
+Não deixe as etiquetas sobrepostas às construções ou aos cadeados.
+
+FAZENDA
+
+- Preserve a fazenda como destino inicial ou concluído, conforme o estado atual.
+- Mostre um indicador verde de confirmação completamente visível quando estiver concluída.
+- O círculo verde e a marca de verificação devem aparecer inteiros.
+- Preserve a ação correspondente.
+
+PARQUE, CASA, MERCADO E CIDADE
+
+- Preserve os estados reais de bloqueio ou desbloqueio.
+- Não fixe todos como bloqueados apenas para imitar o print.
+- Consulte os dados de progresso existentes.
+- Mostre cadeados somente quando o destino estiver realmente bloqueado.
+- Destinos desbloqueados devem ser clicáveis.
+- Destinos bloqueados devem informar por que ainda não estão disponíveis.
+
+CADEADOS
+
+- Use círculos brancos ou creme com cadeado azul-escuro.
+- Mostre o cadeado inteiro.
+- Não corte o arco ou a base.
+- Centralize dentro do círculo.
+- Mantenha o mesmo tamanho em todos os destinos.
+- Não deixe os cadeados cobrirem os nomes.
+- Não deixe cadeados sobre partes essenciais das ilustrações.
+- Preserve contraste e área de toque.
+
+CAMINHOS E PROGRESSÃO
+
+- Deixe o caminho principal visualmente claro.
+- Mostre a progressão entre os mundos.
+- Use curvas suaves e pontes.
+- Não esconda o caminho atrás das etiquetas.
+- Se houver ordem de desbloqueio, represente-a de forma compreensível.
+- Preserve a lógica existente do aplicativo.
+
+PLACA INFERIOR
+
+Mantenha a placa decorativa inferior com a mensagem:
+
+“Explorar  
+Aprender  
+Crescer”
+
+- Use uma placa pequena de madeira.
+- Não cubra destinos ou a navegação inferior.
+- Mantenha o texto legível.
+- Use inclinação suave.
+- Preserve o caráter decorativo.
+
+NAVEGAÇÃO INFERIOR
+
+Preserve quatro itens:
+
+1. Início
+2. Relatórios
+3. Conquistas
+4. Perfil
+
+- Use uma barra branca com cantos superiores arredondados.
+- Respeite `env(safe-area-inset-bottom)`.
+- Centralize os quatro itens.
+- Use larguras iguais.
+- Garanta área de toque mínima adequada.
+- Mostre todos os ícones integralmente.
+- Não corte legendas.
+- Não deixe a barra atrás da linha inferior do aparelho.
+
+ITEM ATIVO
+
+- “Início” deve aparecer como ativo.
+- Use fundo azul-claro arredondado ou outro destaque suave.
+- Use ícone azul vivo.
+- Use legenda azul.
+- Não dependa somente da cor; preserve também uma forma de destaque.
+
+ITENS INATIVOS
+
+- Use azul acinzentado ou cinza-azulado.
+- Preserve contraste suficiente.
+- Não deixe os ícones claros demais.
+- Mantenha as ações existentes.
+
+ÍCONES INFERIORES
+
+Utilize:
+
+- casa para Início;
+- documento ou gráfico para Relatórios;
+- troféu ou medalha para Conquistas;
+- pessoa para Perfil.
+
+- Mostre os quatro ícones inteiros.
+- Centralize ícone e legenda.
+- Mantenha o mesmo tamanho visual.
+- Não corte contornos.
+- Use `flex-shrink: 0`.
+- Não deixe os ícones encostarem nas bordas.
+
+ELEMENTOS DECORATIVOS
+
+Preserve o estilo lúdico com:
+
+- flores;
+- arbustos;
+- pedras;
+- pássaros ou patinhos;
+- árvores;
+- água;
+- pequenas estrelas ou traços amarelos.
+
+Esses elementos são secundários.
+
+- Não cubra destinos.
+- Não cubra etiquetas.
+- Não cubra cadeados.
+- Não interfira nos botões.
+- Não prejudique a legibilidade.
+
+ALINHAMENTO E RESPONSIVIDADE
+
+- Teste em 390 × 844 px.
+- Respeite áreas seguras superior e inferior.
+- Use `box-sizing: border-box`.
+- Não use `transform: scale()` na tela inteira.
+- Não use zoom.
+- Não utilize margens negativas para encaixar elementos.
+- Não crie rolagem horizontal.
+- Preserve margens internas equilibradas.
+- Use posicionamento relativo ao contêiner do mapa, não à moldura externa do aparelho.
+- Garanta comportamento adequado em 375 × 812 e 360 × 800 px.
+
+FUNCIONALIDADES
+
+Confirme que continuam funcionando:
+
+- botão de configurações;
+- destino Fazenda;
+- destino Parque;
+- destino Casa;
+- destino Mercado;
+- destino Cidade;
+- regras de bloqueio;
+- progresso;
+- Início;
+- Relatórios;
+- Conquistas;
+- Perfil.
+
+Não substitua estados dinâmicos por imagens fixas.
+
+Não altere a lógica de desbloqueio sem autorização.
+
+ACESSIBILIDADE
+
+- Adicione rótulos acessíveis aos destinos.
+- Informe se o destino está bloqueado, disponível ou concluído.
+- Garanta contraste suficiente.
+- Preserve foco visível.
+- Use áreas de toque confortáveis.
+- Não dependa apenas de cadeados ou cores para comunicar o estado.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir:
+
+1. Confirme que não aparece mais “Lumi”.
+2. Confirme que o logotipo mostra “Leluá”.
+3. Confirme que o logotipo está abaixo da câmera.
+4. Confirme que a personagem oficial está completa.
+5. Confirme que título e subtítulo estão legíveis.
+6. Confirme que os cinco destinos estão corretamente posicionados.
+7. Confirme que etiquetas e cadeados não estão cortados.
+8. Confirme que os estados dos mundos continuam dinâmicos.
+9. Confirme que a barra inferior está alinhada.
+10. Confirme que nenhum ícone está cortado.
+11. Confirme que não existe faixa branca lateral.
+12. Confirme que não existe rolagem horizontal.
+13. Execute os testes existentes.
+14. Apresente uma captura final em 390 × 844 px.
+15. Informe os arquivos modificados.
+
+Se a implementação não estiver visualmente próxima da referência e do padrão das telas anteriores, continue ajustando antes de encerrar.

@@ -1,0 +1,128 @@
+{
+  "activity4": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "clientHeight": 844,
+      "scrollHeight": 844
+    },
+    "activity": {
+      "left": 0,
+      "right": 390,
+      "width": 390,
+      "top": 0,
+      "bottom": 844,
+      "height": 844,
+      "center": 195
+    },
+    "controls": [
+      {
+        "label": "Voltar",
+        "left": 15.59375,
+        "right": 81.890625,
+        "width": 66.296875,
+        "center": 48.7421875,
+        "top": 59.078125,
+        "bottom": 135.03125,
+        "height": 75.953125
+      },
+      {
+        "label": "quantidade 3",
+        "left": 46.796875,
+        "right": 132.59375,
+        "width": 85.796875,
+        "center": 89.6953125,
+        "top": 558.71875,
+        "bottom": 659.984375,
+        "height": 101.265625
+      },
+      {
+        "label": "quantidade 4",
+        "left": 152.09375,
+        "right": 237.890625,
+        "width": 85.796875,
+        "center": 194.9921875,
+        "top": 558.71875,
+        "bottom": 659.984375,
+        "height": 101.265625
+      },
+      {
+        "label": "quantidade 5",
+        "left": 257.390625,
+        "right": 343.1875,
+        "width": 85.796875,
+        "center": 300.2890625,
+        "top": 558.71875,
+        "bottom": 659.984375,
+        "height": 101.265625
+      }
+    ]
+  },
+  "activity2": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "clientHeight": 844,
+      "scrollHeight": 844
+    },
+    "activity": {
+      "left": 0,
+      "right": 390,
+      "width": 390,
+      "top": 0,
+      "bottom": 844,
+      "height": 844,
+      "center": 195
+    },
+    "controls": [
+      {
+        "label": "Voltar",
+        "left": 15.59375,
+        "right": 81.890625,
+        "width": 66.296875,
+        "center": 48.7421875,
+        "top": 59.078125,
+        "bottom": 135.03125,
+        "height": 75.953125
+      },
+      {
+        "label": "vaca",
+        "left": 31.1875,
+        "right": 358.78125,
+        "width": 327.59375,
+        "center": 194.984375,
+        "top": 369.671875,
+        "bottom": 466.71875,
+        "height": 97.046875
+      },
+      {
+        "label": "cavalo",
+        "left": 31.1875,
+        "right": 358.78125,
+        "width": 327.59375,
+        "center": 194.984375,
+        "top": 476.015625,
+        "bottom": 573.0625,
+        "height": 97.046875
+      },
+      {
+        "label": "galinha",
+        "left": 31.1875,
+        "right": 358.78125,
+        "width": 327.59375,
+        "center": 194.984375,
+        "top": 582.359375,
+        "bottom": 679.40625,
+        "height": 97.046875
+      }
+    ]
+  }
+}

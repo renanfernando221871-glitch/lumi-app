@@ -2,13 +2,13 @@ import React from "react";
 import {
   Image,
   ImageSourcePropType,
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+import { LeluaLogo } from "../components/LeluaLogo";
 import { LumiCharacter } from "../components/LumiCharacter";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { colors, shadow } from "../theme/colors";
@@ -25,11 +25,7 @@ type SafetyItemProps = {
   title: string;
 };
 
-const roundedFont = Platform.select({
-  ios: "Arial Rounded MT Bold",
-  android: "sans-serif-rounded",
-  web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
-});
+const roundedFont = "Fredoka_700Bold";
 
 const safetyItems: SafetyItemProps[] = [
   {
@@ -66,7 +62,10 @@ export function SafetyScreen({ onBack, onContinue }: Props) {
         <View style={[styles.bush, styles.bushRight]} />
       </View>
 
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.top}>
           <View style={styles.back}>
             <Pressable
@@ -82,29 +81,38 @@ export function SafetyScreen({ onBack, onContinue }: Props) {
             </Pressable>
           </View>
 
-          <Image
-            accessibilityLabel="Lumi — crescer é descobrir"
-            resizeMode="contain"
-            source={require("../../assets/images/lumi/lumi-logo-guardian.png")}
-            style={styles.logo}
-          />
+          <LeluaLogo compact style={styles.logo} />
 
           <View style={styles.greeting}>
             <View style={styles.speechBubble}>
               <Text style={styles.speechText}>
-                Um lugar seguro para aprender e se divertir!
+                <Text style={styles.speechLead}>Um lugar </Text>
+                <Text style={styles.speechHighlight}>seguro</Text>
+                {"\n"}
+                <Text style={styles.speechLead}>para aprender e se</Text>
+                {"\n"}
+                <Text style={styles.speechAccent}>divertir!</Text>
               </Text>
+              <View style={styles.speechTail} />
+              <View style={[styles.speechSpark, styles.speechSparkTop]} />
+              <View style={[styles.speechSpark, styles.speechSparkMiddle]} />
+              <View style={[styles.speechSpark, styles.speechSparkBottom]} />
             </View>
             <LumiCharacter
-              accessibilityLabel="Lumi, personagem oficial"
+              accessibilityLabel="Leluá, personagem oficial"
               expression="main"
               size="large"
+              style={styles.greetingCharacter}
             />
           </View>
         </View>
 
         <View style={styles.card}>
-          <Text style={styles.title}>Um ambiente seguro{"\n"}para explorar</Text>
+          <Text style={styles.title}>
+            Um ambiente{"\n"}
+            <Text style={styles.titleHighlight}>seguro</Text>
+            {"\n"}para explorar
+          </Text>
           <Text style={styles.description}>
             Aqui, a diversão vem junto com aprendizado, tranquilidade e proteção.
           </Text>
@@ -122,6 +130,7 @@ export function SafetyScreen({ onBack, onContinue }: Props) {
             label="Continuar"
             onPress={onContinue}
             style={styles.continueButton}
+            textStyle={styles.buttonText}
           />
         </View>
       </ScrollView>
@@ -156,13 +165,13 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.82)",
   },
   cloudLeft: {
-    left: "5%",
-    top: "15%",
+    left: -20,
+    top: "18%",
   },
   cloudRight: {
-    right: "4%",
-    top: "9%",
-    transform: [{ scale: 0.75 }],
+    right: -24,
+    top: "13%",
+    transform: [{ scale: 0.64 }],
   },
   hillBack: {
     position: "absolute",
@@ -203,13 +212,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 22,
     paddingTop: 18,
-    paddingBottom: 52,
+    paddingBottom: 58,
   },
   top: {
     width: "100%",
     maxWidth: 400,
-    height: 255,
+    height: 230,
     alignItems: "center",
+    position: "relative",
+    overflow: "visible",
   },
   back: {
     position: "absolute",
@@ -237,114 +248,187 @@ const styles = StyleSheet.create({
     marginTop: -3,
   },
   logo: {
-    width: 185,
-    height: 86,
+    width: 210,
+    height: 94,
   },
   greeting: {
     position: "absolute",
-    right: -9,
-    bottom: -25,
+    right: 0,
+    bottom: -22,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
+    overflow: "visible",
   },
   speechBubble: {
     width: 190,
-    minHeight: 92,
-    borderRadius: 27,
+    minHeight: 98,
+    borderTopLeftRadius: 36,
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 39,
+    borderBottomLeftRadius: 28,
+    borderWidth: 2,
+    borderColor: "#F7FCFF",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 18,
+    paddingHorizontal: 10,
     backgroundColor: colors.white,
+    marginTop: 30,
+    marginRight: -8,
+    zIndex: 1,
+    overflow: "visible",
+    transform: [{ rotate: "-2.5deg" }],
     ...shadow,
   },
+  speechTail: {
+    position: "absolute",
+    right: -8,
+    top: 35,
+    width: 21,
+    height: 21,
+    borderBottomRightRadius: 7,
+    borderRightWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: "#F7FCFF",
+    backgroundColor: colors.white,
+    transform: [{ rotate: "45deg" }],
+    zIndex: 1,
+  },
   speechText: {
-    color: colors.deepGreen,
     fontFamily: roundedFont,
-    fontSize: 17,
-    lineHeight: 22,
-    fontWeight: "900",
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "700",
     textAlign: "center",
+    transform: [{ rotate: "2.5deg" }],
+    zIndex: 2,
+  },
+  speechLead: {
+    color: "#123C84",
+  },
+  speechHighlight: {
+    color: "#2FAE67",
+    fontWeight: "700",
+  },
+  speechAccent: {
+    color: "#168AC5",
+    fontSize: 17,
+    fontWeight: "700",
+  },
+  speechSpark: {
+    position: "absolute",
+    left: -11,
+    width: 10,
+    height: 3,
+    borderRadius: 3,
+    backgroundColor: "#F6C945",
+  },
+  speechSparkTop: {
+    top: 27,
+    transform: [{ rotate: "28deg" }],
+  },
+  speechSparkMiddle: {
+    top: 44,
+    left: -14,
+  },
+  speechSparkBottom: {
+    top: 61,
+    transform: [{ rotate: "-28deg" }],
+  },
+  greetingCharacter: {
+    width: 150,
+    height: 160,
+    zIndex: 2,
   },
   card: {
     width: "100%",
     maxWidth: 400,
     borderRadius: 34,
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 22,
+    paddingHorizontal: 22,
+    paddingTop: 23,
+    paddingBottom: 24,
     backgroundColor: colors.white,
     ...shadow,
   },
   title: {
     color: "#123C84",
     fontFamily: roundedFont,
-    fontSize: 29,
-    lineHeight: 32,
-    fontWeight: "900",
+    fontSize: 30,
+    lineHeight: 33,
+    fontWeight: "700",
     textAlign: "center",
+  },
+  titleHighlight: {
+    color: "#168AC5",
   },
   description: {
     maxWidth: 320,
     alignSelf: "center",
     color: "#334C78",
+    fontFamily: "Nunito_500Medium",
     fontSize: 15,
-    lineHeight: 19,
+    lineHeight: 20,
     textAlign: "center",
     marginTop: 5,
     marginBottom: 12,
   },
   items: {
-    gap: 8,
+    gap: 9,
   },
   item: {
     width: "100%",
-    minHeight: 72,
+    height: 84,
     borderRadius: 19,
     flexDirection: "row",
     alignItems: "center",
     overflow: "hidden",
-    backgroundColor: "#F7F9FC",
+    backgroundColor: "#EEF8FF",
   },
   itemIcon: {
-    width: 78,
-    height: 72,
+    width: 84,
+    height: 84,
   },
   itemCopy: {
     flex: 1,
     paddingHorizontal: 12,
-    paddingVertical: 7,
+    paddingVertical: 8,
   },
   itemTitle: {
     color: "#123C84",
+    fontFamily: roundedFont,
     fontSize: 15,
     lineHeight: 18,
-    fontWeight: "900",
+    fontWeight: "700",
   },
   itemDescription: {
     color: "#405473",
-    fontSize: 12,
-    lineHeight: 15,
-    marginTop: 1,
+    fontFamily: "Nunito_400Regular",
+    fontSize: 12.5,
+    lineHeight: 16,
+    marginTop: 2,
   },
   controlText: {
     color: colors.deepGreen,
-    fontFamily: roundedFont,
+    fontFamily: "Fredoka_600SemiBold",
     fontSize: 18,
-    fontWeight: "900",
+    fontWeight: "600",
     textAlign: "center",
     marginTop: 13,
   },
   controlUnderline: {
-    width: 90,
+    width: 76,
     height: 3,
     alignSelf: "center",
     borderRadius: 2,
-    backgroundColor: "#69D8E2",
+    backgroundColor: "#42B86B",
     marginTop: 5,
+    transform: [{ rotate: "-2deg" }],
   },
   continueButton: {
     width: "100%",
-    minHeight: 60,
+    minHeight: 64,
     marginTop: 15,
+  },
+  buttonText: {
+    fontFamily: roundedFont,
   },
 });

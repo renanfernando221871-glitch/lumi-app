@@ -22,6 +22,8 @@ import {
 } from "./src/domain/progress";
 import { persistProgressBeforeCommit } from "./src/domain/progressPersistence";
 import { useAppNavigation } from "./src/navigation/useAppNavigation";
+import { getFarmActivityPreviewRequest } from "./src/navigation/developmentPreview";
+import { isNonProgressingActivityMode } from "./src/navigation/activityLaunchPolicy";
 import { ActivityScreen } from "./src/screens/ActivityScreen";
 import { HouseScreen } from "./src/screens/HouseScreen";
 import { GuardianSignupScreen } from "./src/screens/GuardianSignupScreen";
@@ -97,6 +99,7 @@ function LumiApp() {
   const [profile, setProfile] = useState<ChildProfile>(defaultProfile);
   const [progress, setProgress] = useState<ProgressState>(defaultProgress);
   const progressRef = useRef<ProgressState>(defaultProgress);
+  const developmentPreviewHandledRef = useRef(false);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
@@ -106,8 +109,14 @@ function LumiApp() {
       Platform.OS === "web" &&
       typeof window !== "undefined" &&
       new URLSearchParams(window.location.search).get("resetProgress") === "1";
+    const developmentActivityPreview =
+      __DEV__ &&
+      Platform.OS === "web" &&
+      typeof window !== "undefined"
+        ? getFarmActivityPreviewRequest(window.location.href, __DEV__)
+        : undefined;
     const prepare =
-      __DEV__ && Platform.OS === "web"
+      __DEV__ && Platform.OS === "web" && !developmentActivityPreview
         ? preparePreviewProgress(forcePreviewReset)
         : Promise.resolve();
 
@@ -129,6 +138,26 @@ function LumiApp() {
       mounted = false;
     };
   }, [replace]);
+
+  useEffect(() => {
+    if (
+      developmentPreviewHandledRef.current ||
+      !hydrated ||
+      !__DEV__ ||
+      Platform.OS !== "web" ||
+      typeof window === "undefined"
+    ) {
+      return;
+    }
+
+    developmentPreviewHandledRef.current = true;
+    const request = getFarmActivityPreviewRequest(window.location.href, __DEV__);
+    const farm = worldCatalog.find(
+      (candidate) => candidate.id === "fazenda-das-descobertas",
+    );
+    if (!request || !farm?.activityIds.includes(request.activityId)) return;
+    navigation.startActivity(farm.id, request.activityId, "preview");
+  }, [hydrated, navigation.startActivity]);
 
   const updateProfile = (name: string, avatar: string) => {
     const next = { name, avatar, hasOnboarded: true };
@@ -245,11 +274,17 @@ function LumiApp() {
   );
 
   if (navigation.route === "house") {
-    const startActivities = () => {
-      const next =
-        getNextIncompleteActivityId(world, progress.completedActivityIds) ??
-        worldActivities[0].id;
-      navigation.startActivity(world.id, next);
+    const startActivities = (selectedActivityId?: string) => {
+      const next = getNextIncompleteActivityId(
+        world,
+        progress.completedActivityIds,
+      );
+      const destinationId =
+        selectedActivityId ?? next ?? worldActivities[0].id;
+      const activityMode = progress.completedActivityIds.includes(destinationId)
+        ? "review"
+        : undefined;
+      navigation.startActivity(world.id, destinationId, activityMode);
     };
     return (
       <HouseScreen
@@ -264,13 +299,26 @@ function LumiApp() {
   }
 
   const activity = getActivity(worldActivities, navigation.activityId);
+  const isReviewMode = navigation.activityMode === "review";
+  const isDevelopmentPreview =
+    __DEV__ && navigation.activityMode === "preview";
+  const isNonProgressingMode = isNonProgressingActivityMode(
+    navigation.activityMode,
+    __DEV__,
+  );
+  const canAccessSelectedActivity = isDevelopmentPreview
+    ? world.id === "fazenda-das-descobertas" &&
+      world.activityIds.includes(activity.id)
+    : isReviewMode
+      ? progress.completedActivityIds.includes(activity.id)
+      : canStartWorldActivity(
+          world,
+          activity.id,
+          progress,
+          worldCatalog,
+        );
   if (
-    !canStartWorldActivity(
-      world,
-      activity.id,
-      progress,
-      worldCatalog,
-    )
+    !canAccessSelectedActivity
   ) {
     const expectedActivityId = getNextIncompleteActivityId(
       world,
@@ -289,6 +337,10 @@ function LumiApp() {
   const activityIndex = worldActivities.indexOf(activity);
 
   const completeActivity = async () => {
+    if (isNonProgressingMode) {
+      navigation.openWorld(world.id);
+      return;
+    }
     const transition = completeWorldActivityTransition(
       progressRef.current,
       world,

@@ -1,0 +1,80 @@
+Verifique a origem do retângulo preto com cantos arredondados que aparece na parte superior de todas as telas.
+
+Esse elemento simula a Dynamic Island ou a câmera de um iPhone e não deve ser desenhado pela interface do aplicativo.
+
+PRIMEIRO, IDENTIFIQUE A ORIGEM
+
+Determine se o retângulo preto pertence:
+
+1. à moldura de visualização do Replit; ou
+2. ao código do aplicativo.
+
+Se pertencer exclusivamente ao simulador ou à moldura de prévia do Replit:
+
+- não altere o código;
+- informe que o elemento não será exibido como parte da interface publicada;
+- apresente também uma prévia sem moldura, se disponível.
+
+Se o retângulo estiver implementado no aplicativo:
+
+- remova-o de todas as telas;
+- remova o componente que o desenha;
+- remova pseudo-elementos CSS relacionados;
+- remova classes como `dynamic-island`, `notch`, `camera-cutout`, `phone-notch` ou equivalentes;
+- remova imagens decorativas usadas para simular câmera;
+- não remova elementos reais da barra de status do sistema.
+
+PESQUISE NO PROJETO
+
+Procure por:
+
+- `DynamicIsland`;
+- `Notch`;
+- `PhoneFrame`;
+- `DeviceFrame`;
+- `camera-cutout`;
+- `dynamic-island`;
+- `notch`;
+- elementos pretos com `border-radius`;
+- pseudo-elementos `::before` e `::after`;
+- elementos com `position: absolute` no centro superior;
+- componentes compartilhados que envolvam todas as telas.
+
+Não esconda o elemento em apenas uma tela. Se ele fizer parte do código, elimine-o no componente compartilhado responsável por todas as páginas.
+
+PRESERVE A ÁREA SEGURA
+
+Mesmo que o retângulo visual seja removido:
+
+- continue respeitando `env(safe-area-inset-top)`;
+- mantenha espaço superior adequado em aparelhos com câmera ou notch;
+- não mova o logotipo para o topo absoluto;
+- não permita que logotipo, botões ou textos fiquem atrás da câmera real;
+- preserve o alinhamento dos cabeçalhos;
+- não substitua a área segura por uma altura fixa exagerada.
+
+A tela publicada deve se adaptar automaticamente:
+
+- em aparelhos com Dynamic Island, o sistema fornece a área segura;
+- em aparelhos sem Dynamic Island, não deve existir um espaço preto artificial;
+- em navegador comum, não deve aparecer nenhum retângulo preto.
+
+VALIDAÇÃO
+
+Teste:
+
+1. prévia do aplicativo sem moldura;
+2. viewport móvel de 390 × 844 px;
+3. viewport de Android;
+4. viewport de iPhone com área segura.
+
+Confirme:
+
+- nenhum retângulo preto artificial aparece;
+- o aplicativo não desenha uma câmera falsa;
+- a área segura continua funcionando;
+- nenhum cabeçalho ficou alto ou baixo demais;
+- nenhum logotipo foi cortado;
+- nenhuma funcionalidade foi modificada.
+
+Informe se o elemento era parte do simulador ou do código e quais arquivos foram alterados.

@@ -1,14 +1,13 @@
 import React from "react";
 import {
   Image,
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
-import { LumiCharacter } from "../components/LumiCharacter";
+import { LeluaLogo } from "../components/LeluaLogo";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
 
@@ -18,11 +17,8 @@ type Props = {
   onContinue: () => void;
 };
 
-const roundedFont = Platform.select({
-  ios: "Arial Rounded MT Bold",
-  android: "sans-serif-rounded",
-  web: "ui-rounded, Arial Rounded MT Bold, Trebuchet MS, sans-serif",
-});
+const roundedFont = "Fredoka_700Bold";
+const bodyMediumFont = "Nunito_500Medium";
 
 export function ChildIntroScreen({ childName: _childName, onBack, onContinue }: Props) {
   return (
@@ -62,19 +58,15 @@ export function ChildIntroScreen({ childName: _childName, onBack, onContinue }: 
           <Text style={styles.backIcon}>‹</Text>
         </Pressable>
 
-        <Image
-          accessibilityLabel="Lumi — crescer é descobrir"
-          resizeMode="contain"
-          source={require("../../assets/images/lumi/lumi-logo-guardian.png")}
-          style={styles.logo}
-        />
+        <LeluaLogo compact style={styles.logo} />
 
         <View style={styles.characterStage}>
           <View style={styles.characterShadow} />
-          <LumiCharacter
-            accessibilityLabel="Lumi, personagem oficial"
-            expression="childIntro"
-            size="hero"
+          <Image
+            accessibilityLabel="Leluá, personagem oficial com os braços abertos"
+            resizeMode="contain"
+            source={require("../../assets/images/lumi/lelua-child-intro-open-arms.png")}
+            style={styles.character}
           />
         </View>
 
@@ -84,8 +76,8 @@ export function ChildIntroScreen({ childName: _childName, onBack, onContinue }: 
             <Text style={styles.hello}>Olá!</Text>
             <Text style={[styles.ray, styles.helloRayRight]}>‹‹</Text>
           </View>
-          <Text style={styles.title}>
-            Eu sou a <Text style={styles.lumiWord}>Lumi</Text>!
+          <Text numberOfLines={1} style={styles.title}>
+            Eu sou a <Text style={styles.leluaWord}>Leluá!</Text>
           </Text>
           <Text style={styles.subtitle}>
             Vamos explorar, brincar e descobrir?
@@ -97,8 +89,9 @@ export function ChildIntroScreen({ childName: _childName, onBack, onContinue }: 
             onPress={onContinue}
             style={styles.continueButton}
           >
-            <Text style={styles.continueText}>Vamos lá!</Text>
-            <Text style={styles.continueArrow}>›</Text>
+            <Text numberOfLines={1} style={styles.continueText}>
+              Vamos lá! →
+            </Text>
           </Pressable>
         </View>
       </ScrollView>
@@ -216,6 +209,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "relative",
   },
+  character: {
+    width: 350,
+    height: 475,
+    flexShrink: 0,
+  },
   characterShadow: {
     position: "absolute",
     bottom: 17,
@@ -229,7 +227,7 @@ const styles = StyleSheet.create({
     color: "#FFBE31",
     fontFamily: roundedFont,
     fontSize: 32,
-    fontWeight: "900",
+    fontWeight: "700",
   },
   copy: { width: "100%", maxWidth: 400, alignItems: "center", marginTop: -8 },
   helloRow: { height: 52, flexDirection: "row", alignItems: "center", justifyContent: "center" },
@@ -238,7 +236,7 @@ const styles = StyleSheet.create({
     fontFamily: roundedFont,
     fontSize: 50,
     lineHeight: 54,
-    fontWeight: "900",
+    fontWeight: "700",
   },
   helloRayLeft: { position: "relative", fontSize: 25, marginRight: 11, transform: [{ rotate: "54deg" }] },
   helloRayRight: { position: "relative", fontSize: 25, marginLeft: 11, transform: [{ rotate: "-54deg" }] },
@@ -250,13 +248,13 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     textAlign: "center",
   },
-  lumiWord: { color: "#F17C68" },
+  leluaWord: { color: "#F17C68" },
   subtitle: {
     color: "#24508A",
-    fontFamily: roundedFont,
+    fontFamily: bodyMediumFont,
     fontSize: 17,
     lineHeight: 22,
-    fontWeight: "800",
+    fontWeight: "500",
     textAlign: "center",
     marginTop: 12,
   },
@@ -275,14 +273,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontFamily: roundedFont,
     fontSize: 28,
-    fontWeight: "900",
-  },
-  continueArrow: {
-    position: "absolute",
-    right: 24,
-    color: colors.white,
-    fontSize: 39,
-    lineHeight: 41,
-    fontWeight: "800",
+    fontWeight: "700",
   },
 });

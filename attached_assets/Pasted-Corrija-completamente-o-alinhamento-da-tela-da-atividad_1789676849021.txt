@@ -1,0 +1,350 @@
+Corrija completamente o alinhamento da tela da atividade 3 — “O animal marrom” — e atualize a identidade antiga para Leluá.
+
+A arte está deslocada e não acompanha corretamente a área útil da tela do celular. Corrija a estrutura responsiva, não apenas mova elementos individualmente.
+
+Não transforme a tela em uma imagem estática.
+
+Modifique somente esta atividade.
+
+PROBLEMAS VISÍVEIS
+
+- Conteúdo geral desalinhado em relação à tela.
+- Cenário deslocado lateralmente.
+- Cabeçalho sem eixo central consistente.
+- Botão de configurações parcialmente cortado.
+- Personagem excessivamente cortada na lateral esquerda.
+- Placa e cabeçalho fora de alinhamento.
+- Cartões sem margens laterais equilibradas.
+- Botão inferior sem centralização perfeita.
+- Fundo não preenchendo uniformemente a área interna.
+- Possível faixa branca ou espaço vazio na base.
+- Elementos calculados em relação à moldura do telefone, e não ao viewport real do aplicativo.
+
+CORREÇÃO ESTRUTURAL
+
+Crie um contêiner raiz próprio para a tela da atividade.
+
+O contêiner deve:
+
+- ocupar 100% da largura disponível;
+- usar altura mínima de `100dvh`;
+- usar `box-sizing: border-box`;
+- usar `position: relative`;
+- respeitar as áreas seguras;
+- não possuir margem lateral;
+- não possuir deslocamento horizontal;
+- não usar escala global;
+- não depender das dimensões da moldura do celular;
+- não criar rolagem horizontal.
+
+Use uma estrutura conceitualmente equivalente a:
+
+```css
+.activityScreen {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+```
+
+Não utilize `left`, `right`, `translateX`, margens negativas ou larguras maiores que 100% para alinhar a tela.
+
+Não use `100vw` dentro de um contêiner que já possui largura ou padding, pois isso pode provocar deslocamento lateral.
+
+IDENTIDADE
+
+Substitua o logotipo antigo “Lumi” pelo logotipo oficial “Leluá”.
+
+- Use o arquivo oficial já existente.
+- Não recrie com texto simples.
+- Preserve as letras coloridas e arredondadas.
+- Preserve o acento agudo.
+- Preserve as folhas.
+- Preserve o slogan “crescer é descobrir”.
+- Não deixe o logotipo atrás da câmera.
+- Use `object-fit: contain`.
+- Não estique ou corte.
+- Remova qualquer ocorrência visual ou narrada de “Lumi”.
+
+CABEÇALHO
+
+Organize uma linha superior com:
+
+- botão de voltar à esquerda;
+- logotipo Leluá centralizado;
+- botão de configurações à direita.
+
+- Use uma grade de três colunas: controle esquerdo, área central flexível e controle direito.
+- Use a mesma largura reservada para os dois controles laterais.
+- Centralize o logotipo em relação à tela, não ao espaço restante.
+- Use botões circulares brancos com o mesmo tamanho.
+- Garanta área de toque mínima de 44 × 44 px.
+- Mostre a seta completamente.
+- Mostre a engrenagem e todos os seus dentes.
+- Afaste a engrenagem da borda direita.
+- Não permita que nenhum botão seja cortado.
+- Respeite `env(safe-area-inset-top)`.
+
+RETÂNGULO PRETO SUPERIOR
+
+Verifique novamente o retângulo preto que simula a câmera.
+
+- Se fizer parte do código do aplicativo, remova-o.
+- Se fizer parte apenas do simulador, não o reproduza na interface.
+- Preserve somente a área segura real.
+- Não deixe o logotipo escondido atrás dele.
+
+CENÁRIO
+
+Preserve o ambiente da Fazenda:
+
+- céu;
+- nuvens;
+- moinho;
+- celeiro;
+- árvores;
+- cerca;
+- vegetação;
+- flores;
+- caminho.
+
+Corrija o enquadramento:
+
+- centralize o cenário.
+- faça o fundo cobrir toda a área útil;
+- use `background-size: cover`;
+- use `background-position: center`;
+- use `background-repeat: no-repeat`;
+- elimine faixa branca à direita, à esquerda ou na base;
+- não estique a ilustração;
+- não desloque o cenário para compensar cartões desalinhados;
+- preserve os elementos importantes dentro da área visível.
+
+PERSONAGEM
+
+Use a Leluá oficial:
+
+- corpo verde-menta;
+- rosto e barriga creme;
+- olhos castanhos;
+- bochechas rosadas;
+- duas folhas assimétricas;
+- bolsa marrom;
+- estrela amarela.
+
+A personagem pode aparecer no lado esquerdo, mas deve estar intencionalmente enquadrada.
+
+- Mostre todo o rosto.
+- Mostre as duas folhas.
+- Mostre a mão e a bolsa.
+- Não corte metade da personagem.
+- Preserve uma margem segura da borda esquerda.
+- Não permita que invada o botão de voltar.
+- Não permita que cubra a placa.
+- Use fundo transparente.
+- Use `object-fit: contain`.
+
+PLACA DA ATIVIDADE
+
+Mantenha exatamente:
+
+“Atividade 3”
+
+“O animal marrom”
+
+- Centralize a placa em relação à área útil.
+- Não centralize em relação ao cenário deslocado.
+- Preserve a leve inclinação lúdica.
+- Não permita que moinho, folhas ou personagem cubram as palavras.
+- Use Fredoka.
+- Preserve a legibilidade.
+- Não corte letras.
+- Mantenha uma distância clara do logotipo.
+
+PROGRESSO
+
+Mantenha o progresso dinâmico.
+
+A referência mostra:
+
+“3 de 8 atividades”
+
+- Não fixe o valor se ele já vier dos dados reais.
+- Centralize o indicador abaixo da placa.
+- Mostre a estrela inteira.
+- Não deixe a estrela encostar no texto.
+- Preserve fundo branco arredondado.
+- Não corte sombra ou bordas.
+
+INSTRUÇÃO
+
+Mantenha exatamente:
+
+“Toque no animal marrom.”
+
+- Use Fredoka em peso 600 ou 700.
+- Cor azul-escura.
+- Centralize horizontalmente.
+- Use cartão branco arredondado.
+- Dê margens laterais iguais.
+- Não deixe o texto encostar nas bordas.
+- Não permita que o cartão ultrapasse a área do celular.
+
+ALTERNATIVAS
+
+Mantenha:
+
+“ovelha”
+
+“cavalo”
+
+“pintinho”
+
+- Use três cartões de mesma largura e altura.
+- Centralize os cartões como grupo.
+- Use margens laterais idênticas.
+- Preserve o mesmo espaço vertical entre eles.
+- Alinhe os animais em uma coluna fixa à esquerda.
+- Alinhe os nomes em uma coluna consistente.
+- Não corte os animais.
+- Use `object-fit: contain`.
+- Preserve fundo transparente.
+- Não permita que textos ou animais ultrapassem os cartões.
+
+ESTADO SELECIONADO
+
+O cavalo representa o animal marrom e deve continuar sendo a resposta correta.
+
+Quando selecionado:
+
+- use fundo verde muito claro;
+- use borda verde;
+- preserve texto azul;
+- não altere o tamanho do cartão;
+- não desloque os outros cartões;
+- não mude a posição do animal.
+
+A seleção deve continuar funcional.
+
+BOTÃO “RESPONDER”
+
+Mantenha:
+
+“Responder →”
+
+- Centralize em relação à área útil da tela.
+- Use a mesma largura visual dos cartões, com margens laterais equilibradas.
+- Preserve o verde.
+- Use Fredoka em peso 700.
+- Mostre a seta inteira.
+- Dê espaço acima e abaixo.
+- Não encoste na base da tela.
+- Respeite `env(safe-area-inset-bottom)`.
+- Não deixe flores cobrirem o botão.
+- Preserve a ação de validar a resposta.
+
+ALINHAMENTO VERTICAL
+
+Organize nesta ordem:
+
+1. Cabeçalho.
+2. Placa da atividade.
+3. Indicador de progresso.
+4. Instrução.
+5. Três alternativas.
+6. Botão “Responder”.
+7. Espaço inferior seguro.
+
+Use espaçamentos consistentes.
+
+- Não sobreponha áreas.
+- Não use margens negativas.
+- Não comprima excessivamente os cartões.
+- Se necessário, permita rolagem vertical suave.
+- Não deixe o botão parcialmente fora da tela.
+
+TIPOGRAFIA
+
+Use:
+
+- Fredoka 700 para placa, instrução, alternativas e botão;
+- Nunito para textos auxiliares;
+- azul-escuro nos textos principais;
+- branco no botão.
+
+Não use fonte padrão do navegador.
+
+PRESERVAR
+
+Não altere:
+
+- regras da atividade;
+- resposta correta;
+- progresso;
+- efeitos sonoros;
+- narração;
+- animações;
+- recompensas;
+- navegação;
+- possibilidade de refazer a atividade.
+
+VERIFICAÇÃO DO NOME
+
+Pesquise nesta atividade por referências visíveis ou narradas contendo:
+
+- `Lumi`;
+- `lumi`;
+- textos alternativos;
+- `aria-label`;
+- legendas;
+- narrações.
+
+Substitua por “Leluá” quando for conteúdo destinado ao usuário.
+
+Não renomeie arquivos ou rotas internas se isso puder quebrar o projeto.
+
+TESTES RESPONSIVOS
+
+Teste em:
+
+- 390 × 844 px;
+- 375 × 812 px;
+- 360 × 800 px.
+
+Em todos os tamanhos:
+
+- conteúdo centralizado;
+- controles superiores inteiros;
+- cenário preenchendo a tela;
+- cartões com margens iguais;
+- botão totalmente visível;
+- nenhuma faixa branca;
+- nenhuma rolagem horizontal.
+
+VALIDAÇÃO FINAL
+
+Antes de concluir, confirme:
+
+1. O logotipo mostra “Leluá”.
+2. O conteúdo está centralizado no viewport.
+3. A seta de voltar está inteira.
+4. A engrenagem está inteira.
+5. A personagem está corretamente enquadrada.
+6. A placa está centralizada.
+7. O cenário cobre toda a tela.
+8. Os três cartões possuem margens iguais.
+9. Nenhum animal está cortado.
+10. O cavalo continua sendo a resposta correta.
+11. O botão “Responder” está centralizado e visível.
+12. Não existe espaço branco na base.
+13. Não existe faixa branca lateral.
+14. Não existe rolagem horizontal.
+15. Nenhuma outra tela foi modificada.
+16. Os testes existentes continuam aprovados.
+
+Apresente uma captura final em 390 × 844 px e informe os arquivos alterados.
