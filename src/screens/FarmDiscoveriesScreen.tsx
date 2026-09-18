@@ -40,14 +40,6 @@ export function FarmDiscoveriesScreen({
           style={styles.artwork}
         >
           <Pressable
-            accessibilityHint="Abre a atividade Quem faz muuu"
-            accessibilityLabel="Abrir primeira atividade"
-            accessibilityRole="button"
-            onPress={onStartActivity}
-            style={styles.activityTapLayer}
-          />
-
-          <Pressable
             accessibilityLabel="Voltar ao mapa"
             accessibilityRole="button"
             hitSlop={12}
@@ -150,24 +142,20 @@ const styles = StyleSheet.create({
   firstActivityButton: {
     position: "absolute",
     zIndex: 20,
-    top: "32%",
+    top: "37.2%",
     right: "4%",
     left: "4%",
-    height: "14%",
+    height: "6%",
     borderRadius: 24,
   },
   secondActivityButton: {
     position: "absolute",
     zIndex: 40,
-    top: "43.2%",
+    top: "43.4%",
     right: "4%",
     left: "4%",
-    height: "6.5%",
+    height: "6%",
     borderRadius: 24,
-  },
-  activityTapLayer: {
-    ...StyleSheet.absoluteFillObject,
-    zIndex: 10,
   },
   pressed: {
     opacity: 0.72,
