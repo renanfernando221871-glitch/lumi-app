@@ -17,7 +17,6 @@ import { GuardianSignupScreen } from "./src/screens/GuardianSignupScreen";
 import { SafetyScreen } from "./src/screens/SafetyScreen";
 import { GuardianHomeScreen } from "./src/screens/GuardianHomeScreen";
 import { ChildIntroScreen } from "./src/screens/ChildIntroScreen";
-import { FarmDiscoveriesScreen } from "./src/screens/FarmDiscoveriesScreen";
 import { MapScreen } from "./src/screens/MapScreen";
 import { PersonalizeScreen } from "./src/screens/PersonalizeScreen";
 import { WelcomeScreen } from "./src/screens/WelcomeScreen";
@@ -55,7 +54,13 @@ function LumiApp() {
         setProfile(savedProfile);
         setProgress(savedProgress);
         setHydrated(true);
-        replace("welcome");
+        const isRemovedFarmUrl =
+          Platform.OS === "web" &&
+          typeof window !== "undefined" &&
+          (window.location.pathname === "/worlds/farm" ||
+            new URLSearchParams(window.location.search).get("route") ===
+              "farmDiscoveries");
+        replace(isRemovedFarmUrl ? "map" : "welcome");
       })
       .catch((error) => {
         console.error("[Lumi preview] Não foi possível preparar o progresso.", error);
@@ -79,14 +84,6 @@ function LumiApp() {
       return;
     }
     Alert.alert("Novas aventuras em breve!");
-  };
-
-  const openWorld = (worldId: string) => {
-    if (worldId === "fazenda-das-descobertas") {
-      navigation.replace("farmDiscoveries");
-      return;
-    }
-    showComingSoon();
   };
 
   if (!fontsLoaded || !hydrated || navigation.route === "splash") {
@@ -166,17 +163,8 @@ function LumiApp() {
         worlds={worldCatalog}
         unlockedWorldIds={unlockedWorldIds}
         completedActivityIds={progress.completedActivityIds}
-        onOpenWorld={openWorld}
+        onOpenWorld={showComingSoon}
         onEditProfile={() => navigation.replace("personalize")}
-      />
-    );
-  }
-
-  if (navigation.route === "farmDiscoveries") {
-    return (
-      <FarmDiscoveriesScreen
-        onBack={() => navigation.replace("map")}
-        onOpenSettings={() => navigation.replace("personalize")}
       />
     );
   }

@@ -6,17 +6,13 @@ import { initialNavigationState, navigationReducer } from "../src/navigation/nav
 
 const appSource = readFileSync(resolve(process.cwd(), "App.tsx"), "utf8");
 
-test("only the approved farm discoveries screen exists after the map", () => {
+test("the application navigation ends at the world map", () => {
   assert.deepEqual(navigationReducer(initialNavigationState, {
     type: "replace",
-    route: "farmDiscoveries",
-  }), { route: "farmDiscoveries" });
-  assert.deepEqual(navigationReducer({ route: "farmDiscoveries" }, {
-    type: "back",
+    route: "map",
   }), { route: "map" });
   assert.doesNotMatch(appSource, /HouseScreen|ActivityScreen|RewardScreen/);
-  assert.doesNotMatch(appSource, /startActivity|showReward/);
-  assert.match(appSource, /worldId === "fazenda-das-descobertas"/);
-  assert.match(appSource, /navigation\.replace\("farmDiscoveries"\)/);
+  assert.doesNotMatch(appSource, /startActivity|openWorld|showReward/);
+  assert.match(appSource, /isRemovedFarmUrl \? "map" : "welcome"/);
   assert.match(appSource, /Novas aventuras em breve!/);
 });
