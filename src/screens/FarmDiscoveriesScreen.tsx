@@ -77,13 +77,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#D8F2E7",
+    backgroundColor: "#111827",
   },
   screen: {
     maxWidth: 520,
     alignSelf: "center",
     overflow: "hidden",
-    backgroundColor: "#D8F2E7",
+    backgroundColor: "#111827",
   },
   artwork: {
     flex: 1,
