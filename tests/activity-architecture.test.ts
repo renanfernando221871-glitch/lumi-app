@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import test from "node:test";
 import { validateActivityCatalog, validateWorldCatalog } from "../src/domain/catalog";
 import { activities } from "../src/data/activities";
@@ -16,6 +18,11 @@ import {
   initialNavigationState,
   navigationReducer,
 } from "../src/navigation/navigationState";
+
+const activityScreenSource = readFileSync(
+  resolve(process.cwd(), "src/screens/ActivityScreen.tsx"),
+  "utf8",
+);
 
 test("Conheça o quarto renders a supported plant visual and keeps bed correct", () => {
   const activity = activities.find(({ id }) => id === "find-bed");
@@ -238,4 +245,28 @@ test("navigation preserves review and preview activity modes", () => {
   });
   assert.equal(preview.route, "activity");
   assert.equal(preview.activityMode, "preview");
+});
+
+test("Fazenda keeps approved references and one layered Activity 3 contract", () => {
+  assert.match(
+    activityScreenSource,
+    /farm-activity-1-lelua-no-mock-status\.png/,
+  );
+  assert.match(
+    activityScreenSource,
+    /farm-activity-2-lelua-initial-no-mock-status\.png/,
+  );
+  assert.match(
+    activityScreenSource,
+    /farm-activity-2-lelua-selected-no-mock-status\.png/,
+  );
+  assert.match(
+    activityScreenSource,
+    /farm-activity-4-lelua-official-viewport\.png/,
+  );
+  assert.match(activityScreenSource, /function FarmLayeredActivity/);
+  assert.match(activityScreenSource, /style=\{styles\.characterCrop\}/);
+  assert.doesNotMatch(activityScreenSource, /farmBrown/);
+  assert.doesNotMatch(activityScreenSource, /activity3-official-success/);
+  assert.doesNotMatch(activityScreenSource, /lelua-farm-cutout/);
 });

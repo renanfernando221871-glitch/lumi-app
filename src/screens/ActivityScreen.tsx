@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { AudioButton } from "../components/AudioButton";
 import { BackButton } from "../components/BackButton";
+import { LeluaLogo } from "../components/LeluaLogo";
 import { LumiSpeechBubble } from "../components/LumiSpeechBubble";
 import { ProgressIndicator } from "../components/ProgressIndicator";
 import { PrimaryButton } from "../components/PrimaryButton";
@@ -230,24 +231,81 @@ export function ActivityScreen({
 function FarmOfficialActivityViewport({
   accessibilityLabel,
   children,
+  onBack,
   source,
 }: {
   accessibilityLabel: string;
   children: React.ReactNode;
+  onBack: () => void;
   source: ImageSourcePropType;
 }) {
-  const { height } = useWindowDimensions();
-
   return (
-    <View style={[styles.farmActivityScreen, { minHeight: height }]}>
+    <FarmActivityScreen accessibilityLabel={accessibilityLabel}>
       <ImageBackground
-        accessibilityLabel={accessibilityLabel}
-        resizeMode="cover"
+        resizeMode="stretch"
         source={source}
-        style={[styles.farmActivityBackground, { height }]}
+        style={styles.farmActivityBackground}
+      />
+      <FarmActivityHeader embedded onBack={onBack} />
+      {children}
+    </FarmActivityScreen>
+  );
+}
+
+function FarmActivityScreen({
+  accessibilityLabel,
+  children,
+}: {
+  accessibilityLabel: string;
+  children: React.ReactNode;
+}) {
+  const { height } = useWindowDimensions();
+  return (
+    <View
+      accessibilityLabel={accessibilityLabel}
+      style={[styles.farmActivityScreen, { height, minHeight: height }]}
+    >
+      {children}
+    </View>
+  );
+}
+
+function FarmActivityHeader({
+  embedded = false,
+  onBack,
+}: {
+  embedded?: boolean;
+  onBack: () => void;
+}) {
+  return (
+    <View pointerEvents="box-none" style={styles.farmActivityHeader}>
+      <Pressable
+        accessibilityLabel="Voltar"
+        accessibilityRole="button"
+        onPress={onBack}
+        style={[
+          styles.farmActivityHeaderButton,
+          embedded && styles.farmActivityEmbeddedButton,
+        ]}
       >
-        {children}
-      </ImageBackground>
+        {!embedded ? <Text style={styles.farmActivityBack}>‹</Text> : null}
+      </Pressable>
+      {!embedded ? (
+        <>
+          <LeluaLogo
+            compact
+            accessibilityLabel="Leluá"
+            style={styles.farmActivityLogo}
+          />
+          <View style={styles.farmActivityHeaderButton}>
+            <Image
+              accessibilityLabel="Configurações"
+              source={require("../../assets/images/onboarding/guardian-home/settings-framed.png")}
+              style={styles.farmActivitySettings}
+            />
+          </View>
+        </>
+      ) : null}
     </View>
   );
 }
@@ -281,14 +339,9 @@ function FarmCountChicksActivity({
   return (
     <FarmOfficialActivityViewport
       accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
+      onBack={onBack}
       source={require("../../attached_assets/farm-activity-4-lelua-official-viewport.png")}
     >
-        <Pressable
-          accessibilityLabel="Voltar"
-          accessibilityRole="button"
-          onPress={onBack}
-          style={styles.farmActivityBackHotspot}
-        />
         {activity.config.options.map((option, index) => (
           <Pressable
             accessibilityLabel={`quantidade ${option}`}
@@ -354,48 +407,27 @@ function FarmOfficialTapActivity({
   onInteraction: (interaction: ActivityInteraction) => void;
   onAdvance: () => void;
 }) {
-  const isFindHorse = activity.id === "farm-find-horse";
   const isBrownAnimal = activity.id === "farm-brown-animal";
-  const displayedItems = isBrownAnimal
-    ? [
-        activity.config.items.find((item) => item.id === "white-sheep"),
-        activity.config.items.find((item) => item.id === "brown-horse"),
-        activity.config.items.find((item) => item.id === "yellow-chick"),
-      ].filter((item): item is TapAndFindActivity["config"]["items"][number] =>
-        Boolean(item),
-      )
-    : activity.config.items;
   const choose = (itemId: string) => {
     if (complete) return;
     onInteraction(evaluateTapAndFind(activity, itemId));
   };
 
-  return (
-    <FarmOfficialActivityViewport
-      accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
-      source={
-        isBrownAnimal
-          ? complete
-            ? require("../../attached_assets/generated_images/activity3-official-success.png")
-            : require("../../attached_assets/generated_images/activity3-official-initial.png")
-          : isFindHorse
-          ? complete
-            ? require("../../attached_assets/farm-activity-2-lelua-selected-no-mock-status.png")
-            : require("../../attached_assets/farm-activity-2-lelua-initial-no-mock-status.png")
-          : require("../../attached_assets/farm-activity-1-lelua-no-mock-status.png")
-      }
-    >
-        <Pressable
-          accessibilityLabel="Voltar"
-          accessibilityRole="button"
-          onPress={onBack}
-          style={
-            isBrownAnimal
-              ? styles.farmBrownBackHotspot
-              : styles.farmActivityBackHotspot
-          }
-        />
-        {displayedItems.map((item, index) => (
+  if (!isBrownAnimal) {
+    const isFindHorse = activity.id === "farm-find-horse";
+    return (
+      <FarmOfficialActivityViewport
+        accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
+        onBack={onBack}
+        source={
+          isFindHorse
+            ? complete
+              ? require("../../attached_assets/farm-activity-2-lelua-selected-no-mock-status.png")
+              : require("../../attached_assets/farm-activity-2-lelua-initial-no-mock-status.png")
+            : require("../../attached_assets/farm-activity-1-lelua-no-mock-status.png")
+        }
+      >
+        {activity.config.items.map((item, index) => (
           <Pressable
             accessibilityLabel={item.label}
             accessibilityRole="button"
@@ -403,10 +435,8 @@ function FarmOfficialTapActivity({
             key={item.id}
             onPress={() => choose(item.id)}
             style={[
-              isBrownAnimal ? styles.farmBrownAnimalHotspot : styles.farmAnimalHotspot,
-              isBrownAnimal
-                ? { top: `${53 + index * 10.8}%` }
-                : { top: `${43.8 + index * 12.6}%` },
+              styles.farmAnimalHotspot,
+              { top: `${43.8 + index * 12.6}%` },
             ]}
           />
         ))}
@@ -418,7 +448,7 @@ function FarmOfficialTapActivity({
         {complete ? (
           <>
             <CompletionNarration text={activity.successFeedback} />
-            {!isFindHorse && !isBrownAnimal ? (
+            {!isFindHorse ? (
               <View
                 accessibilityLiveRegion="polite"
                 style={styles.farmSuccessBadge}
@@ -435,62 +465,216 @@ function FarmOfficialTapActivity({
               accessibilityRole="button"
               disabled={advancing}
               onPress={onAdvance}
-              style={
-                isBrownAnimal
-                  ? styles.farmBrownAnswerHotspot
-                  : styles.farmAnswerHotspot
-              }
+              style={styles.farmAnswerHotspot}
             />
           </>
         ) : null}
-    </FarmOfficialActivityViewport>
+      </FarmOfficialActivityViewport>
+    );
+  }
+
+  return (
+    <FarmLayeredActivity
+      accessibilityLabel={`Atividade ${activityNumber}: ${activity.title}`}
+      activity={activity}
+      complete={complete}
+      feedback={feedback}
+      onBack={onBack}
+      onChoose={choose}
+      onAdvance={onAdvance}
+      advancing={advancing}
+      activityNumber={activityNumber}
+      total={total}
+    />
+  );
+}
+
+/**
+ * The first three farm activities deliberately share one stage contract. The
+ * character is not a separate asset: this crop window renders the supplied
+ * full source image, keeping the original occlusion and proportions intact.
+ */
+function FarmLayeredActivity({
+  accessibilityLabel,
+  activity,
+  activityNumber,
+  total,
+  feedback,
+  complete,
+  advancing,
+  onBack,
+  onChoose,
+  onAdvance,
+}: {
+  accessibilityLabel: string;
+  activity: TapAndFindActivity;
+  activityNumber: number;
+  total: number;
+  feedback?: string;
+  complete: boolean;
+  advancing: boolean;
+  onBack: () => void;
+  onChoose: (itemId: string) => void;
+  onAdvance: () => void;
+}) {
+  const items = [
+    activity.config.items.find((item) => item.id === "white-sheep"),
+    activity.config.items.find((item) => item.id === "brown-horse"),
+    activity.config.items.find((item) => item.id === "yellow-chick"),
+  ].filter((item): item is TapAndFindActivity["config"]["items"][number] =>
+    Boolean(item),
+  );
+  const itemLabels: Record<string, string> = {
+    "white-sheep": "ovelha",
+    "brown-horse": "cavalo",
+    "yellow-chick": "pintinho",
+  };
+  const itemCropTop: Record<string, number> = {
+    "white-sheep": -336,
+    "brown-horse": -400,
+    "yellow-chick": -470,
+  };
+
+  return (
+    <FarmActivityScreen accessibilityLabel={accessibilityLabel}>
+      <Image
+        accessibilityLabel="Paisagem da Fazenda"
+        source={require("../../attached_assets/generated_images/farm-scenery-clean.png")}
+        resizeMode="cover"
+        style={styles.layeredScenery}
+      />
+      <View style={styles.layeredContent}>
+        <FarmActivityHeader onBack={onBack} />
+        <View style={styles.layeredHero}>
+          <View style={styles.characterCrop} accessibilityLabel="Leluá na fazenda">
+            <Image
+              source={require("../../attached_assets/farm-activity-1-lelua-no-mock-status.png")}
+              resizeMode="stretch"
+              style={styles.characterSource}
+            />
+          </View>
+          <View style={styles.layeredSign}>
+            <Text style={styles.layeredSignSmall}>ATIVIDADE {activityNumber}</Text>
+            <Text style={styles.layeredSignTitle}>{activity.title}</Text>
+          </View>
+        </View>
+        <View style={styles.layeredProgress}>
+          <Text style={styles.layeredStar}>★</Text>
+          <Text style={styles.layeredProgressText}>{activityNumber} de 8 atividades</Text>
+        </View>
+        <View style={styles.layeredPrompt}>
+          <Text style={styles.layeredPromptText}>{activity.instructionText}</Text>
+        </View>
+        <View style={styles.layeredCards}>
+          {items.map((item) => (
+            <Pressable
+              accessibilityLabel={item.label}
+              accessibilityRole="button"
+              disabled={complete}
+              key={item.id}
+              onPress={() => onChoose(item.id)}
+              style={({ pressed }) => [
+                styles.layeredCard,
+                complete && item.isTarget && styles.layeredCardCorrect,
+                pressed && styles.layeredCardPressed,
+              ]}
+            >
+              <View style={styles.layeredAnimalCrop}>
+                <Image
+                  accessibilityIgnoresInvertColors
+                  source={require("../../attached_assets/generated_images/activity3-official-initial.png")}
+                  resizeMode="stretch"
+                  style={[
+                    styles.layeredAnimalSource,
+                    { top: itemCropTop[item.id] },
+                  ]}
+                />
+              </View>
+              <Text style={styles.layeredCardText}>
+                {itemLabels[item.id] ?? item.label}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
+        {feedback && !complete ? (
+          <Text accessibilityLiveRegion="polite" style={styles.layeredFeedback}>{feedback}</Text>
+        ) : null}
+        {complete ? (
+          <>
+            <CompletionNarration text={activity.successFeedback} />
+            <Text accessibilityLiveRegion="polite" style={styles.layeredSuccess}>Muito bem! ✓</Text>
+          </>
+        ) : null}
+        <Pressable
+          accessibilityLabel={complete ? (activityNumber === total ? "Concluir mundo" : "Próxima atividade") : "Responder"}
+          accessibilityRole="button"
+          disabled={!complete || advancing}
+          onPress={onAdvance}
+          style={({ pressed }) => [styles.layeredAnswer, pressed && styles.layeredAnswerPressed]}
+        >
+          <Text style={styles.layeredAnswerText}>{complete ? (activityNumber === total ? "Concluir" : "Próxima") : "Responder"} <Text style={styles.layeredArrow}>›</Text></Text>
+        </Pressable>
+      </View>
+    </FarmActivityScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  farmBrownBackHotspot: {
-    position: "absolute",
-    top: "2%",
-    left: "1%",
-    width: "20%",
-    height: "8%",
-    borderRadius: 40,
-    zIndex: 2,
-  },
-  farmBrownAnimalHotspot: {
-    position: "absolute",
-    left: "6%",
-    width: "88%",
-    height: "10%",
-    borderRadius: 28,
-  },
-  farmBrownAnswerHotspot: {
-    position: "absolute",
-    left: "10%",
-    width: "80%",
-    bottom: "4%",
-    height: "7%",
-    borderRadius: 40,
-  },
+  layeredScenery: { ...StyleSheet.absoluteFillObject, width: "100%", height: "100%" },
+  layeredContent: { flex: 1, paddingHorizontal: 16, paddingTop: 124, paddingBottom: 78 },
+  layeredHero: { height: 142, position: "relative" },
+  layeredSign: { position: "absolute", top: 24, left: 96, zIndex: 2, width: 230, minHeight: 100, paddingHorizontal: 10, alignItems: "center", justifyContent: "center", borderRadius: 18, backgroundColor: "#B8763F", borderWidth: 3, borderColor: "#8A4D2C", transform: [{ rotate: "-2deg" }], elevation: 4 },
+  layeredSignSmall: { color: "#FFF1C7", fontSize: 13, fontWeight: "800" },
+  layeredSignTitle: { color: "#FFF7D8", fontSize: 25, lineHeight: 29, textAlign: "center", fontWeight: "900" },
+  characterCrop: { position: "absolute", left: 4, top: 14, width: 82, height: 148, overflow: "hidden", zIndex: 1 },
+  characterSource: { position: "absolute", width: 390, height: 844, left: -50, top: -138 },
+  layeredProgress: { alignSelf: "center", flexDirection: "row", alignItems: "center", gap: 7, paddingHorizontal: 20, height: 40, borderRadius: 22, backgroundColor: "#FFFDF5", elevation: 3, zIndex: 3 },
+  layeredStar: { color: "#F5B928", fontSize: 23 },
+  layeredProgressText: { color: "#174A75", fontSize: 15, fontWeight: "900" },
+  layeredPrompt: { marginTop: 10, minHeight: 57, borderRadius: 28, alignItems: "center", justifyContent: "center", paddingHorizontal: 15, backgroundColor: "#EFF8FF", borderWidth: 2, borderColor: "#D6EBF4", zIndex: 3 },
+  layeredPromptText: { color: "#174A75", fontSize: 17, textAlign: "center", fontWeight: "900" },
+  layeredCards: { marginTop: 10, gap: 8, zIndex: 3 },
+  layeredCard: { minHeight: 78, flexDirection: "row", alignItems: "center", paddingHorizontal: 18, borderRadius: 24, backgroundColor: "rgba(255,253,247,0.96)", borderWidth: 2, borderColor: "#74BFF1", elevation: 2 },
+  layeredCardCorrect: { borderColor: "#45B84A", backgroundColor: "#F0FFE8" },
+  layeredCardPressed: { opacity: 0.72 },
+  layeredAnimalCrop: { width: 86, height: 62, overflow: "hidden" },
+  layeredAnimalSource: { position: "absolute", width: 275, height: 614, left: -36 },
+  layeredCardText: { marginLeft: 12, color: "#165C9A", fontSize: 21, fontWeight: "900" },
+  layeredFeedback: { marginTop: 7, color: "#A84F43", fontSize: 13, textAlign: "center", fontWeight: "900" },
+  layeredSuccess: { alignSelf: "center", marginTop: 8, paddingHorizontal: 18, paddingVertical: 7, borderRadius: 18, backgroundColor: "#53B94A", color: "#FFF", fontSize: 14, fontWeight: "900" },
+  layeredAnswer: { position: "absolute", left: 16, right: 16, bottom: 78, minHeight: 56, borderRadius: 30, alignItems: "center", justifyContent: "center", backgroundColor: "#45B84A", borderWidth: 3, borderColor: "#F4FFE9", elevation: 3 },
+  layeredAnswerPressed: { opacity: 0.78 },
+  layeredAnswerText: { color: "#FFF", fontSize: 22, fontWeight: "900" },
+  layeredArrow: { fontSize: 30, lineHeight: 27 },
   farmActivityScreen: {
     width: "100%",
     maxWidth: 520,
     alignSelf: "center",
+    position: "relative",
     overflow: "hidden",
     backgroundColor: "#BCEFFF",
   },
   farmActivityBackground: {
+    ...StyleSheet.absoluteFillObject,
     width: "100%",
+    height: "100%",
   },
-  farmActivityBackHotspot: {
+  farmActivityHeader: {
     position: "absolute",
-    top: "7%",
-    left: "4%",
-    width: "17%",
-    height: "9%",
-    borderRadius: 40,
-    zIndex: 2,
+    top: 72,
+    left: 16,
+    right: 16,
+    height: 52,
+    zIndex: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
+  farmActivityHeaderButton: { width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: "#FFFDF5", elevation: 3 },
+  farmActivityEmbeddedButton: { backgroundColor: "transparent", elevation: 0 },
+  farmActivityBack: { color: "#174A75", fontSize: 36, lineHeight: 38, marginTop: -4, fontWeight: "800" },
+  farmActivityLogo: { position: "absolute", top: -8, left: "50%", width: 220, height: 90, marginLeft: -110 },
+  farmActivitySettings: { width: 34, height: 34, resizeMode: "contain" },
   farmAnimalHotspot: {
     position: "absolute",
     left: "8%",

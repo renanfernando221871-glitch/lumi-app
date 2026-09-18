@@ -420,3 +420,101 @@ mtime_ms = 1789681757668
 storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/0e0870cd-8d4d-4e42-ad1c-53de9f0ea83d/60cb64fc-b8e8-42f2-ac22-2a2f07864190"
 storage_version_token = "1789681800842904"
 content_type = "image/png"
+
+[[outputs]]
+id = "mst3ISv-6M-T_a5B4czx7"
+uri = "file://screenshots/farm-list-390x844.png"
+type = "image"
+title = "Fazenda — lista de atividades"
+description = "Captura final da lista da Fazenda em 390 × 844."
+logical_id = "ee0261e8-d5c8-4505-8cc6-f070749a6dbd"
+content_hash = "sha256:c92fdc4aa5a09fe887e4c341db05b44711717a34a529c1e5dbb2bb43996f0688"
+size = 196273
+mtime_ms = 1789683872568
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/ee0261e8-d5c8-4505-8cc6-f070749a6dbd/4601469a-f221-4d1b-8b68-ec6dc8213279"
+storage_version_token = "1789684056182772"
+content_type = "image/png"
+
+[[outputs]]
+id = "n6nVWEj1CL0vkTyMQGKJm"
+uri = "file://screenshots/farm-activity-1-390x844.png"
+type = "image"
+title = "Fazenda — Atividade 1 corrigida"
+description = "Quem faz mu?, captura final em 390 × 844."
+logical_id = "27f422cf-c205-4be0-8c5e-01064cc052c4"
+content_hash = "sha256:f2da0716ece71a711ea93e84e0d655af884702ef38c8df9ae164d45c450d076f"
+size = 406779
+mtime_ms = 1789685090612
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/27f422cf-c205-4be0-8c5e-01064cc052c4/5c5ef4da-b237-43e1-8a65-461efceea4f7"
+storage_version_token = "1789685278067808"
+content_type = "image/png"
+
+[[outputs]]
+id = "JRS4mEgdb6BLII5Av634V"
+uri = "file://screenshots/farm-activity-2-390x844.png"
+type = "image"
+title = "Fazenda — Atividade 2 corrigida"
+description = "Encontre o cavalo, captura final em 390 × 844."
+logical_id = "262a03eb-e2a7-4452-81ff-cf7adc6de69e"
+content_hash = "sha256:f09480e363b6afc50738b11a3a9ae8af5893b65c600f530bf2bceb077293fa92"
+size = 399278
+mtime_ms = 1789685092620
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/262a03eb-e2a7-4452-81ff-cf7adc6de69e/b70c1aa3-a583-4c85-9b96-fe7d9da34b2e"
+storage_version_token = "1789685278607958"
+content_type = "image/png"
+
+[[outputs]]
+id = "dqdYpC3Uho8n8iT-tOOF7"
+uri = "file://screenshots/farm-activity-3-390x844.png"
+type = "image"
+title = "Fazenda — Atividade 3 corrigida"
+description = "O animal marrom, captura final em 390 × 844."
+logical_id = "f9f83dd8-0466-455a-9697-2fb4108367eb"
+content_hash = "sha256:eb215cd8058dcc26f68184754a62904b94e7546092a28f2bb2ea85de0a8b5ba3"
+size = 377960
+mtime_ms = 1789685242664
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/f9f83dd8-0466-455a-9697-2fb4108367eb/f0be3e67-2d13-46bf-b3e8-e459ebde9518"
+storage_version_token = "1789685279126793"
+content_type = "image/png"
+
+[[outputs]]
+id = "K23YZTRGWcznRrmekkzDk"
+uri = "file://screenshots/farm-activity-4-390x844.png"
+type = "image"
+title = "Fazenda — Atividade 4 corrigida"
+description = "Conte os pintinhos, captura final em 390 × 844."
+logical_id = "116e9bec-0b30-47c6-abb6-d9f5aa87d1bf"
+content_hash = "sha256:1cc641ee425cecd7c43f64cdd74d6b749b2c332351f85f4a678600610ac02d5a"
+size = 397439
+mtime_ms = 1789685096576
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/116e9bec-0b30-47c6-abb6-d9f5aa87d1bf/7afe82a6-6dbb-445c-a441-e2eb37d4f0b3"
+storage_version_token = "1789685279646769"
+content_type = "image/png"
+
+[[outputs]]
+id = "xk3qHVMKMnYBjfeSZG36X"
+uri = "file://screenshots/farm-activities-comparison-390x844.png"
+type = "image"
+title = "Atividades 1–4 — comparação final"
+description = "As quatro atividades lado a lado, cada uma capturada em 390 × 844."
+logical_id = "ae910f59-6c20-40f7-8231-c8be687fedee"
+content_hash = "sha256:d8419b7d2c2d6650636b4b34af004551c0bcb8915f690f7eaff776f936d1dd6c"
+size = 1506215
+mtime_ms = 1789685243476
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/ae910f59-6c20-40f7-8231-c8be687fedee/ec43b477-3bc1-468e-9e75-0091ed559125"
+storage_version_token = "1789685276904529"
+content_type = "image/png"
+
+[[outputs]]
+id = "RI2yKVHj2yV3vyoxjE4B4"
+uri = "file://screenshots/farm-activities-comparison-guides.png"
+type = "image"
+title = "Atividades 1–4 — validação com linhas-guia"
+description = "Prancha de validação em 1560 × 844 com referências horizontais de topo, conteúdo e base."
+logical_id = "07a27229-8ae9-4153-82b6-73b9f048a679"
+content_hash = "sha256:7f142b0dbdc2fe35f1842baa9887209a6a3800e5ae85df2f0f1d3768a460f879"
+size = 1711500
+mtime_ms = 1789685244372
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/07a27229-8ae9-4153-82b6-73b9f048a679/7382c398-8d2f-4c5d-9cf2-9afe2e3f1151"
+storage_version_token = "1789685277488398"
+content_type = "image/png"

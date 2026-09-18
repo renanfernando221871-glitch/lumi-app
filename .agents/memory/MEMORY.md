@@ -8,3 +8,4 @@
 - [Auditoria do vertical slice](lumi-validation.md) — diferencie “não observado” de “falhou” quando não houver implementação executável.
 - [generateImage square canvas workaround](generateimage-square-canvas-workaround.md) — prompt-only aspect requests are ignored; confine content to a central band, then crop to get a tall phone mockup.
 - [Chrome headless mobile viewport](chrome-headless-mobile-viewport.md) — window-size may not set the DOM viewport; use CDP device metrics before responsive validation.
+- [Recorte oficial da Leluá na Fazenda](farm-official-character-crop.md) — use o PNG integral da Atividade 1 numa janela recortada; preserve a ocultação original.

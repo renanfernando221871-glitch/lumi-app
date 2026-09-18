@@ -1,0 +1,384 @@
+Execute uma remoção completa e controlada de todas as telas, rotas, componentes, recursos e conexões que existem depois da tela do mapa de mundos.
+
+OBJETIVO
+
+O aplicativo deve terminar temporariamente na tela do mapa.
+
+Preserve integralmente:
+
+- todas as telas anteriores ao mapa;
+- a tela do mapa;
+- identidade da Leluá;
+- autenticação;
+- cadastro;
+- perfil da criança;
+- painel do responsável;
+- configurações e recursos que já existiam antes do mapa;
+- navegação necessária para chegar ao mapa.
+
+Exclua tudo o que foi criado para funcionar após a seleção de um destino no mapa.
+
+IMPORTANTE
+
+Esta é uma ação destrutiva. Antes de excluir qualquer coisa:
+
+1. Crie um commit ou checkpoint de segurança.
+2. Use a mensagem:
+
+`backup antes de reconstruir as telas posteriores ao mapa`
+
+3. Confirme que o checkpoint foi criado.
+4. Liste os arquivos que pretende excluir.
+5. Não inicie a exclusão antes de concluir o backup.
+6. Não use `git reset --hard`.
+7. Não apague arquivos que também sejam usados pelas telas preservadas.
+8. Não envie o backup para produção automaticamente sem informar.
+
+LIMITE EXATO
+
+A tela do mapa é o ponto final temporário da aplicação.
+
+Devem ser removidos todos os fluxos iniciados ao tocar nos destinos:
+
+- Fazenda;
+- Parque;
+- Casa;
+- Mercado;
+- Cidade.
+
+Não deixe nenhuma dessas áreas conectada a uma tela posterior.
+
+REMOVER O FLUXO DA FAZENDA
+
+Exclua completamente:
+
+- tela “Descobertas da Fazenda”;
+- lista de atividades da Fazenda;
+- atividade 1 — “Quem faz mu?”;
+- atividade 2 — “Encontre o cavalo”;
+- atividade 3 — “O animal marrom”;
+- atividade 4 — “Conte os pintinhos”;
+- atividade 5 — “Do maior para o menor”;
+- atividade 6 — “De onde vem?”;
+- atividade 7 — “Na frente ou atrás?”;
+- atividade 8 — “Ajude na colheita”;
+- telas de acerto;
+- telas de erro;
+- telas de conclusão;
+- telas de recompensa específicas dessas atividades;
+- rotas de revisão ou repetição;
+- rotas de prévia;
+- atalhos de desenvolvimento criados para abrir essas atividades;
+- estados e componentes exclusivos desse fluxo.
+
+REMOVER OUTROS MUNDOS POSTERIORES
+
+Exclua telas e fluxos posteriores ao mapa relacionados a:
+
+- Parque;
+- Casa;
+- Mercado;
+- Cidade;
+- outros destinos ou mundos criados depois do mapa;
+- desafios associados;
+- resultados;
+- recompensas;
+- transições posteriores;
+- rotas de desenvolvimento para esses destinos.
+
+ROTAS
+
+Remova todas as rotas que levem do mapa para telas posteriores.
+
+Procure por rotas equivalentes a:
+
+- `/farm`;
+- `/fazenda`;
+- `/farm/activity`;
+- `/activity`;
+- `/activities`;
+- `/park`;
+- `/parque`;
+- `/home-world`;
+- `/casa`;
+- `/market`;
+- `/mercado`;
+- `/city`;
+- `/cidade`;
+- `/challenge`;
+- `/reward`;
+- `/result`;
+- `/complete`;
+- `/preview`;
+- parâmetros de desenvolvimento usados para abrir atividades.
+
+Os nomes reais podem ser diferentes. Inspecione o roteador completo.
+
+Depois da limpeza:
+
+- nenhuma rota posterior ao mapa deve existir;
+- nenhuma URL antiga deve abrir uma tela removida;
+- nenhuma rota deve redirecionar silenciosamente para componentes excluídos;
+- nenhuma importação de rota pode ficar quebrada.
+
+CONEXÕES DO MAPA
+
+Remova temporariamente todas as ações que abrem telas posteriores.
+
+Ao tocar em Fazenda, Parque, Casa, Mercado ou Cidade:
+
+- não navegar;
+- não abrir tela;
+- não chamar rota antiga;
+- não carregar componente posterior;
+- não executar progresso;
+- não criar dados de atividade.
+
+É aceitável mostrar apenas uma resposta temporária e não navegável, como:
+
+“Novas aventuras em breve!”
+
+Se usar essa mensagem:
+
+- implemente-a dentro da tela do mapa;
+- use um aviso simples e reversível;
+- não crie uma nova página;
+- não crie rota;
+- não crie modal complexo;
+- não conecte a telas futuras.
+
+Não deixe handlers vazios que lancem erros.
+
+COMPONENTES
+
+Exclua componentes utilizados exclusivamente após o mapa, incluindo equivalentes a:
+
+- lista de atividades;
+- cabeçalhos específicos de atividades;
+- placas de atividade;
+- cartões de alternativas;
+- indicadores de progresso exclusivos;
+- botões de resposta exclusivos;
+- feedback de acerto e erro;
+- telas de recompensa;
+- controles de revisão;
+- seletores de atividades;
+- componentes específicos dos mundos posteriores.
+
+Antes de excluir cada componente:
+
+1. Pesquise todas as referências.
+2. Confirme que ele não é utilizado antes ou na tela do mapa.
+3. Se for compartilhado, preserve-o.
+4. Remova somente os usos posteriores ao mapa.
+5. Não exclua componentes globais.
+
+ESTILOS
+
+Remova CSS, módulos de estilo ou regras utilizadas exclusivamente pelas telas posteriores ao mapa.
+
+Não altere estilos globais das telas preservadas.
+
+Não remova:
+
+- Fredoka;
+- Nunito;
+- cores globais da marca;
+- componentes gerais;
+- tokens de design;
+- estilos usados no mapa;
+- estilos usados em telas anteriores.
+
+Elimine:
+
+- seletores órfãos;
+- imports de CSS sem uso;
+- estilos inline exclusivos das páginas removidas;
+- variantes criadas apenas para atividades;
+- regras de enquadramento das telas excluídas.
+
+RECURSOS VISUAIS
+
+Remova imagens, áudios e animações usados exclusivamente nas telas posteriores ao mapa.
+
+Isso pode incluir:
+
+- cenários específicos da Fazenda;
+- placas específicas de atividades;
+- animais usados somente nos desafios;
+- ícones específicos;
+- áudios das perguntas;
+- sons de respostas;
+- ilustrações de recompensas;
+- capturas de referência importadas para implementação.
+
+ANTES DE EXCLUIR UM RECURSO
+
+- Pesquise pelo nome do arquivo em todo o projeto.
+- Confirme que não é utilizado pelo mapa ou por telas anteriores.
+- Preserve a personagem oficial da Leluá.
+- Preserve o logotipo oficial.
+- Preserve fundos, ícones e sons usados anteriormente.
+- Preserve recursos do mapa.
+- Não remova arquivos apenas porque o nome contém “farm” ou “activity” sem verificar seu uso.
+
+ESTADOS E DADOS
+
+Remova estados criados exclusivamente para as telas posteriores:
+
+- atividade selecionada;
+- resposta selecionada;
+- progresso temporário de desafios;
+- modo de revisão;
+- rotas de prévia;
+- resultados;
+- feedback;
+- recompensa da atividade;
+- desbloqueio de atividades internas.
+
+Não apague dados gerais do perfil da criança.
+
+Não apague autenticação ou cadastro.
+
+Não apague a estrutura geral de progresso do usuário se ela também for usada no mapa ou no painel do responsável.
+
+Se existirem dados persistidos das atividades removidas:
+
+- pare de lê-los;
+- pare de gravá-los;
+- preserve-os temporariamente no armazenamento para permitir recuperação;
+- não execute migração destrutiva de banco de dados nesta etapa;
+- não apague dados reais dos usuários.
+
+IMPORTAÇÕES E CÓDIGO ÓRFÃO
+
+Após excluir:
+
+- remova imports quebrados;
+- remova exports sem uso;
+- remova chamadas para funções excluídas;
+- remova handlers antigos;
+- remova links antigos;
+- remova referências em menus;
+- remova testes exclusivos das telas excluídas;
+- remova mocks exclusivos;
+- remova atalhos de desenvolvimento;
+- remova comentários que indiquem rotas inexistentes.
+
+Execute busca global por nomes das telas e rotas removidas.
+
+Não deixe código morto conectado ao aplicativo.
+
+O que não puder ser removido com segurança deve ser listado, explicado e deixado desconectado.
+
+TELA DO MAPA
+
+A tela do mapa deve permanecer visualmente idêntica.
+
+Não altere:
+
+- logotipo;
+- personagem;
+- título;
+- subtítulo;
+- placa;
+- cenário;
+- destinos;
+- etiquetas;
+- navegação inferior;
+- botão de configurações;
+- estados visuais;
+- fontes;
+- cores;
+- alinhamentos.
+
+Altere somente os handlers dos destinos para impedir navegação posterior.
+
+Não remova os destinos do desenho do mapa.
+
+Não altere seus estados visuais sem autorização.
+
+TELAS ANTERIORES
+
+Não modifique nenhuma tela anterior ao mapa.
+
+Não faça refatorações gerais.
+
+Não altere:
+
+- boas-vindas;
+- cadastro do responsável;
+- perfil da criança;
+- tela de segurança;
+- apresentação da Leluá;
+- painel do responsável;
+- componentes anteriores;
+- rotas anteriores;
+- textos anteriores;
+- recursos anteriores;
+- estilos anteriores.
+
+Não altere componentes compartilhados se isso mudar a aparência dessas páginas.
+
+Se um componente compartilhado contiver lógica posterior ao mapa, remova apenas essa lógica por uma propriedade ou variante restrita.
+
+BUILD E TESTES
+
+Depois da limpeza:
+
+1. Execute a verificação de TypeScript.
+2. Execute o build.
+3. Execute os testes restantes.
+4. Abra todas as rotas preservadas.
+5. Navegue desde a primeira tela até o mapa.
+6. Confirme que nenhuma rota preservada apresenta erro.
+7. Toque em todos os destinos do mapa.
+8. Confirme que nenhum destino abre uma tela posterior.
+9. Confirme que URLs antigas não quebram o aplicativo.
+10. Redirecione URLs antigas para o mapa ou para uma página segura existente, sem recriar as telas excluídas.
+
+CRITÉRIOS DE ACEITAÇÃO
+
+A limpeza estará concluída somente quando:
+
+- o mapa for a última tela funcional do fluxo;
+- não existir tela da Fazenda;
+- não existir atividade da Fazenda;
+- não existir tela do Parque;
+- não existir tela da Casa;
+- não existir tela do Mercado;
+- não existir tela da Cidade;
+- não existir rota de desafio;
+- não existir rota de recompensa posterior;
+- não existir rota de revisão;
+- não existir rota de prévia das atividades;
+- os destinos do mapa não navegarem;
+- não houver imports quebrados;
+- não houver erros de TypeScript;
+- o build for concluído;
+- os testes preservados forem aprovados;
+- as telas anteriores permanecerem inalteradas;
+- o mapa permanecer visualmente inalterado.
+
+ENTREGA
+
+Ao terminar, apresente:
+
+1. Hash ou identificação do checkpoint de segurança.
+2. Lista dos arquivos excluídos.
+3. Lista dos arquivos modificados.
+4. Lista das rotas removidas.
+5. Lista dos recursos removidos.
+6. Lista do que foi preservado por ser compartilhado.
+7. Resultado do TypeScript.
+8. Resultado do build.
+9. Resultado dos testes.
+10. Captura da tela do mapa após a limpeza.
+11. Confirmação de que os destinos não navegam.
+12. Confirmação de que nenhuma tela anterior foi alterada.
+
+Não comece a implementar as novas telas.
+
+Não use ainda a nova arte da Fazenda.
+
+Primeiro conclua e valide esta limpeza. Aguarde uma nova autorização antes de acrescentar qualquer tela posterior ao mapa.

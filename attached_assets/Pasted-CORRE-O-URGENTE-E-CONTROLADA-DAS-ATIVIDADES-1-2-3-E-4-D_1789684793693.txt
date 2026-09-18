@@ -1,0 +1,450 @@
+CORREÇÃO URGENTE E CONTROLADA DAS ATIVIDADES 1, 2, 3 E 4 DA FAZENDA
+
+As últimas alterações introduziram novas regressões.
+
+Problemas atuais:
+
+- atividades 1, 2 e 4 desalinhadas no topo;
+- atividades 1, 2 e 4 desalinhadas na base;
+- espaço branco ou término incorreto do cenário na parte inferior;
+- cabeçalhos em alturas inconsistentes;
+- distância variável entre conteúdo e bordas;
+- atividade 3 com recorte incorreto da personagem;
+- personagem da atividade 3 ampliada excessivamente;
+- personagem da atividade 3 parcialmente escondida;
+- placa da atividade 3 sobreposta ao rosto da personagem;
+- logotipo da atividade 3 encoberto;
+- atividade 3 visualmente diferente das demais.
+
+NÃO redesenhe novamente as quatro telas.
+
+NÃO gere novos recursos.
+
+NÃO modifique ilustrações, textos, animais, cenários, cores ou lógica das atividades 1, 2 e 4.
+
+Corrija apenas:
+
+1. contêiner compartilhado;
+2. alinhamento superior;
+3. alinhamento inferior;
+4. áreas seguras;
+5. recorte e posição da personagem da atividade 3;
+6. posição da placa da atividade 3;
+7. cabeçalho da atividade 3.
+
+ETAPA 1 — PROTEGER AS ATIVIDADES 1, 2 E 4
+
+Considere o conteúdo visual atual das atividades 1, 2 e 4 aprovado.
+
+Não altere:
+
+- personagem;
+- placa;
+- cenário;
+- animais;
+- pergunta;
+- alternativas;
+- cores;
+- fontes;
+- tamanhos internos;
+- progresso;
+- botão;
+- funcionamento.
+
+Apenas encaixe corretamente essas telas dentro do viewport.
+
+Antes de editar, registre capturas e os valores de posicionamento atuais para evitar novas mudanças visuais.
+
+ETAPA 2 — UM ÚNICO CONTÊINER DE TELA
+
+As quatro atividades devem usar exatamente o mesmo componente raiz.
+
+Use uma estrutura equivalente a:
+
+```css
+.farmActivityScreen {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: clip;
+  overflow-y: auto;
+  background-color: #dff5ff;
+}
+
+.farmActivityBackground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.farmActivityContent {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+```
+
+Adapte ao código real do projeto.
+
+Não aplique essas regras à moldura externa usada somente na prévia.
+
+Aplique-as à área real do aplicativo.
+
+ETAPA 3 — ELIMINAR A FAIXA INFERIOR
+
+Nas atividades 1, 2 e 4, o cenário deve chegar até o final da área útil.
+
+Verifique:
+
+- altura de `html`;
+- altura de `body`;
+- altura do elemento raiz;
+- altura do componente do aplicativo;
+- altura do wrapper das atividades;
+- fundo branco herdado;
+- padding inferior duplicado;
+- margem inferior;
+- elemento com altura fixa menor que o viewport;
+- imagem de fundo terminando antes do contêiner.
+
+Garanta conceitualmente:
+
+```css
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100dvh;
+}
+```
+
+O fundo da Fazenda deve preencher toda a área interna, inclusive atrás da área segura inferior.
+
+Não resolva apenas mudando a cor da faixa branca para verde.
+
+Corrija a altura real da camada de fundo.
+
+ETAPA 4 — ÁREA SEGURA INFERIOR
+
+- O cenário deve continuar atrás da área segura.
+- O conteúdo interativo deve ficar acima da barra de gesto.
+- O botão “Responder” deve possuir espaço inferior consistente.
+- Flores e vegetação podem ocupar o fundo da área segura.
+- Nenhum botão pode ser cortado.
+- Não adicione uma faixa branca.
+- Não adicione padding inferior no fundo.
+- Aplique o padding inferior somente ao conteúdo.
+
+As atividades 1, 2, 3 e 4 devem apresentar exatamente a mesma distância entre o botão e a borda útil inferior.
+
+ETAPA 5 — ALINHAMENTO SUPERIOR
+
+Use um único cabeçalho compartilhado.
+
+O cabeçalho deve conter:
+
+- botão de voltar;
+- logotipo Leluá;
+- botão de configurações.
+
+Todos devem:
+
+- ter a mesma posição nas quatro telas;
+- usar as mesmas dimensões;
+- compartilhar o mesmo centro vertical;
+- respeitar a área segura;
+- permanecer abaixo da câmera;
+- ter a mesma distância da borda superior.
+
+Não mova individualmente o cabeçalho de cada atividade.
+
+Não use valores especiais para atividade 1, 2, 3 ou 4.
+
+Use uma grade compartilhada de três colunas.
+
+ETAPA 6 — RETÂNGULO PRETO
+
+- Não desenhe uma Dynamic Island artificial dentro do aplicativo.
+- Se o retângulo preto vier do simulador, não o inclua nos cálculos do layout.
+- Se existir como componente do aplicativo, remova-o.
+- Preserve somente `safe-area-inset-top`.
+- O logotipo deve aparecer integralmente abaixo da área segura.
+
+ETAPA 7 — ATIVIDADE 3: RESTAURAR O CABEÇALHO
+
+Na atividade 3:
+
+- use exatamente o mesmo cabeçalho das atividades 1 e 2;
+- mostre o logotipo Leluá completo;
+- use o mesmo tamanho;
+- use a mesma posição;
+- use o mesmo botão de voltar;
+- use a mesma engrenagem;
+- não permita que o logotipo fique atrás da câmera.
+
+Não utilize cabeçalho exclusivo para a atividade 3.
+
+ETAPA 8 — ATIVIDADE 3: PERSONAGEM
+
+A personagem foi recortada incorretamente.
+
+Use exatamente o recorte visível da personagem da atividade 1, conforme autorizado anteriormente.
+
+REGRAS DO RECORTE
+
+- Use a mesma fonte visual da atividade 1.
+- Preserve exatamente o mesmo rosto.
+- Preserve as mesmas folhas.
+- Preserve a mesma expressão.
+- Preserve as mesmas cores.
+- Preserve a bolsa e a estrela quando visíveis.
+- Não ampliar além da escala usada na atividade 1.
+- Não esticar.
+- Não redesenhar.
+- Não gerar outra personagem.
+- Não aumentar somente o rosto.
+- Não mostrar uma cabeça gigante.
+- Não cortar olhos, boca ou folhas.
+
+DIMENSÕES E POSIÇÃO
+
+- Use o mesmo tamanho visual da personagem na atividade 1.
+- Use a mesma posição lateral.
+- Use o mesmo alinhamento vertical.
+- Mostre integralmente o rosto.
+- Mostre as duas folhas.
+- Preserve espaço entre rosto e placa.
+- Não permita que a personagem atravesse o cabeçalho.
+- Não permita que a personagem invada o cartão de progresso.
+
+Se estiver usando um recorte de imagem, use um contêiner próprio:
+
+```css
+.activityCharacterCrop {
+  position: absolute;
+  overflow: hidden;
+}
+
+.activityCharacterCrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: /* mesmo ponto focal da Atividade 1 */;
+}
+```
+
+Calcule `object-position` copiando exatamente a atividade 1.
+
+Não escolha o ponto focal manualmente sem comparar lado a lado.
+
+ETAPA 9 — ATIVIDADE 3: PLACA
+
+A placa não pode cobrir o rosto da Leluá.
+
+Use exatamente a mesma placa e a mesma posição relativa da atividade 1.
+
+Texto:
+
+“Atividade 3”
+
+“O animal marrom”
+
+REGRAS
+
+- A placa deve começar à direita da área principal do rosto.
+- Preserve espaço mínimo de 8 a 12 px entre o rosto e a placa.
+- Não cubra olhos, boca, bochechas ou folhas.
+- Não posicione a placa sobre a personagem.
+- Não aumente a placa.
+- Não centralize a placa ignorando a presença da personagem.
+- Preserve a mesma largura e altura das atividades 1 e 2.
+- Preserve a mesma textura, inclinação, sombra e tipografia.
+
+A posição da placa deve ser calculada dentro de uma composição horizontal compartilhada:
+
+```text
+[personagem] [placa]
+```
+
+e não com dois elementos absolutamente sobrepostos.
+
+Se a composição utilizar camadas, mantenha áreas de ocupação independentes e sem interseção.
+
+ETAPA 10 — ORDEM DAS CAMADAS
+
+Na atividade 3, use esta ordem de camadas:
+
+1. cenário;
+2. elementos decorativos;
+3. personagem;
+4. placa, ao lado da personagem;
+5. cabeçalho;
+6. progresso;
+7. conteúdo interativo.
+
+A placa pode ficar acima do cenário, mas não sobre o rosto.
+
+Não resolva o problema apenas alterando `z-index`; corrija também a posição física.
+
+ETAPA 11 — ATIVIDADE 3: CONTEÚDO
+
+Preserve:
+
+“Atividade 3”
+
+“O animal marrom”
+
+“3 de 8 atividades” ou o valor dinâmico real.
+
+“Toque no animal marrom.”
+
+Alternativas:
+
+- ovelha;
+- cavalo;
+- pintinho.
+
+Resposta correta:
+
+- cavalo.
+
+Botão:
+
+“Responder →”
+
+Não altere funcionalidade, áudio, resposta correta ou progresso.
+
+ETAPA 12 — MESMAS MEDIDAS NAS QUATRO TELAS
+
+Meça e padronize:
+
+- altura do cabeçalho;
+- distância superior;
+- posição do logotipo;
+- largura da placa;
+- posição do progresso;
+- largura do conteúdo;
+- largura do botão;
+- distância inferior;
+- altura total do fundo.
+
+As diferenças entre atividades devem ser apenas de conteúdo, não de estrutura.
+
+ETAPA 13 — REMOVER SOBRESCRITAS ESPECÍFICAS
+
+Procure por estilos exclusivos das atividades que contenham:
+
+- `top`;
+- `bottom`;
+- `left`;
+- `right`;
+- `height`;
+- `min-height`;
+- `margin-top`;
+- `margin-bottom`;
+- `transform`;
+- `translate`;
+- `scale`;
+- `overflow`;
+- `object-position`;
+- `z-index`.
+
+Remova ou limite regras que estejam criando variações de enquadramento.
+
+Não remova estilos necessários a outras telas sem verificar o impacto.
+
+ETAPA 14 — TESTE VISUAL OBRIGATÓRIO
+
+Capture as quatro atividades em exatamente:
+
+390 × 844 px
+
+Apresente-as lado a lado.
+
+Adicione linhas-guia horizontais nas capturas de validação, se possível, para comparar:
+
+- topo do cabeçalho;
+- centro dos ícones;
+- base do logotipo;
+- topo da placa;
+- topo do progresso;
+- topo do botão;
+- base do cenário.
+
+As linhas devem coincidir entre as telas equivalentes.
+
+ETAPA 15 — CRITÉRIOS DE ACEITAÇÃO
+
+ATIVIDADES 1, 2 E 4
+
+- Conteúdo visual interno preservado.
+- Cabeçalho alinhado.
+- Fundo preenchendo toda a altura.
+- Nenhuma faixa branca inferior.
+- Botão com mesma distância da base.
+- Nenhum ícone deslocado.
+
+ATIVIDADE 3
+
+- Mesmo cabeçalho.
+- Logotipo completo.
+- Personagem oficial.
+- Mesmo tamanho da personagem da atividade 1.
+- Rosto completamente visível.
+- Placa sem cobrir a personagem.
+- Progresso alinhado.
+- Cartões alinhados.
+- Botão alinhado.
+- Fundo preenchendo a altura.
+
+TODAS
+
+- Nenhuma rolagem horizontal.
+- Nenhuma faixa branca.
+- Nenhuma câmera artificial.
+- Nenhum elemento atrás da área segura.
+- Nenhuma alteração nas respostas.
+- Nenhuma alteração no progresso.
+- Nenhuma alteração em outras telas.
+
+ETAPA 16 — ENTREGA
+
+Informe:
+
+- causa da faixa inferior;
+- causa do desalinhamento superior;
+- causa do recorte incorreto;
+- causa da sobreposição da placa;
+- arquivos modificados;
+- estilos removidos;
+- componente compartilhado utilizado;
+- valores finais de margem superior e inferior;
+- testes executados.
+
+Não encerre a tarefa apenas dizendo que corrigiu.
+
+Apresente as quatro capturas lado a lado.
+
+A correção não está concluída enquanto:
+
+- as bases não estiverem alinhadas;
+- os topos não estiverem alinhados;
+- a personagem da atividade 3 estiver ampliada ou cortada incorretamente;
+- a placa da atividade 3 cobrir qualquer parte do rosto.

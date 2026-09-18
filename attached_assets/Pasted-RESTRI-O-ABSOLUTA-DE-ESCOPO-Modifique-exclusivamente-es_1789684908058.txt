@@ -1,0 +1,75 @@
+RESTRIÇÃO ABSOLUTA DE ESCOPO
+
+Modifique exclusivamente estas quatro telas:
+
+1. Atividade 1 — “Quem faz mu?”
+2. Atividade 2 — “Encontre o cavalo”
+3. Atividade 3 — “O animal marrom”
+4. Atividade 4 — “Conte os pintinhos”
+
+Não altere nenhuma outra tela do aplicativo.
+
+Isso inclui não modificar visualmente:
+
+- boas-vindas;
+- cadastro do responsável;
+- perfil da criança;
+- apresentação da Leluá;
+- ambiente seguro;
+- painel do responsável;
+- mapa de aventuras;
+- lista “Descobertas da Fazenda”;
+- outras atividades da Fazenda;
+- Parque;
+- Casa;
+- Mercado;
+- Cidade;
+- relatórios;
+- conquistas;
+- perfil;
+- configurações;
+- menus;
+- telas futuras.
+
+COMPONENTES COMPARTILHADOS
+
+Se for necessário alterar um componente compartilhado:
+
+1. Verifique primeiro todas as telas que o utilizam.
+2. Não faça a alteração global se ela afetar páginas fora das quatro atividades especificadas.
+3. Crie uma variante limitada às atividades da Fazenda, se necessário.
+4. Preserve a interface pública atual do componente.
+5. Não altere valores padrão usados por outras páginas.
+6. Não substitua recursos compartilhados globalmente.
+7. Não altere CSS global para resolver um problema local.
+8. Evite seletores genéricos como `img`, `button`, `.card`, `.screen` ou `.container`.
+9. Use classes ou estilos com escopo específico para as quatro atividades.
+10. Não faça refatorações gerais nesta etapa.
+
+PROTEÇÃO ANTES DA EDIÇÃO
+
+Antes de começar:
+
+- liste os arquivos que pretende modificar;
+- confirme que eles pertencem às quatro atividades;
+- identifique dependências compartilhadas;
+- registre um checkpoint;
+- capture o estado atual das demais telas relevantes.
+
+Se a correção exigir editar um arquivo que afeta outras páginas, limite a mudança por propriedade, variante, rota ou componente específico.
+
+VALIDAÇÃO DE ESCOPO
+
+Depois da implementação:
+
+1. Mostre as quatro atividades corrigidas.
+2. Execute os testes existentes.
+3. Verifique que nenhuma outra rota teve arquivos ou estilos modificados.
+4. Apresente a lista completa dos arquivos alterados.
+5. Explique por que cada arquivo precisou ser modificado.
+6. Confirme que nenhuma tela fora do escopo mudou visualmente.
+7. Se houver alterações inesperadas fora do escopo, reverta somente essas alterações antes de concluir.
+
+A tarefa deve ser interrompida antes da edição caso não seja possível limitar as mudanças exclusivamente às quatro telas.
+
+Não altere nenhuma outra tela sem uma nova autorização explícita.
