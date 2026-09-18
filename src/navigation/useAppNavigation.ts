@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useReducer } from "react";
 import { BackHandler } from "react-native";
 import {
-  ActivityLaunchMode,
   StaticRoute,
   canGoBack,
   initialNavigationState,
@@ -22,25 +21,6 @@ export function useAppNavigation() {
     dispatch({ type: "back" });
   }, []);
 
-  const openWorld = useCallback((worldId: string) => {
-    dispatch({ type: "openWorld", worldId });
-  }, []);
-
-  const startActivity = useCallback(
-    (
-      worldId: string,
-      activityId: string,
-      activityMode?: ActivityLaunchMode,
-    ) => {
-      dispatch({ type: "startActivity", worldId, activityId, activityMode });
-    },
-    [],
-  );
-
-  const showReward = useCallback((rewardId: string) => {
-    dispatch({ type: "showReward", rewardId });
-  }, []);
-
   useEffect(() => {
     const handleBackPress = () => {
       if (!canGoBack(state)) return false;
@@ -59,8 +39,5 @@ export function useAppNavigation() {
     ...state,
     replace,
     goBack,
-    openWorld,
-    startActivity,
-    showReward,
   };
 }

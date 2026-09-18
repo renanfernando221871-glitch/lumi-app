@@ -1,0 +1,456 @@
+Implemente uma única nova tela depois do mapa:
+
+“Descobertas da Fazenda”
+
+Use como referência visual oficial a imagem anexada:
+
+`lelua-fazenda-00-lista-atividades-recriada.png`
+
+ESCOPO EXATO
+
+Nesta etapa, implemente somente:
+
+1. A tela “Descobertas da Fazenda”.
+2. Uma rota para essa tela.
+3. A navegação do destino “Fazenda” no mapa para essa rota.
+4. O botão de voltar da Fazenda para o mapa.
+
+Não implemente ainda:
+
+- atividade 1;
+- atividade 2;
+- atividade 3;
+- atividade 4;
+- atividade 5;
+- atividade 6;
+- atividade 7;
+- atividade 8;
+- telas de resposta;
+- recompensas;
+- resultados;
+- rotas de atividades;
+- Parque;
+- Casa;
+- Mercado;
+- Cidade.
+
+Não altere nenhuma tela anterior.
+
+REFERÊNCIA VISUAL
+
+A imagem anexada é a referência oficial para:
+
+- composição;
+- proporções;
+- cores;
+- tipografia;
+- margens;
+- espaçamentos;
+- personagem;
+- placa;
+- cartões;
+- ícones;
+- estados;
+- botão;
+- cenário.
+
+Reproduza a interface com componentes reais.
+
+Não use a imagem completa como fundo da tela.
+
+Não transforme textos, botões e linhas de atividades em uma imagem estática.
+
+A ilustração do cenário pode ser utilizada como recurso visual de fundo, mas os controles devem permanecer separados e funcionais.
+
+CANVAS E ÁREA SEGURA
+
+A referência representa somente o viewport do aplicativo.
+
+Não crie:
+
+- moldura de celular;
+- borda externa de telefone;
+- Dynamic Island;
+- câmera artificial;
+- retângulo preto superior;
+- barra de gesto artificial.
+
+Use:
+
+- largura de 100%;
+- altura mínima de `100dvh`;
+- `box-sizing: border-box`;
+- área segura superior;
+- área segura inferior;
+- ausência de rolagem horizontal.
+
+O cenário deve preencher toda a tela, inclusive a área inferior.
+
+Não deixe faixa branca em nenhuma borda.
+
+CABEÇALHO
+
+Reproduza:
+
+- botão circular branco de voltar à esquerda;
+- logotipo oficial Leluá centralizado;
+- botão circular branco de configurações à direita.
+
+BOTÃO DE VOLTAR
+
+- Use seta azul-escura.
+- Centralize dentro do círculo.
+- Área de toque mínima de 44 × 44 px.
+- Ao tocar, retornar ao mapa.
+
+LOGOTIPO
+
+- Use o logotipo oficial “Leluá”.
+- Preserve letras coloridas, acento e folhas.
+- Preserve o slogan:
+
+“crescer é descobrir”
+
+- Use o mesmo recurso das telas anteriores.
+- Não recrie com texto simples.
+- Não mostre “Lumi”.
+- Preserve proporções.
+- Use `object-fit: contain`.
+
+CONFIGURAÇÕES
+
+- Use engrenagem azul completamente visível.
+- Preserve todos os dentes.
+- Centralize no círculo.
+- Não corte o ícone.
+- Nesta etapa, mantenha a ação já existente de configurações, se houver.
+- Não crie uma nova tela de configurações.
+
+CENÁRIO
+
+Reproduza o cenário da referência:
+
+- céu azul-claro;
+- nuvens;
+- colinas;
+- celeiro;
+- moinho;
+- árvores;
+- cerca;
+- estrada;
+- flores;
+- folhas;
+- vegetação.
+
+- Use estilo infantil tridimensional suave.
+- Preencha toda a área.
+- Não estique a imagem.
+- Mantenha contraste suficiente atrás dos cartões.
+- Não deixe elementos decorativos cobrirem controles.
+
+PLACA
+
+Reproduza a placa de madeira com os textos:
+
+“Descobertas da”
+
+“Fazenda”
+
+- “Descobertas da” em tamanho menor.
+- “Fazenda” em destaque.
+- Use Fredoka em peso 700.
+- Texto creme ou branco.
+- Preserve textura de madeira.
+- Use sombra suave.
+- Mantenha tamanho proporcional.
+- Não deixe a placa dominar toda a tela.
+- Posicione-a à esquerda da personagem.
+- Não sobreponha placa e personagem.
+
+PERSONAGEM
+
+Use exclusivamente a Leluá oficial já existente no projeto.
+
+Características:
+
+- corpo verde-menta;
+- rosto e barriga creme;
+- olhos castanhos;
+- bochechas rosadas;
+- duas folhas assimétricas;
+- bolsa marrom;
+- estrela amarela;
+- pose acolhedora.
+
+- Posicione à direita da placa.
+- Mostre integralmente rosto, folhas, mão, bolsa e pés.
+- Não gere outra personagem.
+- Não use personagem parecida.
+- Não use recorte de outra tela se o recurso oficial estiver disponível.
+- Use fundo transparente.
+- Use `object-fit: contain`.
+
+INSTRUÇÃO
+
+Mantenha exatamente:
+
+“Escolha uma atividade para começar a explorar!”
+
+- Use Fredoka.
+- Peso 600 ou 700.
+- Cor azul-escura.
+- Centralize.
+- Preserve a frase em uma linha quando houver largura suficiente.
+- Em telas menores, use quebra equilibrada.
+- Não deixe pontuação isolada.
+
+CARTÃO PRINCIPAL
+
+Crie um cartão branco centralizado.
+
+- Margens laterais iguais.
+- Cantos grandes e arredondados.
+- Sombra suave.
+- Espaçamento interno consistente.
+- Fundo branco ou creme.
+- Nenhum conteúdo pode ultrapassar o cartão.
+
+CABEÇALHO DO CARTÃO
+
+À esquerda:
+
+- estrela amarela completa;
+- texto dinâmico:
+
+“4 de 8 atividades”
+
+- barra curta de progresso verde.
+
+À direita:
+
+“Muitas descobertas  
+te esperam!”
+
+- Use dados reais se já existirem.
+- Se os dados tiverem sido removidos na limpeza, crie somente um estado local temporário de demonstração.
+- Não recrie toda a lógica das atividades.
+- Preserve boa legibilidade.
+- Não sobreponha textos.
+
+LISTA
+
+Mostre exatamente oito linhas nesta ordem:
+
+1. “Quem faz muuu?”
+2. “Encontre o cavalo”
+3. “O animal marrom”
+4. “Conte os pintinhos”
+5. “Do maior para o menor”
+6. “De onde vem?”
+7. “Na frente ou atrás?”
+8. “Ajude na colheita”
+
+Cada linha deve conter:
+
+- estado à esquerda;
+- ícone ilustrado;
+- título;
+- estado à direita.
+
+LINHAS 1 A 4
+
+Aparência concluída:
+
+- fundo verde muito claro;
+- círculo verde com marca branca à esquerda;
+- ícone correspondente;
+- texto verde-escuro;
+- marca verde à direita.
+
+LINHA 5
+
+Aparência selecionada e disponível:
+
+- fundo verde-menta um pouco mais destacado;
+- círculo verde com número “5”;
+- ícone de comparação de tamanhos;
+- texto “Do maior para o menor”;
+- seta verde à direita.
+
+LINHAS 6 A 8
+
+Aparência bloqueada:
+
+- fundo azul-acinzentado muito claro;
+- círculo cinza com número;
+- ícone correspondente;
+- título azul-escuro;
+- cadeado azul completo à direita.
+
+PADRÃO DAS LINHAS
+
+- Mesma largura.
+- Mesma altura.
+- Mesmo raio.
+- Mesmo espaçamento.
+- Colunas alinhadas.
+- Ícones completos.
+- Cadeados completos.
+- Textos legíveis.
+- Nenhuma palavra cortada.
+- Nenhuma linha deve navegar nesta etapa.
+
+INTERAÇÕES TEMPORÁRIAS
+
+As linhas devem responder visualmente ao toque, mas não podem abrir atividades ainda.
+
+Ao tocar em qualquer linha, mostre uma mensagem discreta dentro da própria tela:
+
+“Esta atividade será adicionada na próxima etapa.”
+
+Não crie:
+
+- rota de atividade;
+- página vazia;
+- redirecionamento;
+- componente de desafio;
+- progresso definitivo;
+- recompensa.
+
+BOTÃO INFERIOR
+
+Reproduza o botão verde:
+
+“Refazer atividade →”
+
+- Use Fredoka em peso 700.
+- Texto branco.
+- Seta completamente visível.
+- Cantos arredondados.
+- Margens laterais iguais.
+- Posicione separado do cartão por 14 a 16 px.
+- Preserve espaço inferior seguro.
+- Não deixe vegetação cobrir o botão.
+
+Nesta etapa, o botão não deve abrir uma atividade.
+
+Ao tocar, mostre:
+
+“Esta atividade será adicionada na próxima etapa.”
+
+Não deixe o botão parecer quebrado.
+
+TIPOGRAFIA
+
+Use:
+
+- Fredoka nos títulos, atividades, números e botão;
+- Nunito nos textos auxiliares;
+- azul-escuro nos textos principais;
+- verde-escuro nos estados concluídos.
+
+Se Fredoka e Nunito já estiverem carregadas, reutilize-as.
+
+Não crie outra família tipográfica.
+
+ROTA
+
+Crie uma rota clara para a nova tela, seguindo o padrão do projeto.
+
+Exemplo conceitual:
+
+`/worlds/farm`
+
+ou a convenção já usada pelo roteador.
+
+Não crie rotas para atividades.
+
+MAPA
+
+Altere somente o handler do destino Fazenda.
+
+Ao tocar em “Fazenda”:
+
+- navegar para “Descobertas da Fazenda”.
+
+Preserve os outros destinos sem navegação posterior.
+
+Não altere visualmente o mapa.
+
+Não mova destinos.
+
+Não mude etiquetas, cadeados, personagem ou cenário.
+
+PROTEÇÃO DE ESCOPO
+
+Não modifique:
+
+- telas anteriores;
+- estilos globais;
+- componentes de outras páginas;
+- outros destinos;
+- painel do responsável;
+- perfil;
+- autenticação;
+- cadastro;
+- navegação inferior;
+- dados do usuário.
+
+Se precisar alterar um componente compartilhado, crie uma variante limitada à Fazenda.
+
+Não faça refatorações gerais.
+
+RESPONSIVIDADE
+
+Teste em:
+
+- 390 × 844 px;
+- 375 × 812 px;
+- 360 × 800 px.
+
+Confirme:
+
+- nenhuma faixa branca;
+- nenhuma câmera artificial;
+- nenhuma rolagem horizontal;
+- conteúdo centralizado;
+- cartão com margens iguais;
+- botão totalmente visível;
+- personagem inteira;
+- ícones completos.
+
+VALIDAÇÃO
+
+Antes de concluir:
+
+1. Abra o mapa.
+2. Toque em Fazenda.
+3. Confirme que a nova tela abre.
+4. Use voltar.
+5. Confirme que retorna ao mapa.
+6. Toque em cada linha.
+7. Confirme que nenhuma abre uma atividade.
+8. Toque no botão inferior.
+9. Confirme que nenhuma rota futura é criada.
+10. Confirme que nenhuma tela anterior mudou.
+11. Execute TypeScript.
+12. Execute o build.
+13. Execute os testes existentes.
+
+ENTREGA
+
+Apresente:
+
+- captura da nova tela em 390 × 844 px;
+- captura do mapa preservado;
+- arquivo da nova tela;
+- rota criada;
+- arquivo do mapa alterado;
+- lista completa dos arquivos modificados;
+- resultado do TypeScript;
+- resultado do build;
+- resultado dos testes;
+- confirmação de que nenhuma atividade foi implementada;
+- confirmação de que nenhuma outra tela foi alterada.
+
+Não avance para a atividade 1 sem uma nova autorização.

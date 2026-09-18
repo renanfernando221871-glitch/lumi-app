@@ -1,16 +1,10 @@
-import { validateWorldCatalog } from "../domain/catalog";
-import { activities } from "./activities";
 import { WorldDefinition } from "../types";
-import { rewards } from "./rewards";
 
 export const casaDoLumi: WorldDefinition = {
   id: "casa-do-lumi",
   title: "Casa da Lumi",
   description: "Um cantinho acolhedor para descobrir e aprender.",
-  activityIds: activities
-    .filter((activity) => activity.worldId === "casa-do-lumi")
-    .map((activity) => activity.id),
-  rewardId: "lumi-flower",
+  activityIds: ["find-bed", "red-object", "store-teddy", "big-or-small", "count-apples", "identify-shape", "lumi-emotion", "tidy-room"],
   unlock: {
     unlockedByDefault: false,
     prerequisiteWorldId: "fazenda-das-descobertas",
@@ -28,10 +22,7 @@ export const fazendaDasDescobertas: WorldDefinition = {
   id: "fazenda-das-descobertas",
   title: "Fazenda das Descobertas",
   description: "Um lugar para descobrir animais, tamanhos e a colheita.",
-  activityIds: activities
-    .filter((activity) => activity.worldId === "fazenda-das-descobertas")
-    .map((activity) => activity.id),
-  rewardId: "farm-basket",
+  activityIds: ["farm-who-moo", "farm-find-horse", "farm-brown-animal", "farm-count-chicks", "farm-order-size", "farm-who-gives-what", "farm-front-or-back", "farm-help-harvest"],
   unlock: {
     unlockedByDefault: true,
   },
@@ -48,10 +39,7 @@ export const parqueDasCores: WorldDefinition = {
   id: "parque-das-cores",
   title: "Parque das Cores",
   description: "Um parque alegre para descobrir cores, formas e caminhos.",
-  activityIds: activities
-    .filter((activity) => activity.worldId === "parque-das-cores")
-    .map((activity) => activity.id),
-  rewardId: "parque-rainbow",
+  activityIds: ["parque-kites", "parque-shapes", "parque-above-below", "parque-count-ducks", "parque-sequence", "parque-right-path", "parque-speed", "parque-real-world"],
   unlock: {
     unlockedByDefault: false,
     prerequisiteWorldId: "casa-do-lumi",
@@ -69,10 +57,7 @@ export const mercadoDoLumi: WorldDefinition = {
   id: "mercado-do-lumi",
   title: "Mercado da Lumi",
   description: "Um mercado alegre para escolher, contar e organizar alimentos.",
-  activityIds: activities
-    .filter((activity) => activity.worldId === "mercado-do-lumi")
-    .map((activity) => activity.id),
-  rewardId: "mercado-bag",
+  activityIds: ["mercado-find-apple", "mercado-two-bananas", "mercado-fruit-or-vegetable", "mercado-which-has-more", "mercado-what-disappeared", "mercado-what-color", "mercado-first-sound", "mercado-prepare-snack"],
   unlock: {
     unlockedByDefault: false,
     prerequisiteWorldId: "parque-das-cores",
@@ -90,10 +75,7 @@ export const cidadeDasAventuras: WorldDefinition = {
   id: "cidade-das-aventuras",
   title: "Cidade das Aventuras",
   description: "Uma cidade para descobrir pessoas, lugares, escolhas e histórias.",
-  activityIds: activities
-    .filter((activity) => activity.worldId === "cidade-das-aventuras")
-    .map((activity) => activity.id),
-  rewardId: "cidade-star",
+  activityIds: ["cidade-who-drives", "cidade-car-sound", "cidade-where-to-go", "cidade-cross-safely", "cidade-who-is-sad", "cidade-help-friend", "cidade-build-sentence", "cidade-lumi-story"],
   unlock: {
     unlockedByDefault: false,
     prerequisiteWorldId: "mercado-do-lumi",
@@ -116,11 +98,3 @@ export const worldCatalog: readonly WorldDefinition[] = [
   cidadeDasAventuras,
 ];
 export const worlds = worldCatalog;
-
-if (process.env.NODE_ENV !== "production") {
-  validateWorldCatalog(
-    worldCatalog,
-    activities,
-    rewards.map((reward) => reward.id),
-  );
-}

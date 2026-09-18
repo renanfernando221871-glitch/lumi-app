@@ -518,3 +518,45 @@ mtime_ms = 1789685244372
 storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/07a27229-8ae9-4153-82b6-73b9f048a679/7382c398-8d2f-4c5d-9cf2-9afe2e3f1151"
 storage_version_token = "1789685277488398"
 content_type = "image/png"
+
+[[outputs]]
+id = "hL8qv5OJlDua9Ht0TwNxV"
+uri = "file://screenshots/map-after-cleanup-390x844.png"
+type = "image"
+title = "Mapa após a limpeza"
+description = "Captura final do mapa em 390 × 844, agora como última tela funcional do aplicativo."
+logical_id = "f68f8291-8ec2-4d71-8957-3c94e0b8e2cc"
+content_hash = "sha256:5ebe720291ac6b6cd88f2f984fd0b36a57c792bd1736a12f955bade30aaffa8a"
+size = 414786
+mtime_ms = 1789690819654
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/f68f8291-8ec2-4d71-8957-3c94e0b8e2cc/6255cdcd-a237-43e5-8177-66e2218394b7"
+storage_version_token = "1789690846338199"
+content_type = "image/png"
+
+[[outputs]]
+id = "P5nwxAQvr2QjM5QajnESy"
+uri = "file://screenshots/farm-discoveries-390x844.png"
+type = "image"
+title = "Descobertas da Fazenda — 390 × 844"
+description = "Captura final da única nova tela pós-mapa, com oito linhas não navegáveis e aviso temporário."
+logical_id = "57eda8b1-8b4d-4c1d-b9fc-a5fcdb6915b4"
+content_hash = "sha256:9c5f56d891dfea2fe948d8e1cc34e268d62ecc5f970cc5f36ab7bfcb80e3e0e5"
+size = 250173
+mtime_ms = 1789691399483
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/57eda8b1-8b4d-4c1d-b9fc-a5fcdb6915b4/860006de-8c84-4385-aa0f-0eff3d0aec7b"
+storage_version_token = "1789691451531972"
+content_type = "image/png"
+
+[[outputs]]
+id = "H3EwYmxFVw9R0Skq-j8fs"
+uri = "file://screenshots/map-preserved-farm-route-390x844.png"
+type = "image"
+title = "Mapa preservado — 390 × 844"
+description = "Captura do mapa sem alterações visuais, agora com a Fazenda ligada à nova tela."
+logical_id = "7c83fe9f-ba7b-4c0a-b1ee-5195bc8afd2f"
+content_hash = "sha256:9ed07badaf536bdbb6bd3d1e304236a5afad26d417d487dbdc6354c54dc8379d"
+size = 414825
+mtime_ms = 1789691398707
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:ab750cb4-5aaa-44b5-a775-96f693178f41/7c83fe9f-ba7b-4c0a-b1ee-5195bc8afd2f/5af6fcde-532c-4e41-ab30-d3d549128b4b"
+storage_version_token = "1789691452259387"
+content_type = "image/png"

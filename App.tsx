@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Platform } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, Platform } from "react-native";
 import { useFonts } from "expo-font";
 import {
   Fredoka_600SemiBold,
@@ -10,79 +10,26 @@ import {
   Nunito_500Medium,
   Nunito_700Bold,
 } from "@expo-google-fonts/nunito";
-import { activities } from "./src/data/activities";
-import { getRewardById, rewards } from "./src/data/rewards";
 import { worldCatalog } from "./src/data/worlds";
-import {
-  canOpenWorld,
-  canStartWorldActivity,
-  completeWorldActivityTransition,
-  getNextIncompleteActivityId,
-  getUnlockedWorldIds,
-} from "./src/domain/progress";
-import { persistProgressBeforeCommit } from "./src/domain/progressPersistence";
+import { getUnlockedWorldIds } from "./src/domain/progress";
 import { useAppNavigation } from "./src/navigation/useAppNavigation";
-import { getFarmActivityPreviewRequest } from "./src/navigation/developmentPreview";
-import { isNonProgressingActivityMode } from "./src/navigation/activityLaunchPolicy";
-import { ActivityScreen } from "./src/screens/ActivityScreen";
-import { HouseScreen } from "./src/screens/HouseScreen";
 import { GuardianSignupScreen } from "./src/screens/GuardianSignupScreen";
 import { SafetyScreen } from "./src/screens/SafetyScreen";
 import { GuardianHomeScreen } from "./src/screens/GuardianHomeScreen";
 import { ChildIntroScreen } from "./src/screens/ChildIntroScreen";
+import { FarmDiscoveriesScreen } from "./src/screens/FarmDiscoveriesScreen";
 import { MapScreen } from "./src/screens/MapScreen";
 import { PersonalizeScreen } from "./src/screens/PersonalizeScreen";
-import { RewardScreen } from "./src/screens/RewardScreen";
 import { WelcomeScreen } from "./src/screens/WelcomeScreen";
 import {
   defaultProfile,
   defaultProgress,
   loadSavedState,
-  preparePreviewProgress,
   saveProfile,
-  saveProgress,
 } from "./src/storage/progress";
-import {
-  ActivityDefinition,
-  ChildProfile,
-  ProgressState,
-  WorldDefinition,
-} from "./src/types";
-import {
-  EngineFixtureHarness,
-  getRequestedEngineFixture,
-} from "./src/testing/EngineFixtureHarness";
-
-function getWorld(worldId: string): WorldDefinition {
-  const world = worldCatalog.find((candidate) => candidate.id === worldId);
-  if (!world) throw new Error(`[Lumi navigation] Unknown world "${worldId}".`);
-  return world;
-}
-
-function getWorldActivities(world: WorldDefinition): ActivityDefinition[] {
-  return world.activityIds.map((activityId) => {
-    const activity = activities.find((candidate) => candidate.id === activityId);
-    if (!activity) {
-      throw new Error(`[Lumi navigation] Unknown activity "${activityId}".`);
-    }
-    return activity;
-  });
-}
-
-function getActivity(
-  worldActivities: ActivityDefinition[],
-  activityId: string,
-): ActivityDefinition {
-  const activity = worldActivities.find((candidate) => candidate.id === activityId);
-  if (!activity) {
-    throw new Error(`[Lumi navigation] Activity "${activityId}" is not in this world.`);
-  }
-  return activity;
-}
+import { ChildProfile, ProgressState } from "./src/types";
 
 export default function App() {
-  const engineFixture = getRequestedEngineFixture();
-  if (engineFixture) return <EngineFixtureHarness activity={engineFixture} />;
   return <LumiApp />;
 }
 
@@ -98,34 +45,14 @@ function LumiApp() {
   const { replace } = navigation;
   const [profile, setProfile] = useState<ChildProfile>(defaultProfile);
   const [progress, setProgress] = useState<ProgressState>(defaultProgress);
-  const progressRef = useRef<ProgressState>(defaultProgress);
-  const developmentPreviewHandledRef = useRef(false);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     let mounted = true;
-    const forcePreviewReset =
-      __DEV__ &&
-      Platform.OS === "web" &&
-      typeof window !== "undefined" &&
-      new URLSearchParams(window.location.search).get("resetProgress") === "1";
-    const developmentActivityPreview =
-      __DEV__ &&
-      Platform.OS === "web" &&
-      typeof window !== "undefined"
-        ? getFarmActivityPreviewRequest(window.location.href, __DEV__)
-        : undefined;
-    const prepare =
-      __DEV__ && Platform.OS === "web" && !developmentActivityPreview
-        ? preparePreviewProgress(forcePreviewReset)
-        : Promise.resolve();
-
-    prepare
-      .then(loadSavedState)
+    loadSavedState()
       .then(({ profile: savedProfile, progress: savedProgress }) => {
         if (!mounted) return;
         setProfile(savedProfile);
-        progressRef.current = savedProgress;
         setProgress(savedProgress);
         setHydrated(true);
         replace("welcome");
@@ -139,31 +66,27 @@ function LumiApp() {
     };
   }, [replace]);
 
-  useEffect(() => {
-    if (
-      developmentPreviewHandledRef.current ||
-      !hydrated ||
-      !__DEV__ ||
-      Platform.OS !== "web" ||
-      typeof window === "undefined"
-    ) {
-      return;
-    }
-
-    developmentPreviewHandledRef.current = true;
-    const request = getFarmActivityPreviewRequest(window.location.href, __DEV__);
-    const farm = worldCatalog.find(
-      (candidate) => candidate.id === "fazenda-das-descobertas",
-    );
-    if (!request || !farm?.activityIds.includes(request.activityId)) return;
-    navigation.startActivity(farm.id, request.activityId, "preview");
-  }, [hydrated, navigation.startActivity]);
-
   const updateProfile = (name: string, avatar: string) => {
     const next = { name, avatar, hasOnboarded: true };
     setProfile(next);
     saveProfile(next).catch(console.error);
     navigation.replace("safety");
+  };
+
+  const showComingSoon = () => {
+    if (Platform.OS === "web" && typeof window !== "undefined") {
+      window.alert("Novas aventuras em breve!");
+      return;
+    }
+    Alert.alert("Novas aventuras em breve!");
+  };
+
+  const openWorld = (worldId: string) => {
+    if (worldId === "fazenda-das-descobertas") {
+      navigation.replace("farmDiscoveries");
+      return;
+    }
+    showComingSoon();
   };
 
   if (!fontsLoaded || !hydrated || navigation.route === "splash") {
@@ -237,171 +160,26 @@ function LumiApp() {
       worldCatalog,
       progress.completedActivityIds,
     );
-    const rewardCatalog = rewards.reduce<Record<string, (typeof rewards)[number]>>(
-      (result, reward) => {
-        result[reward.id] = reward;
-        return result;
-      },
-      {},
-    );
     return (
       <MapScreen
         profile={profile}
         worlds={worldCatalog}
         unlockedWorldIds={unlockedWorldIds}
         completedActivityIds={progress.completedActivityIds}
-        rewards={rewardCatalog}
-        onOpenWorld={(worldId) => {
-          if (unlockedWorldIds.includes(worldId)) navigation.openWorld(worldId);
-        }}
+        onOpenWorld={openWorld}
         onEditProfile={() => navigation.replace("personalize")}
       />
     );
   }
 
-  const world = getWorld(navigation.worldId);
-  if (!canOpenWorld(world, progress, worldCatalog)) {
+  if (navigation.route === "farmDiscoveries") {
     return (
-      <NavigationRedirect
-        onRedirect={() => navigation.replace("map")}
-      />
-    );
-  }
-  const worldActivities = getWorldActivities(world);
-  const worldNumber = worldCatalog.indexOf(world) + 1;
-  const nextWorld = worldCatalog.find(
-    (candidate) => candidate.unlock.prerequisiteWorldId === world.id,
-  );
-
-  if (navigation.route === "house") {
-    const startActivities = (selectedActivityId?: string) => {
-      const next = getNextIncompleteActivityId(
-        world,
-        progress.completedActivityIds,
-      );
-      const destinationId =
-        selectedActivityId ?? next ?? worldActivities[0].id;
-      const activityMode = progress.completedActivityIds.includes(destinationId)
-        ? "review"
-        : undefined;
-      navigation.startActivity(world.id, destinationId, activityMode);
-    };
-    return (
-      <HouseScreen
-        completedActivityIds={progress.completedActivityIds}
-        world={world}
-        worldNumber={worldNumber}
-        activities={worldActivities}
-        onBack={navigation.goBack}
-        onStart={startActivities}
+      <FarmDiscoveriesScreen
+        onBack={() => navigation.replace("map")}
+        onOpenSettings={() => navigation.replace("personalize")}
       />
     );
   }
 
-  const activity = getActivity(worldActivities, navigation.activityId);
-  const isReviewMode = navigation.activityMode === "review";
-  const isDevelopmentPreview =
-    __DEV__ && navigation.activityMode === "preview";
-  const isNonProgressingMode = isNonProgressingActivityMode(
-    navigation.activityMode,
-    __DEV__,
-  );
-  const canAccessSelectedActivity = isDevelopmentPreview
-    ? world.id === "fazenda-das-descobertas" &&
-      world.activityIds.includes(activity.id)
-    : isReviewMode
-      ? progress.completedActivityIds.includes(activity.id)
-      : canStartWorldActivity(
-          world,
-          activity.id,
-          progress,
-          worldCatalog,
-        );
-  if (
-    !canAccessSelectedActivity
-  ) {
-    const expectedActivityId = getNextIncompleteActivityId(
-      world,
-      progress.completedActivityIds,
-    );
-    return (
-      <NavigationRedirect
-        onRedirect={() =>
-          expectedActivityId
-            ? navigation.startActivity(world.id, expectedActivityId)
-            : navigation.replace("map")
-        }
-      />
-    );
-  }
-  const activityIndex = worldActivities.indexOf(activity);
-
-  const completeActivity = async () => {
-    if (isNonProgressingMode) {
-      navigation.openWorld(world.id);
-      return;
-    }
-    const transition = completeWorldActivityTransition(
-      progressRef.current,
-      world,
-      activity.id,
-    );
-    const { destination } = transition;
-    if (transition.progressChanged) {
-      try {
-        await persistProgressBeforeCommit(
-          transition.progress,
-          saveProgress,
-          (persistedProgress) => {
-            progressRef.current = persistedProgress;
-            setProgress(persistedProgress);
-          },
-        );
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
-    }
-    if (destination.type === "activity") {
-      navigation.startActivity(world.id, destination.activityId);
-    } else if (destination.type === "reward") {
-      navigation.showReward(destination.rewardId);
-    } else {
-      navigation.replace("map");
-    }
-  };
-
-  return (
-    <>
-      <ActivityScreen
-        key={activity.id}
-        activity={activity}
-        activityNumber={activityIndex + 1}
-        total={worldActivities.length}
-        finalCompletionLabel={getRewardById(world.rewardId).completionLabel}
-        onBack={navigation.goBack}
-        onComplete={completeActivity}
-      />
-      {navigation.rewardId ? (
-        <RewardScreen
-          reward={getRewardById(navigation.rewardId)}
-          unlockMessage={
-            nextWorld
-              ? `Parabéns! Você desbloqueou ${nextWorld.title}!`
-              : undefined
-          }
-          onClose={() => navigation.replace("map")}
-        />
-      ) : null}
-    </>
-  );
-}
-
-function NavigationRedirect({ onRedirect }: { onRedirect: () => void }) {
-  useEffect(() => {
-    onRedirect();
-  }, [onRedirect]);
-  return (
-    <WelcomeScreen disabled onContinue={() => undefined} />
-  );
+  return <WelcomeScreen disabled onContinue={() => undefined} />;
 }

@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { LeluaLogo } from "../components/LeluaLogo";
 import { LumiCharacter } from "../components/LumiCharacter";
-import { ChildProfile, RewardDefinition, WorldDefinition } from "../types";
+import { ChildProfile, WorldDefinition } from "../types";
 import { colors, shadow } from "../theme/colors";
 import { Shell } from "./components/Shell";
 
@@ -19,7 +19,6 @@ type Props = {
   worlds: readonly WorldDefinition[];
   unlockedWorldIds: readonly string[];
   completedActivityIds: readonly string[];
-  rewards: Readonly<Record<string, RewardDefinition>>;
   onOpenWorld: (worldId: string) => void;
   onEditProfile: () => void;
 };
@@ -88,7 +87,6 @@ export function MapScreen({
   worlds,
   unlockedWorldIds,
   completedActivityIds,
-  rewards: _rewards,
   onOpenWorld,
   onEditProfile,
 }: Props) {

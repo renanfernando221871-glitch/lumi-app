@@ -1,0 +1,109 @@
+Remova completamente a tela “Descobertas da Fazenda” que acabou de ser implementada.
+
+Esta solicitação autoriza exclusivamente a exclusão dessa tela e de sua conexão com o mapa.
+
+ANTES DE EXCLUIR
+
+1. Crie um checkpoint de segurança.
+2. Use a mensagem:
+
+`backup antes de remover a nova tela da Fazenda`
+
+3. Liste os arquivos criados ou modificados para implementar “Descobertas da Fazenda”.
+4. Não use `git reset --hard`.
+5. Não reverta alterações anteriores ao último trabalho da Fazenda.
+6. Não altere nenhuma tela visualmente.
+
+REMOVER
+
+Exclua:
+
+- componente da tela “Descobertas da Fazenda”;
+- estilos exclusivos dessa tela;
+- rota criada para essa tela;
+- imports dessa tela;
+- handler que abre essa tela pelo destino Fazenda;
+- mensagem temporária das atividades;
+- estado local criado exclusivamente para essa tela;
+- testes exclusivos dessa implementação;
+- recursos enviados usados exclusivamente nessa implementação;
+- referências ao arquivo `lelua-fazenda-00-lista-atividades-recriada.png`, caso ele tenha sido copiado para o projeto.
+
+Não exclua a arte original fora do projeto nem recursos compartilhados.
+
+MAPA
+
+Preserve a tela do mapa exatamente como estava antes da implementação.
+
+No destino Fazenda:
+
+- remova a navegação para “Descobertas da Fazenda”;
+- não abra nenhuma nova rota;
+- não crie página vazia;
+- não altere aparência, posição, etiqueta ou estado visual;
+- mantenha o destino visível;
+- se for necessário um retorno ao toque, mostre apenas “Novas aventuras em breve!” dentro do mapa.
+
+PRESERVAR
+
+Não altere:
+
+- mapa;
+- destinos;
+- logotipo;
+- personagem;
+- cenário;
+- navegação inferior;
+- telas anteriores;
+- painel do responsável;
+- perfil;
+- cadastro;
+- autenticação;
+- configurações;
+- fontes;
+- estilos globais;
+- recursos compartilhados;
+- dados do usuário.
+
+ROTAS
+
+Depois da remoção:
+
+- a rota da Fazenda não deve mais existir;
+- URLs antigas da Fazenda devem retornar ao mapa;
+- não deve existir importação quebrada;
+- não deve existir componente órfão;
+- não deve existir conexão para atividades futuras.
+
+VALIDAÇÃO
+
+Execute:
+
+1. Verificação de TypeScript.
+2. Build.
+3. Testes existentes.
+4. Navegação desde o início até o mapa.
+5. Toque no destino Fazenda.
+6. Verificação de que nenhuma tela posterior abre.
+7. Verificação de que o mapa permanece visualmente inalterado.
+
+ENTREGA
+
+Informe:
+
+- identificação do checkpoint;
+- arquivos excluídos;
+- arquivos modificados;
+- rota removida;
+- recursos removidos;
+- resultado do TypeScript;
+- resultado do build;
+- resultado dos testes;
+- confirmação de que o mapa é novamente a última tela;
+- confirmação de que nenhuma outra tela foi alterada.
+
+Não implemente outra versão da Fazenda.
+
+Não tente corrigir ou recriar a tela.
+
+Não faça qualquer alteração adicional sem nova autorização.
