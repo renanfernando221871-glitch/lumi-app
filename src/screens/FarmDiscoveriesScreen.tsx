@@ -19,12 +19,20 @@ export function FarmDiscoveriesScreen({
   onOpenSettings,
   onStartActivity,
 }: Props) {
-  const { height } = useWindowDimensions();
+  const { height, width: viewportWidth } = useWindowDimensions();
+  const artworkRatio = 853 / 1844;
+  const screenWidth = Math.min(520, viewportWidth, height * artworkRatio);
+  const screenHeight = screenWidth / artworkRatio;
 
   return (
     <View style={styles.root}>
       <StatusBar hidden />
-      <View style={[styles.screen, { height }]}>
+      <View
+        style={[
+          styles.screen,
+          { width: screenWidth, height: screenHeight },
+        ]}
+      >
         <ImageBackground
           accessibilityLabel="Descobertas da Fazenda, com oito atividades"
           resizeMode="stretch"
@@ -69,10 +77,11 @@ export function FarmDiscoveriesScreen({
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#D8F2E7",
   },
   screen: {
-    width: "100%",
     maxWidth: 520,
     alignSelf: "center",
     overflow: "hidden",
