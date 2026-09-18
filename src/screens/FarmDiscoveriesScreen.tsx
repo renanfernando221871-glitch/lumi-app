@@ -12,12 +12,14 @@ type Props = {
   onBack: () => void;
   onOpenSettings: () => void;
   onStartActivity: () => void;
+  onStartSecondActivity: () => void;
 };
 
 export function FarmDiscoveriesScreen({
   onBack,
   onOpenSettings,
   onStartActivity,
+  onStartSecondActivity,
 }: Props) {
   const { height, width: viewportWidth } = useWindowDimensions();
   const screenWidth = Math.min(520, viewportWidth);
@@ -84,6 +86,16 @@ export function FarmDiscoveriesScreen({
               pressed && styles.pressed,
             ]}
           />
+
+          <Pressable
+            accessibilityLabel="Encontre o cavalo"
+            accessibilityRole="button"
+            onPress={onStartSecondActivity}
+            style={({ pressed }) => [
+              styles.secondActivityButton,
+              pressed && styles.pressed,
+            ]}
+          />
         </ImageBackground>
       </View>
     </View>
@@ -142,6 +154,15 @@ const styles = StyleSheet.create({
     right: "4%",
     left: "4%",
     height: "14%",
+    borderRadius: 24,
+  },
+  secondActivityButton: {
+    position: "absolute",
+    zIndex: 40,
+    top: "43.2%",
+    right: "4%",
+    left: "4%",
+    height: "6.5%",
     borderRadius: 24,
   },
   activityTapLayer: {
