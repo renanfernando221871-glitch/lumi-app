@@ -126,10 +126,11 @@ const styles = StyleSheet.create({
   },
   firstActivityButton: {
     position: "absolute",
-    top: "37.2%",
-    right: "7%",
-    left: "7%",
-    height: "5.8%",
+    zIndex: 20,
+    top: "32%",
+    right: "4%",
+    left: "4%",
+    height: "14%",
     borderRadius: 24,
   },
   pressed: {
