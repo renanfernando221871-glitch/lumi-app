@@ -8,7 +8,8 @@ export type StaticRoute =
   | "childIntro"
   | "map"
   | "farmDiscoveries"
-  | "farmWhoMoo";
+  | "farmWhoMoo"
+  | "farmFindHorse";
 
 export type NavigationState =
   | { route: "splash" }
@@ -20,7 +21,8 @@ export type NavigationState =
   | { route: "childIntro" }
   | { route: "map" }
   | { route: "farmDiscoveries" }
-  | { route: "farmWhoMoo" };
+  | { route: "farmWhoMoo" }
+  | { route: "farmFindHorse" };
 
 export type NavigationAction =
   | { type: "replace"; route: StaticRoute }
@@ -56,6 +58,9 @@ export function navigationReducer(
       if (state.route === "farmWhoMoo") {
         return { route: "farmDiscoveries" };
       }
+      if (state.route === "farmFindHorse") {
+        return { route: "farmDiscoveries" };
+      }
       return state;
   }
 }
@@ -67,6 +72,7 @@ export function canGoBack(state: NavigationState) {
     state.route === "childIntro" ||
     state.route === "farmDiscoveries" ||
     state.route === "farmWhoMoo" ||
+    state.route === "farmFindHorse" ||
     state.route === "guardian"
   );
 }
