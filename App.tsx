@@ -18,6 +18,7 @@ import { SafetyScreen } from "./src/screens/SafetyScreen";
 import { GuardianHomeScreen } from "./src/screens/GuardianHomeScreen";
 import { ChildIntroScreen } from "./src/screens/ChildIntroScreen";
 import { FarmDiscoveriesScreen } from "./src/screens/FarmDiscoveriesScreen";
+import { FarmWhoMooScreen } from "./src/screens/FarmWhoMooScreen";
 import { MapScreen } from "./src/screens/MapScreen";
 import { PersonalizeScreen } from "./src/screens/PersonalizeScreen";
 import { WelcomeScreen } from "./src/screens/WelcomeScreen";
@@ -179,7 +180,16 @@ function LumiApp() {
       <FarmDiscoveriesScreen
         onBack={() => navigation.replace("map")}
         onOpenSettings={() => navigation.replace("personalize")}
-        onStartActivity={() => undefined}
+        onStartActivity={() => navigation.replace("farmWhoMoo")}
+      />
+    );
+  }
+
+  if (navigation.route === "farmWhoMoo") {
+    return (
+      <FarmWhoMooScreen
+        onBack={() => navigation.replace("farmDiscoveries")}
+        onOpenSettings={() => navigation.replace("personalize")}
       />
     );
   }
