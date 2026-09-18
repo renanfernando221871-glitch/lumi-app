@@ -17,6 +17,7 @@ import { GuardianSignupScreen } from "./src/screens/GuardianSignupScreen";
 import { SafetyScreen } from "./src/screens/SafetyScreen";
 import { GuardianHomeScreen } from "./src/screens/GuardianHomeScreen";
 import { ChildIntroScreen } from "./src/screens/ChildIntroScreen";
+import { FarmDiscoveriesScreen } from "./src/screens/FarmDiscoveriesScreen";
 import { MapScreen } from "./src/screens/MapScreen";
 import { PersonalizeScreen } from "./src/screens/PersonalizeScreen";
 import { WelcomeScreen } from "./src/screens/WelcomeScreen";
@@ -78,7 +79,11 @@ function LumiApp() {
     navigation.replace("safety");
   };
 
-  const showComingSoon = () => {
+  const openWorld = (worldId: string) => {
+    if (worldId === "fazenda-das-descobertas") {
+      navigation.replace("farmDiscoveries");
+      return;
+    }
     if (Platform.OS === "web" && typeof window !== "undefined") {
       window.alert("Novas aventuras em breve!");
       return;
@@ -163,8 +168,18 @@ function LumiApp() {
         worlds={worldCatalog}
         unlockedWorldIds={unlockedWorldIds}
         completedActivityIds={progress.completedActivityIds}
-        onOpenWorld={showComingSoon}
+        onOpenWorld={openWorld}
         onEditProfile={() => navigation.replace("personalize")}
+      />
+    );
+  }
+
+  if (navigation.route === "farmDiscoveries") {
+    return (
+      <FarmDiscoveriesScreen
+        onBack={() => navigation.replace("map")}
+        onOpenSettings={() => navigation.replace("personalize")}
+        onStartActivity={() => undefined}
       />
     );
   }

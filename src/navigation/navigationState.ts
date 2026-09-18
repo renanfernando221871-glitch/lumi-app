@@ -6,7 +6,8 @@ export type StaticRoute =
   | "safety"
   | "guardianHome"
   | "childIntro"
-  | "map";
+  | "map"
+  | "farmDiscoveries";
 
 export type NavigationState =
   | { route: "splash" }
@@ -16,7 +17,8 @@ export type NavigationState =
   | { route: "safety" }
   | { route: "guardianHome" }
   | { route: "childIntro" }
-  | { route: "map" };
+  | { route: "map" }
+  | { route: "farmDiscoveries" };
 
 export type NavigationAction =
   | { type: "replace"; route: StaticRoute }
@@ -46,6 +48,9 @@ export function navigationReducer(
       if (state.route === "childIntro") {
         return { route: "guardianHome" };
       }
+      if (state.route === "farmDiscoveries") {
+        return { route: "map" };
+      }
       return state;
   }
 }
@@ -55,6 +60,7 @@ export function canGoBack(state: NavigationState) {
     state.route === "personalize" ||
     state.route === "safety" ||
     state.route === "childIntro" ||
+    state.route === "farmDiscoveries" ||
     state.route === "guardian"
   );
 }
