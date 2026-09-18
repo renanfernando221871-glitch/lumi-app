@@ -66,6 +66,16 @@ export function FarmDiscoveriesScreen({
               pressed && styles.pressed,
             ]}
           />
+
+          <Pressable
+            accessibilityLabel="Quem faz muuu?"
+            accessibilityRole="button"
+            onPress={onStartActivity}
+            style={({ pressed }) => [
+              styles.firstActivityButton,
+              pressed && styles.pressed,
+            ]}
+          />
         </ImageBackground>
       </View>
     </View>
@@ -113,6 +123,14 @@ const styles = StyleSheet.create({
     left: "7%",
     height: "7.3%",
     borderRadius: 32,
+  },
+  firstActivityButton: {
+    position: "absolute",
+    top: "37.2%",
+    right: "7%",
+    left: "7%",
+    height: "5.8%",
+    borderRadius: 24,
   },
   pressed: {
     opacity: 0.72,
