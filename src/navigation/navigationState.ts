@@ -7,7 +7,8 @@ export type StaticRoute =
   | "guardianHome"
   | "childIntro"
   | "map"
-  | "farmDiscoveries";
+  | "farmDiscoveries"
+  | "farmWhoMoo";
 
 export type NavigationState =
   | { route: "splash" }
@@ -18,7 +19,8 @@ export type NavigationState =
   | { route: "guardianHome" }
   | { route: "childIntro" }
   | { route: "map" }
-  | { route: "farmDiscoveries" };
+  | { route: "farmDiscoveries" }
+  | { route: "farmWhoMoo" };
 
 export type NavigationAction =
   | { type: "replace"; route: StaticRoute }
@@ -51,6 +53,9 @@ export function navigationReducer(
       if (state.route === "farmDiscoveries") {
         return { route: "map" };
       }
+      if (state.route === "farmWhoMoo") {
+        return { route: "farmDiscoveries" };
+      }
       return state;
   }
 }
@@ -61,6 +66,7 @@ export function canGoBack(state: NavigationState) {
     state.route === "safety" ||
     state.route === "childIntro" ||
     state.route === "farmDiscoveries" ||
+    state.route === "farmWhoMoo" ||
     state.route === "guardian"
   );
 }
